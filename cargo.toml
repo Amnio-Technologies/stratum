@@ -1,0 +1,14 @@
+[workspace]
+resolver = "2"
+
+members = [
+    "firmware/bms",
+    "firmware/monitoring",
+    "firmware/modules",
+    "firmware/main",
+    "ui/lvgl",
+    "ui/desktop-runner",
+    "ui/embedded-ui",
+    "tools/module-sim",
+    "tools/data-logger",
+]
