@@ -1,3 +1,0 @@
-C:/Users/erick/Documents/amnio/ui/amnio-ui/build/CMakeFiles/amnio-ui.dir
-C:/Users/erick/Documents/amnio/ui/amnio-ui/build/CMakeFiles/edit_cache.dir
-C:/Users/erick/Documents/amnio/ui/amnio-ui/build/CMakeFiles/rebuild_cache.dir
