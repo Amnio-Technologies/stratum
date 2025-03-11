@@ -1,17 +1,17 @@
 use crate::amnio_bindings;
 use egui::{ColorImage, TextureHandle, TextureOptions};
 
-pub struct LvglRenderer {
+struct LvglRenderer {
     texture: Option<TextureHandle>,
 }
 
 impl LvglRenderer {
-    pub fn new() -> Self {
+    fn new() -> Self {
         LvglRenderer { texture: None }
     }
 
     /// Converts LVGL's RGB565 framebuffer to RGBA and uploads to GPU
-    pub fn update_lvgl_framebuffer(&mut self, egui_ctx: &egui::Context) {
+    fn update_lvgl_framebuffer(&mut self, egui_ctx: &egui::Context) {
         let (fb, width, height) = match LvglEnvironment::get_framebuffer() {
             Some(fb) => fb,
             None => {
@@ -37,24 +37,24 @@ impl LvglRenderer {
             Some(egui_ctx.load_texture("lvgl_fb", color_image, TextureOptions::default()));
     }
 
-    pub fn get_texture(&self) -> Option<&TextureHandle> {
+    fn get_texture(&self) -> Option<&TextureHandle> {
         self.texture.as_ref()
     }
 }
 
-pub struct LvglEnvironment;
+struct LvglEnvironment;
 impl LvglEnvironment {
-    pub fn update_ui() {
+    fn update_ui() {
         unsafe { amnio_bindings::lvgl_update() };
     }
 
-    pub fn setup_ui() {
+    fn setup_ui() {
         unsafe {
             amnio_bindings::lvgl_setup();
         }
     }
 
-    pub fn get_framebuffer() -> Option<(&'static mut [u16], usize, usize)> {
+    fn get_framebuffer() -> Option<(&'static mut [u16], usize, usize)> {
         let ptr = unsafe { amnio_bindings::get_lvgl_framebuffer() };
         if ptr.is_null() {
             return None;

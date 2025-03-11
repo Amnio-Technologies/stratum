@@ -1,5 +1,5 @@
 use egui::Context;
-use egui_sdl2_gl::egui::{FullOutput, TextureHandle};
+use egui_sdl2_gl::egui::FullOutput;
 use egui_sdl2_gl::painter::Painter;
 use egui_sdl2_gl::{gl, sdl2};
 use sdl2::event::Event;
@@ -19,11 +19,11 @@ mod amnio_bindings {
     include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 }
 
+mod amnio_lvgl_ui;
 mod debug_ui;
-mod lvgl_renderer;
 mod window_init;
 
-use lvgl_renderer::{AmnioLvglUI, LvglEnvironment};
+use amnio_lvgl_ui::AmnioLvglUI;
 use window_init::{initialize_egui, initialize_sdl, initialize_window, setup_gl_attr};
 
 use egui_sdl2_gl::EguiStateHandler;
@@ -144,7 +144,6 @@ fn main() {
             break;
         }
 
-        LvglEnvironment::update_ui();
         render_frame(
             &window,
             &mut painter,
