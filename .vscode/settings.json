@@ -6,6 +6,8 @@
         "lv_init.h": "c",
         "stdlib.h": "c",
         "lv_display.h": "c",
-        "windows.h": "c"
+        "windows.h": "c",
+        "compare": "c",
+        "cstdint": "c"
     }
 }

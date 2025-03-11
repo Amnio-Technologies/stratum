@@ -1,9 +1,8 @@
-#include "amnio_ui.h" // ✅ Ensures function definitions match the declarations
+#include "amnio_ui.h"
 
 // LVGL framebuffer (RGB565 format)
 static uint16_t lvgl_framebuffer[LVGL_SCREEN_WIDTH * LVGL_SCREEN_HEIGHT];
 
-// ✅ Display flush callback (copy pixels to framebuffer)
 void my_flush_cb(lv_display_t *display, const lv_area_t *area, uint8_t *px_map)
 {
     uint16_t *src = (uint16_t *)px_map; // Convert to 16-bit color
@@ -17,7 +16,6 @@ void my_flush_cb(lv_display_t *display, const lv_area_t *area, uint8_t *px_map)
     lv_display_flush_ready(display); // Notify LVGL flush is done
 }
 
-// ✅ LVGL UI Example
 void lv_example_get_started_1(void)
 {
     lv_obj_set_style_bg_color(lv_screen_active(), lv_color_hex(0x003a57), LV_PART_MAIN);
@@ -28,7 +26,6 @@ void lv_example_get_started_1(void)
     lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
 }
 
-// ✅ Initialize LVGL & display
 AMNIO_API void lvgl_setup(void)
 {
     lv_init();
@@ -39,14 +36,22 @@ AMNIO_API void lvgl_setup(void)
     lv_example_get_started_1();
 }
 
-// ✅ Update LVGL (step function)
 AMNIO_API void lvgl_update(void)
 {
     lv_timer_handler();
 }
 
-// ✅ Get LVGL framebuffer pointer (for Rust)
 AMNIO_API uint16_t *get_lvgl_framebuffer(void)
 {
     return lvgl_framebuffer;
+}
+
+AMNIO_API uint32_t get_lvgl_display_width(void)
+{
+    return LVGL_SCREEN_WIDTH;
+}
+
+AMNIO_API uint32_t get_lvgl_display_height(void)
+{
+    return LVGL_SCREEN_HEIGHT;
 }

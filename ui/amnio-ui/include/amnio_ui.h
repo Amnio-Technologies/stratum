@@ -22,6 +22,8 @@ extern "C"
     AMNIO_API void lvgl_setup(void);
     AMNIO_API void lvgl_update(void);
     AMNIO_API uint16_t *get_lvgl_framebuffer(void);
+    AMNIO_API uint32_t get_lvgl_display_width(void);
+    AMNIO_API uint32_t get_lvgl_display_height(void);
 
 #ifdef __cplusplus
 }

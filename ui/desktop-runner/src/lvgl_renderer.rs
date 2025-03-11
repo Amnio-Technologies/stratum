@@ -1,8 +1,5 @@
-use crate::amnio_ui::get_framebuffer;
+use crate::amnio_bindings;
 use egui::{ColorImage, TextureHandle, TextureOptions};
-
-const LVGL_SCREEN_WIDTH: usize = 480;
-const LVGL_SCREEN_HEIGHT: usize = 320;
 
 pub struct LvglRenderer {
     texture: Option<TextureHandle>,
@@ -15,8 +12,15 @@ impl LvglRenderer {
 
     /// Converts LVGL's RGB565 framebuffer to RGBA and uploads to GPU
     pub fn update_lvgl_framebuffer(&mut self, egui_ctx: &egui::Context) {
-        let fb = unsafe { get_framebuffer() }; // ✅ Use actual LVGL framebuffer
-        let mut rgba_data = vec![0u8; LVGL_SCREEN_WIDTH * LVGL_SCREEN_HEIGHT * 4];
+        let (fb, width, height) = match LvglEnvironment::get_framebuffer() {
+            Some(fb) => fb,
+            None => {
+                eprintln!("🛑 LVGL framebuffer is null! Skipping update.");
+                return;
+            }
+        };
+
+        let mut rgba_data = vec![0u8; width * height * 4];
 
         for (i, &pixel) in fb.iter().enumerate() {
             let r = ((pixel >> 11) & 0x1F) << 3;
@@ -28,13 +32,68 @@ impl LvglRenderer {
             rgba_data[i * 4 + 3] = 255 as u8;
         }
 
-        let color_image =
-            ColorImage::from_rgba_unmultiplied([LVGL_SCREEN_WIDTH, LVGL_SCREEN_HEIGHT], &rgba_data);
+        let color_image = ColorImage::from_rgba_unmultiplied([width, height], &rgba_data);
         self.texture =
             Some(egui_ctx.load_texture("lvgl_fb", color_image, TextureOptions::default()));
     }
 
     pub fn get_texture(&self) -> Option<&TextureHandle> {
         self.texture.as_ref()
+    }
+}
+
+pub struct LvglEnvironment;
+impl LvglEnvironment {
+    pub fn update_ui() {
+        unsafe { amnio_bindings::lvgl_update() };
+    }
+
+    pub fn setup_ui() {
+        unsafe {
+            amnio_bindings::lvgl_setup();
+        }
+    }
+
+    pub fn get_framebuffer() -> Option<(&'static mut [u16], usize, usize)> {
+        let ptr = unsafe { amnio_bindings::get_lvgl_framebuffer() };
+        if ptr.is_null() {
+            return None;
+        }
+
+        let width = unsafe { amnio_bindings::get_lvgl_display_width() } as usize;
+        let height = unsafe { amnio_bindings::get_lvgl_display_height() } as usize;
+
+        unsafe {
+            Some((
+                std::slice::from_raw_parts_mut(ptr, width * height),
+                width,
+                height,
+            ))
+        }
+    }
+}
+
+pub struct AmnioLvglUI {
+    lvgl_renderer: LvglRenderer,
+}
+
+impl AmnioLvglUI {
+    pub fn new() -> Self {
+        Self {
+            lvgl_renderer: LvglRenderer::new(),
+        }
+    }
+
+    pub fn update(&mut self, egui_ctx: &egui::Context) -> Option<&TextureHandle> {
+        LvglEnvironment::update_ui();
+        self.lvgl_renderer.update_lvgl_framebuffer(egui_ctx);
+
+        self.lvgl_renderer.get_texture()
+    }
+
+    pub fn setup(self) -> Self {
+        LvglEnvironment::setup_ui();
+
+        self
     }
 }

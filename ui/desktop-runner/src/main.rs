@@ -1,30 +1,38 @@
 use egui::Context;
-use egui_backend::egui::{self, FullOutput, TextureHandle};
-use egui_backend::{gl, sdl2};
+use egui_sdl2_gl::egui::{FullOutput, TextureHandle};
 use egui_sdl2_gl::painter::Painter;
+use egui_sdl2_gl::{gl, sdl2};
 use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
 use sdl2::video::Window;
 use sdl2::EventPump;
+use tracing::info;
+use tracing_subscriber;
 
-mod amnio_ui;
-use amnio_ui::{get_framebuffer, setup_ui, update_ui};
+mod amnio_bindings {
+    #![allow(non_camel_case_types, non_snake_case, non_upper_case_globals)]
+
+    #[cfg(windows)]
+    include!(concat!(env!("OUT_DIR"), "\\bindings.rs"));
+
+    #[cfg(unix)]
+    include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
+}
 
 mod debug_ui;
 mod lvgl_renderer;
-mod window_init; // New module for LVGL integration
+mod window_init;
 
-use lvgl_renderer::LvglRenderer;
-use window_init::{initialize_egui, initialize_sdl, initialize_window, setup_gl_attr}; // Handles LVGL frame conversion
+use lvgl_renderer::{AmnioLvglUI, LvglEnvironment};
+use window_init::{initialize_egui, initialize_sdl, initialize_window, setup_gl_attr};
 
-use egui_sdl2_gl::{self as egui_backend, EguiStateHandler};
+use egui_sdl2_gl::EguiStateHandler;
 
 struct UiState {
     enable_vsync: bool,
     quit: bool,
     slider_value: f64,
     debug_text: String,
-    lvgl_texture: Option<TextureHandle>, // Handle for LVGL framebuffer
 }
 
 fn handle_events(
@@ -44,7 +52,7 @@ fn handle_events(
             _ => egui_state.process_input(window, event, painter),
         }
     }
-    true // Continue running
+    true
 }
 
 fn render_frame(
@@ -53,24 +61,21 @@ fn render_frame(
     egui_ctx: &Context,
     egui_state: &mut EguiStateHandler,
     ui_state: &mut UiState,
-    lvgl_renderer: &mut LvglRenderer,
+    lvgl_ui: &mut AmnioLvglUI,
 ) {
     unsafe {
         gl::ClearColor(0.15, 0.15, 0.15, 1.0);
         gl::Clear(gl::COLOR_BUFFER_BIT);
     }
 
-    update_ui(); // ✅ Call LVGL update before rendering
-    lvgl_renderer.update_lvgl_framebuffer(egui_ctx); // ✅ Get LVGL texture
+    let ui_texture = lvgl_ui.update(egui_ctx);
 
     egui_ctx.begin_pass(egui_state.input.take());
 
-    // Render LVGL texture in left panel
     egui::SidePanel::left("lvgl_canvas")
         .resizable(false)
-        .default_width(300.0)
         .show(egui_ctx, |ui| {
-            if let Some(texture) = lvgl_renderer.get_texture() {
+            if let Some(texture) = ui_texture {
                 ui.image(texture);
             } else {
                 ui.label("🛑 No LVGL Texture Found");
@@ -107,6 +112,8 @@ fn render_frame(
 }
 
 fn main() {
+    tracing_subscriber::fmt::init();
+
     let (sdl_context, mut video_subsystem) = initialize_sdl();
     setup_gl_attr(&mut video_subsystem);
 
@@ -115,19 +122,16 @@ fn main() {
     let (mut painter, mut egui_state, egui_ctx, mut event_pump) =
         initialize_egui(&window, sdl_context);
 
-    let mut lvgl_renderer = LvglRenderer::new();
-
     let mut ui_state = UiState {
         enable_vsync: false,
         quit: false,
         slider_value: 10.0,
         debug_text: "Debug output area".to_string(),
-        lvgl_texture: None,
     };
 
-    println!("🛠️ Initializing LVGL...");
-    setup_ui(); // ✅ Setup LVGL before the render loop
-    println!("🟢 LVGL Initialized");
+    info!("Initializing LVGL...");
+    let mut ui = AmnioLvglUI::new().setup();
+    info!("LVGL Initialized");
 
     while !ui_state.quit {
         if !handle_events(
@@ -140,16 +144,16 @@ fn main() {
             break;
         }
 
-        update_ui(); // ✅ Ensure LVGL runs each frame
+        LvglEnvironment::update_ui();
         render_frame(
             &window,
             &mut painter,
             &egui_ctx,
             &mut egui_state,
             &mut ui_state,
-            &mut lvgl_renderer,
+            &mut ui,
         );
     }
 
-    println!("🔄 Shutting down...");
+    info!("Shutting down...");
 }
