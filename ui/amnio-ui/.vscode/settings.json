@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "lvgl.h": "c",
+        "unistd.h": "c",
+        "amnio_ui.h": "c",
+        "lv_init.h": "c"
+    }
+}

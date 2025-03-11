@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "name": "MinGW64",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/msys64/mingw64/include", // ✅ MinGW64 system headers
+                "C:/msys64/mingw64/include/c++/14.2.0", // ✅ GCC C++ Standard Library
+                "C:/msys64/mingw64/include/c++/14.2.0/x86_64-w64-mingw32", // ✅ Arch-specific headers
+                "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include" // ✅ GCC internal headers
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:/msys64/mingw64/bin/gcc.exe", // ✅ Ensure correct GCC
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x64",
+            "configurationProvider": "ms-vscode.cmake-tools"
+        }
+    ],
+    "version": 4
+}

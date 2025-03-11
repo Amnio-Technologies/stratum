@@ -6,9 +6,8 @@ members = [
     "firmware/monitoring",
     "firmware/modules",
     "firmware/main",
-    "ui/lvgl",
     "ui/desktop-runner",
-    "ui/embedded-ui",
+    "ui/embedded-runner",
     "tools/module-sim",
     "tools/data-logger",
 ]

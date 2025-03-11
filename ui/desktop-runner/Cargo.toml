@@ -1,6 +1,13 @@
 [package]
 name = "desktop-runner"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
+
+[build-dependencies]
+bindgen = "0.71.1"
+cc = "1.2.16"
 
 [dependencies]
+egui = "0.31.1"
+egui_sdl2_gl = "0.31.0"
+sdl2 = "0.37.0"

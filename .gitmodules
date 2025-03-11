@@ -1,0 +1,3 @@
+[submodule "ui/amnio-ui/lvgl"]
+	path = ui/amnio-ui/lvgl
+	url = https://github.com/lvgl/lvgl.git

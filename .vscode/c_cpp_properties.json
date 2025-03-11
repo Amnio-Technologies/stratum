@@ -1,0 +1,36 @@
+{
+    "configurations": [
+        {
+            "name": "MSYS2 MinGW64",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "C:/msys64/mingw64/bin/gcc.exe",
+            "cStandard": "c99",
+            "cppStandard": "c++17",
+            "defines": [
+                "LV_CONF_INCLUDE_SIMPLE",
+                "LV_USE_LOG=1"
+            ],
+            "includePath": [
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/include/lvgl",
+                "C:/msys64/mingw64/include",
+                "C:/msys64/mingw64/include/lvgl"
+            ],
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/include",
+                    "${workspaceFolder}/include/lvgl",
+                    "C:/msys64/mingw64/include",
+                    "C:/msys64/mingw64/include/lvgl"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            },
+            "compilerArgs": [
+                "-I${workspaceFolder}/include",
+                "-I${workspaceFolder}/include/lvgl"
+            ]
+        }
+    ],
+    "version": 4
+}
