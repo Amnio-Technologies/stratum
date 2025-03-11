@@ -1,12 +1,8 @@
+use crate::amnio_ui::get_framebuffer;
 use egui::{ColorImage, TextureHandle, TextureOptions};
-use std::sync::Mutex;
 
 const LVGL_SCREEN_WIDTH: usize = 480;
 const LVGL_SCREEN_HEIGHT: usize = 320;
-
-// Shared framebuffer memory (sync with LVGL's framebuffer)
-static LVGL_FRAMEBUFFER: Mutex<[u16; LVGL_SCREEN_WIDTH * LVGL_SCREEN_HEIGHT]> =
-    Mutex::new([0; LVGL_SCREEN_WIDTH * LVGL_SCREEN_HEIGHT]);
 
 pub struct LvglRenderer {
     texture: Option<TextureHandle>,
@@ -19,7 +15,7 @@ impl LvglRenderer {
 
     /// Converts LVGL's RGB565 framebuffer to RGBA and uploads to GPU
     pub fn update_lvgl_framebuffer(&mut self, egui_ctx: &egui::Context) {
-        let fb = LVGL_FRAMEBUFFER.lock().unwrap();
+        let fb = unsafe { get_framebuffer() }; // ✅ Use actual LVGL framebuffer
         let mut rgba_data = vec![0u8; LVGL_SCREEN_WIDTH * LVGL_SCREEN_HEIGHT * 4];
 
         for (i, &pixel) in fb.iter().enumerate() {
@@ -38,7 +34,6 @@ impl LvglRenderer {
             Some(egui_ctx.load_texture("lvgl_fb", color_image, TextureOptions::default()));
     }
 
-    /// Returns the `egui` texture handle
     pub fn get_texture(&self) -> Option<&TextureHandle> {
         self.texture.as_ref()
     }

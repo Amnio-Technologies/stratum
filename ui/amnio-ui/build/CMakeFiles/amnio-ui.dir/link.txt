@@ -1,3 +1,3 @@
 C:\msys64\mingw64\bin\cmake.exe -E rm -f CMakeFiles\amnio-ui.dir/objects.a
 C:\msys64\mingw64\bin\ar.exe qc CMakeFiles\amnio-ui.dir/objects.a @CMakeFiles\amnio-ui.dir\objects1.rsp
-C:\msys64\mingw64\bin\cc.exe -shared -o amnio-ui.dll -Wl,--out-implib,libamnio-ui.dll.a -Wl,--major-image-version,0,--minor-image-version,0 -Wl,--whole-archive CMakeFiles\amnio-ui.dir/objects.a -Wl,--no-whole-archive @CMakeFiles\amnio-ui.dir\linkLibs.rsp
+C:\msys64\mingw64\bin\cc.exe -shared -o libamnio-ui.dll -Wl,--out-implib,libamnio-ui.dll.a -Wl,--major-image-version,0,--minor-image-version,0 -Wl,--whole-archive CMakeFiles\amnio-ui.dir/objects.a -Wl,--no-whole-archive @CMakeFiles\amnio-ui.dir\linkLibs.rsp

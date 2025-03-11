@@ -2,10 +2,13 @@ use egui::Context;
 use egui_backend::egui::{self, FullOutput, TextureHandle};
 use egui_backend::{gl, sdl2};
 use egui_sdl2_gl::painter::Painter;
-use sdl2::EventPump;
 use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
 use sdl2::video::Window;
+use sdl2::EventPump;
+
+mod amnio_ui;
+use amnio_ui::{get_framebuffer, setup_ui, update_ui};
 
 mod debug_ui;
 mod lvgl_renderer;
@@ -50,24 +53,27 @@ fn render_frame(
     egui_ctx: &Context,
     egui_state: &mut EguiStateHandler,
     ui_state: &mut UiState,
-    lvgl_renderer: &mut LvglRenderer, // Handles LVGL rendering updates
+    lvgl_renderer: &mut LvglRenderer,
 ) {
     unsafe {
         gl::ClearColor(0.15, 0.15, 0.15, 1.0);
         gl::Clear(gl::COLOR_BUFFER_BIT);
     }
 
-    // Update LVGL framebuffer to texture
-    lvgl_renderer.update_lvgl_framebuffer(egui_ctx);
+    update_ui(); // ✅ Call LVGL update before rendering
+    lvgl_renderer.update_lvgl_framebuffer(egui_ctx); // ✅ Get LVGL texture
 
     egui_ctx.begin_pass(egui_state.input.take());
 
+    // Render LVGL texture in left panel
     egui::SidePanel::left("lvgl_canvas")
         .resizable(false)
         .default_width(300.0)
         .show(egui_ctx, |ui| {
             if let Some(texture) = lvgl_renderer.get_texture() {
                 ui.image(texture);
+            } else {
+                ui.label("🛑 No LVGL Texture Found");
             }
         });
 
@@ -109,7 +115,7 @@ fn main() {
     let (mut painter, mut egui_state, egui_ctx, mut event_pump) =
         initialize_egui(&window, sdl_context);
 
-    let mut lvgl_renderer = LvglRenderer::new(); // LVGL Renderer instance
+    let mut lvgl_renderer = LvglRenderer::new();
 
     let mut ui_state = UiState {
         enable_vsync: false,
@@ -119,7 +125,9 @@ fn main() {
         lvgl_texture: None,
     };
 
-    println!("🛠️ Running SDL2 + OpenGL + egui for amnIO UI Debugging");
+    println!("🛠️ Initializing LVGL...");
+    setup_ui(); // ✅ Setup LVGL before the render loop
+    println!("🟢 LVGL Initialized");
 
     while !ui_state.quit {
         if !handle_events(
@@ -132,6 +140,7 @@ fn main() {
             break;
         }
 
+        update_ui(); // ✅ Ensure LVGL runs each frame
         render_frame(
             &window,
             &mut painter,

@@ -2,7 +2,7 @@
 
 use std::ffi::c_void;
 
-#[link(name = "amnio_ui")] // Link against `libamnio_ui.a`
+#[link(name = "amnio-ui")] // Link against `libamnio-ui.a`
 extern "C" {
     pub fn lvgl_setup();
     pub fn lvgl_update();

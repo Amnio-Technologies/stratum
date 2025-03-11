@@ -84,51 +84,6 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-.PHONY : list_install_components/fast
-
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
-	C:\msys64\mingw64\bin\cmake.exe -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
-	C:\msys64\mingw64\bin\cmake.exe -P cmake_install.cmake
-.PHONY : install/fast
-
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
-	C:\msys64\mingw64\bin\cmake.exe -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
-	C:\msys64\mingw64\bin\cmake.exe -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
-	C:\msys64\mingw64\bin\cmake.exe -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
-	C:\msys64\mingw64\bin\cmake.exe -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip/fast
-
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\erick\Documents\amnio\ui\amnio-ui\build\CMakeFiles C:\Users\erick\Documents\amnio\ui\amnio-ui\build\\CMakeFiles\progress.marks
@@ -173,9413 +128,5885 @@ amnio-ui/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/build
 .PHONY : amnio-ui/fast
 
-include/lvgl/src/core/lv_group.obj: include/lvgl/src/core/lv_group.c.obj
+# target to build an object file
+include/lvgl/src/core/lv_group.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_group.obj
 .PHONY : include/lvgl/src/core/lv_group.obj
 
-# target to build an object file
-include/lvgl/src/core/lv_group.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_group.c.obj
-.PHONY : include/lvgl/src/core/lv_group.c.obj
-
-include/lvgl/src/core/lv_group.i: include/lvgl/src/core/lv_group.c.i
+# target to preprocess a source file
+include/lvgl/src/core/lv_group.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_group.i
 .PHONY : include/lvgl/src/core/lv_group.i
 
-# target to preprocess a source file
-include/lvgl/src/core/lv_group.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_group.c.i
-.PHONY : include/lvgl/src/core/lv_group.c.i
-
-include/lvgl/src/core/lv_group.s: include/lvgl/src/core/lv_group.c.s
+# target to generate assembly for a file
+include/lvgl/src/core/lv_group.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_group.s
 .PHONY : include/lvgl/src/core/lv_group.s
 
-# target to generate assembly for a file
-include/lvgl/src/core/lv_group.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_group.c.s
-.PHONY : include/lvgl/src/core/lv_group.c.s
-
-include/lvgl/src/core/lv_obj.obj: include/lvgl/src/core/lv_obj.c.obj
+# target to build an object file
+include/lvgl/src/core/lv_obj.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj.obj
 .PHONY : include/lvgl/src/core/lv_obj.obj
 
-# target to build an object file
-include/lvgl/src/core/lv_obj.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj.c.obj
-.PHONY : include/lvgl/src/core/lv_obj.c.obj
-
-include/lvgl/src/core/lv_obj.i: include/lvgl/src/core/lv_obj.c.i
+# target to preprocess a source file
+include/lvgl/src/core/lv_obj.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj.i
 .PHONY : include/lvgl/src/core/lv_obj.i
 
-# target to preprocess a source file
-include/lvgl/src/core/lv_obj.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj.c.i
-.PHONY : include/lvgl/src/core/lv_obj.c.i
-
-include/lvgl/src/core/lv_obj.s: include/lvgl/src/core/lv_obj.c.s
+# target to generate assembly for a file
+include/lvgl/src/core/lv_obj.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj.s
 .PHONY : include/lvgl/src/core/lv_obj.s
 
-# target to generate assembly for a file
-include/lvgl/src/core/lv_obj.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj.c.s
-.PHONY : include/lvgl/src/core/lv_obj.c.s
-
-include/lvgl/src/core/lv_obj_class.obj: include/lvgl/src/core/lv_obj_class.c.obj
+# target to build an object file
+include/lvgl/src/core/lv_obj_class.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_class.obj
 .PHONY : include/lvgl/src/core/lv_obj_class.obj
 
-# target to build an object file
-include/lvgl/src/core/lv_obj_class.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_class.c.obj
-.PHONY : include/lvgl/src/core/lv_obj_class.c.obj
-
-include/lvgl/src/core/lv_obj_class.i: include/lvgl/src/core/lv_obj_class.c.i
+# target to preprocess a source file
+include/lvgl/src/core/lv_obj_class.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_class.i
 .PHONY : include/lvgl/src/core/lv_obj_class.i
 
-# target to preprocess a source file
-include/lvgl/src/core/lv_obj_class.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_class.c.i
-.PHONY : include/lvgl/src/core/lv_obj_class.c.i
-
-include/lvgl/src/core/lv_obj_class.s: include/lvgl/src/core/lv_obj_class.c.s
+# target to generate assembly for a file
+include/lvgl/src/core/lv_obj_class.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_class.s
 .PHONY : include/lvgl/src/core/lv_obj_class.s
 
-# target to generate assembly for a file
-include/lvgl/src/core/lv_obj_class.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_class.c.s
-.PHONY : include/lvgl/src/core/lv_obj_class.c.s
-
-include/lvgl/src/core/lv_obj_draw.obj: include/lvgl/src/core/lv_obj_draw.c.obj
+# target to build an object file
+include/lvgl/src/core/lv_obj_draw.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_draw.obj
 .PHONY : include/lvgl/src/core/lv_obj_draw.obj
 
-# target to build an object file
-include/lvgl/src/core/lv_obj_draw.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_draw.c.obj
-.PHONY : include/lvgl/src/core/lv_obj_draw.c.obj
-
-include/lvgl/src/core/lv_obj_draw.i: include/lvgl/src/core/lv_obj_draw.c.i
+# target to preprocess a source file
+include/lvgl/src/core/lv_obj_draw.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_draw.i
 .PHONY : include/lvgl/src/core/lv_obj_draw.i
 
-# target to preprocess a source file
-include/lvgl/src/core/lv_obj_draw.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_draw.c.i
-.PHONY : include/lvgl/src/core/lv_obj_draw.c.i
-
-include/lvgl/src/core/lv_obj_draw.s: include/lvgl/src/core/lv_obj_draw.c.s
+# target to generate assembly for a file
+include/lvgl/src/core/lv_obj_draw.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_draw.s
 .PHONY : include/lvgl/src/core/lv_obj_draw.s
 
-# target to generate assembly for a file
-include/lvgl/src/core/lv_obj_draw.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_draw.c.s
-.PHONY : include/lvgl/src/core/lv_obj_draw.c.s
-
-include/lvgl/src/core/lv_obj_event.obj: include/lvgl/src/core/lv_obj_event.c.obj
+# target to build an object file
+include/lvgl/src/core/lv_obj_event.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_event.obj
 .PHONY : include/lvgl/src/core/lv_obj_event.obj
 
-# target to build an object file
-include/lvgl/src/core/lv_obj_event.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_event.c.obj
-.PHONY : include/lvgl/src/core/lv_obj_event.c.obj
-
-include/lvgl/src/core/lv_obj_event.i: include/lvgl/src/core/lv_obj_event.c.i
+# target to preprocess a source file
+include/lvgl/src/core/lv_obj_event.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_event.i
 .PHONY : include/lvgl/src/core/lv_obj_event.i
 
-# target to preprocess a source file
-include/lvgl/src/core/lv_obj_event.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_event.c.i
-.PHONY : include/lvgl/src/core/lv_obj_event.c.i
-
-include/lvgl/src/core/lv_obj_event.s: include/lvgl/src/core/lv_obj_event.c.s
+# target to generate assembly for a file
+include/lvgl/src/core/lv_obj_event.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_event.s
 .PHONY : include/lvgl/src/core/lv_obj_event.s
 
-# target to generate assembly for a file
-include/lvgl/src/core/lv_obj_event.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_event.c.s
-.PHONY : include/lvgl/src/core/lv_obj_event.c.s
-
-include/lvgl/src/core/lv_obj_id_builtin.obj: include/lvgl/src/core/lv_obj_id_builtin.c.obj
+# target to build an object file
+include/lvgl/src/core/lv_obj_id_builtin.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_id_builtin.obj
 .PHONY : include/lvgl/src/core/lv_obj_id_builtin.obj
 
-# target to build an object file
-include/lvgl/src/core/lv_obj_id_builtin.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_id_builtin.c.obj
-.PHONY : include/lvgl/src/core/lv_obj_id_builtin.c.obj
-
-include/lvgl/src/core/lv_obj_id_builtin.i: include/lvgl/src/core/lv_obj_id_builtin.c.i
+# target to preprocess a source file
+include/lvgl/src/core/lv_obj_id_builtin.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_id_builtin.i
 .PHONY : include/lvgl/src/core/lv_obj_id_builtin.i
 
-# target to preprocess a source file
-include/lvgl/src/core/lv_obj_id_builtin.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_id_builtin.c.i
-.PHONY : include/lvgl/src/core/lv_obj_id_builtin.c.i
-
-include/lvgl/src/core/lv_obj_id_builtin.s: include/lvgl/src/core/lv_obj_id_builtin.c.s
+# target to generate assembly for a file
+include/lvgl/src/core/lv_obj_id_builtin.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_id_builtin.s
 .PHONY : include/lvgl/src/core/lv_obj_id_builtin.s
 
-# target to generate assembly for a file
-include/lvgl/src/core/lv_obj_id_builtin.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_id_builtin.c.s
-.PHONY : include/lvgl/src/core/lv_obj_id_builtin.c.s
-
-include/lvgl/src/core/lv_obj_pos.obj: include/lvgl/src/core/lv_obj_pos.c.obj
+# target to build an object file
+include/lvgl/src/core/lv_obj_pos.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_pos.obj
 .PHONY : include/lvgl/src/core/lv_obj_pos.obj
 
-# target to build an object file
-include/lvgl/src/core/lv_obj_pos.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_pos.c.obj
-.PHONY : include/lvgl/src/core/lv_obj_pos.c.obj
-
-include/lvgl/src/core/lv_obj_pos.i: include/lvgl/src/core/lv_obj_pos.c.i
+# target to preprocess a source file
+include/lvgl/src/core/lv_obj_pos.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_pos.i
 .PHONY : include/lvgl/src/core/lv_obj_pos.i
 
-# target to preprocess a source file
-include/lvgl/src/core/lv_obj_pos.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_pos.c.i
-.PHONY : include/lvgl/src/core/lv_obj_pos.c.i
-
-include/lvgl/src/core/lv_obj_pos.s: include/lvgl/src/core/lv_obj_pos.c.s
+# target to generate assembly for a file
+include/lvgl/src/core/lv_obj_pos.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_pos.s
 .PHONY : include/lvgl/src/core/lv_obj_pos.s
 
-# target to generate assembly for a file
-include/lvgl/src/core/lv_obj_pos.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_pos.c.s
-.PHONY : include/lvgl/src/core/lv_obj_pos.c.s
-
-include/lvgl/src/core/lv_obj_property.obj: include/lvgl/src/core/lv_obj_property.c.obj
+# target to build an object file
+include/lvgl/src/core/lv_obj_property.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_property.obj
 .PHONY : include/lvgl/src/core/lv_obj_property.obj
 
-# target to build an object file
-include/lvgl/src/core/lv_obj_property.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_property.c.obj
-.PHONY : include/lvgl/src/core/lv_obj_property.c.obj
-
-include/lvgl/src/core/lv_obj_property.i: include/lvgl/src/core/lv_obj_property.c.i
+# target to preprocess a source file
+include/lvgl/src/core/lv_obj_property.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_property.i
 .PHONY : include/lvgl/src/core/lv_obj_property.i
 
-# target to preprocess a source file
-include/lvgl/src/core/lv_obj_property.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_property.c.i
-.PHONY : include/lvgl/src/core/lv_obj_property.c.i
-
-include/lvgl/src/core/lv_obj_property.s: include/lvgl/src/core/lv_obj_property.c.s
+# target to generate assembly for a file
+include/lvgl/src/core/lv_obj_property.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_property.s
 .PHONY : include/lvgl/src/core/lv_obj_property.s
 
-# target to generate assembly for a file
-include/lvgl/src/core/lv_obj_property.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_property.c.s
-.PHONY : include/lvgl/src/core/lv_obj_property.c.s
-
-include/lvgl/src/core/lv_obj_scroll.obj: include/lvgl/src/core/lv_obj_scroll.c.obj
+# target to build an object file
+include/lvgl/src/core/lv_obj_scroll.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_scroll.obj
 .PHONY : include/lvgl/src/core/lv_obj_scroll.obj
 
-# target to build an object file
-include/lvgl/src/core/lv_obj_scroll.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_scroll.c.obj
-.PHONY : include/lvgl/src/core/lv_obj_scroll.c.obj
-
-include/lvgl/src/core/lv_obj_scroll.i: include/lvgl/src/core/lv_obj_scroll.c.i
+# target to preprocess a source file
+include/lvgl/src/core/lv_obj_scroll.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_scroll.i
 .PHONY : include/lvgl/src/core/lv_obj_scroll.i
 
-# target to preprocess a source file
-include/lvgl/src/core/lv_obj_scroll.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_scroll.c.i
-.PHONY : include/lvgl/src/core/lv_obj_scroll.c.i
-
-include/lvgl/src/core/lv_obj_scroll.s: include/lvgl/src/core/lv_obj_scroll.c.s
+# target to generate assembly for a file
+include/lvgl/src/core/lv_obj_scroll.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_scroll.s
 .PHONY : include/lvgl/src/core/lv_obj_scroll.s
 
-# target to generate assembly for a file
-include/lvgl/src/core/lv_obj_scroll.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_scroll.c.s
-.PHONY : include/lvgl/src/core/lv_obj_scroll.c.s
-
-include/lvgl/src/core/lv_obj_style.obj: include/lvgl/src/core/lv_obj_style.c.obj
+# target to build an object file
+include/lvgl/src/core/lv_obj_style.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_style.obj
 .PHONY : include/lvgl/src/core/lv_obj_style.obj
 
-# target to build an object file
-include/lvgl/src/core/lv_obj_style.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_style.c.obj
-.PHONY : include/lvgl/src/core/lv_obj_style.c.obj
-
-include/lvgl/src/core/lv_obj_style.i: include/lvgl/src/core/lv_obj_style.c.i
+# target to preprocess a source file
+include/lvgl/src/core/lv_obj_style.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_style.i
 .PHONY : include/lvgl/src/core/lv_obj_style.i
 
-# target to preprocess a source file
-include/lvgl/src/core/lv_obj_style.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_style.c.i
-.PHONY : include/lvgl/src/core/lv_obj_style.c.i
-
-include/lvgl/src/core/lv_obj_style.s: include/lvgl/src/core/lv_obj_style.c.s
+# target to generate assembly for a file
+include/lvgl/src/core/lv_obj_style.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_style.s
 .PHONY : include/lvgl/src/core/lv_obj_style.s
 
-# target to generate assembly for a file
-include/lvgl/src/core/lv_obj_style.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_style.c.s
-.PHONY : include/lvgl/src/core/lv_obj_style.c.s
-
-include/lvgl/src/core/lv_obj_style_gen.obj: include/lvgl/src/core/lv_obj_style_gen.c.obj
+# target to build an object file
+include/lvgl/src/core/lv_obj_style_gen.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_style_gen.obj
 .PHONY : include/lvgl/src/core/lv_obj_style_gen.obj
 
-# target to build an object file
-include/lvgl/src/core/lv_obj_style_gen.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_style_gen.c.obj
-.PHONY : include/lvgl/src/core/lv_obj_style_gen.c.obj
-
-include/lvgl/src/core/lv_obj_style_gen.i: include/lvgl/src/core/lv_obj_style_gen.c.i
+# target to preprocess a source file
+include/lvgl/src/core/lv_obj_style_gen.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_style_gen.i
 .PHONY : include/lvgl/src/core/lv_obj_style_gen.i
 
-# target to preprocess a source file
-include/lvgl/src/core/lv_obj_style_gen.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_style_gen.c.i
-.PHONY : include/lvgl/src/core/lv_obj_style_gen.c.i
-
-include/lvgl/src/core/lv_obj_style_gen.s: include/lvgl/src/core/lv_obj_style_gen.c.s
+# target to generate assembly for a file
+include/lvgl/src/core/lv_obj_style_gen.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_style_gen.s
 .PHONY : include/lvgl/src/core/lv_obj_style_gen.s
 
-# target to generate assembly for a file
-include/lvgl/src/core/lv_obj_style_gen.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_style_gen.c.s
-.PHONY : include/lvgl/src/core/lv_obj_style_gen.c.s
-
-include/lvgl/src/core/lv_obj_tree.obj: include/lvgl/src/core/lv_obj_tree.c.obj
+# target to build an object file
+include/lvgl/src/core/lv_obj_tree.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_tree.obj
 .PHONY : include/lvgl/src/core/lv_obj_tree.obj
 
-# target to build an object file
-include/lvgl/src/core/lv_obj_tree.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_tree.c.obj
-.PHONY : include/lvgl/src/core/lv_obj_tree.c.obj
-
-include/lvgl/src/core/lv_obj_tree.i: include/lvgl/src/core/lv_obj_tree.c.i
+# target to preprocess a source file
+include/lvgl/src/core/lv_obj_tree.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_tree.i
 .PHONY : include/lvgl/src/core/lv_obj_tree.i
 
-# target to preprocess a source file
-include/lvgl/src/core/lv_obj_tree.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_tree.c.i
-.PHONY : include/lvgl/src/core/lv_obj_tree.c.i
-
-include/lvgl/src/core/lv_obj_tree.s: include/lvgl/src/core/lv_obj_tree.c.s
+# target to generate assembly for a file
+include/lvgl/src/core/lv_obj_tree.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_tree.s
 .PHONY : include/lvgl/src/core/lv_obj_tree.s
 
-# target to generate assembly for a file
-include/lvgl/src/core/lv_obj_tree.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_obj_tree.c.s
-.PHONY : include/lvgl/src/core/lv_obj_tree.c.s
-
-include/lvgl/src/core/lv_refr.obj: include/lvgl/src/core/lv_refr.c.obj
+# target to build an object file
+include/lvgl/src/core/lv_refr.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_refr.obj
 .PHONY : include/lvgl/src/core/lv_refr.obj
 
-# target to build an object file
-include/lvgl/src/core/lv_refr.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_refr.c.obj
-.PHONY : include/lvgl/src/core/lv_refr.c.obj
-
-include/lvgl/src/core/lv_refr.i: include/lvgl/src/core/lv_refr.c.i
+# target to preprocess a source file
+include/lvgl/src/core/lv_refr.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_refr.i
 .PHONY : include/lvgl/src/core/lv_refr.i
 
-# target to preprocess a source file
-include/lvgl/src/core/lv_refr.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_refr.c.i
-.PHONY : include/lvgl/src/core/lv_refr.c.i
-
-include/lvgl/src/core/lv_refr.s: include/lvgl/src/core/lv_refr.c.s
+# target to generate assembly for a file
+include/lvgl/src/core/lv_refr.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_refr.s
 .PHONY : include/lvgl/src/core/lv_refr.s
 
-# target to generate assembly for a file
-include/lvgl/src/core/lv_refr.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/core/lv_refr.c.s
-.PHONY : include/lvgl/src/core/lv_refr.c.s
-
-include/lvgl/src/display/lv_display.obj: include/lvgl/src/display/lv_display.c.obj
+# target to build an object file
+include/lvgl/src/display/lv_display.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/display/lv_display.obj
 .PHONY : include/lvgl/src/display/lv_display.obj
 
-# target to build an object file
-include/lvgl/src/display/lv_display.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/display/lv_display.c.obj
-.PHONY : include/lvgl/src/display/lv_display.c.obj
-
-include/lvgl/src/display/lv_display.i: include/lvgl/src/display/lv_display.c.i
+# target to preprocess a source file
+include/lvgl/src/display/lv_display.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/display/lv_display.i
 .PHONY : include/lvgl/src/display/lv_display.i
 
-# target to preprocess a source file
-include/lvgl/src/display/lv_display.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/display/lv_display.c.i
-.PHONY : include/lvgl/src/display/lv_display.c.i
-
-include/lvgl/src/display/lv_display.s: include/lvgl/src/display/lv_display.c.s
+# target to generate assembly for a file
+include/lvgl/src/display/lv_display.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/display/lv_display.s
 .PHONY : include/lvgl/src/display/lv_display.s
 
-# target to generate assembly for a file
-include/lvgl/src/display/lv_display.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/display/lv_display.c.s
-.PHONY : include/lvgl/src/display/lv_display.c.s
-
-include/lvgl/src/draw/dma2d/lv_draw_dma2d.obj: include/lvgl/src/draw/dma2d/lv_draw_dma2d.c.obj
+# target to build an object file
+include/lvgl/src/draw/dma2d/lv_draw_dma2d.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/dma2d/lv_draw_dma2d.obj
 .PHONY : include/lvgl/src/draw/dma2d/lv_draw_dma2d.obj
 
-# target to build an object file
-include/lvgl/src/draw/dma2d/lv_draw_dma2d.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/dma2d/lv_draw_dma2d.c.obj
-.PHONY : include/lvgl/src/draw/dma2d/lv_draw_dma2d.c.obj
-
-include/lvgl/src/draw/dma2d/lv_draw_dma2d.i: include/lvgl/src/draw/dma2d/lv_draw_dma2d.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/dma2d/lv_draw_dma2d.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/dma2d/lv_draw_dma2d.i
 .PHONY : include/lvgl/src/draw/dma2d/lv_draw_dma2d.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/dma2d/lv_draw_dma2d.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/dma2d/lv_draw_dma2d.c.i
-.PHONY : include/lvgl/src/draw/dma2d/lv_draw_dma2d.c.i
-
-include/lvgl/src/draw/dma2d/lv_draw_dma2d.s: include/lvgl/src/draw/dma2d/lv_draw_dma2d.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/dma2d/lv_draw_dma2d.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/dma2d/lv_draw_dma2d.s
 .PHONY : include/lvgl/src/draw/dma2d/lv_draw_dma2d.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/dma2d/lv_draw_dma2d.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/dma2d/lv_draw_dma2d.c.s
-.PHONY : include/lvgl/src/draw/dma2d/lv_draw_dma2d.c.s
-
-include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.obj: include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.c.obj
+# target to build an object file
+include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.obj
 .PHONY : include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.obj
 
-# target to build an object file
-include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.c.obj
-.PHONY : include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.c.obj
-
-include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.i: include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.i
 .PHONY : include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.c.i
-.PHONY : include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.c.i
-
-include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.s: include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.s
 .PHONY : include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.c.s
-.PHONY : include/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.c.s
-
-include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.obj: include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.c.obj
+# target to build an object file
+include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.obj
 .PHONY : include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.obj
 
-# target to build an object file
-include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.c.obj
-.PHONY : include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.c.obj
-
-include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.i: include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.i
 .PHONY : include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.c.i
-.PHONY : include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.c.i
-
-include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.s: include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.s
 .PHONY : include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.c.s
-.PHONY : include/lvgl/src/draw/dma2d/lv_draw_dma2d_img.c.s
-
-include/lvgl/src/draw/lv_draw.obj: include/lvgl/src/draw/lv_draw.c.obj
+# target to build an object file
+include/lvgl/src/draw/lv_draw.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw.obj
 .PHONY : include/lvgl/src/draw/lv_draw.obj
 
-# target to build an object file
-include/lvgl/src/draw/lv_draw.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw.c.obj
-.PHONY : include/lvgl/src/draw/lv_draw.c.obj
-
-include/lvgl/src/draw/lv_draw.i: include/lvgl/src/draw/lv_draw.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/lv_draw.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw.i
 .PHONY : include/lvgl/src/draw/lv_draw.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/lv_draw.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw.c.i
-.PHONY : include/lvgl/src/draw/lv_draw.c.i
-
-include/lvgl/src/draw/lv_draw.s: include/lvgl/src/draw/lv_draw.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/lv_draw.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw.s
 .PHONY : include/lvgl/src/draw/lv_draw.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/lv_draw.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw.c.s
-.PHONY : include/lvgl/src/draw/lv_draw.c.s
-
-include/lvgl/src/draw/lv_draw_arc.obj: include/lvgl/src/draw/lv_draw_arc.c.obj
+# target to build an object file
+include/lvgl/src/draw/lv_draw_arc.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_arc.obj
 .PHONY : include/lvgl/src/draw/lv_draw_arc.obj
 
-# target to build an object file
-include/lvgl/src/draw/lv_draw_arc.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_arc.c.obj
-.PHONY : include/lvgl/src/draw/lv_draw_arc.c.obj
-
-include/lvgl/src/draw/lv_draw_arc.i: include/lvgl/src/draw/lv_draw_arc.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/lv_draw_arc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_arc.i
 .PHONY : include/lvgl/src/draw/lv_draw_arc.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/lv_draw_arc.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_arc.c.i
-.PHONY : include/lvgl/src/draw/lv_draw_arc.c.i
-
-include/lvgl/src/draw/lv_draw_arc.s: include/lvgl/src/draw/lv_draw_arc.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/lv_draw_arc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_arc.s
 .PHONY : include/lvgl/src/draw/lv_draw_arc.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/lv_draw_arc.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_arc.c.s
-.PHONY : include/lvgl/src/draw/lv_draw_arc.c.s
-
-include/lvgl/src/draw/lv_draw_buf.obj: include/lvgl/src/draw/lv_draw_buf.c.obj
+# target to build an object file
+include/lvgl/src/draw/lv_draw_buf.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_buf.obj
 .PHONY : include/lvgl/src/draw/lv_draw_buf.obj
 
-# target to build an object file
-include/lvgl/src/draw/lv_draw_buf.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_buf.c.obj
-.PHONY : include/lvgl/src/draw/lv_draw_buf.c.obj
-
-include/lvgl/src/draw/lv_draw_buf.i: include/lvgl/src/draw/lv_draw_buf.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/lv_draw_buf.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_buf.i
 .PHONY : include/lvgl/src/draw/lv_draw_buf.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/lv_draw_buf.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_buf.c.i
-.PHONY : include/lvgl/src/draw/lv_draw_buf.c.i
-
-include/lvgl/src/draw/lv_draw_buf.s: include/lvgl/src/draw/lv_draw_buf.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/lv_draw_buf.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_buf.s
 .PHONY : include/lvgl/src/draw/lv_draw_buf.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/lv_draw_buf.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_buf.c.s
-.PHONY : include/lvgl/src/draw/lv_draw_buf.c.s
-
-include/lvgl/src/draw/lv_draw_image.obj: include/lvgl/src/draw/lv_draw_image.c.obj
+# target to build an object file
+include/lvgl/src/draw/lv_draw_image.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_image.obj
 .PHONY : include/lvgl/src/draw/lv_draw_image.obj
 
-# target to build an object file
-include/lvgl/src/draw/lv_draw_image.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_image.c.obj
-.PHONY : include/lvgl/src/draw/lv_draw_image.c.obj
-
-include/lvgl/src/draw/lv_draw_image.i: include/lvgl/src/draw/lv_draw_image.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/lv_draw_image.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_image.i
 .PHONY : include/lvgl/src/draw/lv_draw_image.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/lv_draw_image.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_image.c.i
-.PHONY : include/lvgl/src/draw/lv_draw_image.c.i
-
-include/lvgl/src/draw/lv_draw_image.s: include/lvgl/src/draw/lv_draw_image.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/lv_draw_image.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_image.s
 .PHONY : include/lvgl/src/draw/lv_draw_image.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/lv_draw_image.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_image.c.s
-.PHONY : include/lvgl/src/draw/lv_draw_image.c.s
-
-include/lvgl/src/draw/lv_draw_label.obj: include/lvgl/src/draw/lv_draw_label.c.obj
+# target to build an object file
+include/lvgl/src/draw/lv_draw_label.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_label.obj
 .PHONY : include/lvgl/src/draw/lv_draw_label.obj
 
-# target to build an object file
-include/lvgl/src/draw/lv_draw_label.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_label.c.obj
-.PHONY : include/lvgl/src/draw/lv_draw_label.c.obj
-
-include/lvgl/src/draw/lv_draw_label.i: include/lvgl/src/draw/lv_draw_label.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/lv_draw_label.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_label.i
 .PHONY : include/lvgl/src/draw/lv_draw_label.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/lv_draw_label.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_label.c.i
-.PHONY : include/lvgl/src/draw/lv_draw_label.c.i
-
-include/lvgl/src/draw/lv_draw_label.s: include/lvgl/src/draw/lv_draw_label.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/lv_draw_label.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_label.s
 .PHONY : include/lvgl/src/draw/lv_draw_label.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/lv_draw_label.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_label.c.s
-.PHONY : include/lvgl/src/draw/lv_draw_label.c.s
-
-include/lvgl/src/draw/lv_draw_line.obj: include/lvgl/src/draw/lv_draw_line.c.obj
+# target to build an object file
+include/lvgl/src/draw/lv_draw_line.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_line.obj
 .PHONY : include/lvgl/src/draw/lv_draw_line.obj
 
-# target to build an object file
-include/lvgl/src/draw/lv_draw_line.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_line.c.obj
-.PHONY : include/lvgl/src/draw/lv_draw_line.c.obj
-
-include/lvgl/src/draw/lv_draw_line.i: include/lvgl/src/draw/lv_draw_line.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/lv_draw_line.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_line.i
 .PHONY : include/lvgl/src/draw/lv_draw_line.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/lv_draw_line.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_line.c.i
-.PHONY : include/lvgl/src/draw/lv_draw_line.c.i
-
-include/lvgl/src/draw/lv_draw_line.s: include/lvgl/src/draw/lv_draw_line.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/lv_draw_line.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_line.s
 .PHONY : include/lvgl/src/draw/lv_draw_line.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/lv_draw_line.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_line.c.s
-.PHONY : include/lvgl/src/draw/lv_draw_line.c.s
-
-include/lvgl/src/draw/lv_draw_mask.obj: include/lvgl/src/draw/lv_draw_mask.c.obj
+# target to build an object file
+include/lvgl/src/draw/lv_draw_mask.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_mask.obj
 .PHONY : include/lvgl/src/draw/lv_draw_mask.obj
 
-# target to build an object file
-include/lvgl/src/draw/lv_draw_mask.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_mask.c.obj
-.PHONY : include/lvgl/src/draw/lv_draw_mask.c.obj
-
-include/lvgl/src/draw/lv_draw_mask.i: include/lvgl/src/draw/lv_draw_mask.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/lv_draw_mask.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_mask.i
 .PHONY : include/lvgl/src/draw/lv_draw_mask.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/lv_draw_mask.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_mask.c.i
-.PHONY : include/lvgl/src/draw/lv_draw_mask.c.i
-
-include/lvgl/src/draw/lv_draw_mask.s: include/lvgl/src/draw/lv_draw_mask.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/lv_draw_mask.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_mask.s
 .PHONY : include/lvgl/src/draw/lv_draw_mask.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/lv_draw_mask.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_mask.c.s
-.PHONY : include/lvgl/src/draw/lv_draw_mask.c.s
-
-include/lvgl/src/draw/lv_draw_rect.obj: include/lvgl/src/draw/lv_draw_rect.c.obj
+# target to build an object file
+include/lvgl/src/draw/lv_draw_rect.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_rect.obj
 .PHONY : include/lvgl/src/draw/lv_draw_rect.obj
 
-# target to build an object file
-include/lvgl/src/draw/lv_draw_rect.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_rect.c.obj
-.PHONY : include/lvgl/src/draw/lv_draw_rect.c.obj
-
-include/lvgl/src/draw/lv_draw_rect.i: include/lvgl/src/draw/lv_draw_rect.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/lv_draw_rect.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_rect.i
 .PHONY : include/lvgl/src/draw/lv_draw_rect.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/lv_draw_rect.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_rect.c.i
-.PHONY : include/lvgl/src/draw/lv_draw_rect.c.i
-
-include/lvgl/src/draw/lv_draw_rect.s: include/lvgl/src/draw/lv_draw_rect.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/lv_draw_rect.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_rect.s
 .PHONY : include/lvgl/src/draw/lv_draw_rect.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/lv_draw_rect.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_rect.c.s
-.PHONY : include/lvgl/src/draw/lv_draw_rect.c.s
-
-include/lvgl/src/draw/lv_draw_triangle.obj: include/lvgl/src/draw/lv_draw_triangle.c.obj
+# target to build an object file
+include/lvgl/src/draw/lv_draw_triangle.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_triangle.obj
 .PHONY : include/lvgl/src/draw/lv_draw_triangle.obj
 
-# target to build an object file
-include/lvgl/src/draw/lv_draw_triangle.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_triangle.c.obj
-.PHONY : include/lvgl/src/draw/lv_draw_triangle.c.obj
-
-include/lvgl/src/draw/lv_draw_triangle.i: include/lvgl/src/draw/lv_draw_triangle.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/lv_draw_triangle.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_triangle.i
 .PHONY : include/lvgl/src/draw/lv_draw_triangle.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/lv_draw_triangle.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_triangle.c.i
-.PHONY : include/lvgl/src/draw/lv_draw_triangle.c.i
-
-include/lvgl/src/draw/lv_draw_triangle.s: include/lvgl/src/draw/lv_draw_triangle.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/lv_draw_triangle.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_triangle.s
 .PHONY : include/lvgl/src/draw/lv_draw_triangle.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/lv_draw_triangle.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_triangle.c.s
-.PHONY : include/lvgl/src/draw/lv_draw_triangle.c.s
-
-include/lvgl/src/draw/lv_draw_vector.obj: include/lvgl/src/draw/lv_draw_vector.c.obj
+# target to build an object file
+include/lvgl/src/draw/lv_draw_vector.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_vector.obj
 .PHONY : include/lvgl/src/draw/lv_draw_vector.obj
 
-# target to build an object file
-include/lvgl/src/draw/lv_draw_vector.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_vector.c.obj
-.PHONY : include/lvgl/src/draw/lv_draw_vector.c.obj
-
-include/lvgl/src/draw/lv_draw_vector.i: include/lvgl/src/draw/lv_draw_vector.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/lv_draw_vector.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_vector.i
 .PHONY : include/lvgl/src/draw/lv_draw_vector.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/lv_draw_vector.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_vector.c.i
-.PHONY : include/lvgl/src/draw/lv_draw_vector.c.i
-
-include/lvgl/src/draw/lv_draw_vector.s: include/lvgl/src/draw/lv_draw_vector.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/lv_draw_vector.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_vector.s
 .PHONY : include/lvgl/src/draw/lv_draw_vector.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/lv_draw_vector.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_draw_vector.c.s
-.PHONY : include/lvgl/src/draw/lv_draw_vector.c.s
-
-include/lvgl/src/draw/lv_image_decoder.obj: include/lvgl/src/draw/lv_image_decoder.c.obj
+# target to build an object file
+include/lvgl/src/draw/lv_image_decoder.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_image_decoder.obj
 .PHONY : include/lvgl/src/draw/lv_image_decoder.obj
 
-# target to build an object file
-include/lvgl/src/draw/lv_image_decoder.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_image_decoder.c.obj
-.PHONY : include/lvgl/src/draw/lv_image_decoder.c.obj
-
-include/lvgl/src/draw/lv_image_decoder.i: include/lvgl/src/draw/lv_image_decoder.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/lv_image_decoder.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_image_decoder.i
 .PHONY : include/lvgl/src/draw/lv_image_decoder.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/lv_image_decoder.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_image_decoder.c.i
-.PHONY : include/lvgl/src/draw/lv_image_decoder.c.i
-
-include/lvgl/src/draw/lv_image_decoder.s: include/lvgl/src/draw/lv_image_decoder.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/lv_image_decoder.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_image_decoder.s
 .PHONY : include/lvgl/src/draw/lv_image_decoder.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/lv_image_decoder.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/lv_image_decoder.c.s
-.PHONY : include/lvgl/src/draw/lv_image_decoder.c.s
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.obj: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.c.obj
+# target to build an object file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.obj
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.obj
 
-# target to build an object file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.c.obj
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.c.obj
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.i: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.i
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.c.i
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.c.i
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.s: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.s
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.c.s
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.c.s
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.obj: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.c.obj
+# target to build an object file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.obj
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.obj
 
-# target to build an object file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.c.obj
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.c.obj
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.i: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.i
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.c.i
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.c.i
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.s: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.s
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.c.s
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.c.s
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.obj: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.c.obj
+# target to build an object file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.obj
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.obj
 
-# target to build an object file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.c.obj
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.c.obj
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.i: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.i
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.c.i
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.c.i
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.s: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.s
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.c.s
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.c.s
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.obj: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.c.obj
+# target to build an object file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.obj
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.obj
 
-# target to build an object file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.c.obj
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.c.obj
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.i: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.i
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.c.i
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.c.i
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.s: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.s
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.c.s
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.c.s
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.obj: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.c.obj
+# target to build an object file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.obj
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.obj
 
-# target to build an object file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.c.obj
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.c.obj
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.i: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.i
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.c.i
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.c.i
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.s: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.s
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.c.s
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.c.s
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.obj: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.c.obj
+# target to build an object file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.obj
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.obj
 
-# target to build an object file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.c.obj
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.c.obj
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.i: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.i
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.c.i
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.c.i
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.s: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.s
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.c.s
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.c.s
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.obj: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.c.obj
+# target to build an object file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.obj
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.obj
 
-# target to build an object file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.c.obj
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.c.obj
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.i: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.i
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.c.i
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.c.i
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.s: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.s
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.c.s
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.c.s
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.obj: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.c.obj
+# target to build an object file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.obj
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.obj
 
-# target to build an object file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.c.obj
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.c.obj
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.i: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.i
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.c.i
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.c.i
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.s: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.s
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.c.s
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.c.s
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.obj: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.c.obj
+# target to build an object file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.obj
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.obj
 
-# target to build an object file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.c.obj
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.c.obj
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.i: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.i
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.c.i
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.c.i
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.s: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.s
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.c.s
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.c.s
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.obj: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.c.obj
+# target to build an object file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.obj
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.obj
 
-# target to build an object file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.c.obj
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.c.obj
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.i: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.i
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.c.i
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.c.i
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.s: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.s
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.c.s
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.c.s
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.obj: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.c.obj
+# target to build an object file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.obj
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.obj
 
-# target to build an object file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.c.obj
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.c.obj
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.i: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.i
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.c.i
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.c.i
-
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.s: include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.s
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.c.s
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.c.s
-
-include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.obj: include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.c.obj
+# target to build an object file
+include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.obj
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.obj
 
-# target to build an object file
-include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.c.obj
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.c.obj
-
-include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.i: include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.i
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.c.i
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.c.i
-
-include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.s: include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.s
 .PHONY : include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.c.s
-.PHONY : include/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.c.s
-
-include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.obj: include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.obj
 .PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.c.obj
-.PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.c.obj
-
-include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.i: include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.i
 .PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.c.i
-.PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.c.i
-
-include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.s: include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.s
 .PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.c.s
-.PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.c.s
-
-include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.obj: include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.obj
 .PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.c.obj
-.PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.c.obj
-
-include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.i: include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.i
 .PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.c.i
-.PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.c.i
-
-include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.s: include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.s
 .PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.c.s
-.PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_g2d.c.s
-
-include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.obj: include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.obj
 .PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.c.obj
-.PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.c.obj
-
-include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.i: include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.i
 .PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.c.i
-.PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.c.i
-
-include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.s: include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.s
 .PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.c.s
-.PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.c.s
-
-include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.obj: include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.obj
 .PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.c.obj
-.PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.c.obj
-
-include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.i: include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.i
 .PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.c.i
-.PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.c.i
-
-include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.s: include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.s
 .PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.c.s
-.PHONY : include/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.c.s
-
-include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.obj: include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.obj
 .PHONY : include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.c.obj
-.PHONY : include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.c.obj
-
-include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.i: include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.i
 .PHONY : include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.c.i
-.PHONY : include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.c.i
-
-include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.s: include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.s
 .PHONY : include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.c.s
-.PHONY : include/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.c.s
-
-include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.obj: include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.obj
 .PHONY : include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.c.obj
-.PHONY : include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.c.obj
-
-include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.i: include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.i
 .PHONY : include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.c.i
-.PHONY : include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.c.i
-
-include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.s: include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.s
 .PHONY : include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.c.s
-.PHONY : include/lvgl/src/draw/nxp/g2d/lv_g2d_utils.c.s
-
-include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.obj: include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.obj
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.c.obj
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.c.obj
-
-include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.i: include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.i
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.c.i
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.c.i
-
-include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.s: include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.s
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.c.s
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.c.s
-
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.obj: include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.obj
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.c.obj
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.c.obj
-
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.i: include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.i
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.c.i
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.c.i
-
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.s: include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.s
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.c.s
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp.c.s
-
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.obj: include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.obj
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.c.obj
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.c.obj
-
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.i: include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.i
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.c.i
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.c.i
-
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.s: include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.s
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.c.s
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.c.s
-
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.obj: include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.obj
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.c.obj
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.c.obj
-
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.i: include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.i
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.c.i
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.c.i
-
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.s: include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.s
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.c.s
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.c.s
-
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.obj: include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.obj
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.c.obj
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.c.obj
-
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.i: include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.i
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.c.i
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.c.i
-
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.s: include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.s
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.c.s
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.c.s
-
-include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.obj: include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.obj
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.c.obj
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.c.obj
-
-include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.i: include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.i
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.c.i
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.c.i
-
-include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.s: include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.s
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.c.s
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.c.s
-
-include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.obj: include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.obj
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.c.obj
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.c.obj
-
-include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.i: include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.i
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.c.i
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.c.i
-
-include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.s: include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.s
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.c.s
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_pxp_osa.c.s
-
-include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.obj: include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.obj
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.c.obj
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.c.obj
-
-include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.i: include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.i
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.c.i
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.c.i
-
-include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.s: include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.s
 .PHONY : include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.c.s
-.PHONY : include/lvgl/src/draw/nxp/pxp/lv_pxp_utils.c.s
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.obj: include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.obj
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.c.obj
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.c.obj
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.i: include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.i
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.c.i
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.c.i
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.s: include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.s
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.c.s
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_buf_vglite.c.s
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.obj: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.obj
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.c.obj
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.c.obj
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.i: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.i
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.c.i
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.c.i
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.s: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.s
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.c.s
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite.c.s
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.obj: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.obj
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.c.obj
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.c.obj
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.i: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.i
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.c.i
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.c.i
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.s: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.s
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.c.s
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.c.s
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.obj: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.obj
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.c.obj
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.c.obj
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.i: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.i
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.c.i
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.c.i
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.s: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.s
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.c.s
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_border.c.s
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.obj: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.obj
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.c.obj
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.c.obj
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.i: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.i
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.c.i
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.c.i
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.s: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.s
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.c.s
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_fill.c.s
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.obj: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.obj
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.c.obj
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.c.obj
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.i: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.i
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.c.i
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.c.i
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.s: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.s
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.c.s
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_img.c.s
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.obj: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.obj
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.c.obj
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.c.obj
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.i: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.i
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.c.i
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.c.i
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.s: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.s
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.c.s
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_label.c.s
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.obj: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.obj
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.c.obj
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.c.obj
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.i: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.i
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.c.i
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.c.i
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.s: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.s
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.c.s
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_layer.c.s
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.obj: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.obj
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.c.obj
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.c.obj
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.i: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.i
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.c.i
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.c.i
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.s: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.s
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.c.s
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.c.s
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.obj: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.obj
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.c.obj
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.c.obj
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.i: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.i
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.c.i
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.c.i
-
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.s: include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.s
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.c.s
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_draw_vglite_triangle.c.s
-
-include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.obj: include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.obj
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.c.obj
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.c.obj
-
-include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.i: include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.i
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.c.i
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.c.i
-
-include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.s: include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.s
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.c.s
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_buf.c.s
-
-include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.obj: include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.obj
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.c.obj
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.c.obj
-
-include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.i: include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.i
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.c.i
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.c.i
-
-include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.s: include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.s
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.c.s
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_matrix.c.s
-
-include/lvgl/src/draw/nxp/vglite/lv_vglite_path.obj: include/lvgl/src/draw/nxp/vglite/lv_vglite_path.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/vglite/lv_vglite_path.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_path.obj
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_path.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/vglite/lv_vglite_path.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_path.c.obj
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_path.c.obj
-
-include/lvgl/src/draw/nxp/vglite/lv_vglite_path.i: include/lvgl/src/draw/nxp/vglite/lv_vglite_path.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/vglite/lv_vglite_path.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_path.i
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_path.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/vglite/lv_vglite_path.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_path.c.i
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_path.c.i
-
-include/lvgl/src/draw/nxp/vglite/lv_vglite_path.s: include/lvgl/src/draw/nxp/vglite/lv_vglite_path.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/vglite/lv_vglite_path.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_path.s
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_path.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/vglite/lv_vglite_path.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_path.c.s
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_path.c.s
-
-include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.obj: include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.c.obj
+# target to build an object file
+include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.obj
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.obj
 
-# target to build an object file
-include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.c.obj
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.c.obj
-
-include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.i: include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.i
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.c.i
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.c.i
-
-include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.s: include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.s
 .PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.c.s
-.PHONY : include/lvgl/src/draw/nxp/vglite/lv_vglite_utils.c.s
-
-include/lvgl/src/draw/opengles/lv_draw_opengles.obj: include/lvgl/src/draw/opengles/lv_draw_opengles.c.obj
+# target to build an object file
+include/lvgl/src/draw/opengles/lv_draw_opengles.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/opengles/lv_draw_opengles.obj
 .PHONY : include/lvgl/src/draw/opengles/lv_draw_opengles.obj
 
-# target to build an object file
-include/lvgl/src/draw/opengles/lv_draw_opengles.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/opengles/lv_draw_opengles.c.obj
-.PHONY : include/lvgl/src/draw/opengles/lv_draw_opengles.c.obj
-
-include/lvgl/src/draw/opengles/lv_draw_opengles.i: include/lvgl/src/draw/opengles/lv_draw_opengles.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/opengles/lv_draw_opengles.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/opengles/lv_draw_opengles.i
 .PHONY : include/lvgl/src/draw/opengles/lv_draw_opengles.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/opengles/lv_draw_opengles.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/opengles/lv_draw_opengles.c.i
-.PHONY : include/lvgl/src/draw/opengles/lv_draw_opengles.c.i
-
-include/lvgl/src/draw/opengles/lv_draw_opengles.s: include/lvgl/src/draw/opengles/lv_draw_opengles.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/opengles/lv_draw_opengles.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/opengles/lv_draw_opengles.s
 .PHONY : include/lvgl/src/draw/opengles/lv_draw_opengles.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/opengles/lv_draw_opengles.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/opengles/lv_draw_opengles.c.s
-.PHONY : include/lvgl/src/draw/opengles/lv_draw_opengles.c.s
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.obj: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.c.obj
+# target to build an object file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.obj
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.obj
 
-# target to build an object file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.c.obj
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.c.obj
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.i: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.i
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.c.i
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.c.i
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.s: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.s
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.c.s
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.c.s
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.obj: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.c.obj
+# target to build an object file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.obj
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.obj
 
-# target to build an object file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.c.obj
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.c.obj
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.i: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.i
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.c.i
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.c.i
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.s: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.s
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.c.s
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.c.s
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.obj: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.c.obj
+# target to build an object file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.obj
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.obj
 
-# target to build an object file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.c.obj
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.c.obj
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.i: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.i
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.c.i
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.c.i
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.s: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.s
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.c.s
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.c.s
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.obj: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.c.obj
+# target to build an object file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.obj
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.obj
 
-# target to build an object file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.c.obj
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.c.obj
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.i: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.i
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.c.i
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.c.i
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.s: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.s
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.c.s
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.c.s
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.obj: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.c.obj
+# target to build an object file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.obj
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.obj
 
-# target to build an object file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.c.obj
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.c.obj
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.i: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.i
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.c.i
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.c.i
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.s: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.s
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.c.s
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.c.s
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.obj: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.c.obj
+# target to build an object file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.obj
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.obj
 
-# target to build an object file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.c.obj
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.c.obj
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.i: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.i
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.c.i
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.c.i
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.s: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.s
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.c.s
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.c.s
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.obj: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.c.obj
+# target to build an object file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.obj
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.obj
 
-# target to build an object file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.c.obj
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.c.obj
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.i: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.i
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.c.i
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.c.i
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.s: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.s
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.c.s
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.c.s
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.obj: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.c.obj
+# target to build an object file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.obj
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.obj
 
-# target to build an object file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.c.obj
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.c.obj
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.i: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.i
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.c.i
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.c.i
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.s: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.s
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.c.s
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.c.s
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.obj: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.c.obj
+# target to build an object file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.obj
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.obj
 
-# target to build an object file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.c.obj
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.c.obj
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.i: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.i
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.c.i
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.c.i
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.s: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.s
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.c.s
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.c.s
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.obj: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.c.obj
+# target to build an object file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.obj
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.obj
 
-# target to build an object file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.c.obj
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.c.obj
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.i: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.i
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.c.i
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.c.i
-
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.s: include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.s
 .PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.c.s
-.PHONY : include/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.c.s
-
-include/lvgl/src/draw/sdl/lv_draw_sdl.obj: include/lvgl/src/draw/sdl/lv_draw_sdl.c.obj
+# target to build an object file
+include/lvgl/src/draw/sdl/lv_draw_sdl.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sdl/lv_draw_sdl.obj
 .PHONY : include/lvgl/src/draw/sdl/lv_draw_sdl.obj
 
-# target to build an object file
-include/lvgl/src/draw/sdl/lv_draw_sdl.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sdl/lv_draw_sdl.c.obj
-.PHONY : include/lvgl/src/draw/sdl/lv_draw_sdl.c.obj
-
-include/lvgl/src/draw/sdl/lv_draw_sdl.i: include/lvgl/src/draw/sdl/lv_draw_sdl.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sdl/lv_draw_sdl.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sdl/lv_draw_sdl.i
 .PHONY : include/lvgl/src/draw/sdl/lv_draw_sdl.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sdl/lv_draw_sdl.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sdl/lv_draw_sdl.c.i
-.PHONY : include/lvgl/src/draw/sdl/lv_draw_sdl.c.i
-
-include/lvgl/src/draw/sdl/lv_draw_sdl.s: include/lvgl/src/draw/sdl/lv_draw_sdl.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sdl/lv_draw_sdl.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sdl/lv_draw_sdl.s
 .PHONY : include/lvgl/src/draw/sdl/lv_draw_sdl.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sdl/lv_draw_sdl.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sdl/lv_draw_sdl.c.s
-.PHONY : include/lvgl/src/draw/sdl/lv_draw_sdl.c.s
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.obj: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.obj
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.c.obj
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.c.obj
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.i: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.i
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.c.i
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.c.i
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.s: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.s
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.c.s
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend.c.s
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.obj: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.obj
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.c.obj
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.c.obj
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.i: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.i
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.c.i
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.c.i
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.s: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.s
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.c.s
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.c.s
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.obj: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.obj
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.c.obj
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.c.obj
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.i: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.i
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.c.i
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.c.i
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.s: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.s
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.c.s
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.c.s
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.obj: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.obj
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.c.obj
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.c.obj
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.i: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.i
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.c.i
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.c.i
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.s: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.s
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.c.s
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.c.s
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.obj: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.obj
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.c.obj
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.c.obj
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.i: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.i
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.c.i
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.c.i
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.s: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.s
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.c.s
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.c.s
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.obj: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.obj
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.c.obj
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.c.obj
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.i: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.i
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.c.i
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.c.i
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.s: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.s
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.c.s
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.c.s
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.obj: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.obj
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.c.obj
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.c.obj
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.i: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.i
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.c.i
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.c.i
-
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.s: include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.s
 .PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.c.s
-.PHONY : include/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.c.s
-
-include/lvgl/src/draw/sw/lv_draw_sw.obj: include/lvgl/src/draw/sw/lv_draw_sw.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/lv_draw_sw.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw.obj
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/lv_draw_sw.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw.c.obj
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw.c.obj
-
-include/lvgl/src/draw/sw/lv_draw_sw.i: include/lvgl/src/draw/sw/lv_draw_sw.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/lv_draw_sw.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw.i
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/lv_draw_sw.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw.c.i
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw.c.i
-
-include/lvgl/src/draw/sw/lv_draw_sw.s: include/lvgl/src/draw/sw/lv_draw_sw.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/lv_draw_sw.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw.s
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/lv_draw_sw.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw.c.s
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw.c.s
-
-include/lvgl/src/draw/sw/lv_draw_sw_arc.obj: include/lvgl/src/draw/sw/lv_draw_sw_arc.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/lv_draw_sw_arc.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_arc.obj
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_arc.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/lv_draw_sw_arc.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_arc.c.obj
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_arc.c.obj
-
-include/lvgl/src/draw/sw/lv_draw_sw_arc.i: include/lvgl/src/draw/sw/lv_draw_sw_arc.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/lv_draw_sw_arc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_arc.i
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_arc.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/lv_draw_sw_arc.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_arc.c.i
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_arc.c.i
-
-include/lvgl/src/draw/sw/lv_draw_sw_arc.s: include/lvgl/src/draw/sw/lv_draw_sw_arc.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/lv_draw_sw_arc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_arc.s
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_arc.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/lv_draw_sw_arc.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_arc.c.s
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_arc.c.s
-
-include/lvgl/src/draw/sw/lv_draw_sw_border.obj: include/lvgl/src/draw/sw/lv_draw_sw_border.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/lv_draw_sw_border.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_border.obj
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_border.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/lv_draw_sw_border.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_border.c.obj
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_border.c.obj
-
-include/lvgl/src/draw/sw/lv_draw_sw_border.i: include/lvgl/src/draw/sw/lv_draw_sw_border.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/lv_draw_sw_border.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_border.i
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_border.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/lv_draw_sw_border.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_border.c.i
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_border.c.i
-
-include/lvgl/src/draw/sw/lv_draw_sw_border.s: include/lvgl/src/draw/sw/lv_draw_sw_border.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/lv_draw_sw_border.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_border.s
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_border.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/lv_draw_sw_border.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_border.c.s
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_border.c.s
-
-include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.obj: include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.obj
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.c.obj
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.c.obj
-
-include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.i: include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.i
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.c.i
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.c.i
-
-include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.s: include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.s
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.c.s
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_box_shadow.c.s
-
-include/lvgl/src/draw/sw/lv_draw_sw_fill.obj: include/lvgl/src/draw/sw/lv_draw_sw_fill.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/lv_draw_sw_fill.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_fill.obj
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_fill.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/lv_draw_sw_fill.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_fill.c.obj
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_fill.c.obj
-
-include/lvgl/src/draw/sw/lv_draw_sw_fill.i: include/lvgl/src/draw/sw/lv_draw_sw_fill.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/lv_draw_sw_fill.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_fill.i
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_fill.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/lv_draw_sw_fill.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_fill.c.i
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_fill.c.i
-
-include/lvgl/src/draw/sw/lv_draw_sw_fill.s: include/lvgl/src/draw/sw/lv_draw_sw_fill.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/lv_draw_sw_fill.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_fill.s
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_fill.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/lv_draw_sw_fill.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_fill.c.s
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_fill.c.s
-
-include/lvgl/src/draw/sw/lv_draw_sw_grad.obj: include/lvgl/src/draw/sw/lv_draw_sw_grad.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/lv_draw_sw_grad.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_grad.obj
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_grad.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/lv_draw_sw_grad.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_grad.c.obj
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_grad.c.obj
-
-include/lvgl/src/draw/sw/lv_draw_sw_grad.i: include/lvgl/src/draw/sw/lv_draw_sw_grad.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/lv_draw_sw_grad.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_grad.i
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_grad.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/lv_draw_sw_grad.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_grad.c.i
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_grad.c.i
-
-include/lvgl/src/draw/sw/lv_draw_sw_grad.s: include/lvgl/src/draw/sw/lv_draw_sw_grad.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/lv_draw_sw_grad.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_grad.s
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_grad.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/lv_draw_sw_grad.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_grad.c.s
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_grad.c.s
-
-include/lvgl/src/draw/sw/lv_draw_sw_img.obj: include/lvgl/src/draw/sw/lv_draw_sw_img.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/lv_draw_sw_img.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_img.obj
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_img.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/lv_draw_sw_img.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_img.c.obj
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_img.c.obj
-
-include/lvgl/src/draw/sw/lv_draw_sw_img.i: include/lvgl/src/draw/sw/lv_draw_sw_img.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/lv_draw_sw_img.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_img.i
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_img.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/lv_draw_sw_img.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_img.c.i
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_img.c.i
-
-include/lvgl/src/draw/sw/lv_draw_sw_img.s: include/lvgl/src/draw/sw/lv_draw_sw_img.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/lv_draw_sw_img.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_img.s
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_img.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/lv_draw_sw_img.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_img.c.s
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_img.c.s
-
-include/lvgl/src/draw/sw/lv_draw_sw_letter.obj: include/lvgl/src/draw/sw/lv_draw_sw_letter.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/lv_draw_sw_letter.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_letter.obj
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_letter.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/lv_draw_sw_letter.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_letter.c.obj
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_letter.c.obj
-
-include/lvgl/src/draw/sw/lv_draw_sw_letter.i: include/lvgl/src/draw/sw/lv_draw_sw_letter.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/lv_draw_sw_letter.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_letter.i
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_letter.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/lv_draw_sw_letter.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_letter.c.i
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_letter.c.i
-
-include/lvgl/src/draw/sw/lv_draw_sw_letter.s: include/lvgl/src/draw/sw/lv_draw_sw_letter.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/lv_draw_sw_letter.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_letter.s
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_letter.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/lv_draw_sw_letter.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_letter.c.s
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_letter.c.s
-
-include/lvgl/src/draw/sw/lv_draw_sw_line.obj: include/lvgl/src/draw/sw/lv_draw_sw_line.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/lv_draw_sw_line.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_line.obj
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_line.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/lv_draw_sw_line.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_line.c.obj
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_line.c.obj
-
-include/lvgl/src/draw/sw/lv_draw_sw_line.i: include/lvgl/src/draw/sw/lv_draw_sw_line.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/lv_draw_sw_line.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_line.i
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_line.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/lv_draw_sw_line.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_line.c.i
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_line.c.i
-
-include/lvgl/src/draw/sw/lv_draw_sw_line.s: include/lvgl/src/draw/sw/lv_draw_sw_line.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/lv_draw_sw_line.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_line.s
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_line.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/lv_draw_sw_line.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_line.c.s
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_line.c.s
-
-include/lvgl/src/draw/sw/lv_draw_sw_mask.obj: include/lvgl/src/draw/sw/lv_draw_sw_mask.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/lv_draw_sw_mask.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_mask.obj
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_mask.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/lv_draw_sw_mask.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_mask.c.obj
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_mask.c.obj
-
-include/lvgl/src/draw/sw/lv_draw_sw_mask.i: include/lvgl/src/draw/sw/lv_draw_sw_mask.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/lv_draw_sw_mask.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_mask.i
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_mask.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/lv_draw_sw_mask.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_mask.c.i
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_mask.c.i
-
-include/lvgl/src/draw/sw/lv_draw_sw_mask.s: include/lvgl/src/draw/sw/lv_draw_sw_mask.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/lv_draw_sw_mask.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_mask.s
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_mask.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/lv_draw_sw_mask.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_mask.c.s
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_mask.c.s
-
-include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.obj: include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.obj
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.c.obj
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.c.obj
-
-include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.i: include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.i
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.c.i
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.c.i
-
-include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.s: include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.s
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.c.s
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_mask_rect.c.s
-
-include/lvgl/src/draw/sw/lv_draw_sw_transform.obj: include/lvgl/src/draw/sw/lv_draw_sw_transform.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/lv_draw_sw_transform.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_transform.obj
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_transform.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/lv_draw_sw_transform.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_transform.c.obj
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_transform.c.obj
-
-include/lvgl/src/draw/sw/lv_draw_sw_transform.i: include/lvgl/src/draw/sw/lv_draw_sw_transform.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/lv_draw_sw_transform.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_transform.i
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_transform.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/lv_draw_sw_transform.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_transform.c.i
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_transform.c.i
-
-include/lvgl/src/draw/sw/lv_draw_sw_transform.s: include/lvgl/src/draw/sw/lv_draw_sw_transform.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/lv_draw_sw_transform.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_transform.s
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_transform.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/lv_draw_sw_transform.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_transform.c.s
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_transform.c.s
-
-include/lvgl/src/draw/sw/lv_draw_sw_triangle.obj: include/lvgl/src/draw/sw/lv_draw_sw_triangle.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/lv_draw_sw_triangle.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_triangle.obj
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_triangle.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/lv_draw_sw_triangle.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_triangle.c.obj
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_triangle.c.obj
-
-include/lvgl/src/draw/sw/lv_draw_sw_triangle.i: include/lvgl/src/draw/sw/lv_draw_sw_triangle.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/lv_draw_sw_triangle.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_triangle.i
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_triangle.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/lv_draw_sw_triangle.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_triangle.c.i
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_triangle.c.i
-
-include/lvgl/src/draw/sw/lv_draw_sw_triangle.s: include/lvgl/src/draw/sw/lv_draw_sw_triangle.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/lv_draw_sw_triangle.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_triangle.s
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_triangle.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/lv_draw_sw_triangle.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_triangle.c.s
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_triangle.c.s
-
-include/lvgl/src/draw/sw/lv_draw_sw_utils.obj: include/lvgl/src/draw/sw/lv_draw_sw_utils.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/lv_draw_sw_utils.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_utils.obj
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_utils.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/lv_draw_sw_utils.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_utils.c.obj
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_utils.c.obj
-
-include/lvgl/src/draw/sw/lv_draw_sw_utils.i: include/lvgl/src/draw/sw/lv_draw_sw_utils.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/lv_draw_sw_utils.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_utils.i
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_utils.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/lv_draw_sw_utils.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_utils.c.i
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_utils.c.i
-
-include/lvgl/src/draw/sw/lv_draw_sw_utils.s: include/lvgl/src/draw/sw/lv_draw_sw_utils.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/lv_draw_sw_utils.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_utils.s
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_utils.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/lv_draw_sw_utils.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_utils.c.s
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_utils.c.s
-
-include/lvgl/src/draw/sw/lv_draw_sw_vector.obj: include/lvgl/src/draw/sw/lv_draw_sw_vector.c.obj
+# target to build an object file
+include/lvgl/src/draw/sw/lv_draw_sw_vector.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_vector.obj
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_vector.obj
 
-# target to build an object file
-include/lvgl/src/draw/sw/lv_draw_sw_vector.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_vector.c.obj
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_vector.c.obj
-
-include/lvgl/src/draw/sw/lv_draw_sw_vector.i: include/lvgl/src/draw/sw/lv_draw_sw_vector.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/sw/lv_draw_sw_vector.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_vector.i
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_vector.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/sw/lv_draw_sw_vector.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_vector.c.i
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_vector.c.i
-
-include/lvgl/src/draw/sw/lv_draw_sw_vector.s: include/lvgl/src/draw/sw/lv_draw_sw_vector.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/sw/lv_draw_sw_vector.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_vector.s
 .PHONY : include/lvgl/src/draw/sw/lv_draw_sw_vector.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/sw/lv_draw_sw_vector.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/sw/lv_draw_sw_vector.c.s
-.PHONY : include/lvgl/src/draw/sw/lv_draw_sw_vector.c.s
-
-include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.obj: include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.c.obj
+# target to build an object file
+include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.obj
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.obj
 
-# target to build an object file
-include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.c.obj
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.c.obj
-
-include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.i: include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.i
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.c.i
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.c.i
-
-include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.s: include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.s
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.c.s
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.c.s
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.obj: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.c.obj
+# target to build an object file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.obj
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.obj
 
-# target to build an object file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.c.obj
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.c.obj
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.i: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.i
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.c.i
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.c.i
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.s: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.s
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.c.s
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite.c.s
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.obj: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.c.obj
+# target to build an object file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.obj
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.obj
 
-# target to build an object file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.c.obj
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.c.obj
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.i: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.i
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.c.i
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.c.i
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.s: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.s
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.c.s
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.c.s
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.obj: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.c.obj
+# target to build an object file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.obj
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.obj
 
-# target to build an object file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.c.obj
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.c.obj
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.i: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.i
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.c.i
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.c.i
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.s: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.s
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.c.s
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.c.s
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.obj: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.c.obj
+# target to build an object file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.obj
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.obj
 
-# target to build an object file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.c.obj
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.c.obj
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.i: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.i
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.c.i
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.c.i
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.s: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.s
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.c.s
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.c.s
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.obj: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.c.obj
+# target to build an object file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.obj
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.obj
 
-# target to build an object file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.c.obj
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.c.obj
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.i: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.i
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.c.i
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.c.i
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.s: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.s
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.c.s
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.c.s
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.obj: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.c.obj
+# target to build an object file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.obj
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.obj
 
-# target to build an object file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.c.obj
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.c.obj
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.i: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.i
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.c.i
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.c.i
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.s: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.s
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.c.s
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.c.s
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.obj: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.c.obj
+# target to build an object file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.obj
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.obj
 
-# target to build an object file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.c.obj
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.c.obj
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.i: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.i
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.c.i
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.c.i
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.s: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.s
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.c.s
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.c.s
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.obj: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.c.obj
+# target to build an object file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.obj
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.obj
 
-# target to build an object file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.c.obj
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.c.obj
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.i: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.i
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.c.i
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.c.i
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.s: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.s
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.c.s
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.c.s
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.obj: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.c.obj
+# target to build an object file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.obj
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.obj
 
-# target to build an object file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.c.obj
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.c.obj
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.i: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.i
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.c.i
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.c.i
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.s: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.s
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.c.s
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.c.s
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.obj: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.c.obj
+# target to build an object file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.obj
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.obj
 
-# target to build an object file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.c.obj
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.c.obj
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.i: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.i
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.c.i
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.c.i
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.s: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.s
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.c.s
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.c.s
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.obj: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.c.obj
+# target to build an object file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.obj
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.obj
 
-# target to build an object file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.c.obj
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.c.obj
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.i: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.i
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.c.i
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.c.i
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.s: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.s
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.c.s
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.c.s
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.obj: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.c.obj
+# target to build an object file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.obj
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.obj
 
-# target to build an object file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.c.obj
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.c.obj
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.i: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.i
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.c.i
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.c.i
-
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.s: include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.s
 .PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.c.s
-.PHONY : include/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.c.s
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.obj: include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.c.obj
+# target to build an object file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.obj
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.obj
 
-# target to build an object file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.c.obj
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.c.obj
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.i: include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.i
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.c.i
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.c.i
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.s: include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.s
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.c.s
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.c.s
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.obj: include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.c.obj
+# target to build an object file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.obj
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.obj
 
-# target to build an object file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.c.obj
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.c.obj
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.i: include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.i
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.c.i
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.c.i
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.s: include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.s
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.c.s
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_grad.c.s
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_math.obj: include/lvgl/src/draw/vg_lite/lv_vg_lite_math.c.obj
+# target to build an object file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_math.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_math.obj
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_math.obj
 
-# target to build an object file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_math.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_math.c.obj
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_math.c.obj
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_math.i: include/lvgl/src/draw/vg_lite/lv_vg_lite_math.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_math.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_math.i
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_math.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_math.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_math.c.i
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_math.c.i
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_math.s: include/lvgl/src/draw/vg_lite/lv_vg_lite_math.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_math.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_math.s
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_math.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_math.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_math.c.s
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_math.c.s
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_path.obj: include/lvgl/src/draw/vg_lite/lv_vg_lite_path.c.obj
+# target to build an object file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_path.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_path.obj
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_path.obj
 
-# target to build an object file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_path.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_path.c.obj
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_path.c.obj
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_path.i: include/lvgl/src/draw/vg_lite/lv_vg_lite_path.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_path.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_path.i
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_path.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_path.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_path.c.i
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_path.c.i
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_path.s: include/lvgl/src/draw/vg_lite/lv_vg_lite_path.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_path.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_path.s
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_path.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_path.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_path.c.s
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_path.c.s
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.obj: include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.c.obj
+# target to build an object file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.obj
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.obj
 
-# target to build an object file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.c.obj
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.c.obj
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.i: include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.i
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.c.i
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.c.i
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.s: include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.s
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.c.s
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_pending.c.s
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.obj: include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.c.obj
+# target to build an object file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.obj
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.obj
 
-# target to build an object file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.c.obj
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.c.obj
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.i: include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.i
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.c.i
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.c.i
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.s: include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.s
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.c.s
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.c.s
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.obj: include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.c.obj
+# target to build an object file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.obj
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.obj
 
-# target to build an object file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.c.obj
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.c.obj
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.i: include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.c.i
+# target to preprocess a source file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.i
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.i
 
-# target to preprocess a source file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.c.i
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.c.i
-
-include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.s: include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.c.s
+# target to generate assembly for a file
+include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.s
 .PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.s
 
-# target to generate assembly for a file
-include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.c.s
-.PHONY : include/lvgl/src/draw/vg_lite/lv_vg_lite_utils.c.s
-
-include/lvgl/src/drivers/display/drm/lv_linux_drm.obj: include/lvgl/src/drivers/display/drm/lv_linux_drm.c.obj
+# target to build an object file
+include/lvgl/src/drivers/display/drm/lv_linux_drm.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/drm/lv_linux_drm.obj
 .PHONY : include/lvgl/src/drivers/display/drm/lv_linux_drm.obj
 
-# target to build an object file
-include/lvgl/src/drivers/display/drm/lv_linux_drm.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/drm/lv_linux_drm.c.obj
-.PHONY : include/lvgl/src/drivers/display/drm/lv_linux_drm.c.obj
-
-include/lvgl/src/drivers/display/drm/lv_linux_drm.i: include/lvgl/src/drivers/display/drm/lv_linux_drm.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/display/drm/lv_linux_drm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/drm/lv_linux_drm.i
 .PHONY : include/lvgl/src/drivers/display/drm/lv_linux_drm.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/display/drm/lv_linux_drm.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/drm/lv_linux_drm.c.i
-.PHONY : include/lvgl/src/drivers/display/drm/lv_linux_drm.c.i
-
-include/lvgl/src/drivers/display/drm/lv_linux_drm.s: include/lvgl/src/drivers/display/drm/lv_linux_drm.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/display/drm/lv_linux_drm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/drm/lv_linux_drm.s
 .PHONY : include/lvgl/src/drivers/display/drm/lv_linux_drm.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/display/drm/lv_linux_drm.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/drm/lv_linux_drm.c.s
-.PHONY : include/lvgl/src/drivers/display/drm/lv_linux_drm.c.s
-
-include/lvgl/src/drivers/display/fb/lv_linux_fbdev.obj: include/lvgl/src/drivers/display/fb/lv_linux_fbdev.c.obj
+# target to build an object file
+include/lvgl/src/drivers/display/fb/lv_linux_fbdev.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/fb/lv_linux_fbdev.obj
 .PHONY : include/lvgl/src/drivers/display/fb/lv_linux_fbdev.obj
 
-# target to build an object file
-include/lvgl/src/drivers/display/fb/lv_linux_fbdev.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/fb/lv_linux_fbdev.c.obj
-.PHONY : include/lvgl/src/drivers/display/fb/lv_linux_fbdev.c.obj
-
-include/lvgl/src/drivers/display/fb/lv_linux_fbdev.i: include/lvgl/src/drivers/display/fb/lv_linux_fbdev.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/display/fb/lv_linux_fbdev.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/fb/lv_linux_fbdev.i
 .PHONY : include/lvgl/src/drivers/display/fb/lv_linux_fbdev.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/display/fb/lv_linux_fbdev.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/fb/lv_linux_fbdev.c.i
-.PHONY : include/lvgl/src/drivers/display/fb/lv_linux_fbdev.c.i
-
-include/lvgl/src/drivers/display/fb/lv_linux_fbdev.s: include/lvgl/src/drivers/display/fb/lv_linux_fbdev.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/display/fb/lv_linux_fbdev.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/fb/lv_linux_fbdev.s
 .PHONY : include/lvgl/src/drivers/display/fb/lv_linux_fbdev.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/display/fb/lv_linux_fbdev.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/fb/lv_linux_fbdev.c.s
-.PHONY : include/lvgl/src/drivers/display/fb/lv_linux_fbdev.c.s
-
-include/lvgl/src/drivers/display/ili9341/lv_ili9341.obj: include/lvgl/src/drivers/display/ili9341/lv_ili9341.c.obj
+# target to build an object file
+include/lvgl/src/drivers/display/ili9341/lv_ili9341.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/ili9341/lv_ili9341.obj
 .PHONY : include/lvgl/src/drivers/display/ili9341/lv_ili9341.obj
 
-# target to build an object file
-include/lvgl/src/drivers/display/ili9341/lv_ili9341.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/ili9341/lv_ili9341.c.obj
-.PHONY : include/lvgl/src/drivers/display/ili9341/lv_ili9341.c.obj
-
-include/lvgl/src/drivers/display/ili9341/lv_ili9341.i: include/lvgl/src/drivers/display/ili9341/lv_ili9341.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/display/ili9341/lv_ili9341.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/ili9341/lv_ili9341.i
 .PHONY : include/lvgl/src/drivers/display/ili9341/lv_ili9341.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/display/ili9341/lv_ili9341.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/ili9341/lv_ili9341.c.i
-.PHONY : include/lvgl/src/drivers/display/ili9341/lv_ili9341.c.i
-
-include/lvgl/src/drivers/display/ili9341/lv_ili9341.s: include/lvgl/src/drivers/display/ili9341/lv_ili9341.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/display/ili9341/lv_ili9341.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/ili9341/lv_ili9341.s
 .PHONY : include/lvgl/src/drivers/display/ili9341/lv_ili9341.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/display/ili9341/lv_ili9341.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/ili9341/lv_ili9341.c.s
-.PHONY : include/lvgl/src/drivers/display/ili9341/lv_ili9341.c.s
-
-include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.obj: include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.c.obj
+# target to build an object file
+include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.obj
 .PHONY : include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.obj
 
-# target to build an object file
-include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.c.obj
-.PHONY : include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.c.obj
-
-include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.i: include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.i
 .PHONY : include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.c.i
-.PHONY : include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.c.i
-
-include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.s: include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.s
 .PHONY : include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.c.s
-.PHONY : include/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.c.s
-
-include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.obj: include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.c.obj
+# target to build an object file
+include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.obj
 .PHONY : include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.obj
 
-# target to build an object file
-include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.c.obj
-.PHONY : include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.c.obj
-
-include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.i: include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.i
 .PHONY : include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.c.i
-.PHONY : include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.c.i
-
-include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.s: include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.s
 .PHONY : include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.c.s
-.PHONY : include/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.c.s
-
-include/lvgl/src/drivers/display/st7735/lv_st7735.obj: include/lvgl/src/drivers/display/st7735/lv_st7735.c.obj
+# target to build an object file
+include/lvgl/src/drivers/display/st7735/lv_st7735.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st7735/lv_st7735.obj
 .PHONY : include/lvgl/src/drivers/display/st7735/lv_st7735.obj
 
-# target to build an object file
-include/lvgl/src/drivers/display/st7735/lv_st7735.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st7735/lv_st7735.c.obj
-.PHONY : include/lvgl/src/drivers/display/st7735/lv_st7735.c.obj
-
-include/lvgl/src/drivers/display/st7735/lv_st7735.i: include/lvgl/src/drivers/display/st7735/lv_st7735.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/display/st7735/lv_st7735.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st7735/lv_st7735.i
 .PHONY : include/lvgl/src/drivers/display/st7735/lv_st7735.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/display/st7735/lv_st7735.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st7735/lv_st7735.c.i
-.PHONY : include/lvgl/src/drivers/display/st7735/lv_st7735.c.i
-
-include/lvgl/src/drivers/display/st7735/lv_st7735.s: include/lvgl/src/drivers/display/st7735/lv_st7735.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/display/st7735/lv_st7735.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st7735/lv_st7735.s
 .PHONY : include/lvgl/src/drivers/display/st7735/lv_st7735.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/display/st7735/lv_st7735.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st7735/lv_st7735.c.s
-.PHONY : include/lvgl/src/drivers/display/st7735/lv_st7735.c.s
-
-include/lvgl/src/drivers/display/st7789/lv_st7789.obj: include/lvgl/src/drivers/display/st7789/lv_st7789.c.obj
+# target to build an object file
+include/lvgl/src/drivers/display/st7789/lv_st7789.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st7789/lv_st7789.obj
 .PHONY : include/lvgl/src/drivers/display/st7789/lv_st7789.obj
 
-# target to build an object file
-include/lvgl/src/drivers/display/st7789/lv_st7789.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st7789/lv_st7789.c.obj
-.PHONY : include/lvgl/src/drivers/display/st7789/lv_st7789.c.obj
-
-include/lvgl/src/drivers/display/st7789/lv_st7789.i: include/lvgl/src/drivers/display/st7789/lv_st7789.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/display/st7789/lv_st7789.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st7789/lv_st7789.i
 .PHONY : include/lvgl/src/drivers/display/st7789/lv_st7789.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/display/st7789/lv_st7789.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st7789/lv_st7789.c.i
-.PHONY : include/lvgl/src/drivers/display/st7789/lv_st7789.c.i
-
-include/lvgl/src/drivers/display/st7789/lv_st7789.s: include/lvgl/src/drivers/display/st7789/lv_st7789.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/display/st7789/lv_st7789.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st7789/lv_st7789.s
 .PHONY : include/lvgl/src/drivers/display/st7789/lv_st7789.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/display/st7789/lv_st7789.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st7789/lv_st7789.c.s
-.PHONY : include/lvgl/src/drivers/display/st7789/lv_st7789.c.s
-
-include/lvgl/src/drivers/display/st7796/lv_st7796.obj: include/lvgl/src/drivers/display/st7796/lv_st7796.c.obj
+# target to build an object file
+include/lvgl/src/drivers/display/st7796/lv_st7796.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st7796/lv_st7796.obj
 .PHONY : include/lvgl/src/drivers/display/st7796/lv_st7796.obj
 
-# target to build an object file
-include/lvgl/src/drivers/display/st7796/lv_st7796.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st7796/lv_st7796.c.obj
-.PHONY : include/lvgl/src/drivers/display/st7796/lv_st7796.c.obj
-
-include/lvgl/src/drivers/display/st7796/lv_st7796.i: include/lvgl/src/drivers/display/st7796/lv_st7796.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/display/st7796/lv_st7796.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st7796/lv_st7796.i
 .PHONY : include/lvgl/src/drivers/display/st7796/lv_st7796.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/display/st7796/lv_st7796.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st7796/lv_st7796.c.i
-.PHONY : include/lvgl/src/drivers/display/st7796/lv_st7796.c.i
-
-include/lvgl/src/drivers/display/st7796/lv_st7796.s: include/lvgl/src/drivers/display/st7796/lv_st7796.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/display/st7796/lv_st7796.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st7796/lv_st7796.s
 .PHONY : include/lvgl/src/drivers/display/st7796/lv_st7796.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/display/st7796/lv_st7796.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st7796/lv_st7796.c.s
-.PHONY : include/lvgl/src/drivers/display/st7796/lv_st7796.c.s
-
-include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.obj: include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.c.obj
+# target to build an object file
+include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.obj
 .PHONY : include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.obj
 
-# target to build an object file
-include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.c.obj
-.PHONY : include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.c.obj
-
-include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.i: include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.i
 .PHONY : include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.c.i
-.PHONY : include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.c.i
-
-include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.s: include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.s
 .PHONY : include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.c.s
-.PHONY : include/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.c.s
-
-include/lvgl/src/drivers/evdev/lv_evdev.obj: include/lvgl/src/drivers/evdev/lv_evdev.c.obj
+# target to build an object file
+include/lvgl/src/drivers/evdev/lv_evdev.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/evdev/lv_evdev.obj
 .PHONY : include/lvgl/src/drivers/evdev/lv_evdev.obj
 
-# target to build an object file
-include/lvgl/src/drivers/evdev/lv_evdev.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/evdev/lv_evdev.c.obj
-.PHONY : include/lvgl/src/drivers/evdev/lv_evdev.c.obj
-
-include/lvgl/src/drivers/evdev/lv_evdev.i: include/lvgl/src/drivers/evdev/lv_evdev.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/evdev/lv_evdev.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/evdev/lv_evdev.i
 .PHONY : include/lvgl/src/drivers/evdev/lv_evdev.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/evdev/lv_evdev.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/evdev/lv_evdev.c.i
-.PHONY : include/lvgl/src/drivers/evdev/lv_evdev.c.i
-
-include/lvgl/src/drivers/evdev/lv_evdev.s: include/lvgl/src/drivers/evdev/lv_evdev.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/evdev/lv_evdev.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/evdev/lv_evdev.s
 .PHONY : include/lvgl/src/drivers/evdev/lv_evdev.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/evdev/lv_evdev.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/evdev/lv_evdev.c.s
-.PHONY : include/lvgl/src/drivers/evdev/lv_evdev.c.s
-
-include/lvgl/src/drivers/glfw/lv_glfw_window.obj: include/lvgl/src/drivers/glfw/lv_glfw_window.c.obj
+# target to build an object file
+include/lvgl/src/drivers/glfw/lv_glfw_window.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_glfw_window.obj
 .PHONY : include/lvgl/src/drivers/glfw/lv_glfw_window.obj
 
-# target to build an object file
-include/lvgl/src/drivers/glfw/lv_glfw_window.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_glfw_window.c.obj
-.PHONY : include/lvgl/src/drivers/glfw/lv_glfw_window.c.obj
-
-include/lvgl/src/drivers/glfw/lv_glfw_window.i: include/lvgl/src/drivers/glfw/lv_glfw_window.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/glfw/lv_glfw_window.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_glfw_window.i
 .PHONY : include/lvgl/src/drivers/glfw/lv_glfw_window.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/glfw/lv_glfw_window.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_glfw_window.c.i
-.PHONY : include/lvgl/src/drivers/glfw/lv_glfw_window.c.i
-
-include/lvgl/src/drivers/glfw/lv_glfw_window.s: include/lvgl/src/drivers/glfw/lv_glfw_window.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/glfw/lv_glfw_window.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_glfw_window.s
 .PHONY : include/lvgl/src/drivers/glfw/lv_glfw_window.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/glfw/lv_glfw_window.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_glfw_window.c.s
-.PHONY : include/lvgl/src/drivers/glfw/lv_glfw_window.c.s
-
-include/lvgl/src/drivers/glfw/lv_opengles_debug.obj: include/lvgl/src/drivers/glfw/lv_opengles_debug.c.obj
+# target to build an object file
+include/lvgl/src/drivers/glfw/lv_opengles_debug.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_opengles_debug.obj
 .PHONY : include/lvgl/src/drivers/glfw/lv_opengles_debug.obj
 
-# target to build an object file
-include/lvgl/src/drivers/glfw/lv_opengles_debug.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_opengles_debug.c.obj
-.PHONY : include/lvgl/src/drivers/glfw/lv_opengles_debug.c.obj
-
-include/lvgl/src/drivers/glfw/lv_opengles_debug.i: include/lvgl/src/drivers/glfw/lv_opengles_debug.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/glfw/lv_opengles_debug.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_opengles_debug.i
 .PHONY : include/lvgl/src/drivers/glfw/lv_opengles_debug.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/glfw/lv_opengles_debug.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_opengles_debug.c.i
-.PHONY : include/lvgl/src/drivers/glfw/lv_opengles_debug.c.i
-
-include/lvgl/src/drivers/glfw/lv_opengles_debug.s: include/lvgl/src/drivers/glfw/lv_opengles_debug.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/glfw/lv_opengles_debug.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_opengles_debug.s
 .PHONY : include/lvgl/src/drivers/glfw/lv_opengles_debug.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/glfw/lv_opengles_debug.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_opengles_debug.c.s
-.PHONY : include/lvgl/src/drivers/glfw/lv_opengles_debug.c.s
-
-include/lvgl/src/drivers/glfw/lv_opengles_driver.obj: include/lvgl/src/drivers/glfw/lv_opengles_driver.c.obj
+# target to build an object file
+include/lvgl/src/drivers/glfw/lv_opengles_driver.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_opengles_driver.obj
 .PHONY : include/lvgl/src/drivers/glfw/lv_opengles_driver.obj
 
-# target to build an object file
-include/lvgl/src/drivers/glfw/lv_opengles_driver.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_opengles_driver.c.obj
-.PHONY : include/lvgl/src/drivers/glfw/lv_opengles_driver.c.obj
-
-include/lvgl/src/drivers/glfw/lv_opengles_driver.i: include/lvgl/src/drivers/glfw/lv_opengles_driver.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/glfw/lv_opengles_driver.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_opengles_driver.i
 .PHONY : include/lvgl/src/drivers/glfw/lv_opengles_driver.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/glfw/lv_opengles_driver.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_opengles_driver.c.i
-.PHONY : include/lvgl/src/drivers/glfw/lv_opengles_driver.c.i
-
-include/lvgl/src/drivers/glfw/lv_opengles_driver.s: include/lvgl/src/drivers/glfw/lv_opengles_driver.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/glfw/lv_opengles_driver.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_opengles_driver.s
 .PHONY : include/lvgl/src/drivers/glfw/lv_opengles_driver.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/glfw/lv_opengles_driver.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_opengles_driver.c.s
-.PHONY : include/lvgl/src/drivers/glfw/lv_opengles_driver.c.s
-
-include/lvgl/src/drivers/glfw/lv_opengles_texture.obj: include/lvgl/src/drivers/glfw/lv_opengles_texture.c.obj
+# target to build an object file
+include/lvgl/src/drivers/glfw/lv_opengles_texture.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_opengles_texture.obj
 .PHONY : include/lvgl/src/drivers/glfw/lv_opengles_texture.obj
 
-# target to build an object file
-include/lvgl/src/drivers/glfw/lv_opengles_texture.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_opengles_texture.c.obj
-.PHONY : include/lvgl/src/drivers/glfw/lv_opengles_texture.c.obj
-
-include/lvgl/src/drivers/glfw/lv_opengles_texture.i: include/lvgl/src/drivers/glfw/lv_opengles_texture.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/glfw/lv_opengles_texture.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_opengles_texture.i
 .PHONY : include/lvgl/src/drivers/glfw/lv_opengles_texture.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/glfw/lv_opengles_texture.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_opengles_texture.c.i
-.PHONY : include/lvgl/src/drivers/glfw/lv_opengles_texture.c.i
-
-include/lvgl/src/drivers/glfw/lv_opengles_texture.s: include/lvgl/src/drivers/glfw/lv_opengles_texture.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/glfw/lv_opengles_texture.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_opengles_texture.s
 .PHONY : include/lvgl/src/drivers/glfw/lv_opengles_texture.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/glfw/lv_opengles_texture.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/glfw/lv_opengles_texture.c.s
-.PHONY : include/lvgl/src/drivers/glfw/lv_opengles_texture.c.s
-
-include/lvgl/src/drivers/libinput/lv_libinput.obj: include/lvgl/src/drivers/libinput/lv_libinput.c.obj
+# target to build an object file
+include/lvgl/src/drivers/libinput/lv_libinput.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/libinput/lv_libinput.obj
 .PHONY : include/lvgl/src/drivers/libinput/lv_libinput.obj
 
-# target to build an object file
-include/lvgl/src/drivers/libinput/lv_libinput.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/libinput/lv_libinput.c.obj
-.PHONY : include/lvgl/src/drivers/libinput/lv_libinput.c.obj
-
-include/lvgl/src/drivers/libinput/lv_libinput.i: include/lvgl/src/drivers/libinput/lv_libinput.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/libinput/lv_libinput.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/libinput/lv_libinput.i
 .PHONY : include/lvgl/src/drivers/libinput/lv_libinput.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/libinput/lv_libinput.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/libinput/lv_libinput.c.i
-.PHONY : include/lvgl/src/drivers/libinput/lv_libinput.c.i
-
-include/lvgl/src/drivers/libinput/lv_libinput.s: include/lvgl/src/drivers/libinput/lv_libinput.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/libinput/lv_libinput.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/libinput/lv_libinput.s
 .PHONY : include/lvgl/src/drivers/libinput/lv_libinput.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/libinput/lv_libinput.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/libinput/lv_libinput.c.s
-.PHONY : include/lvgl/src/drivers/libinput/lv_libinput.c.s
-
-include/lvgl/src/drivers/libinput/lv_xkb.obj: include/lvgl/src/drivers/libinput/lv_xkb.c.obj
+# target to build an object file
+include/lvgl/src/drivers/libinput/lv_xkb.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/libinput/lv_xkb.obj
 .PHONY : include/lvgl/src/drivers/libinput/lv_xkb.obj
 
-# target to build an object file
-include/lvgl/src/drivers/libinput/lv_xkb.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/libinput/lv_xkb.c.obj
-.PHONY : include/lvgl/src/drivers/libinput/lv_xkb.c.obj
-
-include/lvgl/src/drivers/libinput/lv_xkb.i: include/lvgl/src/drivers/libinput/lv_xkb.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/libinput/lv_xkb.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/libinput/lv_xkb.i
 .PHONY : include/lvgl/src/drivers/libinput/lv_xkb.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/libinput/lv_xkb.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/libinput/lv_xkb.c.i
-.PHONY : include/lvgl/src/drivers/libinput/lv_xkb.c.i
-
-include/lvgl/src/drivers/libinput/lv_xkb.s: include/lvgl/src/drivers/libinput/lv_xkb.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/libinput/lv_xkb.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/libinput/lv_xkb.s
 .PHONY : include/lvgl/src/drivers/libinput/lv_xkb.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/libinput/lv_xkb.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/libinput/lv_xkb.c.s
-.PHONY : include/lvgl/src/drivers/libinput/lv_xkb.c.s
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_cache.obj: include/lvgl/src/drivers/nuttx/lv_nuttx_cache.c.obj
+# target to build an object file
+include/lvgl/src/drivers/nuttx/lv_nuttx_cache.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_cache.obj
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_cache.obj
 
-# target to build an object file
-include/lvgl/src/drivers/nuttx/lv_nuttx_cache.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_cache.c.obj
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_cache.c.obj
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_cache.i: include/lvgl/src/drivers/nuttx/lv_nuttx_cache.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/nuttx/lv_nuttx_cache.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_cache.i
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_cache.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/nuttx/lv_nuttx_cache.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_cache.c.i
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_cache.c.i
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_cache.s: include/lvgl/src/drivers/nuttx/lv_nuttx_cache.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/nuttx/lv_nuttx_cache.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_cache.s
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_cache.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/nuttx/lv_nuttx_cache.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_cache.c.s
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_cache.c.s
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_entry.obj: include/lvgl/src/drivers/nuttx/lv_nuttx_entry.c.obj
+# target to build an object file
+include/lvgl/src/drivers/nuttx/lv_nuttx_entry.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_entry.obj
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_entry.obj
 
-# target to build an object file
-include/lvgl/src/drivers/nuttx/lv_nuttx_entry.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_entry.c.obj
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_entry.c.obj
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_entry.i: include/lvgl/src/drivers/nuttx/lv_nuttx_entry.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/nuttx/lv_nuttx_entry.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_entry.i
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_entry.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/nuttx/lv_nuttx_entry.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_entry.c.i
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_entry.c.i
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_entry.s: include/lvgl/src/drivers/nuttx/lv_nuttx_entry.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/nuttx/lv_nuttx_entry.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_entry.s
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_entry.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/nuttx/lv_nuttx_entry.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_entry.c.s
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_entry.c.s
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.obj: include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.c.obj
+# target to build an object file
+include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.obj
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.obj
 
-# target to build an object file
-include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.c.obj
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.c.obj
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.i: include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.i
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.c.i
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.c.i
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.s: include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.s
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.c.s
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_fbdev.c.s
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.obj: include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.c.obj
+# target to build an object file
+include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.obj
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.obj
 
-# target to build an object file
-include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.c.obj
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.c.obj
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.i: include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.i
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.c.i
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.c.i
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.s: include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.s
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.c.s
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_image_cache.c.s
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.obj: include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.c.obj
+# target to build an object file
+include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.obj
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.obj
 
-# target to build an object file
-include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.c.obj
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.c.obj
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.i: include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.i
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.c.i
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.c.i
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.s: include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.s
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.c.s
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_lcd.c.s
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.obj: include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.c.obj
+# target to build an object file
+include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.obj
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.obj
 
-# target to build an object file
-include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.c.obj
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.c.obj
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.i: include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.i
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.c.i
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.c.i
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.s: include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.s
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.c.s
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_libuv.c.s
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.obj: include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.c.obj
+# target to build an object file
+include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.obj
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.obj
 
-# target to build an object file
-include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.c.obj
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.c.obj
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.i: include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.i
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.c.i
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.c.i
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.s: include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.s
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.c.s
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_profiler.c.s
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.obj: include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.c.obj
+# target to build an object file
+include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.obj
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.obj
 
-# target to build an object file
-include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.c.obj
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.c.obj
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.i: include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.i
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.c.i
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.c.i
-
-include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.s: include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.s
 .PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.c.s
-.PHONY : include/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.c.s
-
-include/lvgl/src/drivers/qnx/lv_qnx.obj: include/lvgl/src/drivers/qnx/lv_qnx.c.obj
+# target to build an object file
+include/lvgl/src/drivers/qnx/lv_qnx.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/qnx/lv_qnx.obj
 .PHONY : include/lvgl/src/drivers/qnx/lv_qnx.obj
 
-# target to build an object file
-include/lvgl/src/drivers/qnx/lv_qnx.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/qnx/lv_qnx.c.obj
-.PHONY : include/lvgl/src/drivers/qnx/lv_qnx.c.obj
-
-include/lvgl/src/drivers/qnx/lv_qnx.i: include/lvgl/src/drivers/qnx/lv_qnx.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/qnx/lv_qnx.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/qnx/lv_qnx.i
 .PHONY : include/lvgl/src/drivers/qnx/lv_qnx.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/qnx/lv_qnx.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/qnx/lv_qnx.c.i
-.PHONY : include/lvgl/src/drivers/qnx/lv_qnx.c.i
-
-include/lvgl/src/drivers/qnx/lv_qnx.s: include/lvgl/src/drivers/qnx/lv_qnx.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/qnx/lv_qnx.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/qnx/lv_qnx.s
 .PHONY : include/lvgl/src/drivers/qnx/lv_qnx.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/qnx/lv_qnx.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/qnx/lv_qnx.c.s
-.PHONY : include/lvgl/src/drivers/qnx/lv_qnx.c.s
-
-include/lvgl/src/drivers/sdl/lv_sdl_keyboard.obj: include/lvgl/src/drivers/sdl/lv_sdl_keyboard.c.obj
+# target to build an object file
+include/lvgl/src/drivers/sdl/lv_sdl_keyboard.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_keyboard.obj
 .PHONY : include/lvgl/src/drivers/sdl/lv_sdl_keyboard.obj
 
-# target to build an object file
-include/lvgl/src/drivers/sdl/lv_sdl_keyboard.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_keyboard.c.obj
-.PHONY : include/lvgl/src/drivers/sdl/lv_sdl_keyboard.c.obj
-
-include/lvgl/src/drivers/sdl/lv_sdl_keyboard.i: include/lvgl/src/drivers/sdl/lv_sdl_keyboard.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/sdl/lv_sdl_keyboard.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_keyboard.i
 .PHONY : include/lvgl/src/drivers/sdl/lv_sdl_keyboard.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/sdl/lv_sdl_keyboard.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_keyboard.c.i
-.PHONY : include/lvgl/src/drivers/sdl/lv_sdl_keyboard.c.i
-
-include/lvgl/src/drivers/sdl/lv_sdl_keyboard.s: include/lvgl/src/drivers/sdl/lv_sdl_keyboard.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/sdl/lv_sdl_keyboard.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_keyboard.s
 .PHONY : include/lvgl/src/drivers/sdl/lv_sdl_keyboard.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/sdl/lv_sdl_keyboard.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_keyboard.c.s
-.PHONY : include/lvgl/src/drivers/sdl/lv_sdl_keyboard.c.s
-
-include/lvgl/src/drivers/sdl/lv_sdl_mouse.obj: include/lvgl/src/drivers/sdl/lv_sdl_mouse.c.obj
+# target to build an object file
+include/lvgl/src/drivers/sdl/lv_sdl_mouse.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_mouse.obj
 .PHONY : include/lvgl/src/drivers/sdl/lv_sdl_mouse.obj
 
-# target to build an object file
-include/lvgl/src/drivers/sdl/lv_sdl_mouse.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_mouse.c.obj
-.PHONY : include/lvgl/src/drivers/sdl/lv_sdl_mouse.c.obj
-
-include/lvgl/src/drivers/sdl/lv_sdl_mouse.i: include/lvgl/src/drivers/sdl/lv_sdl_mouse.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/sdl/lv_sdl_mouse.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_mouse.i
 .PHONY : include/lvgl/src/drivers/sdl/lv_sdl_mouse.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/sdl/lv_sdl_mouse.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_mouse.c.i
-.PHONY : include/lvgl/src/drivers/sdl/lv_sdl_mouse.c.i
-
-include/lvgl/src/drivers/sdl/lv_sdl_mouse.s: include/lvgl/src/drivers/sdl/lv_sdl_mouse.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/sdl/lv_sdl_mouse.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_mouse.s
 .PHONY : include/lvgl/src/drivers/sdl/lv_sdl_mouse.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/sdl/lv_sdl_mouse.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_mouse.c.s
-.PHONY : include/lvgl/src/drivers/sdl/lv_sdl_mouse.c.s
-
-include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.obj: include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.c.obj
+# target to build an object file
+include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.obj
 .PHONY : include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.obj
 
-# target to build an object file
-include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.c.obj
-.PHONY : include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.c.obj
-
-include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.i: include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.i
 .PHONY : include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.c.i
-.PHONY : include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.c.i
-
-include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.s: include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.s
 .PHONY : include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.c.s
-.PHONY : include/lvgl/src/drivers/sdl/lv_sdl_mousewheel.c.s
-
-include/lvgl/src/drivers/sdl/lv_sdl_window.obj: include/lvgl/src/drivers/sdl/lv_sdl_window.c.obj
+# target to build an object file
+include/lvgl/src/drivers/sdl/lv_sdl_window.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_window.obj
 .PHONY : include/lvgl/src/drivers/sdl/lv_sdl_window.obj
 
-# target to build an object file
-include/lvgl/src/drivers/sdl/lv_sdl_window.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_window.c.obj
-.PHONY : include/lvgl/src/drivers/sdl/lv_sdl_window.c.obj
-
-include/lvgl/src/drivers/sdl/lv_sdl_window.i: include/lvgl/src/drivers/sdl/lv_sdl_window.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/sdl/lv_sdl_window.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_window.i
 .PHONY : include/lvgl/src/drivers/sdl/lv_sdl_window.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/sdl/lv_sdl_window.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_window.c.i
-.PHONY : include/lvgl/src/drivers/sdl/lv_sdl_window.c.i
-
-include/lvgl/src/drivers/sdl/lv_sdl_window.s: include/lvgl/src/drivers/sdl/lv_sdl_window.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/sdl/lv_sdl_window.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_window.s
 .PHONY : include/lvgl/src/drivers/sdl/lv_sdl_window.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/sdl/lv_sdl_window.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/sdl/lv_sdl_window.c.s
-.PHONY : include/lvgl/src/drivers/sdl/lv_sdl_window.c.s
-
-include/lvgl/src/drivers/uefi/lv_uefi_context.obj: include/lvgl/src/drivers/uefi/lv_uefi_context.c.obj
+# target to build an object file
+include/lvgl/src/drivers/uefi/lv_uefi_context.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_context.obj
 .PHONY : include/lvgl/src/drivers/uefi/lv_uefi_context.obj
 
-# target to build an object file
-include/lvgl/src/drivers/uefi/lv_uefi_context.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_context.c.obj
-.PHONY : include/lvgl/src/drivers/uefi/lv_uefi_context.c.obj
-
-include/lvgl/src/drivers/uefi/lv_uefi_context.i: include/lvgl/src/drivers/uefi/lv_uefi_context.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/uefi/lv_uefi_context.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_context.i
 .PHONY : include/lvgl/src/drivers/uefi/lv_uefi_context.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/uefi/lv_uefi_context.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_context.c.i
-.PHONY : include/lvgl/src/drivers/uefi/lv_uefi_context.c.i
-
-include/lvgl/src/drivers/uefi/lv_uefi_context.s: include/lvgl/src/drivers/uefi/lv_uefi_context.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/uefi/lv_uefi_context.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_context.s
 .PHONY : include/lvgl/src/drivers/uefi/lv_uefi_context.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/uefi/lv_uefi_context.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_context.c.s
-.PHONY : include/lvgl/src/drivers/uefi/lv_uefi_context.c.s
-
-include/lvgl/src/drivers/uefi/lv_uefi_display.obj: include/lvgl/src/drivers/uefi/lv_uefi_display.c.obj
+# target to build an object file
+include/lvgl/src/drivers/uefi/lv_uefi_display.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_display.obj
 .PHONY : include/lvgl/src/drivers/uefi/lv_uefi_display.obj
 
-# target to build an object file
-include/lvgl/src/drivers/uefi/lv_uefi_display.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_display.c.obj
-.PHONY : include/lvgl/src/drivers/uefi/lv_uefi_display.c.obj
-
-include/lvgl/src/drivers/uefi/lv_uefi_display.i: include/lvgl/src/drivers/uefi/lv_uefi_display.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/uefi/lv_uefi_display.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_display.i
 .PHONY : include/lvgl/src/drivers/uefi/lv_uefi_display.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/uefi/lv_uefi_display.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_display.c.i
-.PHONY : include/lvgl/src/drivers/uefi/lv_uefi_display.c.i
-
-include/lvgl/src/drivers/uefi/lv_uefi_display.s: include/lvgl/src/drivers/uefi/lv_uefi_display.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/uefi/lv_uefi_display.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_display.s
 .PHONY : include/lvgl/src/drivers/uefi/lv_uefi_display.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/uefi/lv_uefi_display.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_display.c.s
-.PHONY : include/lvgl/src/drivers/uefi/lv_uefi_display.c.s
-
-include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.obj: include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.c.obj
+# target to build an object file
+include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.obj
 .PHONY : include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.obj
 
-# target to build an object file
-include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.c.obj
-.PHONY : include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.c.obj
-
-include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.i: include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.i
 .PHONY : include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.c.i
-.PHONY : include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.c.i
-
-include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.s: include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.s
 .PHONY : include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.c.s
-.PHONY : include/lvgl/src/drivers/uefi/lv_uefi_indev_keyboard.c.s
-
-include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.obj: include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.c.obj
+# target to build an object file
+include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.obj
 .PHONY : include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.obj
 
-# target to build an object file
-include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.c.obj
-.PHONY : include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.c.obj
-
-include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.i: include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.i
 .PHONY : include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.c.i
-.PHONY : include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.c.i
-
-include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.s: include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.s
 .PHONY : include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.c.s
-.PHONY : include/lvgl/src/drivers/uefi/lv_uefi_indev_pointer.c.s
-
-include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.obj: include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.c.obj
+# target to build an object file
+include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.obj
 .PHONY : include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.obj
 
-# target to build an object file
-include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.c.obj
-.PHONY : include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.c.obj
-
-include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.i: include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.i
 .PHONY : include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.c.i
-.PHONY : include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.c.i
-
-include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.s: include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.s
 .PHONY : include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.c.s
-.PHONY : include/lvgl/src/drivers/uefi/lv_uefi_indev_touch.c.s
-
-include/lvgl/src/drivers/uefi/lv_uefi_private.obj: include/lvgl/src/drivers/uefi/lv_uefi_private.c.obj
+# target to build an object file
+include/lvgl/src/drivers/uefi/lv_uefi_private.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_private.obj
 .PHONY : include/lvgl/src/drivers/uefi/lv_uefi_private.obj
 
-# target to build an object file
-include/lvgl/src/drivers/uefi/lv_uefi_private.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_private.c.obj
-.PHONY : include/lvgl/src/drivers/uefi/lv_uefi_private.c.obj
-
-include/lvgl/src/drivers/uefi/lv_uefi_private.i: include/lvgl/src/drivers/uefi/lv_uefi_private.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/uefi/lv_uefi_private.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_private.i
 .PHONY : include/lvgl/src/drivers/uefi/lv_uefi_private.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/uefi/lv_uefi_private.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_private.c.i
-.PHONY : include/lvgl/src/drivers/uefi/lv_uefi_private.c.i
-
-include/lvgl/src/drivers/uefi/lv_uefi_private.s: include/lvgl/src/drivers/uefi/lv_uefi_private.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/uefi/lv_uefi_private.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_private.s
 .PHONY : include/lvgl/src/drivers/uefi/lv_uefi_private.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/uefi/lv_uefi_private.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/uefi/lv_uefi_private.c.s
-.PHONY : include/lvgl/src/drivers/uefi/lv_uefi_private.c.s
-
-include/lvgl/src/drivers/wayland/lv_wayland.obj: include/lvgl/src/drivers/wayland/lv_wayland.c.obj
+# target to build an object file
+include/lvgl/src/drivers/wayland/lv_wayland.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/wayland/lv_wayland.obj
 .PHONY : include/lvgl/src/drivers/wayland/lv_wayland.obj
 
-# target to build an object file
-include/lvgl/src/drivers/wayland/lv_wayland.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/wayland/lv_wayland.c.obj
-.PHONY : include/lvgl/src/drivers/wayland/lv_wayland.c.obj
-
-include/lvgl/src/drivers/wayland/lv_wayland.i: include/lvgl/src/drivers/wayland/lv_wayland.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/wayland/lv_wayland.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/wayland/lv_wayland.i
 .PHONY : include/lvgl/src/drivers/wayland/lv_wayland.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/wayland/lv_wayland.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/wayland/lv_wayland.c.i
-.PHONY : include/lvgl/src/drivers/wayland/lv_wayland.c.i
-
-include/lvgl/src/drivers/wayland/lv_wayland.s: include/lvgl/src/drivers/wayland/lv_wayland.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/wayland/lv_wayland.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/wayland/lv_wayland.s
 .PHONY : include/lvgl/src/drivers/wayland/lv_wayland.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/wayland/lv_wayland.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/wayland/lv_wayland.c.s
-.PHONY : include/lvgl/src/drivers/wayland/lv_wayland.c.s
-
-include/lvgl/src/drivers/wayland/lv_wayland_smm.obj: include/lvgl/src/drivers/wayland/lv_wayland_smm.c.obj
+# target to build an object file
+include/lvgl/src/drivers/wayland/lv_wayland_smm.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/wayland/lv_wayland_smm.obj
 .PHONY : include/lvgl/src/drivers/wayland/lv_wayland_smm.obj
 
-# target to build an object file
-include/lvgl/src/drivers/wayland/lv_wayland_smm.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/wayland/lv_wayland_smm.c.obj
-.PHONY : include/lvgl/src/drivers/wayland/lv_wayland_smm.c.obj
-
-include/lvgl/src/drivers/wayland/lv_wayland_smm.i: include/lvgl/src/drivers/wayland/lv_wayland_smm.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/wayland/lv_wayland_smm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/wayland/lv_wayland_smm.i
 .PHONY : include/lvgl/src/drivers/wayland/lv_wayland_smm.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/wayland/lv_wayland_smm.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/wayland/lv_wayland_smm.c.i
-.PHONY : include/lvgl/src/drivers/wayland/lv_wayland_smm.c.i
-
-include/lvgl/src/drivers/wayland/lv_wayland_smm.s: include/lvgl/src/drivers/wayland/lv_wayland_smm.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/wayland/lv_wayland_smm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/wayland/lv_wayland_smm.s
 .PHONY : include/lvgl/src/drivers/wayland/lv_wayland_smm.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/wayland/lv_wayland_smm.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/wayland/lv_wayland_smm.c.s
-.PHONY : include/lvgl/src/drivers/wayland/lv_wayland_smm.c.s
-
-include/lvgl/src/drivers/windows/lv_windows_context.obj: include/lvgl/src/drivers/windows/lv_windows_context.c.obj
+# target to build an object file
+include/lvgl/src/drivers/windows/lv_windows_context.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/windows/lv_windows_context.obj
 .PHONY : include/lvgl/src/drivers/windows/lv_windows_context.obj
 
-# target to build an object file
-include/lvgl/src/drivers/windows/lv_windows_context.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/windows/lv_windows_context.c.obj
-.PHONY : include/lvgl/src/drivers/windows/lv_windows_context.c.obj
-
-include/lvgl/src/drivers/windows/lv_windows_context.i: include/lvgl/src/drivers/windows/lv_windows_context.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/windows/lv_windows_context.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/windows/lv_windows_context.i
 .PHONY : include/lvgl/src/drivers/windows/lv_windows_context.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/windows/lv_windows_context.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/windows/lv_windows_context.c.i
-.PHONY : include/lvgl/src/drivers/windows/lv_windows_context.c.i
-
-include/lvgl/src/drivers/windows/lv_windows_context.s: include/lvgl/src/drivers/windows/lv_windows_context.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/windows/lv_windows_context.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/windows/lv_windows_context.s
 .PHONY : include/lvgl/src/drivers/windows/lv_windows_context.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/windows/lv_windows_context.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/windows/lv_windows_context.c.s
-.PHONY : include/lvgl/src/drivers/windows/lv_windows_context.c.s
-
-include/lvgl/src/drivers/windows/lv_windows_display.obj: include/lvgl/src/drivers/windows/lv_windows_display.c.obj
+# target to build an object file
+include/lvgl/src/drivers/windows/lv_windows_display.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/windows/lv_windows_display.obj
 .PHONY : include/lvgl/src/drivers/windows/lv_windows_display.obj
 
-# target to build an object file
-include/lvgl/src/drivers/windows/lv_windows_display.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/windows/lv_windows_display.c.obj
-.PHONY : include/lvgl/src/drivers/windows/lv_windows_display.c.obj
-
-include/lvgl/src/drivers/windows/lv_windows_display.i: include/lvgl/src/drivers/windows/lv_windows_display.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/windows/lv_windows_display.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/windows/lv_windows_display.i
 .PHONY : include/lvgl/src/drivers/windows/lv_windows_display.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/windows/lv_windows_display.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/windows/lv_windows_display.c.i
-.PHONY : include/lvgl/src/drivers/windows/lv_windows_display.c.i
-
-include/lvgl/src/drivers/windows/lv_windows_display.s: include/lvgl/src/drivers/windows/lv_windows_display.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/windows/lv_windows_display.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/windows/lv_windows_display.s
 .PHONY : include/lvgl/src/drivers/windows/lv_windows_display.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/windows/lv_windows_display.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/windows/lv_windows_display.c.s
-.PHONY : include/lvgl/src/drivers/windows/lv_windows_display.c.s
-
-include/lvgl/src/drivers/windows/lv_windows_input.obj: include/lvgl/src/drivers/windows/lv_windows_input.c.obj
+# target to build an object file
+include/lvgl/src/drivers/windows/lv_windows_input.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/windows/lv_windows_input.obj
 .PHONY : include/lvgl/src/drivers/windows/lv_windows_input.obj
 
-# target to build an object file
-include/lvgl/src/drivers/windows/lv_windows_input.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/windows/lv_windows_input.c.obj
-.PHONY : include/lvgl/src/drivers/windows/lv_windows_input.c.obj
-
-include/lvgl/src/drivers/windows/lv_windows_input.i: include/lvgl/src/drivers/windows/lv_windows_input.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/windows/lv_windows_input.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/windows/lv_windows_input.i
 .PHONY : include/lvgl/src/drivers/windows/lv_windows_input.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/windows/lv_windows_input.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/windows/lv_windows_input.c.i
-.PHONY : include/lvgl/src/drivers/windows/lv_windows_input.c.i
-
-include/lvgl/src/drivers/windows/lv_windows_input.s: include/lvgl/src/drivers/windows/lv_windows_input.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/windows/lv_windows_input.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/windows/lv_windows_input.s
 .PHONY : include/lvgl/src/drivers/windows/lv_windows_input.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/windows/lv_windows_input.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/windows/lv_windows_input.c.s
-.PHONY : include/lvgl/src/drivers/windows/lv_windows_input.c.s
-
-include/lvgl/src/drivers/x11/lv_x11_display.obj: include/lvgl/src/drivers/x11/lv_x11_display.c.obj
+# target to build an object file
+include/lvgl/src/drivers/x11/lv_x11_display.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/x11/lv_x11_display.obj
 .PHONY : include/lvgl/src/drivers/x11/lv_x11_display.obj
 
-# target to build an object file
-include/lvgl/src/drivers/x11/lv_x11_display.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/x11/lv_x11_display.c.obj
-.PHONY : include/lvgl/src/drivers/x11/lv_x11_display.c.obj
-
-include/lvgl/src/drivers/x11/lv_x11_display.i: include/lvgl/src/drivers/x11/lv_x11_display.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/x11/lv_x11_display.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/x11/lv_x11_display.i
 .PHONY : include/lvgl/src/drivers/x11/lv_x11_display.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/x11/lv_x11_display.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/x11/lv_x11_display.c.i
-.PHONY : include/lvgl/src/drivers/x11/lv_x11_display.c.i
-
-include/lvgl/src/drivers/x11/lv_x11_display.s: include/lvgl/src/drivers/x11/lv_x11_display.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/x11/lv_x11_display.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/x11/lv_x11_display.s
 .PHONY : include/lvgl/src/drivers/x11/lv_x11_display.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/x11/lv_x11_display.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/x11/lv_x11_display.c.s
-.PHONY : include/lvgl/src/drivers/x11/lv_x11_display.c.s
-
-include/lvgl/src/drivers/x11/lv_x11_input.obj: include/lvgl/src/drivers/x11/lv_x11_input.c.obj
+# target to build an object file
+include/lvgl/src/drivers/x11/lv_x11_input.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/x11/lv_x11_input.obj
 .PHONY : include/lvgl/src/drivers/x11/lv_x11_input.obj
 
-# target to build an object file
-include/lvgl/src/drivers/x11/lv_x11_input.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/x11/lv_x11_input.c.obj
-.PHONY : include/lvgl/src/drivers/x11/lv_x11_input.c.obj
-
-include/lvgl/src/drivers/x11/lv_x11_input.i: include/lvgl/src/drivers/x11/lv_x11_input.c.i
+# target to preprocess a source file
+include/lvgl/src/drivers/x11/lv_x11_input.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/x11/lv_x11_input.i
 .PHONY : include/lvgl/src/drivers/x11/lv_x11_input.i
 
-# target to preprocess a source file
-include/lvgl/src/drivers/x11/lv_x11_input.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/x11/lv_x11_input.c.i
-.PHONY : include/lvgl/src/drivers/x11/lv_x11_input.c.i
-
-include/lvgl/src/drivers/x11/lv_x11_input.s: include/lvgl/src/drivers/x11/lv_x11_input.c.s
+# target to generate assembly for a file
+include/lvgl/src/drivers/x11/lv_x11_input.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/x11/lv_x11_input.s
 .PHONY : include/lvgl/src/drivers/x11/lv_x11_input.s
 
-# target to generate assembly for a file
-include/lvgl/src/drivers/x11/lv_x11_input.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/drivers/x11/lv_x11_input.c.s
-.PHONY : include/lvgl/src/drivers/x11/lv_x11_input.c.s
-
-include/lvgl/src/font/lv_binfont_loader.obj: include/lvgl/src/font/lv_binfont_loader.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_binfont_loader.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_binfont_loader.obj
 .PHONY : include/lvgl/src/font/lv_binfont_loader.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_binfont_loader.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_binfont_loader.c.obj
-.PHONY : include/lvgl/src/font/lv_binfont_loader.c.obj
-
-include/lvgl/src/font/lv_binfont_loader.i: include/lvgl/src/font/lv_binfont_loader.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_binfont_loader.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_binfont_loader.i
 .PHONY : include/lvgl/src/font/lv_binfont_loader.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_binfont_loader.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_binfont_loader.c.i
-.PHONY : include/lvgl/src/font/lv_binfont_loader.c.i
-
-include/lvgl/src/font/lv_binfont_loader.s: include/lvgl/src/font/lv_binfont_loader.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_binfont_loader.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_binfont_loader.s
 .PHONY : include/lvgl/src/font/lv_binfont_loader.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_binfont_loader.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_binfont_loader.c.s
-.PHONY : include/lvgl/src/font/lv_binfont_loader.c.s
-
-include/lvgl/src/font/lv_font.obj: include/lvgl/src/font/lv_font.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font.obj
 .PHONY : include/lvgl/src/font/lv_font.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font.c.obj
-.PHONY : include/lvgl/src/font/lv_font.c.obj
-
-include/lvgl/src/font/lv_font.i: include/lvgl/src/font/lv_font.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font.i
 .PHONY : include/lvgl/src/font/lv_font.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font.c.i
-.PHONY : include/lvgl/src/font/lv_font.c.i
-
-include/lvgl/src/font/lv_font.s: include/lvgl/src/font/lv_font.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font.s
 .PHONY : include/lvgl/src/font/lv_font.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font.c.s
-.PHONY : include/lvgl/src/font/lv_font.c.s
-
-include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.obj: include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.obj
 .PHONY : include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.c.obj
-.PHONY : include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.c.obj
-
-include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.i: include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.i
 .PHONY : include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.c.i
-.PHONY : include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.c.i
-
-include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.s: include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.s
 .PHONY : include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.c.s
-.PHONY : include/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.c.s
-
-include/lvgl/src/font/lv_font_fmt_txt.obj: include/lvgl/src/font/lv_font_fmt_txt.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_fmt_txt.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_fmt_txt.obj
 .PHONY : include/lvgl/src/font/lv_font_fmt_txt.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_fmt_txt.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_fmt_txt.c.obj
-.PHONY : include/lvgl/src/font/lv_font_fmt_txt.c.obj
-
-include/lvgl/src/font/lv_font_fmt_txt.i: include/lvgl/src/font/lv_font_fmt_txt.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_fmt_txt.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_fmt_txt.i
 .PHONY : include/lvgl/src/font/lv_font_fmt_txt.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_fmt_txt.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_fmt_txt.c.i
-.PHONY : include/lvgl/src/font/lv_font_fmt_txt.c.i
-
-include/lvgl/src/font/lv_font_fmt_txt.s: include/lvgl/src/font/lv_font_fmt_txt.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_fmt_txt.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_fmt_txt.s
 .PHONY : include/lvgl/src/font/lv_font_fmt_txt.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_fmt_txt.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_fmt_txt.c.s
-.PHONY : include/lvgl/src/font/lv_font_fmt_txt.c.s
-
-include/lvgl/src/font/lv_font_montserrat_10.obj: include/lvgl/src/font/lv_font_montserrat_10.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_10.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_10.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_10.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_10.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_10.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_10.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_10.i: include/lvgl/src/font/lv_font_montserrat_10.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_10.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_10.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_10.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_10.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_10.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_10.c.i
-
-include/lvgl/src/font/lv_font_montserrat_10.s: include/lvgl/src/font/lv_font_montserrat_10.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_10.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_10.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_10.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_10.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_10.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_10.c.s
-
-include/lvgl/src/font/lv_font_montserrat_12.obj: include/lvgl/src/font/lv_font_montserrat_12.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_12.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_12.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_12.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_12.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_12.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_12.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_12.i: include/lvgl/src/font/lv_font_montserrat_12.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_12.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_12.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_12.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_12.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_12.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_12.c.i
-
-include/lvgl/src/font/lv_font_montserrat_12.s: include/lvgl/src/font/lv_font_montserrat_12.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_12.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_12.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_12.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_12.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_12.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_12.c.s
-
-include/lvgl/src/font/lv_font_montserrat_14.obj: include/lvgl/src/font/lv_font_montserrat_14.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_14.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_14.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_14.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_14.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_14.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_14.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_14.i: include/lvgl/src/font/lv_font_montserrat_14.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_14.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_14.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_14.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_14.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_14.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_14.c.i
-
-include/lvgl/src/font/lv_font_montserrat_14.s: include/lvgl/src/font/lv_font_montserrat_14.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_14.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_14.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_14.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_14.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_14.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_14.c.s
-
-include/lvgl/src/font/lv_font_montserrat_16.obj: include/lvgl/src/font/lv_font_montserrat_16.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_16.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_16.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_16.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_16.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_16.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_16.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_16.i: include/lvgl/src/font/lv_font_montserrat_16.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_16.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_16.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_16.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_16.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_16.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_16.c.i
-
-include/lvgl/src/font/lv_font_montserrat_16.s: include/lvgl/src/font/lv_font_montserrat_16.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_16.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_16.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_16.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_16.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_16.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_16.c.s
-
-include/lvgl/src/font/lv_font_montserrat_18.obj: include/lvgl/src/font/lv_font_montserrat_18.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_18.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_18.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_18.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_18.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_18.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_18.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_18.i: include/lvgl/src/font/lv_font_montserrat_18.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_18.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_18.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_18.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_18.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_18.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_18.c.i
-
-include/lvgl/src/font/lv_font_montserrat_18.s: include/lvgl/src/font/lv_font_montserrat_18.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_18.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_18.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_18.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_18.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_18.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_18.c.s
-
-include/lvgl/src/font/lv_font_montserrat_20.obj: include/lvgl/src/font/lv_font_montserrat_20.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_20.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_20.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_20.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_20.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_20.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_20.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_20.i: include/lvgl/src/font/lv_font_montserrat_20.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_20.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_20.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_20.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_20.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_20.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_20.c.i
-
-include/lvgl/src/font/lv_font_montserrat_20.s: include/lvgl/src/font/lv_font_montserrat_20.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_20.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_20.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_20.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_20.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_20.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_20.c.s
-
-include/lvgl/src/font/lv_font_montserrat_22.obj: include/lvgl/src/font/lv_font_montserrat_22.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_22.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_22.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_22.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_22.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_22.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_22.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_22.i: include/lvgl/src/font/lv_font_montserrat_22.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_22.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_22.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_22.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_22.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_22.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_22.c.i
-
-include/lvgl/src/font/lv_font_montserrat_22.s: include/lvgl/src/font/lv_font_montserrat_22.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_22.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_22.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_22.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_22.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_22.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_22.c.s
-
-include/lvgl/src/font/lv_font_montserrat_24.obj: include/lvgl/src/font/lv_font_montserrat_24.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_24.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_24.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_24.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_24.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_24.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_24.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_24.i: include/lvgl/src/font/lv_font_montserrat_24.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_24.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_24.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_24.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_24.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_24.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_24.c.i
-
-include/lvgl/src/font/lv_font_montserrat_24.s: include/lvgl/src/font/lv_font_montserrat_24.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_24.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_24.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_24.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_24.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_24.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_24.c.s
-
-include/lvgl/src/font/lv_font_montserrat_26.obj: include/lvgl/src/font/lv_font_montserrat_26.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_26.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_26.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_26.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_26.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_26.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_26.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_26.i: include/lvgl/src/font/lv_font_montserrat_26.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_26.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_26.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_26.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_26.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_26.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_26.c.i
-
-include/lvgl/src/font/lv_font_montserrat_26.s: include/lvgl/src/font/lv_font_montserrat_26.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_26.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_26.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_26.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_26.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_26.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_26.c.s
-
-include/lvgl/src/font/lv_font_montserrat_28.obj: include/lvgl/src/font/lv_font_montserrat_28.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_28.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_28.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_28.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_28.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_28.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_28.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_28.i: include/lvgl/src/font/lv_font_montserrat_28.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_28.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_28.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_28.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_28.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_28.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_28.c.i
-
-include/lvgl/src/font/lv_font_montserrat_28.s: include/lvgl/src/font/lv_font_montserrat_28.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_28.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_28.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_28.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_28.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_28.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_28.c.s
-
-include/lvgl/src/font/lv_font_montserrat_28_compressed.obj: include/lvgl/src/font/lv_font_montserrat_28_compressed.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_28_compressed.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_28_compressed.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_28_compressed.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_28_compressed.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_28_compressed.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_28_compressed.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_28_compressed.i: include/lvgl/src/font/lv_font_montserrat_28_compressed.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_28_compressed.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_28_compressed.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_28_compressed.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_28_compressed.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_28_compressed.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_28_compressed.c.i
-
-include/lvgl/src/font/lv_font_montserrat_28_compressed.s: include/lvgl/src/font/lv_font_montserrat_28_compressed.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_28_compressed.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_28_compressed.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_28_compressed.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_28_compressed.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_28_compressed.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_28_compressed.c.s
-
-include/lvgl/src/font/lv_font_montserrat_30.obj: include/lvgl/src/font/lv_font_montserrat_30.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_30.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_30.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_30.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_30.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_30.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_30.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_30.i: include/lvgl/src/font/lv_font_montserrat_30.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_30.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_30.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_30.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_30.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_30.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_30.c.i
-
-include/lvgl/src/font/lv_font_montserrat_30.s: include/lvgl/src/font/lv_font_montserrat_30.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_30.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_30.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_30.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_30.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_30.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_30.c.s
-
-include/lvgl/src/font/lv_font_montserrat_32.obj: include/lvgl/src/font/lv_font_montserrat_32.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_32.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_32.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_32.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_32.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_32.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_32.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_32.i: include/lvgl/src/font/lv_font_montserrat_32.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_32.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_32.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_32.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_32.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_32.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_32.c.i
-
-include/lvgl/src/font/lv_font_montserrat_32.s: include/lvgl/src/font/lv_font_montserrat_32.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_32.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_32.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_32.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_32.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_32.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_32.c.s
-
-include/lvgl/src/font/lv_font_montserrat_34.obj: include/lvgl/src/font/lv_font_montserrat_34.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_34.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_34.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_34.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_34.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_34.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_34.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_34.i: include/lvgl/src/font/lv_font_montserrat_34.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_34.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_34.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_34.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_34.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_34.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_34.c.i
-
-include/lvgl/src/font/lv_font_montserrat_34.s: include/lvgl/src/font/lv_font_montserrat_34.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_34.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_34.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_34.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_34.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_34.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_34.c.s
-
-include/lvgl/src/font/lv_font_montserrat_36.obj: include/lvgl/src/font/lv_font_montserrat_36.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_36.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_36.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_36.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_36.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_36.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_36.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_36.i: include/lvgl/src/font/lv_font_montserrat_36.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_36.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_36.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_36.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_36.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_36.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_36.c.i
-
-include/lvgl/src/font/lv_font_montserrat_36.s: include/lvgl/src/font/lv_font_montserrat_36.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_36.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_36.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_36.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_36.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_36.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_36.c.s
-
-include/lvgl/src/font/lv_font_montserrat_38.obj: include/lvgl/src/font/lv_font_montserrat_38.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_38.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_38.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_38.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_38.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_38.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_38.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_38.i: include/lvgl/src/font/lv_font_montserrat_38.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_38.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_38.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_38.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_38.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_38.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_38.c.i
-
-include/lvgl/src/font/lv_font_montserrat_38.s: include/lvgl/src/font/lv_font_montserrat_38.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_38.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_38.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_38.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_38.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_38.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_38.c.s
-
-include/lvgl/src/font/lv_font_montserrat_40.obj: include/lvgl/src/font/lv_font_montserrat_40.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_40.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_40.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_40.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_40.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_40.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_40.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_40.i: include/lvgl/src/font/lv_font_montserrat_40.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_40.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_40.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_40.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_40.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_40.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_40.c.i
-
-include/lvgl/src/font/lv_font_montserrat_40.s: include/lvgl/src/font/lv_font_montserrat_40.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_40.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_40.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_40.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_40.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_40.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_40.c.s
-
-include/lvgl/src/font/lv_font_montserrat_42.obj: include/lvgl/src/font/lv_font_montserrat_42.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_42.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_42.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_42.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_42.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_42.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_42.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_42.i: include/lvgl/src/font/lv_font_montserrat_42.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_42.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_42.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_42.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_42.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_42.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_42.c.i
-
-include/lvgl/src/font/lv_font_montserrat_42.s: include/lvgl/src/font/lv_font_montserrat_42.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_42.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_42.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_42.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_42.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_42.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_42.c.s
-
-include/lvgl/src/font/lv_font_montserrat_44.obj: include/lvgl/src/font/lv_font_montserrat_44.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_44.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_44.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_44.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_44.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_44.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_44.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_44.i: include/lvgl/src/font/lv_font_montserrat_44.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_44.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_44.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_44.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_44.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_44.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_44.c.i
-
-include/lvgl/src/font/lv_font_montserrat_44.s: include/lvgl/src/font/lv_font_montserrat_44.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_44.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_44.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_44.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_44.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_44.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_44.c.s
-
-include/lvgl/src/font/lv_font_montserrat_46.obj: include/lvgl/src/font/lv_font_montserrat_46.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_46.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_46.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_46.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_46.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_46.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_46.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_46.i: include/lvgl/src/font/lv_font_montserrat_46.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_46.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_46.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_46.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_46.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_46.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_46.c.i
-
-include/lvgl/src/font/lv_font_montserrat_46.s: include/lvgl/src/font/lv_font_montserrat_46.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_46.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_46.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_46.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_46.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_46.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_46.c.s
-
-include/lvgl/src/font/lv_font_montserrat_48.obj: include/lvgl/src/font/lv_font_montserrat_48.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_48.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_48.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_48.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_48.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_48.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_48.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_48.i: include/lvgl/src/font/lv_font_montserrat_48.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_48.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_48.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_48.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_48.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_48.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_48.c.i
-
-include/lvgl/src/font/lv_font_montserrat_48.s: include/lvgl/src/font/lv_font_montserrat_48.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_48.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_48.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_48.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_48.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_48.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_48.c.s
-
-include/lvgl/src/font/lv_font_montserrat_8.obj: include/lvgl/src/font/lv_font_montserrat_8.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_montserrat_8.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_8.obj
 .PHONY : include/lvgl/src/font/lv_font_montserrat_8.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_montserrat_8.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_8.c.obj
-.PHONY : include/lvgl/src/font/lv_font_montserrat_8.c.obj
-
-include/lvgl/src/font/lv_font_montserrat_8.i: include/lvgl/src/font/lv_font_montserrat_8.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_montserrat_8.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_8.i
 .PHONY : include/lvgl/src/font/lv_font_montserrat_8.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_montserrat_8.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_8.c.i
-.PHONY : include/lvgl/src/font/lv_font_montserrat_8.c.i
-
-include/lvgl/src/font/lv_font_montserrat_8.s: include/lvgl/src/font/lv_font_montserrat_8.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_montserrat_8.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_8.s
 .PHONY : include/lvgl/src/font/lv_font_montserrat_8.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_montserrat_8.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_montserrat_8.c.s
-.PHONY : include/lvgl/src/font/lv_font_montserrat_8.c.s
-
-include/lvgl/src/font/lv_font_simsun_14_cjk.obj: include/lvgl/src/font/lv_font_simsun_14_cjk.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_simsun_14_cjk.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_simsun_14_cjk.obj
 .PHONY : include/lvgl/src/font/lv_font_simsun_14_cjk.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_simsun_14_cjk.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_simsun_14_cjk.c.obj
-.PHONY : include/lvgl/src/font/lv_font_simsun_14_cjk.c.obj
-
-include/lvgl/src/font/lv_font_simsun_14_cjk.i: include/lvgl/src/font/lv_font_simsun_14_cjk.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_simsun_14_cjk.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_simsun_14_cjk.i
 .PHONY : include/lvgl/src/font/lv_font_simsun_14_cjk.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_simsun_14_cjk.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_simsun_14_cjk.c.i
-.PHONY : include/lvgl/src/font/lv_font_simsun_14_cjk.c.i
-
-include/lvgl/src/font/lv_font_simsun_14_cjk.s: include/lvgl/src/font/lv_font_simsun_14_cjk.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_simsun_14_cjk.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_simsun_14_cjk.s
 .PHONY : include/lvgl/src/font/lv_font_simsun_14_cjk.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_simsun_14_cjk.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_simsun_14_cjk.c.s
-.PHONY : include/lvgl/src/font/lv_font_simsun_14_cjk.c.s
-
-include/lvgl/src/font/lv_font_simsun_16_cjk.obj: include/lvgl/src/font/lv_font_simsun_16_cjk.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_simsun_16_cjk.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_simsun_16_cjk.obj
 .PHONY : include/lvgl/src/font/lv_font_simsun_16_cjk.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_simsun_16_cjk.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_simsun_16_cjk.c.obj
-.PHONY : include/lvgl/src/font/lv_font_simsun_16_cjk.c.obj
-
-include/lvgl/src/font/lv_font_simsun_16_cjk.i: include/lvgl/src/font/lv_font_simsun_16_cjk.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_simsun_16_cjk.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_simsun_16_cjk.i
 .PHONY : include/lvgl/src/font/lv_font_simsun_16_cjk.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_simsun_16_cjk.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_simsun_16_cjk.c.i
-.PHONY : include/lvgl/src/font/lv_font_simsun_16_cjk.c.i
-
-include/lvgl/src/font/lv_font_simsun_16_cjk.s: include/lvgl/src/font/lv_font_simsun_16_cjk.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_simsun_16_cjk.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_simsun_16_cjk.s
 .PHONY : include/lvgl/src/font/lv_font_simsun_16_cjk.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_simsun_16_cjk.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_simsun_16_cjk.c.s
-.PHONY : include/lvgl/src/font/lv_font_simsun_16_cjk.c.s
-
-include/lvgl/src/font/lv_font_unscii_16.obj: include/lvgl/src/font/lv_font_unscii_16.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_unscii_16.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_unscii_16.obj
 .PHONY : include/lvgl/src/font/lv_font_unscii_16.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_unscii_16.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_unscii_16.c.obj
-.PHONY : include/lvgl/src/font/lv_font_unscii_16.c.obj
-
-include/lvgl/src/font/lv_font_unscii_16.i: include/lvgl/src/font/lv_font_unscii_16.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_unscii_16.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_unscii_16.i
 .PHONY : include/lvgl/src/font/lv_font_unscii_16.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_unscii_16.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_unscii_16.c.i
-.PHONY : include/lvgl/src/font/lv_font_unscii_16.c.i
-
-include/lvgl/src/font/lv_font_unscii_16.s: include/lvgl/src/font/lv_font_unscii_16.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_unscii_16.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_unscii_16.s
 .PHONY : include/lvgl/src/font/lv_font_unscii_16.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_unscii_16.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_unscii_16.c.s
-.PHONY : include/lvgl/src/font/lv_font_unscii_16.c.s
-
-include/lvgl/src/font/lv_font_unscii_8.obj: include/lvgl/src/font/lv_font_unscii_8.c.obj
+# target to build an object file
+include/lvgl/src/font/lv_font_unscii_8.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_unscii_8.obj
 .PHONY : include/lvgl/src/font/lv_font_unscii_8.obj
 
-# target to build an object file
-include/lvgl/src/font/lv_font_unscii_8.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_unscii_8.c.obj
-.PHONY : include/lvgl/src/font/lv_font_unscii_8.c.obj
-
-include/lvgl/src/font/lv_font_unscii_8.i: include/lvgl/src/font/lv_font_unscii_8.c.i
+# target to preprocess a source file
+include/lvgl/src/font/lv_font_unscii_8.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_unscii_8.i
 .PHONY : include/lvgl/src/font/lv_font_unscii_8.i
 
-# target to preprocess a source file
-include/lvgl/src/font/lv_font_unscii_8.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_unscii_8.c.i
-.PHONY : include/lvgl/src/font/lv_font_unscii_8.c.i
-
-include/lvgl/src/font/lv_font_unscii_8.s: include/lvgl/src/font/lv_font_unscii_8.c.s
+# target to generate assembly for a file
+include/lvgl/src/font/lv_font_unscii_8.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_unscii_8.s
 .PHONY : include/lvgl/src/font/lv_font_unscii_8.s
 
-# target to generate assembly for a file
-include/lvgl/src/font/lv_font_unscii_8.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/font/lv_font_unscii_8.c.s
-.PHONY : include/lvgl/src/font/lv_font_unscii_8.c.s
-
-include/lvgl/src/indev/lv_indev.obj: include/lvgl/src/indev/lv_indev.c.obj
+# target to build an object file
+include/lvgl/src/indev/lv_indev.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/indev/lv_indev.obj
 .PHONY : include/lvgl/src/indev/lv_indev.obj
 
-# target to build an object file
-include/lvgl/src/indev/lv_indev.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/indev/lv_indev.c.obj
-.PHONY : include/lvgl/src/indev/lv_indev.c.obj
-
-include/lvgl/src/indev/lv_indev.i: include/lvgl/src/indev/lv_indev.c.i
+# target to preprocess a source file
+include/lvgl/src/indev/lv_indev.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/indev/lv_indev.i
 .PHONY : include/lvgl/src/indev/lv_indev.i
 
-# target to preprocess a source file
-include/lvgl/src/indev/lv_indev.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/indev/lv_indev.c.i
-.PHONY : include/lvgl/src/indev/lv_indev.c.i
-
-include/lvgl/src/indev/lv_indev.s: include/lvgl/src/indev/lv_indev.c.s
+# target to generate assembly for a file
+include/lvgl/src/indev/lv_indev.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/indev/lv_indev.s
 .PHONY : include/lvgl/src/indev/lv_indev.s
 
-# target to generate assembly for a file
-include/lvgl/src/indev/lv_indev.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/indev/lv_indev.c.s
-.PHONY : include/lvgl/src/indev/lv_indev.c.s
-
-include/lvgl/src/indev/lv_indev_gesture.obj: include/lvgl/src/indev/lv_indev_gesture.c.obj
+# target to build an object file
+include/lvgl/src/indev/lv_indev_gesture.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/indev/lv_indev_gesture.obj
 .PHONY : include/lvgl/src/indev/lv_indev_gesture.obj
 
-# target to build an object file
-include/lvgl/src/indev/lv_indev_gesture.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/indev/lv_indev_gesture.c.obj
-.PHONY : include/lvgl/src/indev/lv_indev_gesture.c.obj
-
-include/lvgl/src/indev/lv_indev_gesture.i: include/lvgl/src/indev/lv_indev_gesture.c.i
+# target to preprocess a source file
+include/lvgl/src/indev/lv_indev_gesture.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/indev/lv_indev_gesture.i
 .PHONY : include/lvgl/src/indev/lv_indev_gesture.i
 
-# target to preprocess a source file
-include/lvgl/src/indev/lv_indev_gesture.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/indev/lv_indev_gesture.c.i
-.PHONY : include/lvgl/src/indev/lv_indev_gesture.c.i
-
-include/lvgl/src/indev/lv_indev_gesture.s: include/lvgl/src/indev/lv_indev_gesture.c.s
+# target to generate assembly for a file
+include/lvgl/src/indev/lv_indev_gesture.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/indev/lv_indev_gesture.s
 .PHONY : include/lvgl/src/indev/lv_indev_gesture.s
 
-# target to generate assembly for a file
-include/lvgl/src/indev/lv_indev_gesture.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/indev/lv_indev_gesture.c.s
-.PHONY : include/lvgl/src/indev/lv_indev_gesture.c.s
-
-include/lvgl/src/indev/lv_indev_scroll.obj: include/lvgl/src/indev/lv_indev_scroll.c.obj
+# target to build an object file
+include/lvgl/src/indev/lv_indev_scroll.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/indev/lv_indev_scroll.obj
 .PHONY : include/lvgl/src/indev/lv_indev_scroll.obj
 
-# target to build an object file
-include/lvgl/src/indev/lv_indev_scroll.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/indev/lv_indev_scroll.c.obj
-.PHONY : include/lvgl/src/indev/lv_indev_scroll.c.obj
-
-include/lvgl/src/indev/lv_indev_scroll.i: include/lvgl/src/indev/lv_indev_scroll.c.i
+# target to preprocess a source file
+include/lvgl/src/indev/lv_indev_scroll.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/indev/lv_indev_scroll.i
 .PHONY : include/lvgl/src/indev/lv_indev_scroll.i
 
-# target to preprocess a source file
-include/lvgl/src/indev/lv_indev_scroll.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/indev/lv_indev_scroll.c.i
-.PHONY : include/lvgl/src/indev/lv_indev_scroll.c.i
-
-include/lvgl/src/indev/lv_indev_scroll.s: include/lvgl/src/indev/lv_indev_scroll.c.s
+# target to generate assembly for a file
+include/lvgl/src/indev/lv_indev_scroll.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/indev/lv_indev_scroll.s
 .PHONY : include/lvgl/src/indev/lv_indev_scroll.s
 
-# target to generate assembly for a file
-include/lvgl/src/indev/lv_indev_scroll.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/indev/lv_indev_scroll.c.s
-.PHONY : include/lvgl/src/indev/lv_indev_scroll.c.s
-
-include/lvgl/src/layouts/flex/lv_flex.obj: include/lvgl/src/layouts/flex/lv_flex.c.obj
+# target to build an object file
+include/lvgl/src/layouts/flex/lv_flex.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/layouts/flex/lv_flex.obj
 .PHONY : include/lvgl/src/layouts/flex/lv_flex.obj
 
-# target to build an object file
-include/lvgl/src/layouts/flex/lv_flex.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/layouts/flex/lv_flex.c.obj
-.PHONY : include/lvgl/src/layouts/flex/lv_flex.c.obj
-
-include/lvgl/src/layouts/flex/lv_flex.i: include/lvgl/src/layouts/flex/lv_flex.c.i
+# target to preprocess a source file
+include/lvgl/src/layouts/flex/lv_flex.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/layouts/flex/lv_flex.i
 .PHONY : include/lvgl/src/layouts/flex/lv_flex.i
 
-# target to preprocess a source file
-include/lvgl/src/layouts/flex/lv_flex.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/layouts/flex/lv_flex.c.i
-.PHONY : include/lvgl/src/layouts/flex/lv_flex.c.i
-
-include/lvgl/src/layouts/flex/lv_flex.s: include/lvgl/src/layouts/flex/lv_flex.c.s
+# target to generate assembly for a file
+include/lvgl/src/layouts/flex/lv_flex.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/layouts/flex/lv_flex.s
 .PHONY : include/lvgl/src/layouts/flex/lv_flex.s
 
-# target to generate assembly for a file
-include/lvgl/src/layouts/flex/lv_flex.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/layouts/flex/lv_flex.c.s
-.PHONY : include/lvgl/src/layouts/flex/lv_flex.c.s
-
-include/lvgl/src/layouts/grid/lv_grid.obj: include/lvgl/src/layouts/grid/lv_grid.c.obj
+# target to build an object file
+include/lvgl/src/layouts/grid/lv_grid.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/layouts/grid/lv_grid.obj
 .PHONY : include/lvgl/src/layouts/grid/lv_grid.obj
 
-# target to build an object file
-include/lvgl/src/layouts/grid/lv_grid.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/layouts/grid/lv_grid.c.obj
-.PHONY : include/lvgl/src/layouts/grid/lv_grid.c.obj
-
-include/lvgl/src/layouts/grid/lv_grid.i: include/lvgl/src/layouts/grid/lv_grid.c.i
+# target to preprocess a source file
+include/lvgl/src/layouts/grid/lv_grid.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/layouts/grid/lv_grid.i
 .PHONY : include/lvgl/src/layouts/grid/lv_grid.i
 
-# target to preprocess a source file
-include/lvgl/src/layouts/grid/lv_grid.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/layouts/grid/lv_grid.c.i
-.PHONY : include/lvgl/src/layouts/grid/lv_grid.c.i
-
-include/lvgl/src/layouts/grid/lv_grid.s: include/lvgl/src/layouts/grid/lv_grid.c.s
+# target to generate assembly for a file
+include/lvgl/src/layouts/grid/lv_grid.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/layouts/grid/lv_grid.s
 .PHONY : include/lvgl/src/layouts/grid/lv_grid.s
 
-# target to generate assembly for a file
-include/lvgl/src/layouts/grid/lv_grid.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/layouts/grid/lv_grid.c.s
-.PHONY : include/lvgl/src/layouts/grid/lv_grid.c.s
-
-include/lvgl/src/layouts/lv_layout.obj: include/lvgl/src/layouts/lv_layout.c.obj
+# target to build an object file
+include/lvgl/src/layouts/lv_layout.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/layouts/lv_layout.obj
 .PHONY : include/lvgl/src/layouts/lv_layout.obj
 
-# target to build an object file
-include/lvgl/src/layouts/lv_layout.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/layouts/lv_layout.c.obj
-.PHONY : include/lvgl/src/layouts/lv_layout.c.obj
-
-include/lvgl/src/layouts/lv_layout.i: include/lvgl/src/layouts/lv_layout.c.i
+# target to preprocess a source file
+include/lvgl/src/layouts/lv_layout.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/layouts/lv_layout.i
 .PHONY : include/lvgl/src/layouts/lv_layout.i
 
-# target to preprocess a source file
-include/lvgl/src/layouts/lv_layout.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/layouts/lv_layout.c.i
-.PHONY : include/lvgl/src/layouts/lv_layout.c.i
-
-include/lvgl/src/layouts/lv_layout.s: include/lvgl/src/layouts/lv_layout.c.s
+# target to generate assembly for a file
+include/lvgl/src/layouts/lv_layout.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/layouts/lv_layout.s
 .PHONY : include/lvgl/src/layouts/lv_layout.s
 
-# target to generate assembly for a file
-include/lvgl/src/layouts/lv_layout.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/layouts/lv_layout.c.s
-.PHONY : include/lvgl/src/layouts/lv_layout.c.s
-
-include/lvgl/src/libs/barcode/code128.obj: include/lvgl/src/libs/barcode/code128.c.obj
+# target to build an object file
+include/lvgl/src/libs/barcode/code128.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/barcode/code128.obj
 .PHONY : include/lvgl/src/libs/barcode/code128.obj
 
-# target to build an object file
-include/lvgl/src/libs/barcode/code128.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/barcode/code128.c.obj
-.PHONY : include/lvgl/src/libs/barcode/code128.c.obj
-
-include/lvgl/src/libs/barcode/code128.i: include/lvgl/src/libs/barcode/code128.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/barcode/code128.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/barcode/code128.i
 .PHONY : include/lvgl/src/libs/barcode/code128.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/barcode/code128.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/barcode/code128.c.i
-.PHONY : include/lvgl/src/libs/barcode/code128.c.i
-
-include/lvgl/src/libs/barcode/code128.s: include/lvgl/src/libs/barcode/code128.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/barcode/code128.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/barcode/code128.s
 .PHONY : include/lvgl/src/libs/barcode/code128.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/barcode/code128.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/barcode/code128.c.s
-.PHONY : include/lvgl/src/libs/barcode/code128.c.s
-
-include/lvgl/src/libs/barcode/lv_barcode.obj: include/lvgl/src/libs/barcode/lv_barcode.c.obj
+# target to build an object file
+include/lvgl/src/libs/barcode/lv_barcode.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/barcode/lv_barcode.obj
 .PHONY : include/lvgl/src/libs/barcode/lv_barcode.obj
 
-# target to build an object file
-include/lvgl/src/libs/barcode/lv_barcode.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/barcode/lv_barcode.c.obj
-.PHONY : include/lvgl/src/libs/barcode/lv_barcode.c.obj
-
-include/lvgl/src/libs/barcode/lv_barcode.i: include/lvgl/src/libs/barcode/lv_barcode.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/barcode/lv_barcode.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/barcode/lv_barcode.i
 .PHONY : include/lvgl/src/libs/barcode/lv_barcode.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/barcode/lv_barcode.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/barcode/lv_barcode.c.i
-.PHONY : include/lvgl/src/libs/barcode/lv_barcode.c.i
-
-include/lvgl/src/libs/barcode/lv_barcode.s: include/lvgl/src/libs/barcode/lv_barcode.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/barcode/lv_barcode.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/barcode/lv_barcode.s
 .PHONY : include/lvgl/src/libs/barcode/lv_barcode.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/barcode/lv_barcode.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/barcode/lv_barcode.c.s
-.PHONY : include/lvgl/src/libs/barcode/lv_barcode.c.s
-
-include/lvgl/src/libs/bin_decoder/lv_bin_decoder.obj: include/lvgl/src/libs/bin_decoder/lv_bin_decoder.c.obj
+# target to build an object file
+include/lvgl/src/libs/bin_decoder/lv_bin_decoder.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/bin_decoder/lv_bin_decoder.obj
 .PHONY : include/lvgl/src/libs/bin_decoder/lv_bin_decoder.obj
 
-# target to build an object file
-include/lvgl/src/libs/bin_decoder/lv_bin_decoder.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/bin_decoder/lv_bin_decoder.c.obj
-.PHONY : include/lvgl/src/libs/bin_decoder/lv_bin_decoder.c.obj
-
-include/lvgl/src/libs/bin_decoder/lv_bin_decoder.i: include/lvgl/src/libs/bin_decoder/lv_bin_decoder.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/bin_decoder/lv_bin_decoder.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/bin_decoder/lv_bin_decoder.i
 .PHONY : include/lvgl/src/libs/bin_decoder/lv_bin_decoder.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/bin_decoder/lv_bin_decoder.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/bin_decoder/lv_bin_decoder.c.i
-.PHONY : include/lvgl/src/libs/bin_decoder/lv_bin_decoder.c.i
-
-include/lvgl/src/libs/bin_decoder/lv_bin_decoder.s: include/lvgl/src/libs/bin_decoder/lv_bin_decoder.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/bin_decoder/lv_bin_decoder.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/bin_decoder/lv_bin_decoder.s
 .PHONY : include/lvgl/src/libs/bin_decoder/lv_bin_decoder.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/bin_decoder/lv_bin_decoder.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/bin_decoder/lv_bin_decoder.c.s
-.PHONY : include/lvgl/src/libs/bin_decoder/lv_bin_decoder.c.s
-
-include/lvgl/src/libs/bmp/lv_bmp.obj: include/lvgl/src/libs/bmp/lv_bmp.c.obj
+# target to build an object file
+include/lvgl/src/libs/bmp/lv_bmp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/bmp/lv_bmp.obj
 .PHONY : include/lvgl/src/libs/bmp/lv_bmp.obj
 
-# target to build an object file
-include/lvgl/src/libs/bmp/lv_bmp.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/bmp/lv_bmp.c.obj
-.PHONY : include/lvgl/src/libs/bmp/lv_bmp.c.obj
-
-include/lvgl/src/libs/bmp/lv_bmp.i: include/lvgl/src/libs/bmp/lv_bmp.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/bmp/lv_bmp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/bmp/lv_bmp.i
 .PHONY : include/lvgl/src/libs/bmp/lv_bmp.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/bmp/lv_bmp.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/bmp/lv_bmp.c.i
-.PHONY : include/lvgl/src/libs/bmp/lv_bmp.c.i
-
-include/lvgl/src/libs/bmp/lv_bmp.s: include/lvgl/src/libs/bmp/lv_bmp.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/bmp/lv_bmp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/bmp/lv_bmp.s
 .PHONY : include/lvgl/src/libs/bmp/lv_bmp.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/bmp/lv_bmp.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/bmp/lv_bmp.c.s
-.PHONY : include/lvgl/src/libs/bmp/lv_bmp.c.s
-
-include/lvgl/src/libs/expat/xmlparse.obj: include/lvgl/src/libs/expat/xmlparse.c.obj
+# target to build an object file
+include/lvgl/src/libs/expat/xmlparse.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmlparse.obj
 .PHONY : include/lvgl/src/libs/expat/xmlparse.obj
 
-# target to build an object file
-include/lvgl/src/libs/expat/xmlparse.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmlparse.c.obj
-.PHONY : include/lvgl/src/libs/expat/xmlparse.c.obj
-
-include/lvgl/src/libs/expat/xmlparse.i: include/lvgl/src/libs/expat/xmlparse.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/expat/xmlparse.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmlparse.i
 .PHONY : include/lvgl/src/libs/expat/xmlparse.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/expat/xmlparse.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmlparse.c.i
-.PHONY : include/lvgl/src/libs/expat/xmlparse.c.i
-
-include/lvgl/src/libs/expat/xmlparse.s: include/lvgl/src/libs/expat/xmlparse.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/expat/xmlparse.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmlparse.s
 .PHONY : include/lvgl/src/libs/expat/xmlparse.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/expat/xmlparse.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmlparse.c.s
-.PHONY : include/lvgl/src/libs/expat/xmlparse.c.s
-
-include/lvgl/src/libs/expat/xmlrole.obj: include/lvgl/src/libs/expat/xmlrole.c.obj
+# target to build an object file
+include/lvgl/src/libs/expat/xmlrole.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmlrole.obj
 .PHONY : include/lvgl/src/libs/expat/xmlrole.obj
 
-# target to build an object file
-include/lvgl/src/libs/expat/xmlrole.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmlrole.c.obj
-.PHONY : include/lvgl/src/libs/expat/xmlrole.c.obj
-
-include/lvgl/src/libs/expat/xmlrole.i: include/lvgl/src/libs/expat/xmlrole.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/expat/xmlrole.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmlrole.i
 .PHONY : include/lvgl/src/libs/expat/xmlrole.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/expat/xmlrole.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmlrole.c.i
-.PHONY : include/lvgl/src/libs/expat/xmlrole.c.i
-
-include/lvgl/src/libs/expat/xmlrole.s: include/lvgl/src/libs/expat/xmlrole.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/expat/xmlrole.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmlrole.s
 .PHONY : include/lvgl/src/libs/expat/xmlrole.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/expat/xmlrole.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmlrole.c.s
-.PHONY : include/lvgl/src/libs/expat/xmlrole.c.s
-
-include/lvgl/src/libs/expat/xmltok.obj: include/lvgl/src/libs/expat/xmltok.c.obj
+# target to build an object file
+include/lvgl/src/libs/expat/xmltok.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmltok.obj
 .PHONY : include/lvgl/src/libs/expat/xmltok.obj
 
-# target to build an object file
-include/lvgl/src/libs/expat/xmltok.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmltok.c.obj
-.PHONY : include/lvgl/src/libs/expat/xmltok.c.obj
-
-include/lvgl/src/libs/expat/xmltok.i: include/lvgl/src/libs/expat/xmltok.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/expat/xmltok.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmltok.i
 .PHONY : include/lvgl/src/libs/expat/xmltok.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/expat/xmltok.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmltok.c.i
-.PHONY : include/lvgl/src/libs/expat/xmltok.c.i
-
-include/lvgl/src/libs/expat/xmltok.s: include/lvgl/src/libs/expat/xmltok.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/expat/xmltok.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmltok.s
 .PHONY : include/lvgl/src/libs/expat/xmltok.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/expat/xmltok.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmltok.c.s
-.PHONY : include/lvgl/src/libs/expat/xmltok.c.s
-
-include/lvgl/src/libs/expat/xmltok_impl.obj: include/lvgl/src/libs/expat/xmltok_impl.c.obj
+# target to build an object file
+include/lvgl/src/libs/expat/xmltok_impl.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmltok_impl.obj
 .PHONY : include/lvgl/src/libs/expat/xmltok_impl.obj
 
-# target to build an object file
-include/lvgl/src/libs/expat/xmltok_impl.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmltok_impl.c.obj
-.PHONY : include/lvgl/src/libs/expat/xmltok_impl.c.obj
-
-include/lvgl/src/libs/expat/xmltok_impl.i: include/lvgl/src/libs/expat/xmltok_impl.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/expat/xmltok_impl.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmltok_impl.i
 .PHONY : include/lvgl/src/libs/expat/xmltok_impl.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/expat/xmltok_impl.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmltok_impl.c.i
-.PHONY : include/lvgl/src/libs/expat/xmltok_impl.c.i
-
-include/lvgl/src/libs/expat/xmltok_impl.s: include/lvgl/src/libs/expat/xmltok_impl.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/expat/xmltok_impl.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmltok_impl.s
 .PHONY : include/lvgl/src/libs/expat/xmltok_impl.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/expat/xmltok_impl.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmltok_impl.c.s
-.PHONY : include/lvgl/src/libs/expat/xmltok_impl.c.s
-
-include/lvgl/src/libs/expat/xmltok_ns.obj: include/lvgl/src/libs/expat/xmltok_ns.c.obj
+# target to build an object file
+include/lvgl/src/libs/expat/xmltok_ns.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmltok_ns.obj
 .PHONY : include/lvgl/src/libs/expat/xmltok_ns.obj
 
-# target to build an object file
-include/lvgl/src/libs/expat/xmltok_ns.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmltok_ns.c.obj
-.PHONY : include/lvgl/src/libs/expat/xmltok_ns.c.obj
-
-include/lvgl/src/libs/expat/xmltok_ns.i: include/lvgl/src/libs/expat/xmltok_ns.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/expat/xmltok_ns.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmltok_ns.i
 .PHONY : include/lvgl/src/libs/expat/xmltok_ns.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/expat/xmltok_ns.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmltok_ns.c.i
-.PHONY : include/lvgl/src/libs/expat/xmltok_ns.c.i
-
-include/lvgl/src/libs/expat/xmltok_ns.s: include/lvgl/src/libs/expat/xmltok_ns.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/expat/xmltok_ns.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmltok_ns.s
 .PHONY : include/lvgl/src/libs/expat/xmltok_ns.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/expat/xmltok_ns.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/expat/xmltok_ns.c.s
-.PHONY : include/lvgl/src/libs/expat/xmltok_ns.c.s
-
-include/lvgl/src/libs/ffmpeg/lv_ffmpeg.obj: include/lvgl/src/libs/ffmpeg/lv_ffmpeg.c.obj
+# target to build an object file
+include/lvgl/src/libs/ffmpeg/lv_ffmpeg.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/ffmpeg/lv_ffmpeg.obj
 .PHONY : include/lvgl/src/libs/ffmpeg/lv_ffmpeg.obj
 
-# target to build an object file
-include/lvgl/src/libs/ffmpeg/lv_ffmpeg.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/ffmpeg/lv_ffmpeg.c.obj
-.PHONY : include/lvgl/src/libs/ffmpeg/lv_ffmpeg.c.obj
-
-include/lvgl/src/libs/ffmpeg/lv_ffmpeg.i: include/lvgl/src/libs/ffmpeg/lv_ffmpeg.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/ffmpeg/lv_ffmpeg.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/ffmpeg/lv_ffmpeg.i
 .PHONY : include/lvgl/src/libs/ffmpeg/lv_ffmpeg.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/ffmpeg/lv_ffmpeg.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/ffmpeg/lv_ffmpeg.c.i
-.PHONY : include/lvgl/src/libs/ffmpeg/lv_ffmpeg.c.i
-
-include/lvgl/src/libs/ffmpeg/lv_ffmpeg.s: include/lvgl/src/libs/ffmpeg/lv_ffmpeg.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/ffmpeg/lv_ffmpeg.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/ffmpeg/lv_ffmpeg.s
 .PHONY : include/lvgl/src/libs/ffmpeg/lv_ffmpeg.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/ffmpeg/lv_ffmpeg.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/ffmpeg/lv_ffmpeg.c.s
-.PHONY : include/lvgl/src/libs/ffmpeg/lv_ffmpeg.c.s
-
-include/lvgl/src/libs/freetype/lv_freetype.obj: include/lvgl/src/libs/freetype/lv_freetype.c.obj
+# target to build an object file
+include/lvgl/src/libs/freetype/lv_freetype.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype.obj
 .PHONY : include/lvgl/src/libs/freetype/lv_freetype.obj
 
-# target to build an object file
-include/lvgl/src/libs/freetype/lv_freetype.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype.c.obj
-.PHONY : include/lvgl/src/libs/freetype/lv_freetype.c.obj
-
-include/lvgl/src/libs/freetype/lv_freetype.i: include/lvgl/src/libs/freetype/lv_freetype.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/freetype/lv_freetype.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype.i
 .PHONY : include/lvgl/src/libs/freetype/lv_freetype.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/freetype/lv_freetype.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype.c.i
-.PHONY : include/lvgl/src/libs/freetype/lv_freetype.c.i
-
-include/lvgl/src/libs/freetype/lv_freetype.s: include/lvgl/src/libs/freetype/lv_freetype.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/freetype/lv_freetype.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype.s
 .PHONY : include/lvgl/src/libs/freetype/lv_freetype.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/freetype/lv_freetype.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype.c.s
-.PHONY : include/lvgl/src/libs/freetype/lv_freetype.c.s
-
-include/lvgl/src/libs/freetype/lv_freetype_glyph.obj: include/lvgl/src/libs/freetype/lv_freetype_glyph.c.obj
+# target to build an object file
+include/lvgl/src/libs/freetype/lv_freetype_glyph.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype_glyph.obj
 .PHONY : include/lvgl/src/libs/freetype/lv_freetype_glyph.obj
 
-# target to build an object file
-include/lvgl/src/libs/freetype/lv_freetype_glyph.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype_glyph.c.obj
-.PHONY : include/lvgl/src/libs/freetype/lv_freetype_glyph.c.obj
-
-include/lvgl/src/libs/freetype/lv_freetype_glyph.i: include/lvgl/src/libs/freetype/lv_freetype_glyph.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/freetype/lv_freetype_glyph.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype_glyph.i
 .PHONY : include/lvgl/src/libs/freetype/lv_freetype_glyph.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/freetype/lv_freetype_glyph.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype_glyph.c.i
-.PHONY : include/lvgl/src/libs/freetype/lv_freetype_glyph.c.i
-
-include/lvgl/src/libs/freetype/lv_freetype_glyph.s: include/lvgl/src/libs/freetype/lv_freetype_glyph.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/freetype/lv_freetype_glyph.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype_glyph.s
 .PHONY : include/lvgl/src/libs/freetype/lv_freetype_glyph.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/freetype/lv_freetype_glyph.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype_glyph.c.s
-.PHONY : include/lvgl/src/libs/freetype/lv_freetype_glyph.c.s
-
-include/lvgl/src/libs/freetype/lv_freetype_image.obj: include/lvgl/src/libs/freetype/lv_freetype_image.c.obj
+# target to build an object file
+include/lvgl/src/libs/freetype/lv_freetype_image.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype_image.obj
 .PHONY : include/lvgl/src/libs/freetype/lv_freetype_image.obj
 
-# target to build an object file
-include/lvgl/src/libs/freetype/lv_freetype_image.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype_image.c.obj
-.PHONY : include/lvgl/src/libs/freetype/lv_freetype_image.c.obj
-
-include/lvgl/src/libs/freetype/lv_freetype_image.i: include/lvgl/src/libs/freetype/lv_freetype_image.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/freetype/lv_freetype_image.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype_image.i
 .PHONY : include/lvgl/src/libs/freetype/lv_freetype_image.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/freetype/lv_freetype_image.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype_image.c.i
-.PHONY : include/lvgl/src/libs/freetype/lv_freetype_image.c.i
-
-include/lvgl/src/libs/freetype/lv_freetype_image.s: include/lvgl/src/libs/freetype/lv_freetype_image.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/freetype/lv_freetype_image.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype_image.s
 .PHONY : include/lvgl/src/libs/freetype/lv_freetype_image.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/freetype/lv_freetype_image.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype_image.c.s
-.PHONY : include/lvgl/src/libs/freetype/lv_freetype_image.c.s
-
-include/lvgl/src/libs/freetype/lv_freetype_outline.obj: include/lvgl/src/libs/freetype/lv_freetype_outline.c.obj
+# target to build an object file
+include/lvgl/src/libs/freetype/lv_freetype_outline.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype_outline.obj
 .PHONY : include/lvgl/src/libs/freetype/lv_freetype_outline.obj
 
-# target to build an object file
-include/lvgl/src/libs/freetype/lv_freetype_outline.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype_outline.c.obj
-.PHONY : include/lvgl/src/libs/freetype/lv_freetype_outline.c.obj
-
-include/lvgl/src/libs/freetype/lv_freetype_outline.i: include/lvgl/src/libs/freetype/lv_freetype_outline.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/freetype/lv_freetype_outline.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype_outline.i
 .PHONY : include/lvgl/src/libs/freetype/lv_freetype_outline.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/freetype/lv_freetype_outline.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype_outline.c.i
-.PHONY : include/lvgl/src/libs/freetype/lv_freetype_outline.c.i
-
-include/lvgl/src/libs/freetype/lv_freetype_outline.s: include/lvgl/src/libs/freetype/lv_freetype_outline.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/freetype/lv_freetype_outline.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype_outline.s
 .PHONY : include/lvgl/src/libs/freetype/lv_freetype_outline.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/freetype/lv_freetype_outline.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_freetype_outline.c.s
-.PHONY : include/lvgl/src/libs/freetype/lv_freetype_outline.c.s
-
-include/lvgl/src/libs/freetype/lv_ftsystem.obj: include/lvgl/src/libs/freetype/lv_ftsystem.c.obj
+# target to build an object file
+include/lvgl/src/libs/freetype/lv_ftsystem.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_ftsystem.obj
 .PHONY : include/lvgl/src/libs/freetype/lv_ftsystem.obj
 
-# target to build an object file
-include/lvgl/src/libs/freetype/lv_ftsystem.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_ftsystem.c.obj
-.PHONY : include/lvgl/src/libs/freetype/lv_ftsystem.c.obj
-
-include/lvgl/src/libs/freetype/lv_ftsystem.i: include/lvgl/src/libs/freetype/lv_ftsystem.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/freetype/lv_ftsystem.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_ftsystem.i
 .PHONY : include/lvgl/src/libs/freetype/lv_ftsystem.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/freetype/lv_ftsystem.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_ftsystem.c.i
-.PHONY : include/lvgl/src/libs/freetype/lv_ftsystem.c.i
-
-include/lvgl/src/libs/freetype/lv_ftsystem.s: include/lvgl/src/libs/freetype/lv_ftsystem.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/freetype/lv_ftsystem.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_ftsystem.s
 .PHONY : include/lvgl/src/libs/freetype/lv_ftsystem.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/freetype/lv_ftsystem.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/freetype/lv_ftsystem.c.s
-.PHONY : include/lvgl/src/libs/freetype/lv_ftsystem.c.s
-
-include/lvgl/src/libs/fsdrv/lv_fs_cbfs.obj: include/lvgl/src/libs/fsdrv/lv_fs_cbfs.c.obj
+# target to build an object file
+include/lvgl/src/libs/fsdrv/lv_fs_cbfs.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_cbfs.obj
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_cbfs.obj
 
-# target to build an object file
-include/lvgl/src/libs/fsdrv/lv_fs_cbfs.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_cbfs.c.obj
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_cbfs.c.obj
-
-include/lvgl/src/libs/fsdrv/lv_fs_cbfs.i: include/lvgl/src/libs/fsdrv/lv_fs_cbfs.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/fsdrv/lv_fs_cbfs.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_cbfs.i
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_cbfs.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/fsdrv/lv_fs_cbfs.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_cbfs.c.i
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_cbfs.c.i
-
-include/lvgl/src/libs/fsdrv/lv_fs_cbfs.s: include/lvgl/src/libs/fsdrv/lv_fs_cbfs.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/fsdrv/lv_fs_cbfs.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_cbfs.s
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_cbfs.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/fsdrv/lv_fs_cbfs.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_cbfs.c.s
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_cbfs.c.s
-
-include/lvgl/src/libs/fsdrv/lv_fs_fatfs.obj: include/lvgl/src/libs/fsdrv/lv_fs_fatfs.c.obj
+# target to build an object file
+include/lvgl/src/libs/fsdrv/lv_fs_fatfs.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_fatfs.obj
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_fatfs.obj
 
-# target to build an object file
-include/lvgl/src/libs/fsdrv/lv_fs_fatfs.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_fatfs.c.obj
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_fatfs.c.obj
-
-include/lvgl/src/libs/fsdrv/lv_fs_fatfs.i: include/lvgl/src/libs/fsdrv/lv_fs_fatfs.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/fsdrv/lv_fs_fatfs.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_fatfs.i
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_fatfs.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/fsdrv/lv_fs_fatfs.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_fatfs.c.i
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_fatfs.c.i
-
-include/lvgl/src/libs/fsdrv/lv_fs_fatfs.s: include/lvgl/src/libs/fsdrv/lv_fs_fatfs.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/fsdrv/lv_fs_fatfs.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_fatfs.s
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_fatfs.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/fsdrv/lv_fs_fatfs.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_fatfs.c.s
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_fatfs.c.s
-
-include/lvgl/src/libs/fsdrv/lv_fs_littlefs.obj: include/lvgl/src/libs/fsdrv/lv_fs_littlefs.c.obj
+# target to build an object file
+include/lvgl/src/libs/fsdrv/lv_fs_littlefs.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_littlefs.obj
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_littlefs.obj
 
-# target to build an object file
-include/lvgl/src/libs/fsdrv/lv_fs_littlefs.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_littlefs.c.obj
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_littlefs.c.obj
-
-include/lvgl/src/libs/fsdrv/lv_fs_littlefs.i: include/lvgl/src/libs/fsdrv/lv_fs_littlefs.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/fsdrv/lv_fs_littlefs.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_littlefs.i
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_littlefs.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/fsdrv/lv_fs_littlefs.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_littlefs.c.i
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_littlefs.c.i
-
-include/lvgl/src/libs/fsdrv/lv_fs_littlefs.s: include/lvgl/src/libs/fsdrv/lv_fs_littlefs.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/fsdrv/lv_fs_littlefs.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_littlefs.s
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_littlefs.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/fsdrv/lv_fs_littlefs.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_littlefs.c.s
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_littlefs.c.s
-
-include/lvgl/src/libs/fsdrv/lv_fs_memfs.obj: include/lvgl/src/libs/fsdrv/lv_fs_memfs.c.obj
+# target to build an object file
+include/lvgl/src/libs/fsdrv/lv_fs_memfs.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_memfs.obj
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_memfs.obj
 
-# target to build an object file
-include/lvgl/src/libs/fsdrv/lv_fs_memfs.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_memfs.c.obj
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_memfs.c.obj
-
-include/lvgl/src/libs/fsdrv/lv_fs_memfs.i: include/lvgl/src/libs/fsdrv/lv_fs_memfs.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/fsdrv/lv_fs_memfs.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_memfs.i
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_memfs.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/fsdrv/lv_fs_memfs.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_memfs.c.i
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_memfs.c.i
-
-include/lvgl/src/libs/fsdrv/lv_fs_memfs.s: include/lvgl/src/libs/fsdrv/lv_fs_memfs.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/fsdrv/lv_fs_memfs.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_memfs.s
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_memfs.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/fsdrv/lv_fs_memfs.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_memfs.c.s
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_memfs.c.s
-
-include/lvgl/src/libs/fsdrv/lv_fs_posix.obj: include/lvgl/src/libs/fsdrv/lv_fs_posix.c.obj
+# target to build an object file
+include/lvgl/src/libs/fsdrv/lv_fs_posix.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_posix.obj
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_posix.obj
 
-# target to build an object file
-include/lvgl/src/libs/fsdrv/lv_fs_posix.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_posix.c.obj
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_posix.c.obj
-
-include/lvgl/src/libs/fsdrv/lv_fs_posix.i: include/lvgl/src/libs/fsdrv/lv_fs_posix.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/fsdrv/lv_fs_posix.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_posix.i
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_posix.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/fsdrv/lv_fs_posix.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_posix.c.i
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_posix.c.i
-
-include/lvgl/src/libs/fsdrv/lv_fs_posix.s: include/lvgl/src/libs/fsdrv/lv_fs_posix.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/fsdrv/lv_fs_posix.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_posix.s
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_posix.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/fsdrv/lv_fs_posix.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_posix.c.s
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_posix.c.s
-
-include/lvgl/src/libs/fsdrv/lv_fs_stdio.obj: include/lvgl/src/libs/fsdrv/lv_fs_stdio.c.obj
+# target to build an object file
+include/lvgl/src/libs/fsdrv/lv_fs_stdio.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_stdio.obj
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_stdio.obj
 
-# target to build an object file
-include/lvgl/src/libs/fsdrv/lv_fs_stdio.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_stdio.c.obj
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_stdio.c.obj
-
-include/lvgl/src/libs/fsdrv/lv_fs_stdio.i: include/lvgl/src/libs/fsdrv/lv_fs_stdio.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/fsdrv/lv_fs_stdio.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_stdio.i
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_stdio.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/fsdrv/lv_fs_stdio.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_stdio.c.i
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_stdio.c.i
-
-include/lvgl/src/libs/fsdrv/lv_fs_stdio.s: include/lvgl/src/libs/fsdrv/lv_fs_stdio.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/fsdrv/lv_fs_stdio.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_stdio.s
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_stdio.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/fsdrv/lv_fs_stdio.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_stdio.c.s
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_stdio.c.s
-
-include/lvgl/src/libs/fsdrv/lv_fs_uefi.obj: include/lvgl/src/libs/fsdrv/lv_fs_uefi.c.obj
+# target to build an object file
+include/lvgl/src/libs/fsdrv/lv_fs_uefi.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_uefi.obj
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_uefi.obj
 
-# target to build an object file
-include/lvgl/src/libs/fsdrv/lv_fs_uefi.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_uefi.c.obj
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_uefi.c.obj
-
-include/lvgl/src/libs/fsdrv/lv_fs_uefi.i: include/lvgl/src/libs/fsdrv/lv_fs_uefi.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/fsdrv/lv_fs_uefi.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_uefi.i
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_uefi.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/fsdrv/lv_fs_uefi.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_uefi.c.i
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_uefi.c.i
-
-include/lvgl/src/libs/fsdrv/lv_fs_uefi.s: include/lvgl/src/libs/fsdrv/lv_fs_uefi.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/fsdrv/lv_fs_uefi.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_uefi.s
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_uefi.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/fsdrv/lv_fs_uefi.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_uefi.c.s
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_uefi.c.s
-
-include/lvgl/src/libs/fsdrv/lv_fs_win32.obj: include/lvgl/src/libs/fsdrv/lv_fs_win32.c.obj
+# target to build an object file
+include/lvgl/src/libs/fsdrv/lv_fs_win32.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_win32.obj
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_win32.obj
 
-# target to build an object file
-include/lvgl/src/libs/fsdrv/lv_fs_win32.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_win32.c.obj
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_win32.c.obj
-
-include/lvgl/src/libs/fsdrv/lv_fs_win32.i: include/lvgl/src/libs/fsdrv/lv_fs_win32.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/fsdrv/lv_fs_win32.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_win32.i
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_win32.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/fsdrv/lv_fs_win32.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_win32.c.i
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_win32.c.i
-
-include/lvgl/src/libs/fsdrv/lv_fs_win32.s: include/lvgl/src/libs/fsdrv/lv_fs_win32.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/fsdrv/lv_fs_win32.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_win32.s
 .PHONY : include/lvgl/src/libs/fsdrv/lv_fs_win32.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/fsdrv/lv_fs_win32.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/fsdrv/lv_fs_win32.c.s
-.PHONY : include/lvgl/src/libs/fsdrv/lv_fs_win32.c.s
-
-include/lvgl/src/libs/gif/gifdec.obj: include/lvgl/src/libs/gif/gifdec.c.obj
+# target to build an object file
+include/lvgl/src/libs/gif/gifdec.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/gif/gifdec.obj
 .PHONY : include/lvgl/src/libs/gif/gifdec.obj
 
-# target to build an object file
-include/lvgl/src/libs/gif/gifdec.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/gif/gifdec.c.obj
-.PHONY : include/lvgl/src/libs/gif/gifdec.c.obj
-
-include/lvgl/src/libs/gif/gifdec.i: include/lvgl/src/libs/gif/gifdec.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/gif/gifdec.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/gif/gifdec.i
 .PHONY : include/lvgl/src/libs/gif/gifdec.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/gif/gifdec.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/gif/gifdec.c.i
-.PHONY : include/lvgl/src/libs/gif/gifdec.c.i
-
-include/lvgl/src/libs/gif/gifdec.s: include/lvgl/src/libs/gif/gifdec.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/gif/gifdec.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/gif/gifdec.s
 .PHONY : include/lvgl/src/libs/gif/gifdec.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/gif/gifdec.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/gif/gifdec.c.s
-.PHONY : include/lvgl/src/libs/gif/gifdec.c.s
-
-include/lvgl/src/libs/gif/lv_gif.obj: include/lvgl/src/libs/gif/lv_gif.c.obj
+# target to build an object file
+include/lvgl/src/libs/gif/lv_gif.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/gif/lv_gif.obj
 .PHONY : include/lvgl/src/libs/gif/lv_gif.obj
 
-# target to build an object file
-include/lvgl/src/libs/gif/lv_gif.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/gif/lv_gif.c.obj
-.PHONY : include/lvgl/src/libs/gif/lv_gif.c.obj
-
-include/lvgl/src/libs/gif/lv_gif.i: include/lvgl/src/libs/gif/lv_gif.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/gif/lv_gif.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/gif/lv_gif.i
 .PHONY : include/lvgl/src/libs/gif/lv_gif.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/gif/lv_gif.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/gif/lv_gif.c.i
-.PHONY : include/lvgl/src/libs/gif/lv_gif.c.i
-
-include/lvgl/src/libs/gif/lv_gif.s: include/lvgl/src/libs/gif/lv_gif.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/gif/lv_gif.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/gif/lv_gif.s
 .PHONY : include/lvgl/src/libs/gif/lv_gif.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/gif/lv_gif.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/gif/lv_gif.c.s
-.PHONY : include/lvgl/src/libs/gif/lv_gif.c.s
-
-include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.obj: include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.c.obj
+# target to build an object file
+include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.obj
 .PHONY : include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.obj
 
-# target to build an object file
-include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.c.obj
-.PHONY : include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.c.obj
-
-include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.i: include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.i
 .PHONY : include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.c.i
-.PHONY : include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.c.i
-
-include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.s: include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.s
 .PHONY : include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.c.s
-.PHONY : include/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.c.s
-
-include/lvgl/src/libs/libpng/lv_libpng.obj: include/lvgl/src/libs/libpng/lv_libpng.c.obj
+# target to build an object file
+include/lvgl/src/libs/libpng/lv_libpng.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/libpng/lv_libpng.obj
 .PHONY : include/lvgl/src/libs/libpng/lv_libpng.obj
 
-# target to build an object file
-include/lvgl/src/libs/libpng/lv_libpng.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/libpng/lv_libpng.c.obj
-.PHONY : include/lvgl/src/libs/libpng/lv_libpng.c.obj
-
-include/lvgl/src/libs/libpng/lv_libpng.i: include/lvgl/src/libs/libpng/lv_libpng.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/libpng/lv_libpng.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/libpng/lv_libpng.i
 .PHONY : include/lvgl/src/libs/libpng/lv_libpng.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/libpng/lv_libpng.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/libpng/lv_libpng.c.i
-.PHONY : include/lvgl/src/libs/libpng/lv_libpng.c.i
-
-include/lvgl/src/libs/libpng/lv_libpng.s: include/lvgl/src/libs/libpng/lv_libpng.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/libpng/lv_libpng.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/libpng/lv_libpng.s
 .PHONY : include/lvgl/src/libs/libpng/lv_libpng.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/libpng/lv_libpng.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/libpng/lv_libpng.c.s
-.PHONY : include/lvgl/src/libs/libpng/lv_libpng.c.s
-
-include/lvgl/src/libs/lodepng/lodepng.obj: include/lvgl/src/libs/lodepng/lodepng.c.obj
+# target to build an object file
+include/lvgl/src/libs/lodepng/lodepng.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/lodepng/lodepng.obj
 .PHONY : include/lvgl/src/libs/lodepng/lodepng.obj
 
-# target to build an object file
-include/lvgl/src/libs/lodepng/lodepng.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/lodepng/lodepng.c.obj
-.PHONY : include/lvgl/src/libs/lodepng/lodepng.c.obj
-
-include/lvgl/src/libs/lodepng/lodepng.i: include/lvgl/src/libs/lodepng/lodepng.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/lodepng/lodepng.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/lodepng/lodepng.i
 .PHONY : include/lvgl/src/libs/lodepng/lodepng.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/lodepng/lodepng.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/lodepng/lodepng.c.i
-.PHONY : include/lvgl/src/libs/lodepng/lodepng.c.i
-
-include/lvgl/src/libs/lodepng/lodepng.s: include/lvgl/src/libs/lodepng/lodepng.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/lodepng/lodepng.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/lodepng/lodepng.s
 .PHONY : include/lvgl/src/libs/lodepng/lodepng.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/lodepng/lodepng.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/lodepng/lodepng.c.s
-.PHONY : include/lvgl/src/libs/lodepng/lodepng.c.s
-
-include/lvgl/src/libs/lodepng/lv_lodepng.obj: include/lvgl/src/libs/lodepng/lv_lodepng.c.obj
+# target to build an object file
+include/lvgl/src/libs/lodepng/lv_lodepng.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/lodepng/lv_lodepng.obj
 .PHONY : include/lvgl/src/libs/lodepng/lv_lodepng.obj
 
-# target to build an object file
-include/lvgl/src/libs/lodepng/lv_lodepng.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/lodepng/lv_lodepng.c.obj
-.PHONY : include/lvgl/src/libs/lodepng/lv_lodepng.c.obj
-
-include/lvgl/src/libs/lodepng/lv_lodepng.i: include/lvgl/src/libs/lodepng/lv_lodepng.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/lodepng/lv_lodepng.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/lodepng/lv_lodepng.i
 .PHONY : include/lvgl/src/libs/lodepng/lv_lodepng.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/lodepng/lv_lodepng.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/lodepng/lv_lodepng.c.i
-.PHONY : include/lvgl/src/libs/lodepng/lv_lodepng.c.i
-
-include/lvgl/src/libs/lodepng/lv_lodepng.s: include/lvgl/src/libs/lodepng/lv_lodepng.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/lodepng/lv_lodepng.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/lodepng/lv_lodepng.s
 .PHONY : include/lvgl/src/libs/lodepng/lv_lodepng.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/lodepng/lv_lodepng.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/lodepng/lv_lodepng.c.s
-.PHONY : include/lvgl/src/libs/lodepng/lv_lodepng.c.s
-
-include/lvgl/src/libs/lz4/lz4.obj: include/lvgl/src/libs/lz4/lz4.c.obj
+# target to build an object file
+include/lvgl/src/libs/lz4/lz4.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/lz4/lz4.obj
 .PHONY : include/lvgl/src/libs/lz4/lz4.obj
 
-# target to build an object file
-include/lvgl/src/libs/lz4/lz4.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/lz4/lz4.c.obj
-.PHONY : include/lvgl/src/libs/lz4/lz4.c.obj
-
-include/lvgl/src/libs/lz4/lz4.i: include/lvgl/src/libs/lz4/lz4.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/lz4/lz4.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/lz4/lz4.i
 .PHONY : include/lvgl/src/libs/lz4/lz4.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/lz4/lz4.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/lz4/lz4.c.i
-.PHONY : include/lvgl/src/libs/lz4/lz4.c.i
-
-include/lvgl/src/libs/lz4/lz4.s: include/lvgl/src/libs/lz4/lz4.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/lz4/lz4.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/lz4/lz4.s
 .PHONY : include/lvgl/src/libs/lz4/lz4.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/lz4/lz4.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/lz4/lz4.c.s
-.PHONY : include/lvgl/src/libs/lz4/lz4.c.s
-
-include/lvgl/src/libs/qrcode/lv_qrcode.obj: include/lvgl/src/libs/qrcode/lv_qrcode.c.obj
+# target to build an object file
+include/lvgl/src/libs/qrcode/lv_qrcode.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/qrcode/lv_qrcode.obj
 .PHONY : include/lvgl/src/libs/qrcode/lv_qrcode.obj
 
-# target to build an object file
-include/lvgl/src/libs/qrcode/lv_qrcode.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/qrcode/lv_qrcode.c.obj
-.PHONY : include/lvgl/src/libs/qrcode/lv_qrcode.c.obj
-
-include/lvgl/src/libs/qrcode/lv_qrcode.i: include/lvgl/src/libs/qrcode/lv_qrcode.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/qrcode/lv_qrcode.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/qrcode/lv_qrcode.i
 .PHONY : include/lvgl/src/libs/qrcode/lv_qrcode.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/qrcode/lv_qrcode.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/qrcode/lv_qrcode.c.i
-.PHONY : include/lvgl/src/libs/qrcode/lv_qrcode.c.i
-
-include/lvgl/src/libs/qrcode/lv_qrcode.s: include/lvgl/src/libs/qrcode/lv_qrcode.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/qrcode/lv_qrcode.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/qrcode/lv_qrcode.s
 .PHONY : include/lvgl/src/libs/qrcode/lv_qrcode.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/qrcode/lv_qrcode.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/qrcode/lv_qrcode.c.s
-.PHONY : include/lvgl/src/libs/qrcode/lv_qrcode.c.s
-
-include/lvgl/src/libs/qrcode/qrcodegen.obj: include/lvgl/src/libs/qrcode/qrcodegen.c.obj
+# target to build an object file
+include/lvgl/src/libs/qrcode/qrcodegen.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/qrcode/qrcodegen.obj
 .PHONY : include/lvgl/src/libs/qrcode/qrcodegen.obj
 
-# target to build an object file
-include/lvgl/src/libs/qrcode/qrcodegen.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/qrcode/qrcodegen.c.obj
-.PHONY : include/lvgl/src/libs/qrcode/qrcodegen.c.obj
-
-include/lvgl/src/libs/qrcode/qrcodegen.i: include/lvgl/src/libs/qrcode/qrcodegen.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/qrcode/qrcodegen.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/qrcode/qrcodegen.i
 .PHONY : include/lvgl/src/libs/qrcode/qrcodegen.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/qrcode/qrcodegen.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/qrcode/qrcodegen.c.i
-.PHONY : include/lvgl/src/libs/qrcode/qrcodegen.c.i
-
-include/lvgl/src/libs/qrcode/qrcodegen.s: include/lvgl/src/libs/qrcode/qrcodegen.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/qrcode/qrcodegen.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/qrcode/qrcodegen.s
 .PHONY : include/lvgl/src/libs/qrcode/qrcodegen.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/qrcode/qrcodegen.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/qrcode/qrcodegen.c.s
-.PHONY : include/lvgl/src/libs/qrcode/qrcodegen.c.s
-
-include/lvgl/src/libs/rle/lv_rle.obj: include/lvgl/src/libs/rle/lv_rle.c.obj
+# target to build an object file
+include/lvgl/src/libs/rle/lv_rle.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/rle/lv_rle.obj
 .PHONY : include/lvgl/src/libs/rle/lv_rle.obj
 
-# target to build an object file
-include/lvgl/src/libs/rle/lv_rle.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/rle/lv_rle.c.obj
-.PHONY : include/lvgl/src/libs/rle/lv_rle.c.obj
-
-include/lvgl/src/libs/rle/lv_rle.i: include/lvgl/src/libs/rle/lv_rle.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/rle/lv_rle.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/rle/lv_rle.i
 .PHONY : include/lvgl/src/libs/rle/lv_rle.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/rle/lv_rle.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/rle/lv_rle.c.i
-.PHONY : include/lvgl/src/libs/rle/lv_rle.c.i
-
-include/lvgl/src/libs/rle/lv_rle.s: include/lvgl/src/libs/rle/lv_rle.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/rle/lv_rle.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/rle/lv_rle.s
 .PHONY : include/lvgl/src/libs/rle/lv_rle.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/rle/lv_rle.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/rle/lv_rle.c.s
-.PHONY : include/lvgl/src/libs/rle/lv_rle.c.s
-
-include/lvgl/src/libs/rlottie/lv_rlottie.obj: include/lvgl/src/libs/rlottie/lv_rlottie.c.obj
+# target to build an object file
+include/lvgl/src/libs/rlottie/lv_rlottie.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/rlottie/lv_rlottie.obj
 .PHONY : include/lvgl/src/libs/rlottie/lv_rlottie.obj
 
-# target to build an object file
-include/lvgl/src/libs/rlottie/lv_rlottie.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/rlottie/lv_rlottie.c.obj
-.PHONY : include/lvgl/src/libs/rlottie/lv_rlottie.c.obj
-
-include/lvgl/src/libs/rlottie/lv_rlottie.i: include/lvgl/src/libs/rlottie/lv_rlottie.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/rlottie/lv_rlottie.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/rlottie/lv_rlottie.i
 .PHONY : include/lvgl/src/libs/rlottie/lv_rlottie.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/rlottie/lv_rlottie.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/rlottie/lv_rlottie.c.i
-.PHONY : include/lvgl/src/libs/rlottie/lv_rlottie.c.i
-
-include/lvgl/src/libs/rlottie/lv_rlottie.s: include/lvgl/src/libs/rlottie/lv_rlottie.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/rlottie/lv_rlottie.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/rlottie/lv_rlottie.s
 .PHONY : include/lvgl/src/libs/rlottie/lv_rlottie.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/rlottie/lv_rlottie.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/rlottie/lv_rlottie.c.s
-.PHONY : include/lvgl/src/libs/rlottie/lv_rlottie.c.s
-
-include/lvgl/src/libs/svg/lv_svg.obj: include/lvgl/src/libs/svg/lv_svg.c.obj
+# target to build an object file
+include/lvgl/src/libs/svg/lv_svg.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg.obj
 .PHONY : include/lvgl/src/libs/svg/lv_svg.obj
 
-# target to build an object file
-include/lvgl/src/libs/svg/lv_svg.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg.c.obj
-.PHONY : include/lvgl/src/libs/svg/lv_svg.c.obj
-
-include/lvgl/src/libs/svg/lv_svg.i: include/lvgl/src/libs/svg/lv_svg.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/svg/lv_svg.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg.i
 .PHONY : include/lvgl/src/libs/svg/lv_svg.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/svg/lv_svg.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg.c.i
-.PHONY : include/lvgl/src/libs/svg/lv_svg.c.i
-
-include/lvgl/src/libs/svg/lv_svg.s: include/lvgl/src/libs/svg/lv_svg.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/svg/lv_svg.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg.s
 .PHONY : include/lvgl/src/libs/svg/lv_svg.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/svg/lv_svg.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg.c.s
-.PHONY : include/lvgl/src/libs/svg/lv_svg.c.s
-
-include/lvgl/src/libs/svg/lv_svg_decoder.obj: include/lvgl/src/libs/svg/lv_svg_decoder.c.obj
+# target to build an object file
+include/lvgl/src/libs/svg/lv_svg_decoder.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_decoder.obj
 .PHONY : include/lvgl/src/libs/svg/lv_svg_decoder.obj
 
-# target to build an object file
-include/lvgl/src/libs/svg/lv_svg_decoder.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_decoder.c.obj
-.PHONY : include/lvgl/src/libs/svg/lv_svg_decoder.c.obj
-
-include/lvgl/src/libs/svg/lv_svg_decoder.i: include/lvgl/src/libs/svg/lv_svg_decoder.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/svg/lv_svg_decoder.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_decoder.i
 .PHONY : include/lvgl/src/libs/svg/lv_svg_decoder.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/svg/lv_svg_decoder.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_decoder.c.i
-.PHONY : include/lvgl/src/libs/svg/lv_svg_decoder.c.i
-
-include/lvgl/src/libs/svg/lv_svg_decoder.s: include/lvgl/src/libs/svg/lv_svg_decoder.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/svg/lv_svg_decoder.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_decoder.s
 .PHONY : include/lvgl/src/libs/svg/lv_svg_decoder.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/svg/lv_svg_decoder.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_decoder.c.s
-.PHONY : include/lvgl/src/libs/svg/lv_svg_decoder.c.s
-
-include/lvgl/src/libs/svg/lv_svg_parser.obj: include/lvgl/src/libs/svg/lv_svg_parser.c.obj
+# target to build an object file
+include/lvgl/src/libs/svg/lv_svg_parser.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_parser.obj
 .PHONY : include/lvgl/src/libs/svg/lv_svg_parser.obj
 
-# target to build an object file
-include/lvgl/src/libs/svg/lv_svg_parser.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_parser.c.obj
-.PHONY : include/lvgl/src/libs/svg/lv_svg_parser.c.obj
-
-include/lvgl/src/libs/svg/lv_svg_parser.i: include/lvgl/src/libs/svg/lv_svg_parser.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/svg/lv_svg_parser.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_parser.i
 .PHONY : include/lvgl/src/libs/svg/lv_svg_parser.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/svg/lv_svg_parser.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_parser.c.i
-.PHONY : include/lvgl/src/libs/svg/lv_svg_parser.c.i
-
-include/lvgl/src/libs/svg/lv_svg_parser.s: include/lvgl/src/libs/svg/lv_svg_parser.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/svg/lv_svg_parser.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_parser.s
 .PHONY : include/lvgl/src/libs/svg/lv_svg_parser.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/svg/lv_svg_parser.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_parser.c.s
-.PHONY : include/lvgl/src/libs/svg/lv_svg_parser.c.s
-
-include/lvgl/src/libs/svg/lv_svg_render.obj: include/lvgl/src/libs/svg/lv_svg_render.c.obj
+# target to build an object file
+include/lvgl/src/libs/svg/lv_svg_render.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_render.obj
 .PHONY : include/lvgl/src/libs/svg/lv_svg_render.obj
 
-# target to build an object file
-include/lvgl/src/libs/svg/lv_svg_render.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_render.c.obj
-.PHONY : include/lvgl/src/libs/svg/lv_svg_render.c.obj
-
-include/lvgl/src/libs/svg/lv_svg_render.i: include/lvgl/src/libs/svg/lv_svg_render.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/svg/lv_svg_render.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_render.i
 .PHONY : include/lvgl/src/libs/svg/lv_svg_render.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/svg/lv_svg_render.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_render.c.i
-.PHONY : include/lvgl/src/libs/svg/lv_svg_render.c.i
-
-include/lvgl/src/libs/svg/lv_svg_render.s: include/lvgl/src/libs/svg/lv_svg_render.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/svg/lv_svg_render.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_render.s
 .PHONY : include/lvgl/src/libs/svg/lv_svg_render.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/svg/lv_svg_render.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_render.c.s
-.PHONY : include/lvgl/src/libs/svg/lv_svg_render.c.s
-
-include/lvgl/src/libs/svg/lv_svg_token.obj: include/lvgl/src/libs/svg/lv_svg_token.c.obj
+# target to build an object file
+include/lvgl/src/libs/svg/lv_svg_token.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_token.obj
 .PHONY : include/lvgl/src/libs/svg/lv_svg_token.obj
 
-# target to build an object file
-include/lvgl/src/libs/svg/lv_svg_token.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_token.c.obj
-.PHONY : include/lvgl/src/libs/svg/lv_svg_token.c.obj
-
-include/lvgl/src/libs/svg/lv_svg_token.i: include/lvgl/src/libs/svg/lv_svg_token.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/svg/lv_svg_token.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_token.i
 .PHONY : include/lvgl/src/libs/svg/lv_svg_token.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/svg/lv_svg_token.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_token.c.i
-.PHONY : include/lvgl/src/libs/svg/lv_svg_token.c.i
-
-include/lvgl/src/libs/svg/lv_svg_token.s: include/lvgl/src/libs/svg/lv_svg_token.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/svg/lv_svg_token.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_token.s
 .PHONY : include/lvgl/src/libs/svg/lv_svg_token.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/svg/lv_svg_token.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/svg/lv_svg_token.c.s
-.PHONY : include/lvgl/src/libs/svg/lv_svg_token.c.s
-
-include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.obj: include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.c.obj
+# target to build an object file
+include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.obj
 .PHONY : include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.obj
 
-# target to build an object file
-include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.c.obj
-.PHONY : include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.c.obj
-
-include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.i: include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.i
 .PHONY : include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.c.i
-.PHONY : include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.c.i
-
-include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.s: include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.s
 .PHONY : include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.c.s
-.PHONY : include/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.c.s
-
-include/lvgl/src/libs/tjpgd/lv_tjpgd.obj: include/lvgl/src/libs/tjpgd/lv_tjpgd.c.obj
+# target to build an object file
+include/lvgl/src/libs/tjpgd/lv_tjpgd.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/tjpgd/lv_tjpgd.obj
 .PHONY : include/lvgl/src/libs/tjpgd/lv_tjpgd.obj
 
-# target to build an object file
-include/lvgl/src/libs/tjpgd/lv_tjpgd.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/tjpgd/lv_tjpgd.c.obj
-.PHONY : include/lvgl/src/libs/tjpgd/lv_tjpgd.c.obj
-
-include/lvgl/src/libs/tjpgd/lv_tjpgd.i: include/lvgl/src/libs/tjpgd/lv_tjpgd.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/tjpgd/lv_tjpgd.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/tjpgd/lv_tjpgd.i
 .PHONY : include/lvgl/src/libs/tjpgd/lv_tjpgd.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/tjpgd/lv_tjpgd.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/tjpgd/lv_tjpgd.c.i
-.PHONY : include/lvgl/src/libs/tjpgd/lv_tjpgd.c.i
-
-include/lvgl/src/libs/tjpgd/lv_tjpgd.s: include/lvgl/src/libs/tjpgd/lv_tjpgd.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/tjpgd/lv_tjpgd.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/tjpgd/lv_tjpgd.s
 .PHONY : include/lvgl/src/libs/tjpgd/lv_tjpgd.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/tjpgd/lv_tjpgd.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/tjpgd/lv_tjpgd.c.s
-.PHONY : include/lvgl/src/libs/tjpgd/lv_tjpgd.c.s
-
-include/lvgl/src/libs/tjpgd/tjpgd.obj: include/lvgl/src/libs/tjpgd/tjpgd.c.obj
+# target to build an object file
+include/lvgl/src/libs/tjpgd/tjpgd.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/tjpgd/tjpgd.obj
 .PHONY : include/lvgl/src/libs/tjpgd/tjpgd.obj
 
-# target to build an object file
-include/lvgl/src/libs/tjpgd/tjpgd.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/tjpgd/tjpgd.c.obj
-.PHONY : include/lvgl/src/libs/tjpgd/tjpgd.c.obj
-
-include/lvgl/src/libs/tjpgd/tjpgd.i: include/lvgl/src/libs/tjpgd/tjpgd.c.i
+# target to preprocess a source file
+include/lvgl/src/libs/tjpgd/tjpgd.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/tjpgd/tjpgd.i
 .PHONY : include/lvgl/src/libs/tjpgd/tjpgd.i
 
-# target to preprocess a source file
-include/lvgl/src/libs/tjpgd/tjpgd.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/tjpgd/tjpgd.c.i
-.PHONY : include/lvgl/src/libs/tjpgd/tjpgd.c.i
-
-include/lvgl/src/libs/tjpgd/tjpgd.s: include/lvgl/src/libs/tjpgd/tjpgd.c.s
+# target to generate assembly for a file
+include/lvgl/src/libs/tjpgd/tjpgd.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/tjpgd/tjpgd.s
 .PHONY : include/lvgl/src/libs/tjpgd/tjpgd.s
 
-# target to generate assembly for a file
-include/lvgl/src/libs/tjpgd/tjpgd.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/libs/tjpgd/tjpgd.c.s
-.PHONY : include/lvgl/src/libs/tjpgd/tjpgd.c.s
-
-include/lvgl/src/lv_init.obj: include/lvgl/src/lv_init.c.obj
+# target to build an object file
+include/lvgl/src/lv_init.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/lv_init.obj
 .PHONY : include/lvgl/src/lv_init.obj
 
-# target to build an object file
-include/lvgl/src/lv_init.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/lv_init.c.obj
-.PHONY : include/lvgl/src/lv_init.c.obj
-
-include/lvgl/src/lv_init.i: include/lvgl/src/lv_init.c.i
+# target to preprocess a source file
+include/lvgl/src/lv_init.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/lv_init.i
 .PHONY : include/lvgl/src/lv_init.i
 
-# target to preprocess a source file
-include/lvgl/src/lv_init.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/lv_init.c.i
-.PHONY : include/lvgl/src/lv_init.c.i
-
-include/lvgl/src/lv_init.s: include/lvgl/src/lv_init.c.s
+# target to generate assembly for a file
+include/lvgl/src/lv_init.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/lv_init.s
 .PHONY : include/lvgl/src/lv_init.s
 
-# target to generate assembly for a file
-include/lvgl/src/lv_init.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/lv_init.c.s
-.PHONY : include/lvgl/src/lv_init.c.s
-
-include/lvgl/src/misc/cache/lv_cache.obj: include/lvgl/src/misc/cache/lv_cache.c.obj
+# target to build an object file
+include/lvgl/src/misc/cache/lv_cache.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_cache.obj
 .PHONY : include/lvgl/src/misc/cache/lv_cache.obj
 
-# target to build an object file
-include/lvgl/src/misc/cache/lv_cache.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_cache.c.obj
-.PHONY : include/lvgl/src/misc/cache/lv_cache.c.obj
-
-include/lvgl/src/misc/cache/lv_cache.i: include/lvgl/src/misc/cache/lv_cache.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/cache/lv_cache.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_cache.i
 .PHONY : include/lvgl/src/misc/cache/lv_cache.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/cache/lv_cache.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_cache.c.i
-.PHONY : include/lvgl/src/misc/cache/lv_cache.c.i
-
-include/lvgl/src/misc/cache/lv_cache.s: include/lvgl/src/misc/cache/lv_cache.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/cache/lv_cache.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_cache.s
 .PHONY : include/lvgl/src/misc/cache/lv_cache.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/cache/lv_cache.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_cache.c.s
-.PHONY : include/lvgl/src/misc/cache/lv_cache.c.s
-
-include/lvgl/src/misc/cache/lv_cache_entry.obj: include/lvgl/src/misc/cache/lv_cache_entry.c.obj
+# target to build an object file
+include/lvgl/src/misc/cache/lv_cache_entry.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_cache_entry.obj
 .PHONY : include/lvgl/src/misc/cache/lv_cache_entry.obj
 
-# target to build an object file
-include/lvgl/src/misc/cache/lv_cache_entry.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_cache_entry.c.obj
-.PHONY : include/lvgl/src/misc/cache/lv_cache_entry.c.obj
-
-include/lvgl/src/misc/cache/lv_cache_entry.i: include/lvgl/src/misc/cache/lv_cache_entry.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/cache/lv_cache_entry.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_cache_entry.i
 .PHONY : include/lvgl/src/misc/cache/lv_cache_entry.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/cache/lv_cache_entry.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_cache_entry.c.i
-.PHONY : include/lvgl/src/misc/cache/lv_cache_entry.c.i
-
-include/lvgl/src/misc/cache/lv_cache_entry.s: include/lvgl/src/misc/cache/lv_cache_entry.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/cache/lv_cache_entry.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_cache_entry.s
 .PHONY : include/lvgl/src/misc/cache/lv_cache_entry.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/cache/lv_cache_entry.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_cache_entry.c.s
-.PHONY : include/lvgl/src/misc/cache/lv_cache_entry.c.s
-
-include/lvgl/src/misc/cache/lv_cache_lru_rb.obj: include/lvgl/src/misc/cache/lv_cache_lru_rb.c.obj
+# target to build an object file
+include/lvgl/src/misc/cache/lv_cache_lru_rb.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_cache_lru_rb.obj
 .PHONY : include/lvgl/src/misc/cache/lv_cache_lru_rb.obj
 
-# target to build an object file
-include/lvgl/src/misc/cache/lv_cache_lru_rb.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_cache_lru_rb.c.obj
-.PHONY : include/lvgl/src/misc/cache/lv_cache_lru_rb.c.obj
-
-include/lvgl/src/misc/cache/lv_cache_lru_rb.i: include/lvgl/src/misc/cache/lv_cache_lru_rb.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/cache/lv_cache_lru_rb.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_cache_lru_rb.i
 .PHONY : include/lvgl/src/misc/cache/lv_cache_lru_rb.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/cache/lv_cache_lru_rb.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_cache_lru_rb.c.i
-.PHONY : include/lvgl/src/misc/cache/lv_cache_lru_rb.c.i
-
-include/lvgl/src/misc/cache/lv_cache_lru_rb.s: include/lvgl/src/misc/cache/lv_cache_lru_rb.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/cache/lv_cache_lru_rb.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_cache_lru_rb.s
 .PHONY : include/lvgl/src/misc/cache/lv_cache_lru_rb.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/cache/lv_cache_lru_rb.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_cache_lru_rb.c.s
-.PHONY : include/lvgl/src/misc/cache/lv_cache_lru_rb.c.s
-
-include/lvgl/src/misc/cache/lv_image_cache.obj: include/lvgl/src/misc/cache/lv_image_cache.c.obj
+# target to build an object file
+include/lvgl/src/misc/cache/lv_image_cache.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_image_cache.obj
 .PHONY : include/lvgl/src/misc/cache/lv_image_cache.obj
 
-# target to build an object file
-include/lvgl/src/misc/cache/lv_image_cache.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_image_cache.c.obj
-.PHONY : include/lvgl/src/misc/cache/lv_image_cache.c.obj
-
-include/lvgl/src/misc/cache/lv_image_cache.i: include/lvgl/src/misc/cache/lv_image_cache.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/cache/lv_image_cache.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_image_cache.i
 .PHONY : include/lvgl/src/misc/cache/lv_image_cache.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/cache/lv_image_cache.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_image_cache.c.i
-.PHONY : include/lvgl/src/misc/cache/lv_image_cache.c.i
-
-include/lvgl/src/misc/cache/lv_image_cache.s: include/lvgl/src/misc/cache/lv_image_cache.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/cache/lv_image_cache.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_image_cache.s
 .PHONY : include/lvgl/src/misc/cache/lv_image_cache.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/cache/lv_image_cache.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_image_cache.c.s
-.PHONY : include/lvgl/src/misc/cache/lv_image_cache.c.s
-
-include/lvgl/src/misc/cache/lv_image_header_cache.obj: include/lvgl/src/misc/cache/lv_image_header_cache.c.obj
+# target to build an object file
+include/lvgl/src/misc/cache/lv_image_header_cache.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_image_header_cache.obj
 .PHONY : include/lvgl/src/misc/cache/lv_image_header_cache.obj
 
-# target to build an object file
-include/lvgl/src/misc/cache/lv_image_header_cache.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_image_header_cache.c.obj
-.PHONY : include/lvgl/src/misc/cache/lv_image_header_cache.c.obj
-
-include/lvgl/src/misc/cache/lv_image_header_cache.i: include/lvgl/src/misc/cache/lv_image_header_cache.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/cache/lv_image_header_cache.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_image_header_cache.i
 .PHONY : include/lvgl/src/misc/cache/lv_image_header_cache.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/cache/lv_image_header_cache.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_image_header_cache.c.i
-.PHONY : include/lvgl/src/misc/cache/lv_image_header_cache.c.i
-
-include/lvgl/src/misc/cache/lv_image_header_cache.s: include/lvgl/src/misc/cache/lv_image_header_cache.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/cache/lv_image_header_cache.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_image_header_cache.s
 .PHONY : include/lvgl/src/misc/cache/lv_image_header_cache.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/cache/lv_image_header_cache.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/cache/lv_image_header_cache.c.s
-.PHONY : include/lvgl/src/misc/cache/lv_image_header_cache.c.s
-
-include/lvgl/src/misc/lv_anim.obj: include/lvgl/src/misc/lv_anim.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_anim.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_anim.obj
 .PHONY : include/lvgl/src/misc/lv_anim.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_anim.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_anim.c.obj
-.PHONY : include/lvgl/src/misc/lv_anim.c.obj
-
-include/lvgl/src/misc/lv_anim.i: include/lvgl/src/misc/lv_anim.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_anim.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_anim.i
 .PHONY : include/lvgl/src/misc/lv_anim.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_anim.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_anim.c.i
-.PHONY : include/lvgl/src/misc/lv_anim.c.i
-
-include/lvgl/src/misc/lv_anim.s: include/lvgl/src/misc/lv_anim.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_anim.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_anim.s
 .PHONY : include/lvgl/src/misc/lv_anim.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_anim.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_anim.c.s
-.PHONY : include/lvgl/src/misc/lv_anim.c.s
-
-include/lvgl/src/misc/lv_anim_timeline.obj: include/lvgl/src/misc/lv_anim_timeline.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_anim_timeline.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_anim_timeline.obj
 .PHONY : include/lvgl/src/misc/lv_anim_timeline.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_anim_timeline.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_anim_timeline.c.obj
-.PHONY : include/lvgl/src/misc/lv_anim_timeline.c.obj
-
-include/lvgl/src/misc/lv_anim_timeline.i: include/lvgl/src/misc/lv_anim_timeline.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_anim_timeline.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_anim_timeline.i
 .PHONY : include/lvgl/src/misc/lv_anim_timeline.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_anim_timeline.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_anim_timeline.c.i
-.PHONY : include/lvgl/src/misc/lv_anim_timeline.c.i
-
-include/lvgl/src/misc/lv_anim_timeline.s: include/lvgl/src/misc/lv_anim_timeline.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_anim_timeline.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_anim_timeline.s
 .PHONY : include/lvgl/src/misc/lv_anim_timeline.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_anim_timeline.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_anim_timeline.c.s
-.PHONY : include/lvgl/src/misc/lv_anim_timeline.c.s
-
-include/lvgl/src/misc/lv_area.obj: include/lvgl/src/misc/lv_area.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_area.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_area.obj
 .PHONY : include/lvgl/src/misc/lv_area.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_area.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_area.c.obj
-.PHONY : include/lvgl/src/misc/lv_area.c.obj
-
-include/lvgl/src/misc/lv_area.i: include/lvgl/src/misc/lv_area.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_area.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_area.i
 .PHONY : include/lvgl/src/misc/lv_area.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_area.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_area.c.i
-.PHONY : include/lvgl/src/misc/lv_area.c.i
-
-include/lvgl/src/misc/lv_area.s: include/lvgl/src/misc/lv_area.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_area.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_area.s
 .PHONY : include/lvgl/src/misc/lv_area.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_area.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_area.c.s
-.PHONY : include/lvgl/src/misc/lv_area.c.s
-
-include/lvgl/src/misc/lv_array.obj: include/lvgl/src/misc/lv_array.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_array.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_array.obj
 .PHONY : include/lvgl/src/misc/lv_array.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_array.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_array.c.obj
-.PHONY : include/lvgl/src/misc/lv_array.c.obj
-
-include/lvgl/src/misc/lv_array.i: include/lvgl/src/misc/lv_array.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_array.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_array.i
 .PHONY : include/lvgl/src/misc/lv_array.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_array.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_array.c.i
-.PHONY : include/lvgl/src/misc/lv_array.c.i
-
-include/lvgl/src/misc/lv_array.s: include/lvgl/src/misc/lv_array.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_array.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_array.s
 .PHONY : include/lvgl/src/misc/lv_array.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_array.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_array.c.s
-.PHONY : include/lvgl/src/misc/lv_array.c.s
-
-include/lvgl/src/misc/lv_async.obj: include/lvgl/src/misc/lv_async.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_async.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_async.obj
 .PHONY : include/lvgl/src/misc/lv_async.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_async.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_async.c.obj
-.PHONY : include/lvgl/src/misc/lv_async.c.obj
-
-include/lvgl/src/misc/lv_async.i: include/lvgl/src/misc/lv_async.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_async.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_async.i
 .PHONY : include/lvgl/src/misc/lv_async.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_async.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_async.c.i
-.PHONY : include/lvgl/src/misc/lv_async.c.i
-
-include/lvgl/src/misc/lv_async.s: include/lvgl/src/misc/lv_async.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_async.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_async.s
 .PHONY : include/lvgl/src/misc/lv_async.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_async.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_async.c.s
-.PHONY : include/lvgl/src/misc/lv_async.c.s
-
-include/lvgl/src/misc/lv_bidi.obj: include/lvgl/src/misc/lv_bidi.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_bidi.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_bidi.obj
 .PHONY : include/lvgl/src/misc/lv_bidi.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_bidi.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_bidi.c.obj
-.PHONY : include/lvgl/src/misc/lv_bidi.c.obj
-
-include/lvgl/src/misc/lv_bidi.i: include/lvgl/src/misc/lv_bidi.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_bidi.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_bidi.i
 .PHONY : include/lvgl/src/misc/lv_bidi.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_bidi.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_bidi.c.i
-.PHONY : include/lvgl/src/misc/lv_bidi.c.i
-
-include/lvgl/src/misc/lv_bidi.s: include/lvgl/src/misc/lv_bidi.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_bidi.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_bidi.s
 .PHONY : include/lvgl/src/misc/lv_bidi.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_bidi.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_bidi.c.s
-.PHONY : include/lvgl/src/misc/lv_bidi.c.s
-
-include/lvgl/src/misc/lv_circle_buf.obj: include/lvgl/src/misc/lv_circle_buf.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_circle_buf.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_circle_buf.obj
 .PHONY : include/lvgl/src/misc/lv_circle_buf.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_circle_buf.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_circle_buf.c.obj
-.PHONY : include/lvgl/src/misc/lv_circle_buf.c.obj
-
-include/lvgl/src/misc/lv_circle_buf.i: include/lvgl/src/misc/lv_circle_buf.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_circle_buf.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_circle_buf.i
 .PHONY : include/lvgl/src/misc/lv_circle_buf.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_circle_buf.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_circle_buf.c.i
-.PHONY : include/lvgl/src/misc/lv_circle_buf.c.i
-
-include/lvgl/src/misc/lv_circle_buf.s: include/lvgl/src/misc/lv_circle_buf.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_circle_buf.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_circle_buf.s
 .PHONY : include/lvgl/src/misc/lv_circle_buf.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_circle_buf.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_circle_buf.c.s
-.PHONY : include/lvgl/src/misc/lv_circle_buf.c.s
-
-include/lvgl/src/misc/lv_color.obj: include/lvgl/src/misc/lv_color.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_color.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_color.obj
 .PHONY : include/lvgl/src/misc/lv_color.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_color.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_color.c.obj
-.PHONY : include/lvgl/src/misc/lv_color.c.obj
-
-include/lvgl/src/misc/lv_color.i: include/lvgl/src/misc/lv_color.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_color.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_color.i
 .PHONY : include/lvgl/src/misc/lv_color.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_color.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_color.c.i
-.PHONY : include/lvgl/src/misc/lv_color.c.i
-
-include/lvgl/src/misc/lv_color.s: include/lvgl/src/misc/lv_color.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_color.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_color.s
 .PHONY : include/lvgl/src/misc/lv_color.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_color.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_color.c.s
-.PHONY : include/lvgl/src/misc/lv_color.c.s
-
-include/lvgl/src/misc/lv_color_op.obj: include/lvgl/src/misc/lv_color_op.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_color_op.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_color_op.obj
 .PHONY : include/lvgl/src/misc/lv_color_op.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_color_op.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_color_op.c.obj
-.PHONY : include/lvgl/src/misc/lv_color_op.c.obj
-
-include/lvgl/src/misc/lv_color_op.i: include/lvgl/src/misc/lv_color_op.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_color_op.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_color_op.i
 .PHONY : include/lvgl/src/misc/lv_color_op.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_color_op.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_color_op.c.i
-.PHONY : include/lvgl/src/misc/lv_color_op.c.i
-
-include/lvgl/src/misc/lv_color_op.s: include/lvgl/src/misc/lv_color_op.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_color_op.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_color_op.s
 .PHONY : include/lvgl/src/misc/lv_color_op.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_color_op.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_color_op.c.s
-.PHONY : include/lvgl/src/misc/lv_color_op.c.s
-
-include/lvgl/src/misc/lv_event.obj: include/lvgl/src/misc/lv_event.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_event.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_event.obj
 .PHONY : include/lvgl/src/misc/lv_event.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_event.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_event.c.obj
-.PHONY : include/lvgl/src/misc/lv_event.c.obj
-
-include/lvgl/src/misc/lv_event.i: include/lvgl/src/misc/lv_event.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_event.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_event.i
 .PHONY : include/lvgl/src/misc/lv_event.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_event.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_event.c.i
-.PHONY : include/lvgl/src/misc/lv_event.c.i
-
-include/lvgl/src/misc/lv_event.s: include/lvgl/src/misc/lv_event.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_event.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_event.s
 .PHONY : include/lvgl/src/misc/lv_event.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_event.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_event.c.s
-.PHONY : include/lvgl/src/misc/lv_event.c.s
-
-include/lvgl/src/misc/lv_fs.obj: include/lvgl/src/misc/lv_fs.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_fs.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_fs.obj
 .PHONY : include/lvgl/src/misc/lv_fs.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_fs.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_fs.c.obj
-.PHONY : include/lvgl/src/misc/lv_fs.c.obj
-
-include/lvgl/src/misc/lv_fs.i: include/lvgl/src/misc/lv_fs.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_fs.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_fs.i
 .PHONY : include/lvgl/src/misc/lv_fs.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_fs.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_fs.c.i
-.PHONY : include/lvgl/src/misc/lv_fs.c.i
-
-include/lvgl/src/misc/lv_fs.s: include/lvgl/src/misc/lv_fs.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_fs.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_fs.s
 .PHONY : include/lvgl/src/misc/lv_fs.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_fs.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_fs.c.s
-.PHONY : include/lvgl/src/misc/lv_fs.c.s
-
-include/lvgl/src/misc/lv_grad.obj: include/lvgl/src/misc/lv_grad.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_grad.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_grad.obj
 .PHONY : include/lvgl/src/misc/lv_grad.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_grad.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_grad.c.obj
-.PHONY : include/lvgl/src/misc/lv_grad.c.obj
-
-include/lvgl/src/misc/lv_grad.i: include/lvgl/src/misc/lv_grad.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_grad.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_grad.i
 .PHONY : include/lvgl/src/misc/lv_grad.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_grad.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_grad.c.i
-.PHONY : include/lvgl/src/misc/lv_grad.c.i
-
-include/lvgl/src/misc/lv_grad.s: include/lvgl/src/misc/lv_grad.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_grad.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_grad.s
 .PHONY : include/lvgl/src/misc/lv_grad.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_grad.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_grad.c.s
-.PHONY : include/lvgl/src/misc/lv_grad.c.s
-
-include/lvgl/src/misc/lv_iter.obj: include/lvgl/src/misc/lv_iter.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_iter.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_iter.obj
 .PHONY : include/lvgl/src/misc/lv_iter.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_iter.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_iter.c.obj
-.PHONY : include/lvgl/src/misc/lv_iter.c.obj
-
-include/lvgl/src/misc/lv_iter.i: include/lvgl/src/misc/lv_iter.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_iter.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_iter.i
 .PHONY : include/lvgl/src/misc/lv_iter.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_iter.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_iter.c.i
-.PHONY : include/lvgl/src/misc/lv_iter.c.i
-
-include/lvgl/src/misc/lv_iter.s: include/lvgl/src/misc/lv_iter.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_iter.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_iter.s
 .PHONY : include/lvgl/src/misc/lv_iter.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_iter.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_iter.c.s
-.PHONY : include/lvgl/src/misc/lv_iter.c.s
-
-include/lvgl/src/misc/lv_ll.obj: include/lvgl/src/misc/lv_ll.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_ll.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_ll.obj
 .PHONY : include/lvgl/src/misc/lv_ll.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_ll.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_ll.c.obj
-.PHONY : include/lvgl/src/misc/lv_ll.c.obj
-
-include/lvgl/src/misc/lv_ll.i: include/lvgl/src/misc/lv_ll.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_ll.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_ll.i
 .PHONY : include/lvgl/src/misc/lv_ll.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_ll.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_ll.c.i
-.PHONY : include/lvgl/src/misc/lv_ll.c.i
-
-include/lvgl/src/misc/lv_ll.s: include/lvgl/src/misc/lv_ll.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_ll.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_ll.s
 .PHONY : include/lvgl/src/misc/lv_ll.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_ll.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_ll.c.s
-.PHONY : include/lvgl/src/misc/lv_ll.c.s
-
-include/lvgl/src/misc/lv_log.obj: include/lvgl/src/misc/lv_log.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_log.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_log.obj
 .PHONY : include/lvgl/src/misc/lv_log.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_log.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_log.c.obj
-.PHONY : include/lvgl/src/misc/lv_log.c.obj
-
-include/lvgl/src/misc/lv_log.i: include/lvgl/src/misc/lv_log.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_log.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_log.i
 .PHONY : include/lvgl/src/misc/lv_log.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_log.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_log.c.i
-.PHONY : include/lvgl/src/misc/lv_log.c.i
-
-include/lvgl/src/misc/lv_log.s: include/lvgl/src/misc/lv_log.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_log.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_log.s
 .PHONY : include/lvgl/src/misc/lv_log.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_log.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_log.c.s
-.PHONY : include/lvgl/src/misc/lv_log.c.s
-
-include/lvgl/src/misc/lv_lru.obj: include/lvgl/src/misc/lv_lru.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_lru.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_lru.obj
 .PHONY : include/lvgl/src/misc/lv_lru.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_lru.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_lru.c.obj
-.PHONY : include/lvgl/src/misc/lv_lru.c.obj
-
-include/lvgl/src/misc/lv_lru.i: include/lvgl/src/misc/lv_lru.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_lru.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_lru.i
 .PHONY : include/lvgl/src/misc/lv_lru.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_lru.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_lru.c.i
-.PHONY : include/lvgl/src/misc/lv_lru.c.i
-
-include/lvgl/src/misc/lv_lru.s: include/lvgl/src/misc/lv_lru.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_lru.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_lru.s
 .PHONY : include/lvgl/src/misc/lv_lru.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_lru.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_lru.c.s
-.PHONY : include/lvgl/src/misc/lv_lru.c.s
-
-include/lvgl/src/misc/lv_math.obj: include/lvgl/src/misc/lv_math.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_math.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_math.obj
 .PHONY : include/lvgl/src/misc/lv_math.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_math.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_math.c.obj
-.PHONY : include/lvgl/src/misc/lv_math.c.obj
-
-include/lvgl/src/misc/lv_math.i: include/lvgl/src/misc/lv_math.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_math.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_math.i
 .PHONY : include/lvgl/src/misc/lv_math.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_math.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_math.c.i
-.PHONY : include/lvgl/src/misc/lv_math.c.i
-
-include/lvgl/src/misc/lv_math.s: include/lvgl/src/misc/lv_math.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_math.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_math.s
 .PHONY : include/lvgl/src/misc/lv_math.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_math.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_math.c.s
-.PHONY : include/lvgl/src/misc/lv_math.c.s
-
-include/lvgl/src/misc/lv_matrix.obj: include/lvgl/src/misc/lv_matrix.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_matrix.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_matrix.obj
 .PHONY : include/lvgl/src/misc/lv_matrix.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_matrix.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_matrix.c.obj
-.PHONY : include/lvgl/src/misc/lv_matrix.c.obj
-
-include/lvgl/src/misc/lv_matrix.i: include/lvgl/src/misc/lv_matrix.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_matrix.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_matrix.i
 .PHONY : include/lvgl/src/misc/lv_matrix.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_matrix.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_matrix.c.i
-.PHONY : include/lvgl/src/misc/lv_matrix.c.i
-
-include/lvgl/src/misc/lv_matrix.s: include/lvgl/src/misc/lv_matrix.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_matrix.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_matrix.s
 .PHONY : include/lvgl/src/misc/lv_matrix.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_matrix.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_matrix.c.s
-.PHONY : include/lvgl/src/misc/lv_matrix.c.s
-
-include/lvgl/src/misc/lv_palette.obj: include/lvgl/src/misc/lv_palette.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_palette.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_palette.obj
 .PHONY : include/lvgl/src/misc/lv_palette.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_palette.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_palette.c.obj
-.PHONY : include/lvgl/src/misc/lv_palette.c.obj
-
-include/lvgl/src/misc/lv_palette.i: include/lvgl/src/misc/lv_palette.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_palette.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_palette.i
 .PHONY : include/lvgl/src/misc/lv_palette.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_palette.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_palette.c.i
-.PHONY : include/lvgl/src/misc/lv_palette.c.i
-
-include/lvgl/src/misc/lv_palette.s: include/lvgl/src/misc/lv_palette.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_palette.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_palette.s
 .PHONY : include/lvgl/src/misc/lv_palette.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_palette.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_palette.c.s
-.PHONY : include/lvgl/src/misc/lv_palette.c.s
-
-include/lvgl/src/misc/lv_profiler_builtin.obj: include/lvgl/src/misc/lv_profiler_builtin.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_profiler_builtin.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_profiler_builtin.obj
 .PHONY : include/lvgl/src/misc/lv_profiler_builtin.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_profiler_builtin.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_profiler_builtin.c.obj
-.PHONY : include/lvgl/src/misc/lv_profiler_builtin.c.obj
-
-include/lvgl/src/misc/lv_profiler_builtin.i: include/lvgl/src/misc/lv_profiler_builtin.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_profiler_builtin.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_profiler_builtin.i
 .PHONY : include/lvgl/src/misc/lv_profiler_builtin.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_profiler_builtin.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_profiler_builtin.c.i
-.PHONY : include/lvgl/src/misc/lv_profiler_builtin.c.i
-
-include/lvgl/src/misc/lv_profiler_builtin.s: include/lvgl/src/misc/lv_profiler_builtin.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_profiler_builtin.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_profiler_builtin.s
 .PHONY : include/lvgl/src/misc/lv_profiler_builtin.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_profiler_builtin.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_profiler_builtin.c.s
-.PHONY : include/lvgl/src/misc/lv_profiler_builtin.c.s
-
-include/lvgl/src/misc/lv_rb.obj: include/lvgl/src/misc/lv_rb.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_rb.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_rb.obj
 .PHONY : include/lvgl/src/misc/lv_rb.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_rb.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_rb.c.obj
-.PHONY : include/lvgl/src/misc/lv_rb.c.obj
-
-include/lvgl/src/misc/lv_rb.i: include/lvgl/src/misc/lv_rb.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_rb.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_rb.i
 .PHONY : include/lvgl/src/misc/lv_rb.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_rb.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_rb.c.i
-.PHONY : include/lvgl/src/misc/lv_rb.c.i
-
-include/lvgl/src/misc/lv_rb.s: include/lvgl/src/misc/lv_rb.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_rb.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_rb.s
 .PHONY : include/lvgl/src/misc/lv_rb.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_rb.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_rb.c.s
-.PHONY : include/lvgl/src/misc/lv_rb.c.s
-
-include/lvgl/src/misc/lv_style.obj: include/lvgl/src/misc/lv_style.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_style.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_style.obj
 .PHONY : include/lvgl/src/misc/lv_style.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_style.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_style.c.obj
-.PHONY : include/lvgl/src/misc/lv_style.c.obj
-
-include/lvgl/src/misc/lv_style.i: include/lvgl/src/misc/lv_style.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_style.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_style.i
 .PHONY : include/lvgl/src/misc/lv_style.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_style.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_style.c.i
-.PHONY : include/lvgl/src/misc/lv_style.c.i
-
-include/lvgl/src/misc/lv_style.s: include/lvgl/src/misc/lv_style.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_style.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_style.s
 .PHONY : include/lvgl/src/misc/lv_style.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_style.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_style.c.s
-.PHONY : include/lvgl/src/misc/lv_style.c.s
-
-include/lvgl/src/misc/lv_style_gen.obj: include/lvgl/src/misc/lv_style_gen.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_style_gen.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_style_gen.obj
 .PHONY : include/lvgl/src/misc/lv_style_gen.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_style_gen.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_style_gen.c.obj
-.PHONY : include/lvgl/src/misc/lv_style_gen.c.obj
-
-include/lvgl/src/misc/lv_style_gen.i: include/lvgl/src/misc/lv_style_gen.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_style_gen.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_style_gen.i
 .PHONY : include/lvgl/src/misc/lv_style_gen.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_style_gen.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_style_gen.c.i
-.PHONY : include/lvgl/src/misc/lv_style_gen.c.i
-
-include/lvgl/src/misc/lv_style_gen.s: include/lvgl/src/misc/lv_style_gen.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_style_gen.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_style_gen.s
 .PHONY : include/lvgl/src/misc/lv_style_gen.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_style_gen.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_style_gen.c.s
-.PHONY : include/lvgl/src/misc/lv_style_gen.c.s
-
-include/lvgl/src/misc/lv_templ.obj: include/lvgl/src/misc/lv_templ.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_templ.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_templ.obj
 .PHONY : include/lvgl/src/misc/lv_templ.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_templ.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_templ.c.obj
-.PHONY : include/lvgl/src/misc/lv_templ.c.obj
-
-include/lvgl/src/misc/lv_templ.i: include/lvgl/src/misc/lv_templ.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_templ.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_templ.i
 .PHONY : include/lvgl/src/misc/lv_templ.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_templ.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_templ.c.i
-.PHONY : include/lvgl/src/misc/lv_templ.c.i
-
-include/lvgl/src/misc/lv_templ.s: include/lvgl/src/misc/lv_templ.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_templ.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_templ.s
 .PHONY : include/lvgl/src/misc/lv_templ.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_templ.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_templ.c.s
-.PHONY : include/lvgl/src/misc/lv_templ.c.s
-
-include/lvgl/src/misc/lv_text.obj: include/lvgl/src/misc/lv_text.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_text.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_text.obj
 .PHONY : include/lvgl/src/misc/lv_text.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_text.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_text.c.obj
-.PHONY : include/lvgl/src/misc/lv_text.c.obj
-
-include/lvgl/src/misc/lv_text.i: include/lvgl/src/misc/lv_text.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_text.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_text.i
 .PHONY : include/lvgl/src/misc/lv_text.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_text.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_text.c.i
-.PHONY : include/lvgl/src/misc/lv_text.c.i
-
-include/lvgl/src/misc/lv_text.s: include/lvgl/src/misc/lv_text.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_text.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_text.s
 .PHONY : include/lvgl/src/misc/lv_text.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_text.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_text.c.s
-.PHONY : include/lvgl/src/misc/lv_text.c.s
-
-include/lvgl/src/misc/lv_text_ap.obj: include/lvgl/src/misc/lv_text_ap.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_text_ap.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_text_ap.obj
 .PHONY : include/lvgl/src/misc/lv_text_ap.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_text_ap.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_text_ap.c.obj
-.PHONY : include/lvgl/src/misc/lv_text_ap.c.obj
-
-include/lvgl/src/misc/lv_text_ap.i: include/lvgl/src/misc/lv_text_ap.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_text_ap.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_text_ap.i
 .PHONY : include/lvgl/src/misc/lv_text_ap.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_text_ap.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_text_ap.c.i
-.PHONY : include/lvgl/src/misc/lv_text_ap.c.i
-
-include/lvgl/src/misc/lv_text_ap.s: include/lvgl/src/misc/lv_text_ap.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_text_ap.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_text_ap.s
 .PHONY : include/lvgl/src/misc/lv_text_ap.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_text_ap.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_text_ap.c.s
-.PHONY : include/lvgl/src/misc/lv_text_ap.c.s
-
-include/lvgl/src/misc/lv_timer.obj: include/lvgl/src/misc/lv_timer.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_timer.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_timer.obj
 .PHONY : include/lvgl/src/misc/lv_timer.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_timer.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_timer.c.obj
-.PHONY : include/lvgl/src/misc/lv_timer.c.obj
-
-include/lvgl/src/misc/lv_timer.i: include/lvgl/src/misc/lv_timer.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_timer.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_timer.i
 .PHONY : include/lvgl/src/misc/lv_timer.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_timer.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_timer.c.i
-.PHONY : include/lvgl/src/misc/lv_timer.c.i
-
-include/lvgl/src/misc/lv_timer.s: include/lvgl/src/misc/lv_timer.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_timer.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_timer.s
 .PHONY : include/lvgl/src/misc/lv_timer.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_timer.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_timer.c.s
-.PHONY : include/lvgl/src/misc/lv_timer.c.s
-
-include/lvgl/src/misc/lv_tree.obj: include/lvgl/src/misc/lv_tree.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_tree.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_tree.obj
 .PHONY : include/lvgl/src/misc/lv_tree.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_tree.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_tree.c.obj
-.PHONY : include/lvgl/src/misc/lv_tree.c.obj
-
-include/lvgl/src/misc/lv_tree.i: include/lvgl/src/misc/lv_tree.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_tree.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_tree.i
 .PHONY : include/lvgl/src/misc/lv_tree.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_tree.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_tree.c.i
-.PHONY : include/lvgl/src/misc/lv_tree.c.i
-
-include/lvgl/src/misc/lv_tree.s: include/lvgl/src/misc/lv_tree.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_tree.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_tree.s
 .PHONY : include/lvgl/src/misc/lv_tree.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_tree.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_tree.c.s
-.PHONY : include/lvgl/src/misc/lv_tree.c.s
-
-include/lvgl/src/misc/lv_utils.obj: include/lvgl/src/misc/lv_utils.c.obj
+# target to build an object file
+include/lvgl/src/misc/lv_utils.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_utils.obj
 .PHONY : include/lvgl/src/misc/lv_utils.obj
 
-# target to build an object file
-include/lvgl/src/misc/lv_utils.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_utils.c.obj
-.PHONY : include/lvgl/src/misc/lv_utils.c.obj
-
-include/lvgl/src/misc/lv_utils.i: include/lvgl/src/misc/lv_utils.c.i
+# target to preprocess a source file
+include/lvgl/src/misc/lv_utils.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_utils.i
 .PHONY : include/lvgl/src/misc/lv_utils.i
 
-# target to preprocess a source file
-include/lvgl/src/misc/lv_utils.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_utils.c.i
-.PHONY : include/lvgl/src/misc/lv_utils.c.i
-
-include/lvgl/src/misc/lv_utils.s: include/lvgl/src/misc/lv_utils.c.s
+# target to generate assembly for a file
+include/lvgl/src/misc/lv_utils.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_utils.s
 .PHONY : include/lvgl/src/misc/lv_utils.s
 
-# target to generate assembly for a file
-include/lvgl/src/misc/lv_utils.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/misc/lv_utils.c.s
-.PHONY : include/lvgl/src/misc/lv_utils.c.s
-
-include/lvgl/src/osal/lv_cmsis_rtos2.obj: include/lvgl/src/osal/lv_cmsis_rtos2.c.obj
+# target to build an object file
+include/lvgl/src/osal/lv_cmsis_rtos2.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_cmsis_rtos2.obj
 .PHONY : include/lvgl/src/osal/lv_cmsis_rtos2.obj
 
-# target to build an object file
-include/lvgl/src/osal/lv_cmsis_rtos2.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_cmsis_rtos2.c.obj
-.PHONY : include/lvgl/src/osal/lv_cmsis_rtos2.c.obj
-
-include/lvgl/src/osal/lv_cmsis_rtos2.i: include/lvgl/src/osal/lv_cmsis_rtos2.c.i
+# target to preprocess a source file
+include/lvgl/src/osal/lv_cmsis_rtos2.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_cmsis_rtos2.i
 .PHONY : include/lvgl/src/osal/lv_cmsis_rtos2.i
 
-# target to preprocess a source file
-include/lvgl/src/osal/lv_cmsis_rtos2.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_cmsis_rtos2.c.i
-.PHONY : include/lvgl/src/osal/lv_cmsis_rtos2.c.i
-
-include/lvgl/src/osal/lv_cmsis_rtos2.s: include/lvgl/src/osal/lv_cmsis_rtos2.c.s
+# target to generate assembly for a file
+include/lvgl/src/osal/lv_cmsis_rtos2.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_cmsis_rtos2.s
 .PHONY : include/lvgl/src/osal/lv_cmsis_rtos2.s
 
-# target to generate assembly for a file
-include/lvgl/src/osal/lv_cmsis_rtos2.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_cmsis_rtos2.c.s
-.PHONY : include/lvgl/src/osal/lv_cmsis_rtos2.c.s
-
-include/lvgl/src/osal/lv_freertos.obj: include/lvgl/src/osal/lv_freertos.c.obj
+# target to build an object file
+include/lvgl/src/osal/lv_freertos.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_freertos.obj
 .PHONY : include/lvgl/src/osal/lv_freertos.obj
 
-# target to build an object file
-include/lvgl/src/osal/lv_freertos.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_freertos.c.obj
-.PHONY : include/lvgl/src/osal/lv_freertos.c.obj
-
-include/lvgl/src/osal/lv_freertos.i: include/lvgl/src/osal/lv_freertos.c.i
+# target to preprocess a source file
+include/lvgl/src/osal/lv_freertos.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_freertos.i
 .PHONY : include/lvgl/src/osal/lv_freertos.i
 
-# target to preprocess a source file
-include/lvgl/src/osal/lv_freertos.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_freertos.c.i
-.PHONY : include/lvgl/src/osal/lv_freertos.c.i
-
-include/lvgl/src/osal/lv_freertos.s: include/lvgl/src/osal/lv_freertos.c.s
+# target to generate assembly for a file
+include/lvgl/src/osal/lv_freertos.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_freertos.s
 .PHONY : include/lvgl/src/osal/lv_freertos.s
 
-# target to generate assembly for a file
-include/lvgl/src/osal/lv_freertos.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_freertos.c.s
-.PHONY : include/lvgl/src/osal/lv_freertos.c.s
-
-include/lvgl/src/osal/lv_linux.obj: include/lvgl/src/osal/lv_linux.c.obj
+# target to build an object file
+include/lvgl/src/osal/lv_linux.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_linux.obj
 .PHONY : include/lvgl/src/osal/lv_linux.obj
 
-# target to build an object file
-include/lvgl/src/osal/lv_linux.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_linux.c.obj
-.PHONY : include/lvgl/src/osal/lv_linux.c.obj
-
-include/lvgl/src/osal/lv_linux.i: include/lvgl/src/osal/lv_linux.c.i
+# target to preprocess a source file
+include/lvgl/src/osal/lv_linux.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_linux.i
 .PHONY : include/lvgl/src/osal/lv_linux.i
 
-# target to preprocess a source file
-include/lvgl/src/osal/lv_linux.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_linux.c.i
-.PHONY : include/lvgl/src/osal/lv_linux.c.i
-
-include/lvgl/src/osal/lv_linux.s: include/lvgl/src/osal/lv_linux.c.s
+# target to generate assembly for a file
+include/lvgl/src/osal/lv_linux.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_linux.s
 .PHONY : include/lvgl/src/osal/lv_linux.s
 
-# target to generate assembly for a file
-include/lvgl/src/osal/lv_linux.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_linux.c.s
-.PHONY : include/lvgl/src/osal/lv_linux.c.s
-
-include/lvgl/src/osal/lv_mqx.obj: include/lvgl/src/osal/lv_mqx.c.obj
+# target to build an object file
+include/lvgl/src/osal/lv_mqx.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_mqx.obj
 .PHONY : include/lvgl/src/osal/lv_mqx.obj
 
-# target to build an object file
-include/lvgl/src/osal/lv_mqx.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_mqx.c.obj
-.PHONY : include/lvgl/src/osal/lv_mqx.c.obj
-
-include/lvgl/src/osal/lv_mqx.i: include/lvgl/src/osal/lv_mqx.c.i
+# target to preprocess a source file
+include/lvgl/src/osal/lv_mqx.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_mqx.i
 .PHONY : include/lvgl/src/osal/lv_mqx.i
 
-# target to preprocess a source file
-include/lvgl/src/osal/lv_mqx.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_mqx.c.i
-.PHONY : include/lvgl/src/osal/lv_mqx.c.i
-
-include/lvgl/src/osal/lv_mqx.s: include/lvgl/src/osal/lv_mqx.c.s
+# target to generate assembly for a file
+include/lvgl/src/osal/lv_mqx.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_mqx.s
 .PHONY : include/lvgl/src/osal/lv_mqx.s
 
-# target to generate assembly for a file
-include/lvgl/src/osal/lv_mqx.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_mqx.c.s
-.PHONY : include/lvgl/src/osal/lv_mqx.c.s
-
-include/lvgl/src/osal/lv_os.obj: include/lvgl/src/osal/lv_os.c.obj
+# target to build an object file
+include/lvgl/src/osal/lv_os.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_os.obj
 .PHONY : include/lvgl/src/osal/lv_os.obj
 
-# target to build an object file
-include/lvgl/src/osal/lv_os.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_os.c.obj
-.PHONY : include/lvgl/src/osal/lv_os.c.obj
-
-include/lvgl/src/osal/lv_os.i: include/lvgl/src/osal/lv_os.c.i
+# target to preprocess a source file
+include/lvgl/src/osal/lv_os.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_os.i
 .PHONY : include/lvgl/src/osal/lv_os.i
 
-# target to preprocess a source file
-include/lvgl/src/osal/lv_os.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_os.c.i
-.PHONY : include/lvgl/src/osal/lv_os.c.i
-
-include/lvgl/src/osal/lv_os.s: include/lvgl/src/osal/lv_os.c.s
+# target to generate assembly for a file
+include/lvgl/src/osal/lv_os.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_os.s
 .PHONY : include/lvgl/src/osal/lv_os.s
 
-# target to generate assembly for a file
-include/lvgl/src/osal/lv_os.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_os.c.s
-.PHONY : include/lvgl/src/osal/lv_os.c.s
-
-include/lvgl/src/osal/lv_os_none.obj: include/lvgl/src/osal/lv_os_none.c.obj
+# target to build an object file
+include/lvgl/src/osal/lv_os_none.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_os_none.obj
 .PHONY : include/lvgl/src/osal/lv_os_none.obj
 
-# target to build an object file
-include/lvgl/src/osal/lv_os_none.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_os_none.c.obj
-.PHONY : include/lvgl/src/osal/lv_os_none.c.obj
-
-include/lvgl/src/osal/lv_os_none.i: include/lvgl/src/osal/lv_os_none.c.i
+# target to preprocess a source file
+include/lvgl/src/osal/lv_os_none.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_os_none.i
 .PHONY : include/lvgl/src/osal/lv_os_none.i
 
-# target to preprocess a source file
-include/lvgl/src/osal/lv_os_none.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_os_none.c.i
-.PHONY : include/lvgl/src/osal/lv_os_none.c.i
-
-include/lvgl/src/osal/lv_os_none.s: include/lvgl/src/osal/lv_os_none.c.s
+# target to generate assembly for a file
+include/lvgl/src/osal/lv_os_none.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_os_none.s
 .PHONY : include/lvgl/src/osal/lv_os_none.s
 
-# target to generate assembly for a file
-include/lvgl/src/osal/lv_os_none.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_os_none.c.s
-.PHONY : include/lvgl/src/osal/lv_os_none.c.s
-
-include/lvgl/src/osal/lv_pthread.obj: include/lvgl/src/osal/lv_pthread.c.obj
+# target to build an object file
+include/lvgl/src/osal/lv_pthread.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_pthread.obj
 .PHONY : include/lvgl/src/osal/lv_pthread.obj
 
-# target to build an object file
-include/lvgl/src/osal/lv_pthread.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_pthread.c.obj
-.PHONY : include/lvgl/src/osal/lv_pthread.c.obj
-
-include/lvgl/src/osal/lv_pthread.i: include/lvgl/src/osal/lv_pthread.c.i
+# target to preprocess a source file
+include/lvgl/src/osal/lv_pthread.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_pthread.i
 .PHONY : include/lvgl/src/osal/lv_pthread.i
 
-# target to preprocess a source file
-include/lvgl/src/osal/lv_pthread.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_pthread.c.i
-.PHONY : include/lvgl/src/osal/lv_pthread.c.i
-
-include/lvgl/src/osal/lv_pthread.s: include/lvgl/src/osal/lv_pthread.c.s
+# target to generate assembly for a file
+include/lvgl/src/osal/lv_pthread.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_pthread.s
 .PHONY : include/lvgl/src/osal/lv_pthread.s
 
-# target to generate assembly for a file
-include/lvgl/src/osal/lv_pthread.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_pthread.c.s
-.PHONY : include/lvgl/src/osal/lv_pthread.c.s
-
-include/lvgl/src/osal/lv_rtthread.obj: include/lvgl/src/osal/lv_rtthread.c.obj
+# target to build an object file
+include/lvgl/src/osal/lv_rtthread.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_rtthread.obj
 .PHONY : include/lvgl/src/osal/lv_rtthread.obj
 
-# target to build an object file
-include/lvgl/src/osal/lv_rtthread.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_rtthread.c.obj
-.PHONY : include/lvgl/src/osal/lv_rtthread.c.obj
-
-include/lvgl/src/osal/lv_rtthread.i: include/lvgl/src/osal/lv_rtthread.c.i
+# target to preprocess a source file
+include/lvgl/src/osal/lv_rtthread.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_rtthread.i
 .PHONY : include/lvgl/src/osal/lv_rtthread.i
 
-# target to preprocess a source file
-include/lvgl/src/osal/lv_rtthread.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_rtthread.c.i
-.PHONY : include/lvgl/src/osal/lv_rtthread.c.i
-
-include/lvgl/src/osal/lv_rtthread.s: include/lvgl/src/osal/lv_rtthread.c.s
+# target to generate assembly for a file
+include/lvgl/src/osal/lv_rtthread.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_rtthread.s
 .PHONY : include/lvgl/src/osal/lv_rtthread.s
 
-# target to generate assembly for a file
-include/lvgl/src/osal/lv_rtthread.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_rtthread.c.s
-.PHONY : include/lvgl/src/osal/lv_rtthread.c.s
-
-include/lvgl/src/osal/lv_sdl2.obj: include/lvgl/src/osal/lv_sdl2.c.obj
+# target to build an object file
+include/lvgl/src/osal/lv_sdl2.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_sdl2.obj
 .PHONY : include/lvgl/src/osal/lv_sdl2.obj
 
-# target to build an object file
-include/lvgl/src/osal/lv_sdl2.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_sdl2.c.obj
-.PHONY : include/lvgl/src/osal/lv_sdl2.c.obj
-
-include/lvgl/src/osal/lv_sdl2.i: include/lvgl/src/osal/lv_sdl2.c.i
+# target to preprocess a source file
+include/lvgl/src/osal/lv_sdl2.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_sdl2.i
 .PHONY : include/lvgl/src/osal/lv_sdl2.i
 
-# target to preprocess a source file
-include/lvgl/src/osal/lv_sdl2.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_sdl2.c.i
-.PHONY : include/lvgl/src/osal/lv_sdl2.c.i
-
-include/lvgl/src/osal/lv_sdl2.s: include/lvgl/src/osal/lv_sdl2.c.s
+# target to generate assembly for a file
+include/lvgl/src/osal/lv_sdl2.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_sdl2.s
 .PHONY : include/lvgl/src/osal/lv_sdl2.s
 
-# target to generate assembly for a file
-include/lvgl/src/osal/lv_sdl2.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_sdl2.c.s
-.PHONY : include/lvgl/src/osal/lv_sdl2.c.s
-
-include/lvgl/src/osal/lv_windows.obj: include/lvgl/src/osal/lv_windows.c.obj
+# target to build an object file
+include/lvgl/src/osal/lv_windows.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_windows.obj
 .PHONY : include/lvgl/src/osal/lv_windows.obj
 
-# target to build an object file
-include/lvgl/src/osal/lv_windows.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_windows.c.obj
-.PHONY : include/lvgl/src/osal/lv_windows.c.obj
-
-include/lvgl/src/osal/lv_windows.i: include/lvgl/src/osal/lv_windows.c.i
+# target to preprocess a source file
+include/lvgl/src/osal/lv_windows.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_windows.i
 .PHONY : include/lvgl/src/osal/lv_windows.i
 
-# target to preprocess a source file
-include/lvgl/src/osal/lv_windows.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_windows.c.i
-.PHONY : include/lvgl/src/osal/lv_windows.c.i
-
-include/lvgl/src/osal/lv_windows.s: include/lvgl/src/osal/lv_windows.c.s
+# target to generate assembly for a file
+include/lvgl/src/osal/lv_windows.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_windows.s
 .PHONY : include/lvgl/src/osal/lv_windows.s
 
-# target to generate assembly for a file
-include/lvgl/src/osal/lv_windows.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/osal/lv_windows.c.s
-.PHONY : include/lvgl/src/osal/lv_windows.c.s
-
-include/lvgl/src/others/file_explorer/lv_file_explorer.obj: include/lvgl/src/others/file_explorer/lv_file_explorer.c.obj
+# target to build an object file
+include/lvgl/src/others/file_explorer/lv_file_explorer.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/file_explorer/lv_file_explorer.obj
 .PHONY : include/lvgl/src/others/file_explorer/lv_file_explorer.obj
 
-# target to build an object file
-include/lvgl/src/others/file_explorer/lv_file_explorer.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/file_explorer/lv_file_explorer.c.obj
-.PHONY : include/lvgl/src/others/file_explorer/lv_file_explorer.c.obj
-
-include/lvgl/src/others/file_explorer/lv_file_explorer.i: include/lvgl/src/others/file_explorer/lv_file_explorer.c.i
+# target to preprocess a source file
+include/lvgl/src/others/file_explorer/lv_file_explorer.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/file_explorer/lv_file_explorer.i
 .PHONY : include/lvgl/src/others/file_explorer/lv_file_explorer.i
 
-# target to preprocess a source file
-include/lvgl/src/others/file_explorer/lv_file_explorer.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/file_explorer/lv_file_explorer.c.i
-.PHONY : include/lvgl/src/others/file_explorer/lv_file_explorer.c.i
-
-include/lvgl/src/others/file_explorer/lv_file_explorer.s: include/lvgl/src/others/file_explorer/lv_file_explorer.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/file_explorer/lv_file_explorer.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/file_explorer/lv_file_explorer.s
 .PHONY : include/lvgl/src/others/file_explorer/lv_file_explorer.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/file_explorer/lv_file_explorer.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/file_explorer/lv_file_explorer.c.s
-.PHONY : include/lvgl/src/others/file_explorer/lv_file_explorer.c.s
-
-include/lvgl/src/others/font_manager/lv_font_manager.obj: include/lvgl/src/others/font_manager/lv_font_manager.c.obj
+# target to build an object file
+include/lvgl/src/others/font_manager/lv_font_manager.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/font_manager/lv_font_manager.obj
 .PHONY : include/lvgl/src/others/font_manager/lv_font_manager.obj
 
-# target to build an object file
-include/lvgl/src/others/font_manager/lv_font_manager.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/font_manager/lv_font_manager.c.obj
-.PHONY : include/lvgl/src/others/font_manager/lv_font_manager.c.obj
-
-include/lvgl/src/others/font_manager/lv_font_manager.i: include/lvgl/src/others/font_manager/lv_font_manager.c.i
+# target to preprocess a source file
+include/lvgl/src/others/font_manager/lv_font_manager.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/font_manager/lv_font_manager.i
 .PHONY : include/lvgl/src/others/font_manager/lv_font_manager.i
 
-# target to preprocess a source file
-include/lvgl/src/others/font_manager/lv_font_manager.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/font_manager/lv_font_manager.c.i
-.PHONY : include/lvgl/src/others/font_manager/lv_font_manager.c.i
-
-include/lvgl/src/others/font_manager/lv_font_manager.s: include/lvgl/src/others/font_manager/lv_font_manager.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/font_manager/lv_font_manager.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/font_manager/lv_font_manager.s
 .PHONY : include/lvgl/src/others/font_manager/lv_font_manager.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/font_manager/lv_font_manager.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/font_manager/lv_font_manager.c.s
-.PHONY : include/lvgl/src/others/font_manager/lv_font_manager.c.s
-
-include/lvgl/src/others/font_manager/lv_font_manager_recycle.obj: include/lvgl/src/others/font_manager/lv_font_manager_recycle.c.obj
+# target to build an object file
+include/lvgl/src/others/font_manager/lv_font_manager_recycle.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/font_manager/lv_font_manager_recycle.obj
 .PHONY : include/lvgl/src/others/font_manager/lv_font_manager_recycle.obj
 
-# target to build an object file
-include/lvgl/src/others/font_manager/lv_font_manager_recycle.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/font_manager/lv_font_manager_recycle.c.obj
-.PHONY : include/lvgl/src/others/font_manager/lv_font_manager_recycle.c.obj
-
-include/lvgl/src/others/font_manager/lv_font_manager_recycle.i: include/lvgl/src/others/font_manager/lv_font_manager_recycle.c.i
+# target to preprocess a source file
+include/lvgl/src/others/font_manager/lv_font_manager_recycle.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/font_manager/lv_font_manager_recycle.i
 .PHONY : include/lvgl/src/others/font_manager/lv_font_manager_recycle.i
 
-# target to preprocess a source file
-include/lvgl/src/others/font_manager/lv_font_manager_recycle.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/font_manager/lv_font_manager_recycle.c.i
-.PHONY : include/lvgl/src/others/font_manager/lv_font_manager_recycle.c.i
-
-include/lvgl/src/others/font_manager/lv_font_manager_recycle.s: include/lvgl/src/others/font_manager/lv_font_manager_recycle.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/font_manager/lv_font_manager_recycle.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/font_manager/lv_font_manager_recycle.s
 .PHONY : include/lvgl/src/others/font_manager/lv_font_manager_recycle.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/font_manager/lv_font_manager_recycle.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/font_manager/lv_font_manager_recycle.c.s
-.PHONY : include/lvgl/src/others/font_manager/lv_font_manager_recycle.c.s
-
-include/lvgl/src/others/font_manager/lv_font_manager_utils.obj: include/lvgl/src/others/font_manager/lv_font_manager_utils.c.obj
+# target to build an object file
+include/lvgl/src/others/font_manager/lv_font_manager_utils.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/font_manager/lv_font_manager_utils.obj
 .PHONY : include/lvgl/src/others/font_manager/lv_font_manager_utils.obj
 
-# target to build an object file
-include/lvgl/src/others/font_manager/lv_font_manager_utils.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/font_manager/lv_font_manager_utils.c.obj
-.PHONY : include/lvgl/src/others/font_manager/lv_font_manager_utils.c.obj
-
-include/lvgl/src/others/font_manager/lv_font_manager_utils.i: include/lvgl/src/others/font_manager/lv_font_manager_utils.c.i
+# target to preprocess a source file
+include/lvgl/src/others/font_manager/lv_font_manager_utils.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/font_manager/lv_font_manager_utils.i
 .PHONY : include/lvgl/src/others/font_manager/lv_font_manager_utils.i
 
-# target to preprocess a source file
-include/lvgl/src/others/font_manager/lv_font_manager_utils.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/font_manager/lv_font_manager_utils.c.i
-.PHONY : include/lvgl/src/others/font_manager/lv_font_manager_utils.c.i
-
-include/lvgl/src/others/font_manager/lv_font_manager_utils.s: include/lvgl/src/others/font_manager/lv_font_manager_utils.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/font_manager/lv_font_manager_utils.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/font_manager/lv_font_manager_utils.s
 .PHONY : include/lvgl/src/others/font_manager/lv_font_manager_utils.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/font_manager/lv_font_manager_utils.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/font_manager/lv_font_manager_utils.c.s
-.PHONY : include/lvgl/src/others/font_manager/lv_font_manager_utils.c.s
-
-include/lvgl/src/others/fragment/lv_fragment.obj: include/lvgl/src/others/fragment/lv_fragment.c.obj
+# target to build an object file
+include/lvgl/src/others/fragment/lv_fragment.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/fragment/lv_fragment.obj
 .PHONY : include/lvgl/src/others/fragment/lv_fragment.obj
 
-# target to build an object file
-include/lvgl/src/others/fragment/lv_fragment.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/fragment/lv_fragment.c.obj
-.PHONY : include/lvgl/src/others/fragment/lv_fragment.c.obj
-
-include/lvgl/src/others/fragment/lv_fragment.i: include/lvgl/src/others/fragment/lv_fragment.c.i
+# target to preprocess a source file
+include/lvgl/src/others/fragment/lv_fragment.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/fragment/lv_fragment.i
 .PHONY : include/lvgl/src/others/fragment/lv_fragment.i
 
-# target to preprocess a source file
-include/lvgl/src/others/fragment/lv_fragment.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/fragment/lv_fragment.c.i
-.PHONY : include/lvgl/src/others/fragment/lv_fragment.c.i
-
-include/lvgl/src/others/fragment/lv_fragment.s: include/lvgl/src/others/fragment/lv_fragment.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/fragment/lv_fragment.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/fragment/lv_fragment.s
 .PHONY : include/lvgl/src/others/fragment/lv_fragment.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/fragment/lv_fragment.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/fragment/lv_fragment.c.s
-.PHONY : include/lvgl/src/others/fragment/lv_fragment.c.s
-
-include/lvgl/src/others/fragment/lv_fragment_manager.obj: include/lvgl/src/others/fragment/lv_fragment_manager.c.obj
+# target to build an object file
+include/lvgl/src/others/fragment/lv_fragment_manager.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/fragment/lv_fragment_manager.obj
 .PHONY : include/lvgl/src/others/fragment/lv_fragment_manager.obj
 
-# target to build an object file
-include/lvgl/src/others/fragment/lv_fragment_manager.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/fragment/lv_fragment_manager.c.obj
-.PHONY : include/lvgl/src/others/fragment/lv_fragment_manager.c.obj
-
-include/lvgl/src/others/fragment/lv_fragment_manager.i: include/lvgl/src/others/fragment/lv_fragment_manager.c.i
+# target to preprocess a source file
+include/lvgl/src/others/fragment/lv_fragment_manager.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/fragment/lv_fragment_manager.i
 .PHONY : include/lvgl/src/others/fragment/lv_fragment_manager.i
 
-# target to preprocess a source file
-include/lvgl/src/others/fragment/lv_fragment_manager.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/fragment/lv_fragment_manager.c.i
-.PHONY : include/lvgl/src/others/fragment/lv_fragment_manager.c.i
-
-include/lvgl/src/others/fragment/lv_fragment_manager.s: include/lvgl/src/others/fragment/lv_fragment_manager.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/fragment/lv_fragment_manager.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/fragment/lv_fragment_manager.s
 .PHONY : include/lvgl/src/others/fragment/lv_fragment_manager.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/fragment/lv_fragment_manager.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/fragment/lv_fragment_manager.c.s
-.PHONY : include/lvgl/src/others/fragment/lv_fragment_manager.c.s
-
-include/lvgl/src/others/gridnav/lv_gridnav.obj: include/lvgl/src/others/gridnav/lv_gridnav.c.obj
+# target to build an object file
+include/lvgl/src/others/gridnav/lv_gridnav.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/gridnav/lv_gridnav.obj
 .PHONY : include/lvgl/src/others/gridnav/lv_gridnav.obj
 
-# target to build an object file
-include/lvgl/src/others/gridnav/lv_gridnav.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/gridnav/lv_gridnav.c.obj
-.PHONY : include/lvgl/src/others/gridnav/lv_gridnav.c.obj
-
-include/lvgl/src/others/gridnav/lv_gridnav.i: include/lvgl/src/others/gridnav/lv_gridnav.c.i
+# target to preprocess a source file
+include/lvgl/src/others/gridnav/lv_gridnav.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/gridnav/lv_gridnav.i
 .PHONY : include/lvgl/src/others/gridnav/lv_gridnav.i
 
-# target to preprocess a source file
-include/lvgl/src/others/gridnav/lv_gridnav.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/gridnav/lv_gridnav.c.i
-.PHONY : include/lvgl/src/others/gridnav/lv_gridnav.c.i
-
-include/lvgl/src/others/gridnav/lv_gridnav.s: include/lvgl/src/others/gridnav/lv_gridnav.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/gridnav/lv_gridnav.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/gridnav/lv_gridnav.s
 .PHONY : include/lvgl/src/others/gridnav/lv_gridnav.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/gridnav/lv_gridnav.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/gridnav/lv_gridnav.c.s
-.PHONY : include/lvgl/src/others/gridnav/lv_gridnav.c.s
-
-include/lvgl/src/others/ime/lv_ime_pinyin.obj: include/lvgl/src/others/ime/lv_ime_pinyin.c.obj
+# target to build an object file
+include/lvgl/src/others/ime/lv_ime_pinyin.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/ime/lv_ime_pinyin.obj
 .PHONY : include/lvgl/src/others/ime/lv_ime_pinyin.obj
 
-# target to build an object file
-include/lvgl/src/others/ime/lv_ime_pinyin.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/ime/lv_ime_pinyin.c.obj
-.PHONY : include/lvgl/src/others/ime/lv_ime_pinyin.c.obj
-
-include/lvgl/src/others/ime/lv_ime_pinyin.i: include/lvgl/src/others/ime/lv_ime_pinyin.c.i
+# target to preprocess a source file
+include/lvgl/src/others/ime/lv_ime_pinyin.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/ime/lv_ime_pinyin.i
 .PHONY : include/lvgl/src/others/ime/lv_ime_pinyin.i
 
-# target to preprocess a source file
-include/lvgl/src/others/ime/lv_ime_pinyin.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/ime/lv_ime_pinyin.c.i
-.PHONY : include/lvgl/src/others/ime/lv_ime_pinyin.c.i
-
-include/lvgl/src/others/ime/lv_ime_pinyin.s: include/lvgl/src/others/ime/lv_ime_pinyin.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/ime/lv_ime_pinyin.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/ime/lv_ime_pinyin.s
 .PHONY : include/lvgl/src/others/ime/lv_ime_pinyin.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/ime/lv_ime_pinyin.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/ime/lv_ime_pinyin.c.s
-.PHONY : include/lvgl/src/others/ime/lv_ime_pinyin.c.s
-
-include/lvgl/src/others/imgfont/lv_imgfont.obj: include/lvgl/src/others/imgfont/lv_imgfont.c.obj
+# target to build an object file
+include/lvgl/src/others/imgfont/lv_imgfont.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/imgfont/lv_imgfont.obj
 .PHONY : include/lvgl/src/others/imgfont/lv_imgfont.obj
 
-# target to build an object file
-include/lvgl/src/others/imgfont/lv_imgfont.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/imgfont/lv_imgfont.c.obj
-.PHONY : include/lvgl/src/others/imgfont/lv_imgfont.c.obj
-
-include/lvgl/src/others/imgfont/lv_imgfont.i: include/lvgl/src/others/imgfont/lv_imgfont.c.i
+# target to preprocess a source file
+include/lvgl/src/others/imgfont/lv_imgfont.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/imgfont/lv_imgfont.i
 .PHONY : include/lvgl/src/others/imgfont/lv_imgfont.i
 
-# target to preprocess a source file
-include/lvgl/src/others/imgfont/lv_imgfont.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/imgfont/lv_imgfont.c.i
-.PHONY : include/lvgl/src/others/imgfont/lv_imgfont.c.i
-
-include/lvgl/src/others/imgfont/lv_imgfont.s: include/lvgl/src/others/imgfont/lv_imgfont.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/imgfont/lv_imgfont.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/imgfont/lv_imgfont.s
 .PHONY : include/lvgl/src/others/imgfont/lv_imgfont.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/imgfont/lv_imgfont.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/imgfont/lv_imgfont.c.s
-.PHONY : include/lvgl/src/others/imgfont/lv_imgfont.c.s
-
-include/lvgl/src/others/monkey/lv_monkey.obj: include/lvgl/src/others/monkey/lv_monkey.c.obj
+# target to build an object file
+include/lvgl/src/others/monkey/lv_monkey.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/monkey/lv_monkey.obj
 .PHONY : include/lvgl/src/others/monkey/lv_monkey.obj
 
-# target to build an object file
-include/lvgl/src/others/monkey/lv_monkey.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/monkey/lv_monkey.c.obj
-.PHONY : include/lvgl/src/others/monkey/lv_monkey.c.obj
-
-include/lvgl/src/others/monkey/lv_monkey.i: include/lvgl/src/others/monkey/lv_monkey.c.i
+# target to preprocess a source file
+include/lvgl/src/others/monkey/lv_monkey.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/monkey/lv_monkey.i
 .PHONY : include/lvgl/src/others/monkey/lv_monkey.i
 
-# target to preprocess a source file
-include/lvgl/src/others/monkey/lv_monkey.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/monkey/lv_monkey.c.i
-.PHONY : include/lvgl/src/others/monkey/lv_monkey.c.i
-
-include/lvgl/src/others/monkey/lv_monkey.s: include/lvgl/src/others/monkey/lv_monkey.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/monkey/lv_monkey.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/monkey/lv_monkey.s
 .PHONY : include/lvgl/src/others/monkey/lv_monkey.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/monkey/lv_monkey.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/monkey/lv_monkey.c.s
-.PHONY : include/lvgl/src/others/monkey/lv_monkey.c.s
-
-include/lvgl/src/others/observer/lv_observer.obj: include/lvgl/src/others/observer/lv_observer.c.obj
+# target to build an object file
+include/lvgl/src/others/observer/lv_observer.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/observer/lv_observer.obj
 .PHONY : include/lvgl/src/others/observer/lv_observer.obj
 
-# target to build an object file
-include/lvgl/src/others/observer/lv_observer.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/observer/lv_observer.c.obj
-.PHONY : include/lvgl/src/others/observer/lv_observer.c.obj
-
-include/lvgl/src/others/observer/lv_observer.i: include/lvgl/src/others/observer/lv_observer.c.i
+# target to preprocess a source file
+include/lvgl/src/others/observer/lv_observer.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/observer/lv_observer.i
 .PHONY : include/lvgl/src/others/observer/lv_observer.i
 
-# target to preprocess a source file
-include/lvgl/src/others/observer/lv_observer.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/observer/lv_observer.c.i
-.PHONY : include/lvgl/src/others/observer/lv_observer.c.i
-
-include/lvgl/src/others/observer/lv_observer.s: include/lvgl/src/others/observer/lv_observer.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/observer/lv_observer.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/observer/lv_observer.s
 .PHONY : include/lvgl/src/others/observer/lv_observer.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/observer/lv_observer.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/observer/lv_observer.c.s
-.PHONY : include/lvgl/src/others/observer/lv_observer.c.s
-
-include/lvgl/src/others/snapshot/lv_snapshot.obj: include/lvgl/src/others/snapshot/lv_snapshot.c.obj
+# target to build an object file
+include/lvgl/src/others/snapshot/lv_snapshot.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/snapshot/lv_snapshot.obj
 .PHONY : include/lvgl/src/others/snapshot/lv_snapshot.obj
 
-# target to build an object file
-include/lvgl/src/others/snapshot/lv_snapshot.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/snapshot/lv_snapshot.c.obj
-.PHONY : include/lvgl/src/others/snapshot/lv_snapshot.c.obj
-
-include/lvgl/src/others/snapshot/lv_snapshot.i: include/lvgl/src/others/snapshot/lv_snapshot.c.i
+# target to preprocess a source file
+include/lvgl/src/others/snapshot/lv_snapshot.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/snapshot/lv_snapshot.i
 .PHONY : include/lvgl/src/others/snapshot/lv_snapshot.i
 
-# target to preprocess a source file
-include/lvgl/src/others/snapshot/lv_snapshot.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/snapshot/lv_snapshot.c.i
-.PHONY : include/lvgl/src/others/snapshot/lv_snapshot.c.i
-
-include/lvgl/src/others/snapshot/lv_snapshot.s: include/lvgl/src/others/snapshot/lv_snapshot.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/snapshot/lv_snapshot.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/snapshot/lv_snapshot.s
 .PHONY : include/lvgl/src/others/snapshot/lv_snapshot.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/snapshot/lv_snapshot.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/snapshot/lv_snapshot.c.s
-.PHONY : include/lvgl/src/others/snapshot/lv_snapshot.c.s
-
-include/lvgl/src/others/sysmon/lv_sysmon.obj: include/lvgl/src/others/sysmon/lv_sysmon.c.obj
+# target to build an object file
+include/lvgl/src/others/sysmon/lv_sysmon.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/sysmon/lv_sysmon.obj
 .PHONY : include/lvgl/src/others/sysmon/lv_sysmon.obj
 
-# target to build an object file
-include/lvgl/src/others/sysmon/lv_sysmon.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/sysmon/lv_sysmon.c.obj
-.PHONY : include/lvgl/src/others/sysmon/lv_sysmon.c.obj
-
-include/lvgl/src/others/sysmon/lv_sysmon.i: include/lvgl/src/others/sysmon/lv_sysmon.c.i
+# target to preprocess a source file
+include/lvgl/src/others/sysmon/lv_sysmon.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/sysmon/lv_sysmon.i
 .PHONY : include/lvgl/src/others/sysmon/lv_sysmon.i
 
-# target to preprocess a source file
-include/lvgl/src/others/sysmon/lv_sysmon.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/sysmon/lv_sysmon.c.i
-.PHONY : include/lvgl/src/others/sysmon/lv_sysmon.c.i
-
-include/lvgl/src/others/sysmon/lv_sysmon.s: include/lvgl/src/others/sysmon/lv_sysmon.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/sysmon/lv_sysmon.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/sysmon/lv_sysmon.s
 .PHONY : include/lvgl/src/others/sysmon/lv_sysmon.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/sysmon/lv_sysmon.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/sysmon/lv_sysmon.c.s
-.PHONY : include/lvgl/src/others/sysmon/lv_sysmon.c.s
-
-include/lvgl/src/others/test/lv_test_display.obj: include/lvgl/src/others/test/lv_test_display.c.obj
+# target to build an object file
+include/lvgl/src/others/test/lv_test_display.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_display.obj
 .PHONY : include/lvgl/src/others/test/lv_test_display.obj
 
-# target to build an object file
-include/lvgl/src/others/test/lv_test_display.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_display.c.obj
-.PHONY : include/lvgl/src/others/test/lv_test_display.c.obj
-
-include/lvgl/src/others/test/lv_test_display.i: include/lvgl/src/others/test/lv_test_display.c.i
+# target to preprocess a source file
+include/lvgl/src/others/test/lv_test_display.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_display.i
 .PHONY : include/lvgl/src/others/test/lv_test_display.i
 
-# target to preprocess a source file
-include/lvgl/src/others/test/lv_test_display.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_display.c.i
-.PHONY : include/lvgl/src/others/test/lv_test_display.c.i
-
-include/lvgl/src/others/test/lv_test_display.s: include/lvgl/src/others/test/lv_test_display.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/test/lv_test_display.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_display.s
 .PHONY : include/lvgl/src/others/test/lv_test_display.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/test/lv_test_display.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_display.c.s
-.PHONY : include/lvgl/src/others/test/lv_test_display.c.s
-
-include/lvgl/src/others/test/lv_test_helpers.obj: include/lvgl/src/others/test/lv_test_helpers.c.obj
+# target to build an object file
+include/lvgl/src/others/test/lv_test_helpers.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_helpers.obj
 .PHONY : include/lvgl/src/others/test/lv_test_helpers.obj
 
-# target to build an object file
-include/lvgl/src/others/test/lv_test_helpers.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_helpers.c.obj
-.PHONY : include/lvgl/src/others/test/lv_test_helpers.c.obj
-
-include/lvgl/src/others/test/lv_test_helpers.i: include/lvgl/src/others/test/lv_test_helpers.c.i
+# target to preprocess a source file
+include/lvgl/src/others/test/lv_test_helpers.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_helpers.i
 .PHONY : include/lvgl/src/others/test/lv_test_helpers.i
 
-# target to preprocess a source file
-include/lvgl/src/others/test/lv_test_helpers.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_helpers.c.i
-.PHONY : include/lvgl/src/others/test/lv_test_helpers.c.i
-
-include/lvgl/src/others/test/lv_test_helpers.s: include/lvgl/src/others/test/lv_test_helpers.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/test/lv_test_helpers.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_helpers.s
 .PHONY : include/lvgl/src/others/test/lv_test_helpers.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/test/lv_test_helpers.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_helpers.c.s
-.PHONY : include/lvgl/src/others/test/lv_test_helpers.c.s
-
-include/lvgl/src/others/test/lv_test_indev.obj: include/lvgl/src/others/test/lv_test_indev.c.obj
+# target to build an object file
+include/lvgl/src/others/test/lv_test_indev.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_indev.obj
 .PHONY : include/lvgl/src/others/test/lv_test_indev.obj
 
-# target to build an object file
-include/lvgl/src/others/test/lv_test_indev.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_indev.c.obj
-.PHONY : include/lvgl/src/others/test/lv_test_indev.c.obj
-
-include/lvgl/src/others/test/lv_test_indev.i: include/lvgl/src/others/test/lv_test_indev.c.i
+# target to preprocess a source file
+include/lvgl/src/others/test/lv_test_indev.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_indev.i
 .PHONY : include/lvgl/src/others/test/lv_test_indev.i
 
-# target to preprocess a source file
-include/lvgl/src/others/test/lv_test_indev.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_indev.c.i
-.PHONY : include/lvgl/src/others/test/lv_test_indev.c.i
-
-include/lvgl/src/others/test/lv_test_indev.s: include/lvgl/src/others/test/lv_test_indev.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/test/lv_test_indev.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_indev.s
 .PHONY : include/lvgl/src/others/test/lv_test_indev.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/test/lv_test_indev.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_indev.c.s
-.PHONY : include/lvgl/src/others/test/lv_test_indev.c.s
-
-include/lvgl/src/others/test/lv_test_screenshot_compare.obj: include/lvgl/src/others/test/lv_test_screenshot_compare.c.obj
+# target to build an object file
+include/lvgl/src/others/test/lv_test_screenshot_compare.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_screenshot_compare.obj
 .PHONY : include/lvgl/src/others/test/lv_test_screenshot_compare.obj
 
-# target to build an object file
-include/lvgl/src/others/test/lv_test_screenshot_compare.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_screenshot_compare.c.obj
-.PHONY : include/lvgl/src/others/test/lv_test_screenshot_compare.c.obj
-
-include/lvgl/src/others/test/lv_test_screenshot_compare.i: include/lvgl/src/others/test/lv_test_screenshot_compare.c.i
+# target to preprocess a source file
+include/lvgl/src/others/test/lv_test_screenshot_compare.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_screenshot_compare.i
 .PHONY : include/lvgl/src/others/test/lv_test_screenshot_compare.i
 
-# target to preprocess a source file
-include/lvgl/src/others/test/lv_test_screenshot_compare.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_screenshot_compare.c.i
-.PHONY : include/lvgl/src/others/test/lv_test_screenshot_compare.c.i
-
-include/lvgl/src/others/test/lv_test_screenshot_compare.s: include/lvgl/src/others/test/lv_test_screenshot_compare.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/test/lv_test_screenshot_compare.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_screenshot_compare.s
 .PHONY : include/lvgl/src/others/test/lv_test_screenshot_compare.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/test/lv_test_screenshot_compare.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/test/lv_test_screenshot_compare.c.s
-.PHONY : include/lvgl/src/others/test/lv_test_screenshot_compare.c.s
-
-include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.obj: include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.c.obj
+# target to build an object file
+include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.obj
 .PHONY : include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.obj
 
-# target to build an object file
-include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.c.obj
-.PHONY : include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.c.obj
-
-include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.i: include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.c.i
+# target to preprocess a source file
+include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.i
 .PHONY : include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.i
 
-# target to preprocess a source file
-include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.c.i
-.PHONY : include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.c.i
-
-include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.s: include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.s
 .PHONY : include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.c.s
-.PHONY : include/lvgl/src/others/vg_lite_tvg/vg_lite_matrix.c.s
-
-include/lvgl/src/others/xml/lv_xml.obj: include/lvgl/src/others/xml/lv_xml.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/lv_xml.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml.obj
 .PHONY : include/lvgl/src/others/xml/lv_xml.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/lv_xml.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml.c.obj
-.PHONY : include/lvgl/src/others/xml/lv_xml.c.obj
-
-include/lvgl/src/others/xml/lv_xml.i: include/lvgl/src/others/xml/lv_xml.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/lv_xml.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml.i
 .PHONY : include/lvgl/src/others/xml/lv_xml.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/lv_xml.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml.c.i
-.PHONY : include/lvgl/src/others/xml/lv_xml.c.i
-
-include/lvgl/src/others/xml/lv_xml.s: include/lvgl/src/others/xml/lv_xml.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/lv_xml.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml.s
 .PHONY : include/lvgl/src/others/xml/lv_xml.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/lv_xml.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml.c.s
-.PHONY : include/lvgl/src/others/xml/lv_xml.c.s
-
-include/lvgl/src/others/xml/lv_xml_base_types.obj: include/lvgl/src/others/xml/lv_xml_base_types.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/lv_xml_base_types.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_base_types.obj
 .PHONY : include/lvgl/src/others/xml/lv_xml_base_types.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/lv_xml_base_types.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_base_types.c.obj
-.PHONY : include/lvgl/src/others/xml/lv_xml_base_types.c.obj
-
-include/lvgl/src/others/xml/lv_xml_base_types.i: include/lvgl/src/others/xml/lv_xml_base_types.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/lv_xml_base_types.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_base_types.i
 .PHONY : include/lvgl/src/others/xml/lv_xml_base_types.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/lv_xml_base_types.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_base_types.c.i
-.PHONY : include/lvgl/src/others/xml/lv_xml_base_types.c.i
-
-include/lvgl/src/others/xml/lv_xml_base_types.s: include/lvgl/src/others/xml/lv_xml_base_types.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/lv_xml_base_types.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_base_types.s
 .PHONY : include/lvgl/src/others/xml/lv_xml_base_types.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/lv_xml_base_types.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_base_types.c.s
-.PHONY : include/lvgl/src/others/xml/lv_xml_base_types.c.s
-
-include/lvgl/src/others/xml/lv_xml_component.obj: include/lvgl/src/others/xml/lv_xml_component.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/lv_xml_component.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_component.obj
 .PHONY : include/lvgl/src/others/xml/lv_xml_component.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/lv_xml_component.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_component.c.obj
-.PHONY : include/lvgl/src/others/xml/lv_xml_component.c.obj
-
-include/lvgl/src/others/xml/lv_xml_component.i: include/lvgl/src/others/xml/lv_xml_component.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/lv_xml_component.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_component.i
 .PHONY : include/lvgl/src/others/xml/lv_xml_component.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/lv_xml_component.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_component.c.i
-.PHONY : include/lvgl/src/others/xml/lv_xml_component.c.i
-
-include/lvgl/src/others/xml/lv_xml_component.s: include/lvgl/src/others/xml/lv_xml_component.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/lv_xml_component.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_component.s
 .PHONY : include/lvgl/src/others/xml/lv_xml_component.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/lv_xml_component.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_component.c.s
-.PHONY : include/lvgl/src/others/xml/lv_xml_component.c.s
-
-include/lvgl/src/others/xml/lv_xml_parser.obj: include/lvgl/src/others/xml/lv_xml_parser.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/lv_xml_parser.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_parser.obj
 .PHONY : include/lvgl/src/others/xml/lv_xml_parser.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/lv_xml_parser.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_parser.c.obj
-.PHONY : include/lvgl/src/others/xml/lv_xml_parser.c.obj
-
-include/lvgl/src/others/xml/lv_xml_parser.i: include/lvgl/src/others/xml/lv_xml_parser.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/lv_xml_parser.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_parser.i
 .PHONY : include/lvgl/src/others/xml/lv_xml_parser.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/lv_xml_parser.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_parser.c.i
-.PHONY : include/lvgl/src/others/xml/lv_xml_parser.c.i
-
-include/lvgl/src/others/xml/lv_xml_parser.s: include/lvgl/src/others/xml/lv_xml_parser.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/lv_xml_parser.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_parser.s
 .PHONY : include/lvgl/src/others/xml/lv_xml_parser.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/lv_xml_parser.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_parser.c.s
-.PHONY : include/lvgl/src/others/xml/lv_xml_parser.c.s
-
-include/lvgl/src/others/xml/lv_xml_style.obj: include/lvgl/src/others/xml/lv_xml_style.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/lv_xml_style.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_style.obj
 .PHONY : include/lvgl/src/others/xml/lv_xml_style.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/lv_xml_style.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_style.c.obj
-.PHONY : include/lvgl/src/others/xml/lv_xml_style.c.obj
-
-include/lvgl/src/others/xml/lv_xml_style.i: include/lvgl/src/others/xml/lv_xml_style.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/lv_xml_style.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_style.i
 .PHONY : include/lvgl/src/others/xml/lv_xml_style.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/lv_xml_style.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_style.c.i
-.PHONY : include/lvgl/src/others/xml/lv_xml_style.c.i
-
-include/lvgl/src/others/xml/lv_xml_style.s: include/lvgl/src/others/xml/lv_xml_style.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/lv_xml_style.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_style.s
 .PHONY : include/lvgl/src/others/xml/lv_xml_style.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/lv_xml_style.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_style.c.s
-.PHONY : include/lvgl/src/others/xml/lv_xml_style.c.s
-
-include/lvgl/src/others/xml/lv_xml_utils.obj: include/lvgl/src/others/xml/lv_xml_utils.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/lv_xml_utils.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_utils.obj
 .PHONY : include/lvgl/src/others/xml/lv_xml_utils.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/lv_xml_utils.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_utils.c.obj
-.PHONY : include/lvgl/src/others/xml/lv_xml_utils.c.obj
-
-include/lvgl/src/others/xml/lv_xml_utils.i: include/lvgl/src/others/xml/lv_xml_utils.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/lv_xml_utils.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_utils.i
 .PHONY : include/lvgl/src/others/xml/lv_xml_utils.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/lv_xml_utils.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_utils.c.i
-.PHONY : include/lvgl/src/others/xml/lv_xml_utils.c.i
-
-include/lvgl/src/others/xml/lv_xml_utils.s: include/lvgl/src/others/xml/lv_xml_utils.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/lv_xml_utils.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_utils.s
 .PHONY : include/lvgl/src/others/xml/lv_xml_utils.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/lv_xml_utils.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_utils.c.s
-.PHONY : include/lvgl/src/others/xml/lv_xml_utils.c.s
-
-include/lvgl/src/others/xml/lv_xml_widget.obj: include/lvgl/src/others/xml/lv_xml_widget.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/lv_xml_widget.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_widget.obj
 .PHONY : include/lvgl/src/others/xml/lv_xml_widget.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/lv_xml_widget.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_widget.c.obj
-.PHONY : include/lvgl/src/others/xml/lv_xml_widget.c.obj
-
-include/lvgl/src/others/xml/lv_xml_widget.i: include/lvgl/src/others/xml/lv_xml_widget.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/lv_xml_widget.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_widget.i
 .PHONY : include/lvgl/src/others/xml/lv_xml_widget.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/lv_xml_widget.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_widget.c.i
-.PHONY : include/lvgl/src/others/xml/lv_xml_widget.c.i
-
-include/lvgl/src/others/xml/lv_xml_widget.s: include/lvgl/src/others/xml/lv_xml_widget.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/lv_xml_widget.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_widget.s
 .PHONY : include/lvgl/src/others/xml/lv_xml_widget.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/lv_xml_widget.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/lv_xml_widget.c.s
-.PHONY : include/lvgl/src/others/xml/lv_xml_widget.c.s
-
-include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.obj: include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.obj
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.c.obj
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.c.obj
-
-include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.i: include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.i
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.c.i
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.c.i
-
-include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.s: include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.s
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.c.s
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_bar_parser.c.s
-
-include/lvgl/src/others/xml/parsers/lv_xml_button_parser.obj: include/lvgl/src/others/xml/parsers/lv_xml_button_parser.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/parsers/lv_xml_button_parser.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_button_parser.obj
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_button_parser.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/parsers/lv_xml_button_parser.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_button_parser.c.obj
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_button_parser.c.obj
-
-include/lvgl/src/others/xml/parsers/lv_xml_button_parser.i: include/lvgl/src/others/xml/parsers/lv_xml_button_parser.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/parsers/lv_xml_button_parser.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_button_parser.i
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_button_parser.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/parsers/lv_xml_button_parser.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_button_parser.c.i
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_button_parser.c.i
-
-include/lvgl/src/others/xml/parsers/lv_xml_button_parser.s: include/lvgl/src/others/xml/parsers/lv_xml_button_parser.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/parsers/lv_xml_button_parser.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_button_parser.s
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_button_parser.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/parsers/lv_xml_button_parser.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_button_parser.c.s
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_button_parser.c.s
-
-include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.obj: include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.obj
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.c.obj
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.c.obj
-
-include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.i: include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.i
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.c.i
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.c.i
-
-include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.s: include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.s
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.c.s
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_buttonmatrix_parser.c.s
-
-include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.obj: include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.obj
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.c.obj
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.c.obj
-
-include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.i: include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.i
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.c.i
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.c.i
-
-include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.s: include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.s
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.c.s
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_chart_parser.c.s
-
-include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.obj: include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.obj
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.c.obj
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.c.obj
-
-include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.i: include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.i
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.c.i
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.c.i
-
-include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.s: include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.s
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.c.s
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_dropdown_parser.c.s
-
-include/lvgl/src/others/xml/parsers/lv_xml_event_parser.obj: include/lvgl/src/others/xml/parsers/lv_xml_event_parser.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/parsers/lv_xml_event_parser.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_event_parser.obj
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_event_parser.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/parsers/lv_xml_event_parser.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_event_parser.c.obj
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_event_parser.c.obj
-
-include/lvgl/src/others/xml/parsers/lv_xml_event_parser.i: include/lvgl/src/others/xml/parsers/lv_xml_event_parser.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/parsers/lv_xml_event_parser.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_event_parser.i
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_event_parser.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/parsers/lv_xml_event_parser.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_event_parser.c.i
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_event_parser.c.i
-
-include/lvgl/src/others/xml/parsers/lv_xml_event_parser.s: include/lvgl/src/others/xml/parsers/lv_xml_event_parser.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/parsers/lv_xml_event_parser.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_event_parser.s
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_event_parser.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/parsers/lv_xml_event_parser.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_event_parser.c.s
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_event_parser.c.s
-
-include/lvgl/src/others/xml/parsers/lv_xml_image_parser.obj: include/lvgl/src/others/xml/parsers/lv_xml_image_parser.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/parsers/lv_xml_image_parser.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_image_parser.obj
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_image_parser.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/parsers/lv_xml_image_parser.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_image_parser.c.obj
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_image_parser.c.obj
-
-include/lvgl/src/others/xml/parsers/lv_xml_image_parser.i: include/lvgl/src/others/xml/parsers/lv_xml_image_parser.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/parsers/lv_xml_image_parser.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_image_parser.i
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_image_parser.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/parsers/lv_xml_image_parser.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_image_parser.c.i
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_image_parser.c.i
-
-include/lvgl/src/others/xml/parsers/lv_xml_image_parser.s: include/lvgl/src/others/xml/parsers/lv_xml_image_parser.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/parsers/lv_xml_image_parser.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_image_parser.s
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_image_parser.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/parsers/lv_xml_image_parser.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_image_parser.c.s
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_image_parser.c.s
-
-include/lvgl/src/others/xml/parsers/lv_xml_label_parser.obj: include/lvgl/src/others/xml/parsers/lv_xml_label_parser.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/parsers/lv_xml_label_parser.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_label_parser.obj
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_label_parser.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/parsers/lv_xml_label_parser.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_label_parser.c.obj
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_label_parser.c.obj
-
-include/lvgl/src/others/xml/parsers/lv_xml_label_parser.i: include/lvgl/src/others/xml/parsers/lv_xml_label_parser.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/parsers/lv_xml_label_parser.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_label_parser.i
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_label_parser.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/parsers/lv_xml_label_parser.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_label_parser.c.i
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_label_parser.c.i
-
-include/lvgl/src/others/xml/parsers/lv_xml_label_parser.s: include/lvgl/src/others/xml/parsers/lv_xml_label_parser.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/parsers/lv_xml_label_parser.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_label_parser.s
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_label_parser.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/parsers/lv_xml_label_parser.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_label_parser.c.s
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_label_parser.c.s
-
-include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.obj: include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.obj
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.c.obj
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.c.obj
-
-include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.i: include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.i
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.c.i
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.c.i
-
-include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.s: include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.s
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.c.s
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_obj_parser.c.s
-
-include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.obj: include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.obj
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.c.obj
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.c.obj
-
-include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.i: include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.i
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.c.i
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.c.i
-
-include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.s: include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.s
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.c.s
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_roller_parser.c.s
-
-include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.obj: include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.obj
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.c.obj
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.c.obj
-
-include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.i: include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.i
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.c.i
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.c.i
-
-include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.s: include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.s
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.c.s
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_scale_parser.c.s
-
-include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.obj: include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.obj
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.c.obj
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.c.obj
-
-include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.i: include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.i
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.c.i
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.c.i
-
-include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.s: include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.s
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.c.s
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_slider_parser.c.s
-
-include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.obj: include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.obj
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.c.obj
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.c.obj
-
-include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.i: include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.i
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.c.i
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.c.i
-
-include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.s: include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.s
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.c.s
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_spangroup_parser.c.s
-
-include/lvgl/src/others/xml/parsers/lv_xml_table_parser.obj: include/lvgl/src/others/xml/parsers/lv_xml_table_parser.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/parsers/lv_xml_table_parser.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_table_parser.obj
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_table_parser.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/parsers/lv_xml_table_parser.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_table_parser.c.obj
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_table_parser.c.obj
-
-include/lvgl/src/others/xml/parsers/lv_xml_table_parser.i: include/lvgl/src/others/xml/parsers/lv_xml_table_parser.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/parsers/lv_xml_table_parser.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_table_parser.i
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_table_parser.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/parsers/lv_xml_table_parser.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_table_parser.c.i
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_table_parser.c.i
-
-include/lvgl/src/others/xml/parsers/lv_xml_table_parser.s: include/lvgl/src/others/xml/parsers/lv_xml_table_parser.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/parsers/lv_xml_table_parser.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_table_parser.s
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_table_parser.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/parsers/lv_xml_table_parser.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_table_parser.c.s
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_table_parser.c.s
-
-include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.obj: include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.c.obj
+# target to build an object file
+include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.obj
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.obj
 
-# target to build an object file
-include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.c.obj
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.c.obj
-
-include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.i: include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.c.i
+# target to preprocess a source file
+include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.i
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.i
 
-# target to preprocess a source file
-include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.c.i
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.c.i
-
-include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.s: include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.c.s
+# target to generate assembly for a file
+include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.s
 .PHONY : include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.s
 
-# target to generate assembly for a file
-include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.c.s
-.PHONY : include/lvgl/src/others/xml/parsers/lv_xml_tabview_parser.c.s
-
-include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.obj: include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c.obj
+# target to build an object file
+include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.obj
 .PHONY : include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.obj
 
-# target to build an object file
-include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c.obj
-.PHONY : include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c.obj
-
-include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.i: include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c.i
+# target to preprocess a source file
+include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.i
 .PHONY : include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.i
 
-# target to preprocess a source file
-include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c.i
-.PHONY : include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c.i
-
-include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.s: include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c.s
+# target to generate assembly for a file
+include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.s
 .PHONY : include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.s
 
-# target to generate assembly for a file
-include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c.s
-.PHONY : include/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c.s
-
-include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.obj: include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.c.obj
+# target to build an object file
+include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.obj
 .PHONY : include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.obj
 
-# target to build an object file
-include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.c.obj
-.PHONY : include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.c.obj
-
-include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.i: include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.c.i
+# target to preprocess a source file
+include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.i
 .PHONY : include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.i
 
-# target to preprocess a source file
-include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.c.i
-.PHONY : include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.c.i
-
-include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.s: include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.c.s
+# target to generate assembly for a file
+include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.s
 .PHONY : include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.s
 
-# target to generate assembly for a file
-include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.c.s
-.PHONY : include/lvgl/src/stdlib/builtin/lv_sprintf_builtin.c.s
-
-include/lvgl/src/stdlib/builtin/lv_string_builtin.obj: include/lvgl/src/stdlib/builtin/lv_string_builtin.c.obj
+# target to build an object file
+include/lvgl/src/stdlib/builtin/lv_string_builtin.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_string_builtin.obj
 .PHONY : include/lvgl/src/stdlib/builtin/lv_string_builtin.obj
 
-# target to build an object file
-include/lvgl/src/stdlib/builtin/lv_string_builtin.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_string_builtin.c.obj
-.PHONY : include/lvgl/src/stdlib/builtin/lv_string_builtin.c.obj
-
-include/lvgl/src/stdlib/builtin/lv_string_builtin.i: include/lvgl/src/stdlib/builtin/lv_string_builtin.c.i
+# target to preprocess a source file
+include/lvgl/src/stdlib/builtin/lv_string_builtin.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_string_builtin.i
 .PHONY : include/lvgl/src/stdlib/builtin/lv_string_builtin.i
 
-# target to preprocess a source file
-include/lvgl/src/stdlib/builtin/lv_string_builtin.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_string_builtin.c.i
-.PHONY : include/lvgl/src/stdlib/builtin/lv_string_builtin.c.i
-
-include/lvgl/src/stdlib/builtin/lv_string_builtin.s: include/lvgl/src/stdlib/builtin/lv_string_builtin.c.s
+# target to generate assembly for a file
+include/lvgl/src/stdlib/builtin/lv_string_builtin.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_string_builtin.s
 .PHONY : include/lvgl/src/stdlib/builtin/lv_string_builtin.s
 
-# target to generate assembly for a file
-include/lvgl/src/stdlib/builtin/lv_string_builtin.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_string_builtin.c.s
-.PHONY : include/lvgl/src/stdlib/builtin/lv_string_builtin.c.s
-
-include/lvgl/src/stdlib/builtin/lv_tlsf.obj: include/lvgl/src/stdlib/builtin/lv_tlsf.c.obj
+# target to build an object file
+include/lvgl/src/stdlib/builtin/lv_tlsf.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_tlsf.obj
 .PHONY : include/lvgl/src/stdlib/builtin/lv_tlsf.obj
 
-# target to build an object file
-include/lvgl/src/stdlib/builtin/lv_tlsf.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_tlsf.c.obj
-.PHONY : include/lvgl/src/stdlib/builtin/lv_tlsf.c.obj
-
-include/lvgl/src/stdlib/builtin/lv_tlsf.i: include/lvgl/src/stdlib/builtin/lv_tlsf.c.i
+# target to preprocess a source file
+include/lvgl/src/stdlib/builtin/lv_tlsf.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_tlsf.i
 .PHONY : include/lvgl/src/stdlib/builtin/lv_tlsf.i
 
-# target to preprocess a source file
-include/lvgl/src/stdlib/builtin/lv_tlsf.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_tlsf.c.i
-.PHONY : include/lvgl/src/stdlib/builtin/lv_tlsf.c.i
-
-include/lvgl/src/stdlib/builtin/lv_tlsf.s: include/lvgl/src/stdlib/builtin/lv_tlsf.c.s
+# target to generate assembly for a file
+include/lvgl/src/stdlib/builtin/lv_tlsf.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_tlsf.s
 .PHONY : include/lvgl/src/stdlib/builtin/lv_tlsf.s
 
-# target to generate assembly for a file
-include/lvgl/src/stdlib/builtin/lv_tlsf.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/builtin/lv_tlsf.c.s
-.PHONY : include/lvgl/src/stdlib/builtin/lv_tlsf.c.s
-
-include/lvgl/src/stdlib/clib/lv_mem_core_clib.obj: include/lvgl/src/stdlib/clib/lv_mem_core_clib.c.obj
+# target to build an object file
+include/lvgl/src/stdlib/clib/lv_mem_core_clib.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/clib/lv_mem_core_clib.obj
 .PHONY : include/lvgl/src/stdlib/clib/lv_mem_core_clib.obj
 
-# target to build an object file
-include/lvgl/src/stdlib/clib/lv_mem_core_clib.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/clib/lv_mem_core_clib.c.obj
-.PHONY : include/lvgl/src/stdlib/clib/lv_mem_core_clib.c.obj
-
-include/lvgl/src/stdlib/clib/lv_mem_core_clib.i: include/lvgl/src/stdlib/clib/lv_mem_core_clib.c.i
+# target to preprocess a source file
+include/lvgl/src/stdlib/clib/lv_mem_core_clib.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/clib/lv_mem_core_clib.i
 .PHONY : include/lvgl/src/stdlib/clib/lv_mem_core_clib.i
 
-# target to preprocess a source file
-include/lvgl/src/stdlib/clib/lv_mem_core_clib.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/clib/lv_mem_core_clib.c.i
-.PHONY : include/lvgl/src/stdlib/clib/lv_mem_core_clib.c.i
-
-include/lvgl/src/stdlib/clib/lv_mem_core_clib.s: include/lvgl/src/stdlib/clib/lv_mem_core_clib.c.s
+# target to generate assembly for a file
+include/lvgl/src/stdlib/clib/lv_mem_core_clib.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/clib/lv_mem_core_clib.s
 .PHONY : include/lvgl/src/stdlib/clib/lv_mem_core_clib.s
 
-# target to generate assembly for a file
-include/lvgl/src/stdlib/clib/lv_mem_core_clib.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/clib/lv_mem_core_clib.c.s
-.PHONY : include/lvgl/src/stdlib/clib/lv_mem_core_clib.c.s
-
-include/lvgl/src/stdlib/clib/lv_sprintf_clib.obj: include/lvgl/src/stdlib/clib/lv_sprintf_clib.c.obj
+# target to build an object file
+include/lvgl/src/stdlib/clib/lv_sprintf_clib.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/clib/lv_sprintf_clib.obj
 .PHONY : include/lvgl/src/stdlib/clib/lv_sprintf_clib.obj
 
-# target to build an object file
-include/lvgl/src/stdlib/clib/lv_sprintf_clib.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/clib/lv_sprintf_clib.c.obj
-.PHONY : include/lvgl/src/stdlib/clib/lv_sprintf_clib.c.obj
-
-include/lvgl/src/stdlib/clib/lv_sprintf_clib.i: include/lvgl/src/stdlib/clib/lv_sprintf_clib.c.i
+# target to preprocess a source file
+include/lvgl/src/stdlib/clib/lv_sprintf_clib.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/clib/lv_sprintf_clib.i
 .PHONY : include/lvgl/src/stdlib/clib/lv_sprintf_clib.i
 
-# target to preprocess a source file
-include/lvgl/src/stdlib/clib/lv_sprintf_clib.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/clib/lv_sprintf_clib.c.i
-.PHONY : include/lvgl/src/stdlib/clib/lv_sprintf_clib.c.i
-
-include/lvgl/src/stdlib/clib/lv_sprintf_clib.s: include/lvgl/src/stdlib/clib/lv_sprintf_clib.c.s
+# target to generate assembly for a file
+include/lvgl/src/stdlib/clib/lv_sprintf_clib.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/clib/lv_sprintf_clib.s
 .PHONY : include/lvgl/src/stdlib/clib/lv_sprintf_clib.s
 
-# target to generate assembly for a file
-include/lvgl/src/stdlib/clib/lv_sprintf_clib.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/clib/lv_sprintf_clib.c.s
-.PHONY : include/lvgl/src/stdlib/clib/lv_sprintf_clib.c.s
-
-include/lvgl/src/stdlib/clib/lv_string_clib.obj: include/lvgl/src/stdlib/clib/lv_string_clib.c.obj
+# target to build an object file
+include/lvgl/src/stdlib/clib/lv_string_clib.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/clib/lv_string_clib.obj
 .PHONY : include/lvgl/src/stdlib/clib/lv_string_clib.obj
 
-# target to build an object file
-include/lvgl/src/stdlib/clib/lv_string_clib.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/clib/lv_string_clib.c.obj
-.PHONY : include/lvgl/src/stdlib/clib/lv_string_clib.c.obj
-
-include/lvgl/src/stdlib/clib/lv_string_clib.i: include/lvgl/src/stdlib/clib/lv_string_clib.c.i
+# target to preprocess a source file
+include/lvgl/src/stdlib/clib/lv_string_clib.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/clib/lv_string_clib.i
 .PHONY : include/lvgl/src/stdlib/clib/lv_string_clib.i
 
-# target to preprocess a source file
-include/lvgl/src/stdlib/clib/lv_string_clib.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/clib/lv_string_clib.c.i
-.PHONY : include/lvgl/src/stdlib/clib/lv_string_clib.c.i
-
-include/lvgl/src/stdlib/clib/lv_string_clib.s: include/lvgl/src/stdlib/clib/lv_string_clib.c.s
+# target to generate assembly for a file
+include/lvgl/src/stdlib/clib/lv_string_clib.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/clib/lv_string_clib.s
 .PHONY : include/lvgl/src/stdlib/clib/lv_string_clib.s
 
-# target to generate assembly for a file
-include/lvgl/src/stdlib/clib/lv_string_clib.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/clib/lv_string_clib.c.s
-.PHONY : include/lvgl/src/stdlib/clib/lv_string_clib.c.s
-
-include/lvgl/src/stdlib/lv_mem.obj: include/lvgl/src/stdlib/lv_mem.c.obj
+# target to build an object file
+include/lvgl/src/stdlib/lv_mem.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/lv_mem.obj
 .PHONY : include/lvgl/src/stdlib/lv_mem.obj
 
-# target to build an object file
-include/lvgl/src/stdlib/lv_mem.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/lv_mem.c.obj
-.PHONY : include/lvgl/src/stdlib/lv_mem.c.obj
-
-include/lvgl/src/stdlib/lv_mem.i: include/lvgl/src/stdlib/lv_mem.c.i
+# target to preprocess a source file
+include/lvgl/src/stdlib/lv_mem.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/lv_mem.i
 .PHONY : include/lvgl/src/stdlib/lv_mem.i
 
-# target to preprocess a source file
-include/lvgl/src/stdlib/lv_mem.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/lv_mem.c.i
-.PHONY : include/lvgl/src/stdlib/lv_mem.c.i
-
-include/lvgl/src/stdlib/lv_mem.s: include/lvgl/src/stdlib/lv_mem.c.s
+# target to generate assembly for a file
+include/lvgl/src/stdlib/lv_mem.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/lv_mem.s
 .PHONY : include/lvgl/src/stdlib/lv_mem.s
 
-# target to generate assembly for a file
-include/lvgl/src/stdlib/lv_mem.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/lv_mem.c.s
-.PHONY : include/lvgl/src/stdlib/lv_mem.c.s
-
-include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.obj: include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.c.obj
+# target to build an object file
+include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.obj
 .PHONY : include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.obj
 
-# target to build an object file
-include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.c.obj
-.PHONY : include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.c.obj
-
-include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.i: include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.c.i
+# target to preprocess a source file
+include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.i
 .PHONY : include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.i
 
-# target to preprocess a source file
-include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.c.i
-.PHONY : include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.c.i
-
-include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.s: include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.c.s
+# target to generate assembly for a file
+include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.s
 .PHONY : include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.s
 
-# target to generate assembly for a file
-include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.c.s
-.PHONY : include/lvgl/src/stdlib/micropython/lv_mem_core_micropython.c.s
-
-include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.obj: include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.c.obj
+# target to build an object file
+include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.obj
 .PHONY : include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.obj
 
-# target to build an object file
-include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.c.obj
-.PHONY : include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.c.obj
-
-include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.i: include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.c.i
+# target to preprocess a source file
+include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.i
 .PHONY : include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.i
 
-# target to preprocess a source file
-include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.c.i
-.PHONY : include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.c.i
-
-include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.s: include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.c.s
+# target to generate assembly for a file
+include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.s
 .PHONY : include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.s
 
-# target to generate assembly for a file
-include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.c.s
-.PHONY : include/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.c.s
-
-include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.obj: include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.c.obj
+# target to build an object file
+include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.obj
 .PHONY : include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.obj
 
-# target to build an object file
-include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.c.obj
-.PHONY : include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.c.obj
-
-include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.i: include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.c.i
+# target to preprocess a source file
+include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.i
 .PHONY : include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.i
 
-# target to preprocess a source file
-include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.c.i
-.PHONY : include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.c.i
-
-include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.s: include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.c.s
+# target to generate assembly for a file
+include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.s
 .PHONY : include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.s
 
-# target to generate assembly for a file
-include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.c.s
-.PHONY : include/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.c.s
-
-include/lvgl/src/stdlib/rtthread/lv_string_rtthread.obj: include/lvgl/src/stdlib/rtthread/lv_string_rtthread.c.obj
+# target to build an object file
+include/lvgl/src/stdlib/rtthread/lv_string_rtthread.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/rtthread/lv_string_rtthread.obj
 .PHONY : include/lvgl/src/stdlib/rtthread/lv_string_rtthread.obj
 
-# target to build an object file
-include/lvgl/src/stdlib/rtthread/lv_string_rtthread.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/rtthread/lv_string_rtthread.c.obj
-.PHONY : include/lvgl/src/stdlib/rtthread/lv_string_rtthread.c.obj
-
-include/lvgl/src/stdlib/rtthread/lv_string_rtthread.i: include/lvgl/src/stdlib/rtthread/lv_string_rtthread.c.i
+# target to preprocess a source file
+include/lvgl/src/stdlib/rtthread/lv_string_rtthread.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/rtthread/lv_string_rtthread.i
 .PHONY : include/lvgl/src/stdlib/rtthread/lv_string_rtthread.i
 
-# target to preprocess a source file
-include/lvgl/src/stdlib/rtthread/lv_string_rtthread.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/rtthread/lv_string_rtthread.c.i
-.PHONY : include/lvgl/src/stdlib/rtthread/lv_string_rtthread.c.i
-
-include/lvgl/src/stdlib/rtthread/lv_string_rtthread.s: include/lvgl/src/stdlib/rtthread/lv_string_rtthread.c.s
+# target to generate assembly for a file
+include/lvgl/src/stdlib/rtthread/lv_string_rtthread.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/rtthread/lv_string_rtthread.s
 .PHONY : include/lvgl/src/stdlib/rtthread/lv_string_rtthread.s
 
-# target to generate assembly for a file
-include/lvgl/src/stdlib/rtthread/lv_string_rtthread.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/rtthread/lv_string_rtthread.c.s
-.PHONY : include/lvgl/src/stdlib/rtthread/lv_string_rtthread.c.s
-
-include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.obj: include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.c.obj
+# target to build an object file
+include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.obj
 .PHONY : include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.obj
 
-# target to build an object file
-include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.c.obj
-.PHONY : include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.c.obj
-
-include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.i: include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.c.i
+# target to preprocess a source file
+include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.i
 .PHONY : include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.i
 
-# target to preprocess a source file
-include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.c.i
-.PHONY : include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.c.i
-
-include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.s: include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.c.s
+# target to generate assembly for a file
+include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.s
 .PHONY : include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.s
 
-# target to generate assembly for a file
-include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.c.s
-.PHONY : include/lvgl/src/stdlib/uefi/lv_mem_core_uefi.c.s
-
-include/lvgl/src/themes/default/lv_theme_default.obj: include/lvgl/src/themes/default/lv_theme_default.c.obj
+# target to build an object file
+include/lvgl/src/themes/default/lv_theme_default.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/default/lv_theme_default.obj
 .PHONY : include/lvgl/src/themes/default/lv_theme_default.obj
 
-# target to build an object file
-include/lvgl/src/themes/default/lv_theme_default.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/default/lv_theme_default.c.obj
-.PHONY : include/lvgl/src/themes/default/lv_theme_default.c.obj
-
-include/lvgl/src/themes/default/lv_theme_default.i: include/lvgl/src/themes/default/lv_theme_default.c.i
+# target to preprocess a source file
+include/lvgl/src/themes/default/lv_theme_default.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/default/lv_theme_default.i
 .PHONY : include/lvgl/src/themes/default/lv_theme_default.i
 
-# target to preprocess a source file
-include/lvgl/src/themes/default/lv_theme_default.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/default/lv_theme_default.c.i
-.PHONY : include/lvgl/src/themes/default/lv_theme_default.c.i
-
-include/lvgl/src/themes/default/lv_theme_default.s: include/lvgl/src/themes/default/lv_theme_default.c.s
+# target to generate assembly for a file
+include/lvgl/src/themes/default/lv_theme_default.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/default/lv_theme_default.s
 .PHONY : include/lvgl/src/themes/default/lv_theme_default.s
 
-# target to generate assembly for a file
-include/lvgl/src/themes/default/lv_theme_default.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/default/lv_theme_default.c.s
-.PHONY : include/lvgl/src/themes/default/lv_theme_default.c.s
-
-include/lvgl/src/themes/lv_theme.obj: include/lvgl/src/themes/lv_theme.c.obj
+# target to build an object file
+include/lvgl/src/themes/lv_theme.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/lv_theme.obj
 .PHONY : include/lvgl/src/themes/lv_theme.obj
 
-# target to build an object file
-include/lvgl/src/themes/lv_theme.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/lv_theme.c.obj
-.PHONY : include/lvgl/src/themes/lv_theme.c.obj
-
-include/lvgl/src/themes/lv_theme.i: include/lvgl/src/themes/lv_theme.c.i
+# target to preprocess a source file
+include/lvgl/src/themes/lv_theme.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/lv_theme.i
 .PHONY : include/lvgl/src/themes/lv_theme.i
 
-# target to preprocess a source file
-include/lvgl/src/themes/lv_theme.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/lv_theme.c.i
-.PHONY : include/lvgl/src/themes/lv_theme.c.i
-
-include/lvgl/src/themes/lv_theme.s: include/lvgl/src/themes/lv_theme.c.s
+# target to generate assembly for a file
+include/lvgl/src/themes/lv_theme.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/lv_theme.s
 .PHONY : include/lvgl/src/themes/lv_theme.s
 
-# target to generate assembly for a file
-include/lvgl/src/themes/lv_theme.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/lv_theme.c.s
-.PHONY : include/lvgl/src/themes/lv_theme.c.s
-
-include/lvgl/src/themes/mono/lv_theme_mono.obj: include/lvgl/src/themes/mono/lv_theme_mono.c.obj
+# target to build an object file
+include/lvgl/src/themes/mono/lv_theme_mono.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/mono/lv_theme_mono.obj
 .PHONY : include/lvgl/src/themes/mono/lv_theme_mono.obj
 
-# target to build an object file
-include/lvgl/src/themes/mono/lv_theme_mono.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/mono/lv_theme_mono.c.obj
-.PHONY : include/lvgl/src/themes/mono/lv_theme_mono.c.obj
-
-include/lvgl/src/themes/mono/lv_theme_mono.i: include/lvgl/src/themes/mono/lv_theme_mono.c.i
+# target to preprocess a source file
+include/lvgl/src/themes/mono/lv_theme_mono.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/mono/lv_theme_mono.i
 .PHONY : include/lvgl/src/themes/mono/lv_theme_mono.i
 
-# target to preprocess a source file
-include/lvgl/src/themes/mono/lv_theme_mono.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/mono/lv_theme_mono.c.i
-.PHONY : include/lvgl/src/themes/mono/lv_theme_mono.c.i
-
-include/lvgl/src/themes/mono/lv_theme_mono.s: include/lvgl/src/themes/mono/lv_theme_mono.c.s
+# target to generate assembly for a file
+include/lvgl/src/themes/mono/lv_theme_mono.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/mono/lv_theme_mono.s
 .PHONY : include/lvgl/src/themes/mono/lv_theme_mono.s
 
-# target to generate assembly for a file
-include/lvgl/src/themes/mono/lv_theme_mono.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/mono/lv_theme_mono.c.s
-.PHONY : include/lvgl/src/themes/mono/lv_theme_mono.c.s
-
-include/lvgl/src/themes/simple/lv_theme_simple.obj: include/lvgl/src/themes/simple/lv_theme_simple.c.obj
+# target to build an object file
+include/lvgl/src/themes/simple/lv_theme_simple.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/simple/lv_theme_simple.obj
 .PHONY : include/lvgl/src/themes/simple/lv_theme_simple.obj
 
-# target to build an object file
-include/lvgl/src/themes/simple/lv_theme_simple.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/simple/lv_theme_simple.c.obj
-.PHONY : include/lvgl/src/themes/simple/lv_theme_simple.c.obj
-
-include/lvgl/src/themes/simple/lv_theme_simple.i: include/lvgl/src/themes/simple/lv_theme_simple.c.i
+# target to preprocess a source file
+include/lvgl/src/themes/simple/lv_theme_simple.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/simple/lv_theme_simple.i
 .PHONY : include/lvgl/src/themes/simple/lv_theme_simple.i
 
-# target to preprocess a source file
-include/lvgl/src/themes/simple/lv_theme_simple.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/simple/lv_theme_simple.c.i
-.PHONY : include/lvgl/src/themes/simple/lv_theme_simple.c.i
-
-include/lvgl/src/themes/simple/lv_theme_simple.s: include/lvgl/src/themes/simple/lv_theme_simple.c.s
+# target to generate assembly for a file
+include/lvgl/src/themes/simple/lv_theme_simple.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/simple/lv_theme_simple.s
 .PHONY : include/lvgl/src/themes/simple/lv_theme_simple.s
 
-# target to generate assembly for a file
-include/lvgl/src/themes/simple/lv_theme_simple.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/themes/simple/lv_theme_simple.c.s
-.PHONY : include/lvgl/src/themes/simple/lv_theme_simple.c.s
-
-include/lvgl/src/tick/lv_tick.obj: include/lvgl/src/tick/lv_tick.c.obj
+# target to build an object file
+include/lvgl/src/tick/lv_tick.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/tick/lv_tick.obj
 .PHONY : include/lvgl/src/tick/lv_tick.obj
 
-# target to build an object file
-include/lvgl/src/tick/lv_tick.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/tick/lv_tick.c.obj
-.PHONY : include/lvgl/src/tick/lv_tick.c.obj
-
-include/lvgl/src/tick/lv_tick.i: include/lvgl/src/tick/lv_tick.c.i
+# target to preprocess a source file
+include/lvgl/src/tick/lv_tick.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/tick/lv_tick.i
 .PHONY : include/lvgl/src/tick/lv_tick.i
 
-# target to preprocess a source file
-include/lvgl/src/tick/lv_tick.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/tick/lv_tick.c.i
-.PHONY : include/lvgl/src/tick/lv_tick.c.i
-
-include/lvgl/src/tick/lv_tick.s: include/lvgl/src/tick/lv_tick.c.s
+# target to generate assembly for a file
+include/lvgl/src/tick/lv_tick.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/tick/lv_tick.s
 .PHONY : include/lvgl/src/tick/lv_tick.s
 
-# target to generate assembly for a file
-include/lvgl/src/tick/lv_tick.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/tick/lv_tick.c.s
-.PHONY : include/lvgl/src/tick/lv_tick.c.s
-
-include/lvgl/src/widgets/animimage/lv_animimage.obj: include/lvgl/src/widgets/animimage/lv_animimage.c.obj
+# target to build an object file
+include/lvgl/src/widgets/animimage/lv_animimage.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/animimage/lv_animimage.obj
 .PHONY : include/lvgl/src/widgets/animimage/lv_animimage.obj
 
-# target to build an object file
-include/lvgl/src/widgets/animimage/lv_animimage.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/animimage/lv_animimage.c.obj
-.PHONY : include/lvgl/src/widgets/animimage/lv_animimage.c.obj
-
-include/lvgl/src/widgets/animimage/lv_animimage.i: include/lvgl/src/widgets/animimage/lv_animimage.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/animimage/lv_animimage.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/animimage/lv_animimage.i
 .PHONY : include/lvgl/src/widgets/animimage/lv_animimage.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/animimage/lv_animimage.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/animimage/lv_animimage.c.i
-.PHONY : include/lvgl/src/widgets/animimage/lv_animimage.c.i
-
-include/lvgl/src/widgets/animimage/lv_animimage.s: include/lvgl/src/widgets/animimage/lv_animimage.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/animimage/lv_animimage.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/animimage/lv_animimage.s
 .PHONY : include/lvgl/src/widgets/animimage/lv_animimage.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/animimage/lv_animimage.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/animimage/lv_animimage.c.s
-.PHONY : include/lvgl/src/widgets/animimage/lv_animimage.c.s
-
-include/lvgl/src/widgets/arc/lv_arc.obj: include/lvgl/src/widgets/arc/lv_arc.c.obj
+# target to build an object file
+include/lvgl/src/widgets/arc/lv_arc.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/arc/lv_arc.obj
 .PHONY : include/lvgl/src/widgets/arc/lv_arc.obj
 
-# target to build an object file
-include/lvgl/src/widgets/arc/lv_arc.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/arc/lv_arc.c.obj
-.PHONY : include/lvgl/src/widgets/arc/lv_arc.c.obj
-
-include/lvgl/src/widgets/arc/lv_arc.i: include/lvgl/src/widgets/arc/lv_arc.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/arc/lv_arc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/arc/lv_arc.i
 .PHONY : include/lvgl/src/widgets/arc/lv_arc.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/arc/lv_arc.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/arc/lv_arc.c.i
-.PHONY : include/lvgl/src/widgets/arc/lv_arc.c.i
-
-include/lvgl/src/widgets/arc/lv_arc.s: include/lvgl/src/widgets/arc/lv_arc.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/arc/lv_arc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/arc/lv_arc.s
 .PHONY : include/lvgl/src/widgets/arc/lv_arc.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/arc/lv_arc.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/arc/lv_arc.c.s
-.PHONY : include/lvgl/src/widgets/arc/lv_arc.c.s
-
-include/lvgl/src/widgets/bar/lv_bar.obj: include/lvgl/src/widgets/bar/lv_bar.c.obj
+# target to build an object file
+include/lvgl/src/widgets/bar/lv_bar.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/bar/lv_bar.obj
 .PHONY : include/lvgl/src/widgets/bar/lv_bar.obj
 
-# target to build an object file
-include/lvgl/src/widgets/bar/lv_bar.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/bar/lv_bar.c.obj
-.PHONY : include/lvgl/src/widgets/bar/lv_bar.c.obj
-
-include/lvgl/src/widgets/bar/lv_bar.i: include/lvgl/src/widgets/bar/lv_bar.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/bar/lv_bar.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/bar/lv_bar.i
 .PHONY : include/lvgl/src/widgets/bar/lv_bar.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/bar/lv_bar.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/bar/lv_bar.c.i
-.PHONY : include/lvgl/src/widgets/bar/lv_bar.c.i
-
-include/lvgl/src/widgets/bar/lv_bar.s: include/lvgl/src/widgets/bar/lv_bar.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/bar/lv_bar.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/bar/lv_bar.s
 .PHONY : include/lvgl/src/widgets/bar/lv_bar.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/bar/lv_bar.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/bar/lv_bar.c.s
-.PHONY : include/lvgl/src/widgets/bar/lv_bar.c.s
-
-include/lvgl/src/widgets/button/lv_button.obj: include/lvgl/src/widgets/button/lv_button.c.obj
+# target to build an object file
+include/lvgl/src/widgets/button/lv_button.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/button/lv_button.obj
 .PHONY : include/lvgl/src/widgets/button/lv_button.obj
 
-# target to build an object file
-include/lvgl/src/widgets/button/lv_button.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/button/lv_button.c.obj
-.PHONY : include/lvgl/src/widgets/button/lv_button.c.obj
-
-include/lvgl/src/widgets/button/lv_button.i: include/lvgl/src/widgets/button/lv_button.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/button/lv_button.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/button/lv_button.i
 .PHONY : include/lvgl/src/widgets/button/lv_button.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/button/lv_button.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/button/lv_button.c.i
-.PHONY : include/lvgl/src/widgets/button/lv_button.c.i
-
-include/lvgl/src/widgets/button/lv_button.s: include/lvgl/src/widgets/button/lv_button.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/button/lv_button.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/button/lv_button.s
 .PHONY : include/lvgl/src/widgets/button/lv_button.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/button/lv_button.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/button/lv_button.c.s
-.PHONY : include/lvgl/src/widgets/button/lv_button.c.s
-
-include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.obj: include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.c.obj
+# target to build an object file
+include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.obj
 .PHONY : include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.obj
 
-# target to build an object file
-include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.c.obj
-.PHONY : include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.c.obj
-
-include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.i: include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.i
 .PHONY : include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.c.i
-.PHONY : include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.c.i
-
-include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.s: include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.s
 .PHONY : include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.c.s
-.PHONY : include/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.c.s
-
-include/lvgl/src/widgets/calendar/lv_calendar.obj: include/lvgl/src/widgets/calendar/lv_calendar.c.obj
+# target to build an object file
+include/lvgl/src/widgets/calendar/lv_calendar.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar.obj
 .PHONY : include/lvgl/src/widgets/calendar/lv_calendar.obj
 
-# target to build an object file
-include/lvgl/src/widgets/calendar/lv_calendar.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar.c.obj
-.PHONY : include/lvgl/src/widgets/calendar/lv_calendar.c.obj
-
-include/lvgl/src/widgets/calendar/lv_calendar.i: include/lvgl/src/widgets/calendar/lv_calendar.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/calendar/lv_calendar.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar.i
 .PHONY : include/lvgl/src/widgets/calendar/lv_calendar.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/calendar/lv_calendar.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar.c.i
-.PHONY : include/lvgl/src/widgets/calendar/lv_calendar.c.i
-
-include/lvgl/src/widgets/calendar/lv_calendar.s: include/lvgl/src/widgets/calendar/lv_calendar.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/calendar/lv_calendar.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar.s
 .PHONY : include/lvgl/src/widgets/calendar/lv_calendar.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/calendar/lv_calendar.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar.c.s
-.PHONY : include/lvgl/src/widgets/calendar/lv_calendar.c.s
-
-include/lvgl/src/widgets/calendar/lv_calendar_chinese.obj: include/lvgl/src/widgets/calendar/lv_calendar_chinese.c.obj
+# target to build an object file
+include/lvgl/src/widgets/calendar/lv_calendar_chinese.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar_chinese.obj
 .PHONY : include/lvgl/src/widgets/calendar/lv_calendar_chinese.obj
 
-# target to build an object file
-include/lvgl/src/widgets/calendar/lv_calendar_chinese.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar_chinese.c.obj
-.PHONY : include/lvgl/src/widgets/calendar/lv_calendar_chinese.c.obj
-
-include/lvgl/src/widgets/calendar/lv_calendar_chinese.i: include/lvgl/src/widgets/calendar/lv_calendar_chinese.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/calendar/lv_calendar_chinese.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar_chinese.i
 .PHONY : include/lvgl/src/widgets/calendar/lv_calendar_chinese.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/calendar/lv_calendar_chinese.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar_chinese.c.i
-.PHONY : include/lvgl/src/widgets/calendar/lv_calendar_chinese.c.i
-
-include/lvgl/src/widgets/calendar/lv_calendar_chinese.s: include/lvgl/src/widgets/calendar/lv_calendar_chinese.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/calendar/lv_calendar_chinese.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar_chinese.s
 .PHONY : include/lvgl/src/widgets/calendar/lv_calendar_chinese.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/calendar/lv_calendar_chinese.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar_chinese.c.s
-.PHONY : include/lvgl/src/widgets/calendar/lv_calendar_chinese.c.s
-
-include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.obj: include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.c.obj
+# target to build an object file
+include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.obj
 .PHONY : include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.obj
 
-# target to build an object file
-include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.c.obj
-.PHONY : include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.c.obj
-
-include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.i: include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.i
 .PHONY : include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.c.i
-.PHONY : include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.c.i
-
-include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.s: include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.s
 .PHONY : include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.c.s
-.PHONY : include/lvgl/src/widgets/calendar/lv_calendar_header_arrow.c.s
-
-include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.obj: include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.c.obj
+# target to build an object file
+include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.obj
 .PHONY : include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.obj
 
-# target to build an object file
-include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.c.obj
-.PHONY : include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.c.obj
-
-include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.i: include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.i
 .PHONY : include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.c.i
-.PHONY : include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.c.i
-
-include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.s: include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.s
 .PHONY : include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.c.s
-.PHONY : include/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.c.s
-
-include/lvgl/src/widgets/canvas/lv_canvas.obj: include/lvgl/src/widgets/canvas/lv_canvas.c.obj
+# target to build an object file
+include/lvgl/src/widgets/canvas/lv_canvas.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/canvas/lv_canvas.obj
 .PHONY : include/lvgl/src/widgets/canvas/lv_canvas.obj
 
-# target to build an object file
-include/lvgl/src/widgets/canvas/lv_canvas.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/canvas/lv_canvas.c.obj
-.PHONY : include/lvgl/src/widgets/canvas/lv_canvas.c.obj
-
-include/lvgl/src/widgets/canvas/lv_canvas.i: include/lvgl/src/widgets/canvas/lv_canvas.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/canvas/lv_canvas.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/canvas/lv_canvas.i
 .PHONY : include/lvgl/src/widgets/canvas/lv_canvas.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/canvas/lv_canvas.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/canvas/lv_canvas.c.i
-.PHONY : include/lvgl/src/widgets/canvas/lv_canvas.c.i
-
-include/lvgl/src/widgets/canvas/lv_canvas.s: include/lvgl/src/widgets/canvas/lv_canvas.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/canvas/lv_canvas.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/canvas/lv_canvas.s
 .PHONY : include/lvgl/src/widgets/canvas/lv_canvas.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/canvas/lv_canvas.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/canvas/lv_canvas.c.s
-.PHONY : include/lvgl/src/widgets/canvas/lv_canvas.c.s
-
-include/lvgl/src/widgets/chart/lv_chart.obj: include/lvgl/src/widgets/chart/lv_chart.c.obj
+# target to build an object file
+include/lvgl/src/widgets/chart/lv_chart.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/chart/lv_chart.obj
 .PHONY : include/lvgl/src/widgets/chart/lv_chart.obj
 
-# target to build an object file
-include/lvgl/src/widgets/chart/lv_chart.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/chart/lv_chart.c.obj
-.PHONY : include/lvgl/src/widgets/chart/lv_chart.c.obj
-
-include/lvgl/src/widgets/chart/lv_chart.i: include/lvgl/src/widgets/chart/lv_chart.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/chart/lv_chart.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/chart/lv_chart.i
 .PHONY : include/lvgl/src/widgets/chart/lv_chart.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/chart/lv_chart.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/chart/lv_chart.c.i
-.PHONY : include/lvgl/src/widgets/chart/lv_chart.c.i
-
-include/lvgl/src/widgets/chart/lv_chart.s: include/lvgl/src/widgets/chart/lv_chart.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/chart/lv_chart.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/chart/lv_chart.s
 .PHONY : include/lvgl/src/widgets/chart/lv_chart.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/chart/lv_chart.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/chart/lv_chart.c.s
-.PHONY : include/lvgl/src/widgets/chart/lv_chart.c.s
-
-include/lvgl/src/widgets/checkbox/lv_checkbox.obj: include/lvgl/src/widgets/checkbox/lv_checkbox.c.obj
+# target to build an object file
+include/lvgl/src/widgets/checkbox/lv_checkbox.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/checkbox/lv_checkbox.obj
 .PHONY : include/lvgl/src/widgets/checkbox/lv_checkbox.obj
 
-# target to build an object file
-include/lvgl/src/widgets/checkbox/lv_checkbox.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/checkbox/lv_checkbox.c.obj
-.PHONY : include/lvgl/src/widgets/checkbox/lv_checkbox.c.obj
-
-include/lvgl/src/widgets/checkbox/lv_checkbox.i: include/lvgl/src/widgets/checkbox/lv_checkbox.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/checkbox/lv_checkbox.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/checkbox/lv_checkbox.i
 .PHONY : include/lvgl/src/widgets/checkbox/lv_checkbox.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/checkbox/lv_checkbox.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/checkbox/lv_checkbox.c.i
-.PHONY : include/lvgl/src/widgets/checkbox/lv_checkbox.c.i
-
-include/lvgl/src/widgets/checkbox/lv_checkbox.s: include/lvgl/src/widgets/checkbox/lv_checkbox.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/checkbox/lv_checkbox.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/checkbox/lv_checkbox.s
 .PHONY : include/lvgl/src/widgets/checkbox/lv_checkbox.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/checkbox/lv_checkbox.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/checkbox/lv_checkbox.c.s
-.PHONY : include/lvgl/src/widgets/checkbox/lv_checkbox.c.s
-
-include/lvgl/src/widgets/dropdown/lv_dropdown.obj: include/lvgl/src/widgets/dropdown/lv_dropdown.c.obj
+# target to build an object file
+include/lvgl/src/widgets/dropdown/lv_dropdown.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/dropdown/lv_dropdown.obj
 .PHONY : include/lvgl/src/widgets/dropdown/lv_dropdown.obj
 
-# target to build an object file
-include/lvgl/src/widgets/dropdown/lv_dropdown.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/dropdown/lv_dropdown.c.obj
-.PHONY : include/lvgl/src/widgets/dropdown/lv_dropdown.c.obj
-
-include/lvgl/src/widgets/dropdown/lv_dropdown.i: include/lvgl/src/widgets/dropdown/lv_dropdown.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/dropdown/lv_dropdown.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/dropdown/lv_dropdown.i
 .PHONY : include/lvgl/src/widgets/dropdown/lv_dropdown.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/dropdown/lv_dropdown.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/dropdown/lv_dropdown.c.i
-.PHONY : include/lvgl/src/widgets/dropdown/lv_dropdown.c.i
-
-include/lvgl/src/widgets/dropdown/lv_dropdown.s: include/lvgl/src/widgets/dropdown/lv_dropdown.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/dropdown/lv_dropdown.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/dropdown/lv_dropdown.s
 .PHONY : include/lvgl/src/widgets/dropdown/lv_dropdown.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/dropdown/lv_dropdown.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/dropdown/lv_dropdown.c.s
-.PHONY : include/lvgl/src/widgets/dropdown/lv_dropdown.c.s
-
-include/lvgl/src/widgets/image/lv_image.obj: include/lvgl/src/widgets/image/lv_image.c.obj
+# target to build an object file
+include/lvgl/src/widgets/image/lv_image.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/image/lv_image.obj
 .PHONY : include/lvgl/src/widgets/image/lv_image.obj
 
-# target to build an object file
-include/lvgl/src/widgets/image/lv_image.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/image/lv_image.c.obj
-.PHONY : include/lvgl/src/widgets/image/lv_image.c.obj
-
-include/lvgl/src/widgets/image/lv_image.i: include/lvgl/src/widgets/image/lv_image.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/image/lv_image.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/image/lv_image.i
 .PHONY : include/lvgl/src/widgets/image/lv_image.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/image/lv_image.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/image/lv_image.c.i
-.PHONY : include/lvgl/src/widgets/image/lv_image.c.i
-
-include/lvgl/src/widgets/image/lv_image.s: include/lvgl/src/widgets/image/lv_image.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/image/lv_image.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/image/lv_image.s
 .PHONY : include/lvgl/src/widgets/image/lv_image.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/image/lv_image.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/image/lv_image.c.s
-.PHONY : include/lvgl/src/widgets/image/lv_image.c.s
-
-include/lvgl/src/widgets/imagebutton/lv_imagebutton.obj: include/lvgl/src/widgets/imagebutton/lv_imagebutton.c.obj
+# target to build an object file
+include/lvgl/src/widgets/imagebutton/lv_imagebutton.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/imagebutton/lv_imagebutton.obj
 .PHONY : include/lvgl/src/widgets/imagebutton/lv_imagebutton.obj
 
-# target to build an object file
-include/lvgl/src/widgets/imagebutton/lv_imagebutton.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/imagebutton/lv_imagebutton.c.obj
-.PHONY : include/lvgl/src/widgets/imagebutton/lv_imagebutton.c.obj
-
-include/lvgl/src/widgets/imagebutton/lv_imagebutton.i: include/lvgl/src/widgets/imagebutton/lv_imagebutton.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/imagebutton/lv_imagebutton.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/imagebutton/lv_imagebutton.i
 .PHONY : include/lvgl/src/widgets/imagebutton/lv_imagebutton.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/imagebutton/lv_imagebutton.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/imagebutton/lv_imagebutton.c.i
-.PHONY : include/lvgl/src/widgets/imagebutton/lv_imagebutton.c.i
-
-include/lvgl/src/widgets/imagebutton/lv_imagebutton.s: include/lvgl/src/widgets/imagebutton/lv_imagebutton.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/imagebutton/lv_imagebutton.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/imagebutton/lv_imagebutton.s
 .PHONY : include/lvgl/src/widgets/imagebutton/lv_imagebutton.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/imagebutton/lv_imagebutton.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/imagebutton/lv_imagebutton.c.s
-.PHONY : include/lvgl/src/widgets/imagebutton/lv_imagebutton.c.s
-
-include/lvgl/src/widgets/keyboard/lv_keyboard.obj: include/lvgl/src/widgets/keyboard/lv_keyboard.c.obj
+# target to build an object file
+include/lvgl/src/widgets/keyboard/lv_keyboard.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/keyboard/lv_keyboard.obj
 .PHONY : include/lvgl/src/widgets/keyboard/lv_keyboard.obj
 
-# target to build an object file
-include/lvgl/src/widgets/keyboard/lv_keyboard.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/keyboard/lv_keyboard.c.obj
-.PHONY : include/lvgl/src/widgets/keyboard/lv_keyboard.c.obj
-
-include/lvgl/src/widgets/keyboard/lv_keyboard.i: include/lvgl/src/widgets/keyboard/lv_keyboard.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/keyboard/lv_keyboard.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/keyboard/lv_keyboard.i
 .PHONY : include/lvgl/src/widgets/keyboard/lv_keyboard.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/keyboard/lv_keyboard.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/keyboard/lv_keyboard.c.i
-.PHONY : include/lvgl/src/widgets/keyboard/lv_keyboard.c.i
-
-include/lvgl/src/widgets/keyboard/lv_keyboard.s: include/lvgl/src/widgets/keyboard/lv_keyboard.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/keyboard/lv_keyboard.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/keyboard/lv_keyboard.s
 .PHONY : include/lvgl/src/widgets/keyboard/lv_keyboard.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/keyboard/lv_keyboard.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/keyboard/lv_keyboard.c.s
-.PHONY : include/lvgl/src/widgets/keyboard/lv_keyboard.c.s
-
-include/lvgl/src/widgets/label/lv_label.obj: include/lvgl/src/widgets/label/lv_label.c.obj
+# target to build an object file
+include/lvgl/src/widgets/label/lv_label.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/label/lv_label.obj
 .PHONY : include/lvgl/src/widgets/label/lv_label.obj
 
-# target to build an object file
-include/lvgl/src/widgets/label/lv_label.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/label/lv_label.c.obj
-.PHONY : include/lvgl/src/widgets/label/lv_label.c.obj
-
-include/lvgl/src/widgets/label/lv_label.i: include/lvgl/src/widgets/label/lv_label.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/label/lv_label.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/label/lv_label.i
 .PHONY : include/lvgl/src/widgets/label/lv_label.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/label/lv_label.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/label/lv_label.c.i
-.PHONY : include/lvgl/src/widgets/label/lv_label.c.i
-
-include/lvgl/src/widgets/label/lv_label.s: include/lvgl/src/widgets/label/lv_label.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/label/lv_label.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/label/lv_label.s
 .PHONY : include/lvgl/src/widgets/label/lv_label.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/label/lv_label.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/label/lv_label.c.s
-.PHONY : include/lvgl/src/widgets/label/lv_label.c.s
-
-include/lvgl/src/widgets/led/lv_led.obj: include/lvgl/src/widgets/led/lv_led.c.obj
+# target to build an object file
+include/lvgl/src/widgets/led/lv_led.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/led/lv_led.obj
 .PHONY : include/lvgl/src/widgets/led/lv_led.obj
 
-# target to build an object file
-include/lvgl/src/widgets/led/lv_led.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/led/lv_led.c.obj
-.PHONY : include/lvgl/src/widgets/led/lv_led.c.obj
-
-include/lvgl/src/widgets/led/lv_led.i: include/lvgl/src/widgets/led/lv_led.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/led/lv_led.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/led/lv_led.i
 .PHONY : include/lvgl/src/widgets/led/lv_led.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/led/lv_led.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/led/lv_led.c.i
-.PHONY : include/lvgl/src/widgets/led/lv_led.c.i
-
-include/lvgl/src/widgets/led/lv_led.s: include/lvgl/src/widgets/led/lv_led.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/led/lv_led.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/led/lv_led.s
 .PHONY : include/lvgl/src/widgets/led/lv_led.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/led/lv_led.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/led/lv_led.c.s
-.PHONY : include/lvgl/src/widgets/led/lv_led.c.s
-
-include/lvgl/src/widgets/line/lv_line.obj: include/lvgl/src/widgets/line/lv_line.c.obj
+# target to build an object file
+include/lvgl/src/widgets/line/lv_line.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/line/lv_line.obj
 .PHONY : include/lvgl/src/widgets/line/lv_line.obj
 
-# target to build an object file
-include/lvgl/src/widgets/line/lv_line.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/line/lv_line.c.obj
-.PHONY : include/lvgl/src/widgets/line/lv_line.c.obj
-
-include/lvgl/src/widgets/line/lv_line.i: include/lvgl/src/widgets/line/lv_line.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/line/lv_line.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/line/lv_line.i
 .PHONY : include/lvgl/src/widgets/line/lv_line.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/line/lv_line.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/line/lv_line.c.i
-.PHONY : include/lvgl/src/widgets/line/lv_line.c.i
-
-include/lvgl/src/widgets/line/lv_line.s: include/lvgl/src/widgets/line/lv_line.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/line/lv_line.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/line/lv_line.s
 .PHONY : include/lvgl/src/widgets/line/lv_line.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/line/lv_line.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/line/lv_line.c.s
-.PHONY : include/lvgl/src/widgets/line/lv_line.c.s
-
-include/lvgl/src/widgets/list/lv_list.obj: include/lvgl/src/widgets/list/lv_list.c.obj
+# target to build an object file
+include/lvgl/src/widgets/list/lv_list.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/list/lv_list.obj
 .PHONY : include/lvgl/src/widgets/list/lv_list.obj
 
-# target to build an object file
-include/lvgl/src/widgets/list/lv_list.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/list/lv_list.c.obj
-.PHONY : include/lvgl/src/widgets/list/lv_list.c.obj
-
-include/lvgl/src/widgets/list/lv_list.i: include/lvgl/src/widgets/list/lv_list.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/list/lv_list.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/list/lv_list.i
 .PHONY : include/lvgl/src/widgets/list/lv_list.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/list/lv_list.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/list/lv_list.c.i
-.PHONY : include/lvgl/src/widgets/list/lv_list.c.i
-
-include/lvgl/src/widgets/list/lv_list.s: include/lvgl/src/widgets/list/lv_list.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/list/lv_list.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/list/lv_list.s
 .PHONY : include/lvgl/src/widgets/list/lv_list.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/list/lv_list.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/list/lv_list.c.s
-.PHONY : include/lvgl/src/widgets/list/lv_list.c.s
-
-include/lvgl/src/widgets/lottie/lv_lottie.obj: include/lvgl/src/widgets/lottie/lv_lottie.c.obj
+# target to build an object file
+include/lvgl/src/widgets/lottie/lv_lottie.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/lottie/lv_lottie.obj
 .PHONY : include/lvgl/src/widgets/lottie/lv_lottie.obj
 
-# target to build an object file
-include/lvgl/src/widgets/lottie/lv_lottie.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/lottie/lv_lottie.c.obj
-.PHONY : include/lvgl/src/widgets/lottie/lv_lottie.c.obj
-
-include/lvgl/src/widgets/lottie/lv_lottie.i: include/lvgl/src/widgets/lottie/lv_lottie.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/lottie/lv_lottie.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/lottie/lv_lottie.i
 .PHONY : include/lvgl/src/widgets/lottie/lv_lottie.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/lottie/lv_lottie.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/lottie/lv_lottie.c.i
-.PHONY : include/lvgl/src/widgets/lottie/lv_lottie.c.i
-
-include/lvgl/src/widgets/lottie/lv_lottie.s: include/lvgl/src/widgets/lottie/lv_lottie.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/lottie/lv_lottie.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/lottie/lv_lottie.s
 .PHONY : include/lvgl/src/widgets/lottie/lv_lottie.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/lottie/lv_lottie.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/lottie/lv_lottie.c.s
-.PHONY : include/lvgl/src/widgets/lottie/lv_lottie.c.s
-
-include/lvgl/src/widgets/menu/lv_menu.obj: include/lvgl/src/widgets/menu/lv_menu.c.obj
+# target to build an object file
+include/lvgl/src/widgets/menu/lv_menu.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/menu/lv_menu.obj
 .PHONY : include/lvgl/src/widgets/menu/lv_menu.obj
 
-# target to build an object file
-include/lvgl/src/widgets/menu/lv_menu.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/menu/lv_menu.c.obj
-.PHONY : include/lvgl/src/widgets/menu/lv_menu.c.obj
-
-include/lvgl/src/widgets/menu/lv_menu.i: include/lvgl/src/widgets/menu/lv_menu.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/menu/lv_menu.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/menu/lv_menu.i
 .PHONY : include/lvgl/src/widgets/menu/lv_menu.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/menu/lv_menu.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/menu/lv_menu.c.i
-.PHONY : include/lvgl/src/widgets/menu/lv_menu.c.i
-
-include/lvgl/src/widgets/menu/lv_menu.s: include/lvgl/src/widgets/menu/lv_menu.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/menu/lv_menu.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/menu/lv_menu.s
 .PHONY : include/lvgl/src/widgets/menu/lv_menu.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/menu/lv_menu.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/menu/lv_menu.c.s
-.PHONY : include/lvgl/src/widgets/menu/lv_menu.c.s
-
-include/lvgl/src/widgets/msgbox/lv_msgbox.obj: include/lvgl/src/widgets/msgbox/lv_msgbox.c.obj
+# target to build an object file
+include/lvgl/src/widgets/msgbox/lv_msgbox.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/msgbox/lv_msgbox.obj
 .PHONY : include/lvgl/src/widgets/msgbox/lv_msgbox.obj
 
-# target to build an object file
-include/lvgl/src/widgets/msgbox/lv_msgbox.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/msgbox/lv_msgbox.c.obj
-.PHONY : include/lvgl/src/widgets/msgbox/lv_msgbox.c.obj
-
-include/lvgl/src/widgets/msgbox/lv_msgbox.i: include/lvgl/src/widgets/msgbox/lv_msgbox.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/msgbox/lv_msgbox.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/msgbox/lv_msgbox.i
 .PHONY : include/lvgl/src/widgets/msgbox/lv_msgbox.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/msgbox/lv_msgbox.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/msgbox/lv_msgbox.c.i
-.PHONY : include/lvgl/src/widgets/msgbox/lv_msgbox.c.i
-
-include/lvgl/src/widgets/msgbox/lv_msgbox.s: include/lvgl/src/widgets/msgbox/lv_msgbox.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/msgbox/lv_msgbox.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/msgbox/lv_msgbox.s
 .PHONY : include/lvgl/src/widgets/msgbox/lv_msgbox.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/msgbox/lv_msgbox.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/msgbox/lv_msgbox.c.s
-.PHONY : include/lvgl/src/widgets/msgbox/lv_msgbox.c.s
-
-include/lvgl/src/widgets/objx_templ/lv_objx_templ.obj: include/lvgl/src/widgets/objx_templ/lv_objx_templ.c.obj
+# target to build an object file
+include/lvgl/src/widgets/objx_templ/lv_objx_templ.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/objx_templ/lv_objx_templ.obj
 .PHONY : include/lvgl/src/widgets/objx_templ/lv_objx_templ.obj
 
-# target to build an object file
-include/lvgl/src/widgets/objx_templ/lv_objx_templ.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/objx_templ/lv_objx_templ.c.obj
-.PHONY : include/lvgl/src/widgets/objx_templ/lv_objx_templ.c.obj
-
-include/lvgl/src/widgets/objx_templ/lv_objx_templ.i: include/lvgl/src/widgets/objx_templ/lv_objx_templ.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/objx_templ/lv_objx_templ.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/objx_templ/lv_objx_templ.i
 .PHONY : include/lvgl/src/widgets/objx_templ/lv_objx_templ.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/objx_templ/lv_objx_templ.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/objx_templ/lv_objx_templ.c.i
-.PHONY : include/lvgl/src/widgets/objx_templ/lv_objx_templ.c.i
-
-include/lvgl/src/widgets/objx_templ/lv_objx_templ.s: include/lvgl/src/widgets/objx_templ/lv_objx_templ.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/objx_templ/lv_objx_templ.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/objx_templ/lv_objx_templ.s
 .PHONY : include/lvgl/src/widgets/objx_templ/lv_objx_templ.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/objx_templ/lv_objx_templ.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/objx_templ/lv_objx_templ.c.s
-.PHONY : include/lvgl/src/widgets/objx_templ/lv_objx_templ.c.s
-
-include/lvgl/src/widgets/property/lv_animimage_properties.obj: include/lvgl/src/widgets/property/lv_animimage_properties.c.obj
+# target to build an object file
+include/lvgl/src/widgets/property/lv_animimage_properties.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_animimage_properties.obj
 .PHONY : include/lvgl/src/widgets/property/lv_animimage_properties.obj
 
-# target to build an object file
-include/lvgl/src/widgets/property/lv_animimage_properties.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_animimage_properties.c.obj
-.PHONY : include/lvgl/src/widgets/property/lv_animimage_properties.c.obj
-
-include/lvgl/src/widgets/property/lv_animimage_properties.i: include/lvgl/src/widgets/property/lv_animimage_properties.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/property/lv_animimage_properties.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_animimage_properties.i
 .PHONY : include/lvgl/src/widgets/property/lv_animimage_properties.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/property/lv_animimage_properties.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_animimage_properties.c.i
-.PHONY : include/lvgl/src/widgets/property/lv_animimage_properties.c.i
-
-include/lvgl/src/widgets/property/lv_animimage_properties.s: include/lvgl/src/widgets/property/lv_animimage_properties.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/property/lv_animimage_properties.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_animimage_properties.s
 .PHONY : include/lvgl/src/widgets/property/lv_animimage_properties.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/property/lv_animimage_properties.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_animimage_properties.c.s
-.PHONY : include/lvgl/src/widgets/property/lv_animimage_properties.c.s
-
-include/lvgl/src/widgets/property/lv_dropdown_properties.obj: include/lvgl/src/widgets/property/lv_dropdown_properties.c.obj
+# target to build an object file
+include/lvgl/src/widgets/property/lv_dropdown_properties.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_dropdown_properties.obj
 .PHONY : include/lvgl/src/widgets/property/lv_dropdown_properties.obj
 
-# target to build an object file
-include/lvgl/src/widgets/property/lv_dropdown_properties.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_dropdown_properties.c.obj
-.PHONY : include/lvgl/src/widgets/property/lv_dropdown_properties.c.obj
-
-include/lvgl/src/widgets/property/lv_dropdown_properties.i: include/lvgl/src/widgets/property/lv_dropdown_properties.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/property/lv_dropdown_properties.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_dropdown_properties.i
 .PHONY : include/lvgl/src/widgets/property/lv_dropdown_properties.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/property/lv_dropdown_properties.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_dropdown_properties.c.i
-.PHONY : include/lvgl/src/widgets/property/lv_dropdown_properties.c.i
-
-include/lvgl/src/widgets/property/lv_dropdown_properties.s: include/lvgl/src/widgets/property/lv_dropdown_properties.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/property/lv_dropdown_properties.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_dropdown_properties.s
 .PHONY : include/lvgl/src/widgets/property/lv_dropdown_properties.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/property/lv_dropdown_properties.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_dropdown_properties.c.s
-.PHONY : include/lvgl/src/widgets/property/lv_dropdown_properties.c.s
-
-include/lvgl/src/widgets/property/lv_image_properties.obj: include/lvgl/src/widgets/property/lv_image_properties.c.obj
+# target to build an object file
+include/lvgl/src/widgets/property/lv_image_properties.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_image_properties.obj
 .PHONY : include/lvgl/src/widgets/property/lv_image_properties.obj
 
-# target to build an object file
-include/lvgl/src/widgets/property/lv_image_properties.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_image_properties.c.obj
-.PHONY : include/lvgl/src/widgets/property/lv_image_properties.c.obj
-
-include/lvgl/src/widgets/property/lv_image_properties.i: include/lvgl/src/widgets/property/lv_image_properties.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/property/lv_image_properties.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_image_properties.i
 .PHONY : include/lvgl/src/widgets/property/lv_image_properties.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/property/lv_image_properties.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_image_properties.c.i
-.PHONY : include/lvgl/src/widgets/property/lv_image_properties.c.i
-
-include/lvgl/src/widgets/property/lv_image_properties.s: include/lvgl/src/widgets/property/lv_image_properties.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/property/lv_image_properties.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_image_properties.s
 .PHONY : include/lvgl/src/widgets/property/lv_image_properties.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/property/lv_image_properties.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_image_properties.c.s
-.PHONY : include/lvgl/src/widgets/property/lv_image_properties.c.s
-
-include/lvgl/src/widgets/property/lv_keyboard_properties.obj: include/lvgl/src/widgets/property/lv_keyboard_properties.c.obj
+# target to build an object file
+include/lvgl/src/widgets/property/lv_keyboard_properties.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_keyboard_properties.obj
 .PHONY : include/lvgl/src/widgets/property/lv_keyboard_properties.obj
 
-# target to build an object file
-include/lvgl/src/widgets/property/lv_keyboard_properties.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_keyboard_properties.c.obj
-.PHONY : include/lvgl/src/widgets/property/lv_keyboard_properties.c.obj
-
-include/lvgl/src/widgets/property/lv_keyboard_properties.i: include/lvgl/src/widgets/property/lv_keyboard_properties.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/property/lv_keyboard_properties.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_keyboard_properties.i
 .PHONY : include/lvgl/src/widgets/property/lv_keyboard_properties.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/property/lv_keyboard_properties.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_keyboard_properties.c.i
-.PHONY : include/lvgl/src/widgets/property/lv_keyboard_properties.c.i
-
-include/lvgl/src/widgets/property/lv_keyboard_properties.s: include/lvgl/src/widgets/property/lv_keyboard_properties.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/property/lv_keyboard_properties.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_keyboard_properties.s
 .PHONY : include/lvgl/src/widgets/property/lv_keyboard_properties.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/property/lv_keyboard_properties.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_keyboard_properties.c.s
-.PHONY : include/lvgl/src/widgets/property/lv_keyboard_properties.c.s
-
-include/lvgl/src/widgets/property/lv_label_properties.obj: include/lvgl/src/widgets/property/lv_label_properties.c.obj
+# target to build an object file
+include/lvgl/src/widgets/property/lv_label_properties.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_label_properties.obj
 .PHONY : include/lvgl/src/widgets/property/lv_label_properties.obj
 
-# target to build an object file
-include/lvgl/src/widgets/property/lv_label_properties.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_label_properties.c.obj
-.PHONY : include/lvgl/src/widgets/property/lv_label_properties.c.obj
-
-include/lvgl/src/widgets/property/lv_label_properties.i: include/lvgl/src/widgets/property/lv_label_properties.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/property/lv_label_properties.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_label_properties.i
 .PHONY : include/lvgl/src/widgets/property/lv_label_properties.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/property/lv_label_properties.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_label_properties.c.i
-.PHONY : include/lvgl/src/widgets/property/lv_label_properties.c.i
-
-include/lvgl/src/widgets/property/lv_label_properties.s: include/lvgl/src/widgets/property/lv_label_properties.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/property/lv_label_properties.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_label_properties.s
 .PHONY : include/lvgl/src/widgets/property/lv_label_properties.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/property/lv_label_properties.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_label_properties.c.s
-.PHONY : include/lvgl/src/widgets/property/lv_label_properties.c.s
-
-include/lvgl/src/widgets/property/lv_obj_properties.obj: include/lvgl/src/widgets/property/lv_obj_properties.c.obj
+# target to build an object file
+include/lvgl/src/widgets/property/lv_obj_properties.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_obj_properties.obj
 .PHONY : include/lvgl/src/widgets/property/lv_obj_properties.obj
 
-# target to build an object file
-include/lvgl/src/widgets/property/lv_obj_properties.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_obj_properties.c.obj
-.PHONY : include/lvgl/src/widgets/property/lv_obj_properties.c.obj
-
-include/lvgl/src/widgets/property/lv_obj_properties.i: include/lvgl/src/widgets/property/lv_obj_properties.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/property/lv_obj_properties.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_obj_properties.i
 .PHONY : include/lvgl/src/widgets/property/lv_obj_properties.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/property/lv_obj_properties.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_obj_properties.c.i
-.PHONY : include/lvgl/src/widgets/property/lv_obj_properties.c.i
-
-include/lvgl/src/widgets/property/lv_obj_properties.s: include/lvgl/src/widgets/property/lv_obj_properties.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/property/lv_obj_properties.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_obj_properties.s
 .PHONY : include/lvgl/src/widgets/property/lv_obj_properties.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/property/lv_obj_properties.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_obj_properties.c.s
-.PHONY : include/lvgl/src/widgets/property/lv_obj_properties.c.s
-
-include/lvgl/src/widgets/property/lv_roller_properties.obj: include/lvgl/src/widgets/property/lv_roller_properties.c.obj
+# target to build an object file
+include/lvgl/src/widgets/property/lv_roller_properties.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_roller_properties.obj
 .PHONY : include/lvgl/src/widgets/property/lv_roller_properties.obj
 
-# target to build an object file
-include/lvgl/src/widgets/property/lv_roller_properties.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_roller_properties.c.obj
-.PHONY : include/lvgl/src/widgets/property/lv_roller_properties.c.obj
-
-include/lvgl/src/widgets/property/lv_roller_properties.i: include/lvgl/src/widgets/property/lv_roller_properties.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/property/lv_roller_properties.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_roller_properties.i
 .PHONY : include/lvgl/src/widgets/property/lv_roller_properties.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/property/lv_roller_properties.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_roller_properties.c.i
-.PHONY : include/lvgl/src/widgets/property/lv_roller_properties.c.i
-
-include/lvgl/src/widgets/property/lv_roller_properties.s: include/lvgl/src/widgets/property/lv_roller_properties.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/property/lv_roller_properties.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_roller_properties.s
 .PHONY : include/lvgl/src/widgets/property/lv_roller_properties.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/property/lv_roller_properties.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_roller_properties.c.s
-.PHONY : include/lvgl/src/widgets/property/lv_roller_properties.c.s
-
-include/lvgl/src/widgets/property/lv_slider_properties.obj: include/lvgl/src/widgets/property/lv_slider_properties.c.obj
+# target to build an object file
+include/lvgl/src/widgets/property/lv_slider_properties.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_slider_properties.obj
 .PHONY : include/lvgl/src/widgets/property/lv_slider_properties.obj
 
-# target to build an object file
-include/lvgl/src/widgets/property/lv_slider_properties.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_slider_properties.c.obj
-.PHONY : include/lvgl/src/widgets/property/lv_slider_properties.c.obj
-
-include/lvgl/src/widgets/property/lv_slider_properties.i: include/lvgl/src/widgets/property/lv_slider_properties.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/property/lv_slider_properties.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_slider_properties.i
 .PHONY : include/lvgl/src/widgets/property/lv_slider_properties.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/property/lv_slider_properties.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_slider_properties.c.i
-.PHONY : include/lvgl/src/widgets/property/lv_slider_properties.c.i
-
-include/lvgl/src/widgets/property/lv_slider_properties.s: include/lvgl/src/widgets/property/lv_slider_properties.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/property/lv_slider_properties.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_slider_properties.s
 .PHONY : include/lvgl/src/widgets/property/lv_slider_properties.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/property/lv_slider_properties.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_slider_properties.c.s
-.PHONY : include/lvgl/src/widgets/property/lv_slider_properties.c.s
-
-include/lvgl/src/widgets/property/lv_style_properties.obj: include/lvgl/src/widgets/property/lv_style_properties.c.obj
+# target to build an object file
+include/lvgl/src/widgets/property/lv_style_properties.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_style_properties.obj
 .PHONY : include/lvgl/src/widgets/property/lv_style_properties.obj
 
-# target to build an object file
-include/lvgl/src/widgets/property/lv_style_properties.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_style_properties.c.obj
-.PHONY : include/lvgl/src/widgets/property/lv_style_properties.c.obj
-
-include/lvgl/src/widgets/property/lv_style_properties.i: include/lvgl/src/widgets/property/lv_style_properties.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/property/lv_style_properties.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_style_properties.i
 .PHONY : include/lvgl/src/widgets/property/lv_style_properties.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/property/lv_style_properties.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_style_properties.c.i
-.PHONY : include/lvgl/src/widgets/property/lv_style_properties.c.i
-
-include/lvgl/src/widgets/property/lv_style_properties.s: include/lvgl/src/widgets/property/lv_style_properties.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/property/lv_style_properties.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_style_properties.s
 .PHONY : include/lvgl/src/widgets/property/lv_style_properties.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/property/lv_style_properties.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_style_properties.c.s
-.PHONY : include/lvgl/src/widgets/property/lv_style_properties.c.s
-
-include/lvgl/src/widgets/property/lv_textarea_properties.obj: include/lvgl/src/widgets/property/lv_textarea_properties.c.obj
+# target to build an object file
+include/lvgl/src/widgets/property/lv_textarea_properties.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_textarea_properties.obj
 .PHONY : include/lvgl/src/widgets/property/lv_textarea_properties.obj
 
-# target to build an object file
-include/lvgl/src/widgets/property/lv_textarea_properties.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_textarea_properties.c.obj
-.PHONY : include/lvgl/src/widgets/property/lv_textarea_properties.c.obj
-
-include/lvgl/src/widgets/property/lv_textarea_properties.i: include/lvgl/src/widgets/property/lv_textarea_properties.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/property/lv_textarea_properties.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_textarea_properties.i
 .PHONY : include/lvgl/src/widgets/property/lv_textarea_properties.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/property/lv_textarea_properties.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_textarea_properties.c.i
-.PHONY : include/lvgl/src/widgets/property/lv_textarea_properties.c.i
-
-include/lvgl/src/widgets/property/lv_textarea_properties.s: include/lvgl/src/widgets/property/lv_textarea_properties.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/property/lv_textarea_properties.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_textarea_properties.s
 .PHONY : include/lvgl/src/widgets/property/lv_textarea_properties.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/property/lv_textarea_properties.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/property/lv_textarea_properties.c.s
-.PHONY : include/lvgl/src/widgets/property/lv_textarea_properties.c.s
-
-include/lvgl/src/widgets/roller/lv_roller.obj: include/lvgl/src/widgets/roller/lv_roller.c.obj
+# target to build an object file
+include/lvgl/src/widgets/roller/lv_roller.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/roller/lv_roller.obj
 .PHONY : include/lvgl/src/widgets/roller/lv_roller.obj
 
-# target to build an object file
-include/lvgl/src/widgets/roller/lv_roller.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/roller/lv_roller.c.obj
-.PHONY : include/lvgl/src/widgets/roller/lv_roller.c.obj
-
-include/lvgl/src/widgets/roller/lv_roller.i: include/lvgl/src/widgets/roller/lv_roller.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/roller/lv_roller.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/roller/lv_roller.i
 .PHONY : include/lvgl/src/widgets/roller/lv_roller.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/roller/lv_roller.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/roller/lv_roller.c.i
-.PHONY : include/lvgl/src/widgets/roller/lv_roller.c.i
-
-include/lvgl/src/widgets/roller/lv_roller.s: include/lvgl/src/widgets/roller/lv_roller.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/roller/lv_roller.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/roller/lv_roller.s
 .PHONY : include/lvgl/src/widgets/roller/lv_roller.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/roller/lv_roller.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/roller/lv_roller.c.s
-.PHONY : include/lvgl/src/widgets/roller/lv_roller.c.s
-
-include/lvgl/src/widgets/scale/lv_scale.obj: include/lvgl/src/widgets/scale/lv_scale.c.obj
+# target to build an object file
+include/lvgl/src/widgets/scale/lv_scale.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/scale/lv_scale.obj
 .PHONY : include/lvgl/src/widgets/scale/lv_scale.obj
 
-# target to build an object file
-include/lvgl/src/widgets/scale/lv_scale.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/scale/lv_scale.c.obj
-.PHONY : include/lvgl/src/widgets/scale/lv_scale.c.obj
-
-include/lvgl/src/widgets/scale/lv_scale.i: include/lvgl/src/widgets/scale/lv_scale.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/scale/lv_scale.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/scale/lv_scale.i
 .PHONY : include/lvgl/src/widgets/scale/lv_scale.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/scale/lv_scale.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/scale/lv_scale.c.i
-.PHONY : include/lvgl/src/widgets/scale/lv_scale.c.i
-
-include/lvgl/src/widgets/scale/lv_scale.s: include/lvgl/src/widgets/scale/lv_scale.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/scale/lv_scale.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/scale/lv_scale.s
 .PHONY : include/lvgl/src/widgets/scale/lv_scale.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/scale/lv_scale.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/scale/lv_scale.c.s
-.PHONY : include/lvgl/src/widgets/scale/lv_scale.c.s
-
-include/lvgl/src/widgets/slider/lv_slider.obj: include/lvgl/src/widgets/slider/lv_slider.c.obj
+# target to build an object file
+include/lvgl/src/widgets/slider/lv_slider.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/slider/lv_slider.obj
 .PHONY : include/lvgl/src/widgets/slider/lv_slider.obj
 
-# target to build an object file
-include/lvgl/src/widgets/slider/lv_slider.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/slider/lv_slider.c.obj
-.PHONY : include/lvgl/src/widgets/slider/lv_slider.c.obj
-
-include/lvgl/src/widgets/slider/lv_slider.i: include/lvgl/src/widgets/slider/lv_slider.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/slider/lv_slider.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/slider/lv_slider.i
 .PHONY : include/lvgl/src/widgets/slider/lv_slider.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/slider/lv_slider.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/slider/lv_slider.c.i
-.PHONY : include/lvgl/src/widgets/slider/lv_slider.c.i
-
-include/lvgl/src/widgets/slider/lv_slider.s: include/lvgl/src/widgets/slider/lv_slider.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/slider/lv_slider.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/slider/lv_slider.s
 .PHONY : include/lvgl/src/widgets/slider/lv_slider.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/slider/lv_slider.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/slider/lv_slider.c.s
-.PHONY : include/lvgl/src/widgets/slider/lv_slider.c.s
-
-include/lvgl/src/widgets/span/lv_span.obj: include/lvgl/src/widgets/span/lv_span.c.obj
+# target to build an object file
+include/lvgl/src/widgets/span/lv_span.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/span/lv_span.obj
 .PHONY : include/lvgl/src/widgets/span/lv_span.obj
 
-# target to build an object file
-include/lvgl/src/widgets/span/lv_span.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/span/lv_span.c.obj
-.PHONY : include/lvgl/src/widgets/span/lv_span.c.obj
-
-include/lvgl/src/widgets/span/lv_span.i: include/lvgl/src/widgets/span/lv_span.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/span/lv_span.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/span/lv_span.i
 .PHONY : include/lvgl/src/widgets/span/lv_span.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/span/lv_span.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/span/lv_span.c.i
-.PHONY : include/lvgl/src/widgets/span/lv_span.c.i
-
-include/lvgl/src/widgets/span/lv_span.s: include/lvgl/src/widgets/span/lv_span.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/span/lv_span.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/span/lv_span.s
 .PHONY : include/lvgl/src/widgets/span/lv_span.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/span/lv_span.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/span/lv_span.c.s
-.PHONY : include/lvgl/src/widgets/span/lv_span.c.s
-
-include/lvgl/src/widgets/spinbox/lv_spinbox.obj: include/lvgl/src/widgets/spinbox/lv_spinbox.c.obj
+# target to build an object file
+include/lvgl/src/widgets/spinbox/lv_spinbox.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/spinbox/lv_spinbox.obj
 .PHONY : include/lvgl/src/widgets/spinbox/lv_spinbox.obj
 
-# target to build an object file
-include/lvgl/src/widgets/spinbox/lv_spinbox.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/spinbox/lv_spinbox.c.obj
-.PHONY : include/lvgl/src/widgets/spinbox/lv_spinbox.c.obj
-
-include/lvgl/src/widgets/spinbox/lv_spinbox.i: include/lvgl/src/widgets/spinbox/lv_spinbox.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/spinbox/lv_spinbox.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/spinbox/lv_spinbox.i
 .PHONY : include/lvgl/src/widgets/spinbox/lv_spinbox.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/spinbox/lv_spinbox.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/spinbox/lv_spinbox.c.i
-.PHONY : include/lvgl/src/widgets/spinbox/lv_spinbox.c.i
-
-include/lvgl/src/widgets/spinbox/lv_spinbox.s: include/lvgl/src/widgets/spinbox/lv_spinbox.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/spinbox/lv_spinbox.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/spinbox/lv_spinbox.s
 .PHONY : include/lvgl/src/widgets/spinbox/lv_spinbox.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/spinbox/lv_spinbox.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/spinbox/lv_spinbox.c.s
-.PHONY : include/lvgl/src/widgets/spinbox/lv_spinbox.c.s
-
-include/lvgl/src/widgets/spinner/lv_spinner.obj: include/lvgl/src/widgets/spinner/lv_spinner.c.obj
+# target to build an object file
+include/lvgl/src/widgets/spinner/lv_spinner.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/spinner/lv_spinner.obj
 .PHONY : include/lvgl/src/widgets/spinner/lv_spinner.obj
 
-# target to build an object file
-include/lvgl/src/widgets/spinner/lv_spinner.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/spinner/lv_spinner.c.obj
-.PHONY : include/lvgl/src/widgets/spinner/lv_spinner.c.obj
-
-include/lvgl/src/widgets/spinner/lv_spinner.i: include/lvgl/src/widgets/spinner/lv_spinner.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/spinner/lv_spinner.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/spinner/lv_spinner.i
 .PHONY : include/lvgl/src/widgets/spinner/lv_spinner.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/spinner/lv_spinner.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/spinner/lv_spinner.c.i
-.PHONY : include/lvgl/src/widgets/spinner/lv_spinner.c.i
-
-include/lvgl/src/widgets/spinner/lv_spinner.s: include/lvgl/src/widgets/spinner/lv_spinner.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/spinner/lv_spinner.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/spinner/lv_spinner.s
 .PHONY : include/lvgl/src/widgets/spinner/lv_spinner.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/spinner/lv_spinner.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/spinner/lv_spinner.c.s
-.PHONY : include/lvgl/src/widgets/spinner/lv_spinner.c.s
-
-include/lvgl/src/widgets/switch/lv_switch.obj: include/lvgl/src/widgets/switch/lv_switch.c.obj
+# target to build an object file
+include/lvgl/src/widgets/switch/lv_switch.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/switch/lv_switch.obj
 .PHONY : include/lvgl/src/widgets/switch/lv_switch.obj
 
-# target to build an object file
-include/lvgl/src/widgets/switch/lv_switch.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/switch/lv_switch.c.obj
-.PHONY : include/lvgl/src/widgets/switch/lv_switch.c.obj
-
-include/lvgl/src/widgets/switch/lv_switch.i: include/lvgl/src/widgets/switch/lv_switch.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/switch/lv_switch.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/switch/lv_switch.i
 .PHONY : include/lvgl/src/widgets/switch/lv_switch.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/switch/lv_switch.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/switch/lv_switch.c.i
-.PHONY : include/lvgl/src/widgets/switch/lv_switch.c.i
-
-include/lvgl/src/widgets/switch/lv_switch.s: include/lvgl/src/widgets/switch/lv_switch.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/switch/lv_switch.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/switch/lv_switch.s
 .PHONY : include/lvgl/src/widgets/switch/lv_switch.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/switch/lv_switch.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/switch/lv_switch.c.s
-.PHONY : include/lvgl/src/widgets/switch/lv_switch.c.s
-
-include/lvgl/src/widgets/table/lv_table.obj: include/lvgl/src/widgets/table/lv_table.c.obj
+# target to build an object file
+include/lvgl/src/widgets/table/lv_table.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/table/lv_table.obj
 .PHONY : include/lvgl/src/widgets/table/lv_table.obj
 
-# target to build an object file
-include/lvgl/src/widgets/table/lv_table.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/table/lv_table.c.obj
-.PHONY : include/lvgl/src/widgets/table/lv_table.c.obj
-
-include/lvgl/src/widgets/table/lv_table.i: include/lvgl/src/widgets/table/lv_table.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/table/lv_table.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/table/lv_table.i
 .PHONY : include/lvgl/src/widgets/table/lv_table.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/table/lv_table.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/table/lv_table.c.i
-.PHONY : include/lvgl/src/widgets/table/lv_table.c.i
-
-include/lvgl/src/widgets/table/lv_table.s: include/lvgl/src/widgets/table/lv_table.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/table/lv_table.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/table/lv_table.s
 .PHONY : include/lvgl/src/widgets/table/lv_table.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/table/lv_table.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/table/lv_table.c.s
-.PHONY : include/lvgl/src/widgets/table/lv_table.c.s
-
-include/lvgl/src/widgets/tabview/lv_tabview.obj: include/lvgl/src/widgets/tabview/lv_tabview.c.obj
+# target to build an object file
+include/lvgl/src/widgets/tabview/lv_tabview.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/tabview/lv_tabview.obj
 .PHONY : include/lvgl/src/widgets/tabview/lv_tabview.obj
 
-# target to build an object file
-include/lvgl/src/widgets/tabview/lv_tabview.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/tabview/lv_tabview.c.obj
-.PHONY : include/lvgl/src/widgets/tabview/lv_tabview.c.obj
-
-include/lvgl/src/widgets/tabview/lv_tabview.i: include/lvgl/src/widgets/tabview/lv_tabview.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/tabview/lv_tabview.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/tabview/lv_tabview.i
 .PHONY : include/lvgl/src/widgets/tabview/lv_tabview.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/tabview/lv_tabview.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/tabview/lv_tabview.c.i
-.PHONY : include/lvgl/src/widgets/tabview/lv_tabview.c.i
-
-include/lvgl/src/widgets/tabview/lv_tabview.s: include/lvgl/src/widgets/tabview/lv_tabview.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/tabview/lv_tabview.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/tabview/lv_tabview.s
 .PHONY : include/lvgl/src/widgets/tabview/lv_tabview.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/tabview/lv_tabview.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/tabview/lv_tabview.c.s
-.PHONY : include/lvgl/src/widgets/tabview/lv_tabview.c.s
-
-include/lvgl/src/widgets/textarea/lv_textarea.obj: include/lvgl/src/widgets/textarea/lv_textarea.c.obj
+# target to build an object file
+include/lvgl/src/widgets/textarea/lv_textarea.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/textarea/lv_textarea.obj
 .PHONY : include/lvgl/src/widgets/textarea/lv_textarea.obj
 
-# target to build an object file
-include/lvgl/src/widgets/textarea/lv_textarea.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/textarea/lv_textarea.c.obj
-.PHONY : include/lvgl/src/widgets/textarea/lv_textarea.c.obj
-
-include/lvgl/src/widgets/textarea/lv_textarea.i: include/lvgl/src/widgets/textarea/lv_textarea.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/textarea/lv_textarea.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/textarea/lv_textarea.i
 .PHONY : include/lvgl/src/widgets/textarea/lv_textarea.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/textarea/lv_textarea.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/textarea/lv_textarea.c.i
-.PHONY : include/lvgl/src/widgets/textarea/lv_textarea.c.i
-
-include/lvgl/src/widgets/textarea/lv_textarea.s: include/lvgl/src/widgets/textarea/lv_textarea.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/textarea/lv_textarea.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/textarea/lv_textarea.s
 .PHONY : include/lvgl/src/widgets/textarea/lv_textarea.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/textarea/lv_textarea.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/textarea/lv_textarea.c.s
-.PHONY : include/lvgl/src/widgets/textarea/lv_textarea.c.s
-
-include/lvgl/src/widgets/tileview/lv_tileview.obj: include/lvgl/src/widgets/tileview/lv_tileview.c.obj
+# target to build an object file
+include/lvgl/src/widgets/tileview/lv_tileview.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/tileview/lv_tileview.obj
 .PHONY : include/lvgl/src/widgets/tileview/lv_tileview.obj
 
-# target to build an object file
-include/lvgl/src/widgets/tileview/lv_tileview.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/tileview/lv_tileview.c.obj
-.PHONY : include/lvgl/src/widgets/tileview/lv_tileview.c.obj
-
-include/lvgl/src/widgets/tileview/lv_tileview.i: include/lvgl/src/widgets/tileview/lv_tileview.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/tileview/lv_tileview.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/tileview/lv_tileview.i
 .PHONY : include/lvgl/src/widgets/tileview/lv_tileview.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/tileview/lv_tileview.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/tileview/lv_tileview.c.i
-.PHONY : include/lvgl/src/widgets/tileview/lv_tileview.c.i
-
-include/lvgl/src/widgets/tileview/lv_tileview.s: include/lvgl/src/widgets/tileview/lv_tileview.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/tileview/lv_tileview.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/tileview/lv_tileview.s
 .PHONY : include/lvgl/src/widgets/tileview/lv_tileview.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/tileview/lv_tileview.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/tileview/lv_tileview.c.s
-.PHONY : include/lvgl/src/widgets/tileview/lv_tileview.c.s
-
-include/lvgl/src/widgets/win/lv_win.obj: include/lvgl/src/widgets/win/lv_win.c.obj
+# target to build an object file
+include/lvgl/src/widgets/win/lv_win.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/win/lv_win.obj
 .PHONY : include/lvgl/src/widgets/win/lv_win.obj
 
-# target to build an object file
-include/lvgl/src/widgets/win/lv_win.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/win/lv_win.c.obj
-.PHONY : include/lvgl/src/widgets/win/lv_win.c.obj
-
-include/lvgl/src/widgets/win/lv_win.i: include/lvgl/src/widgets/win/lv_win.c.i
+# target to preprocess a source file
+include/lvgl/src/widgets/win/lv_win.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/win/lv_win.i
 .PHONY : include/lvgl/src/widgets/win/lv_win.i
 
-# target to preprocess a source file
-include/lvgl/src/widgets/win/lv_win.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/win/lv_win.c.i
-.PHONY : include/lvgl/src/widgets/win/lv_win.c.i
-
-include/lvgl/src/widgets/win/lv_win.s: include/lvgl/src/widgets/win/lv_win.c.s
+# target to generate assembly for a file
+include/lvgl/src/widgets/win/lv_win.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/win/lv_win.s
 .PHONY : include/lvgl/src/widgets/win/lv_win.s
 
-# target to generate assembly for a file
-include/lvgl/src/widgets/win/lv_win.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/include/lvgl/src/widgets/win/lv_win.c.s
-.PHONY : include/lvgl/src/widgets/win/lv_win.c.s
-
-src/amnio_ui.obj: src/amnio_ui.c.obj
+# target to build an object file
+src/amnio_ui.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/src/amnio_ui.obj
 .PHONY : src/amnio_ui.obj
 
-# target to build an object file
-src/amnio_ui.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/src/amnio_ui.c.obj
-.PHONY : src/amnio_ui.c.obj
-
-src/amnio_ui.i: src/amnio_ui.c.i
+# target to preprocess a source file
+src/amnio_ui.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/src/amnio_ui.i
 .PHONY : src/amnio_ui.i
 
-# target to preprocess a source file
-src/amnio_ui.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/src/amnio_ui.c.i
-.PHONY : src/amnio_ui.c.i
-
-src/amnio_ui.s: src/amnio_ui.c.s
-.PHONY : src/amnio_ui.s
-
 # target to generate assembly for a file
-src/amnio_ui.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/src/amnio_ui.c.s
-.PHONY : src/amnio_ui.c.s
+src/amnio_ui.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\amnio-ui.dir\build.make CMakeFiles/amnio-ui.dir/src/amnio_ui.s
+.PHONY : src/amnio_ui.s
 
 # Help Target
 help:
@@ -9588,10 +6015,6 @@ help:
 	@echo ... clean
 	@echo ... depend
 	@echo ... edit_cache
-	@echo ... install
-	@echo ... install/local
-	@echo ... install/strip
-	@echo ... list_install_components
 	@echo ... rebuild_cache
 	@echo ... amnio-ui
 	@echo ... include/lvgl/src/core/lv_group.obj
