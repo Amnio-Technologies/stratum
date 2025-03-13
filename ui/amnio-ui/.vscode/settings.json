@@ -3,6 +3,7 @@
         "lvgl.h": "c",
         "unistd.h": "c",
         "amnio_ui.h": "c",
-        "lv_init.h": "c"
+        "lv_init.h": "c",
+        "stdio.h": "c"
     }
 }

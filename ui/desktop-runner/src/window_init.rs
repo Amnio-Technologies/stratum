@@ -1,12 +1,13 @@
+use std::u32;
+
 use egui::Context;
 use egui_sdl2_gl::{DpiScaling, EguiStateHandler, ShaderVersion};
 use sdl2::{
-    EventPump, Sdl, VideoSubsystem,
     video::{GLContext, GLProfile, Window},
+    EventPump, Sdl, VideoSubsystem,
 };
 
-const SCREEN_WIDTH: u32 = 800;
-const SCREEN_HEIGHT: u32 = 600;
+use crate::{amnio_bindings, debug_ui::DEBUG_UI_WIDTH};
 
 /// Initializes SDL2 and its video subsystem.
 pub fn initialize_sdl() -> (Sdl, VideoSubsystem) {
@@ -25,10 +26,12 @@ pub fn setup_gl_attr(video_subsystem: &mut VideoSubsystem) {
 
 /// Initializes the SDL2 window and OpenGL context.
 pub fn initialize_window(video_subsystem: &mut VideoSubsystem) -> (Window, GLContext) {
+    let window_width = unsafe { amnio_bindings::get_lvgl_display_width() } + DEBUG_UI_WIDTH;
+    let window_height = unsafe { amnio_bindings::get_lvgl_display_height() };
+
     let window = video_subsystem
-        .window("amnIO UI Debugger", SCREEN_WIDTH, SCREEN_HEIGHT)
+        .window("amnIO UI Debugger", window_width, window_height)
         .opengl()
-        .resizable()
         .build()
         .unwrap();
 

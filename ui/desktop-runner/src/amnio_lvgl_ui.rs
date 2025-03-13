@@ -1,5 +1,8 @@
+use std::thread;
+
 use crate::amnio_bindings;
 use egui::{ColorImage, TextureHandle, TextureOptions};
+use std::time::{Duration, Instant};
 
 struct LvglRenderer {
     texture: Option<TextureHandle>,
@@ -12,6 +15,7 @@ impl LvglRenderer {
 
     /// Converts LVGL's RGB565 framebuffer to RGBA and uploads to GPU
     fn update_lvgl_framebuffer(&mut self, egui_ctx: &egui::Context) {
+        // dbg!(unsafe { amnio_bindings::get_debug() });
         let (fb, width, height) = match LvglEnvironment::get_framebuffer() {
             Some(fb) => fb,
             None => {
@@ -52,6 +56,22 @@ impl LvglEnvironment {
         unsafe {
             amnio_bindings::lvgl_setup();
         }
+
+        thread::spawn(move || {
+            let mut last_update = Instant::now();
+
+            loop {
+                let now = Instant::now();
+                let elapsed_ms = now.duration_since(last_update).as_millis() as u32;
+                last_update = now;
+
+                unsafe {
+                    amnio_bindings::lvgl_advance_timer(elapsed_ms);
+                }
+
+                thread::sleep(Duration::from_millis(5)); // Prevents CPU overuse
+            }
+        });
     }
 
     fn get_framebuffer() -> Option<(&'static mut [u16], usize, usize)> {

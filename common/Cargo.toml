@@ -1,0 +1,11 @@
+[package]
+name = "amnio-common"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+lazy_static = "1.5.0"
+log = "0.4.26"
+
+[lib]
+crate-type = ["rlib", "staticlib", "cdylib"] # ✅ Enables linking with C

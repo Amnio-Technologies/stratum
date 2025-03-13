@@ -2,10 +2,8 @@
 resolver = "2"
 
 members = [
-    "firmware/bms",
-    "firmware/monitoring",
-    "firmware/modules",
-    "firmware/main",
+    "common",
+    "firmware",
     "ui/desktop-runner",
     "ui/embedded-runner",
     "tools/module-sim",

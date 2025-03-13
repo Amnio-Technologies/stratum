@@ -1,13 +1,18 @@
+use std::sync::Arc;
+use std::time::{Duration, Instant};
+
+use amnio_common::ui_logging::start_ui_log_worker;
+use amnio_firmware::modules::module_manager::ModuleManager;
+use amnio_firmware::modules::system_controller::SystemController;
 use egui::Context;
 use egui_sdl2_gl::egui::FullOutput;
 use egui_sdl2_gl::painter::Painter;
 use egui_sdl2_gl::{gl, sdl2};
+use log::info;
 use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
 use sdl2::video::Window;
 use sdl2::EventPump;
-use tracing::info;
-use tracing_subscriber;
 
 mod amnio_bindings {
     #![allow(non_camel_case_types, non_snake_case, non_upper_case_globals)]
@@ -30,9 +35,13 @@ use egui_sdl2_gl::EguiStateHandler;
 
 struct UiState {
     enable_vsync: bool,
+    module_manager: ModuleManager,
+    system_controller: Arc<SystemController>,
     quit: bool,
-    slider_value: f64,
-    debug_text: String,
+    fps: f64,                            // ✅ Store FPS value
+    last_frame_time: f64,                // ✅ Track last frame time
+    frame_counter: u32,                  // ✅ Count frames in a second
+    last_fps_update: std::time::Instant, // ✅ Last time we updated FPS
 }
 
 fn handle_events(
@@ -72,21 +81,34 @@ fn render_frame(
 
     egui_ctx.begin_pass(egui_state.input.take());
 
-    egui::SidePanel::left("lvgl_canvas")
-        .resizable(false)
-        .show(egui_ctx, |ui| {
-            if let Some(texture) = ui_texture {
-                ui.image(texture);
-            } else {
-                ui.label("🛑 No LVGL Texture Found");
-            }
-        });
+    egui::CentralPanel::default().show(egui_ctx, |ui| {
+        ui.horizontal(|ui| {
+            // LVGL Canvas
+            ui.allocate_ui_with_layout(
+                egui::vec2(
+                    unsafe { amnio_bindings::get_lvgl_display_width() as f32 },
+                    ui.available_height(),
+                ),
+                egui::Layout::left_to_right(egui::Align::TOP),
+                |ui| {
+                    if let Some(texture) = ui_texture {
+                        ui.image(texture);
+                    } else {
+                        ui.label("No LVGL Texture Found");
+                    }
+                },
+            );
 
-    // Debugging UI
-    egui::SidePanel::right("debug_panel")
-        .resizable(true)
-        .default_width(250.0)
-        .show(egui_ctx, |ui| debug_ui::create_debug_ui(ui, ui_state));
+            // Debug Panel (takes remaining space)
+            ui.allocate_ui_with_layout(
+                ui.available_size(),
+                egui::Layout::top_down(egui::Align::Min),
+                |ui| {
+                    debug_ui::create_debug_ui(ui, ui_state);
+                },
+            );
+        });
+    });
 
     let FullOutput {
         platform_output,
@@ -112,7 +134,8 @@ fn render_frame(
 }
 
 fn main() {
-    tracing_subscriber::fmt::init();
+    env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
+    start_ui_log_worker();
 
     let (sdl_context, mut video_subsystem) = initialize_sdl();
     setup_gl_attr(&mut video_subsystem);
@@ -124,9 +147,13 @@ fn main() {
 
     let mut ui_state = UiState {
         enable_vsync: false,
+        module_manager: ModuleManager::new(),
+        system_controller: SystemController::new(),
         quit: false,
-        slider_value: 10.0,
-        debug_text: "Debug output area".to_string(),
+        fps: 0.0,
+        last_frame_time: 0.0,
+        frame_counter: 0,
+        last_fps_update: Instant::now(), // ✅ Start tracking FPS updates
     };
 
     info!("Initializing LVGL...");
@@ -134,6 +161,8 @@ fn main() {
     info!("LVGL Initialized");
 
     while !ui_state.quit {
+        let start_time = Instant::now(); // ✅ Start measuring frame time
+
         if !handle_events(
             &mut event_pump,
             &mut egui_state,
@@ -152,6 +181,21 @@ fn main() {
             &mut ui_state,
             &mut ui,
         );
+
+        // ✅ Update FPS every second
+        ui_state.frame_counter += 1;
+        let elapsed_time = ui_state.last_fps_update.elapsed();
+        if elapsed_time >= Duration::from_secs(1) {
+            ui_state.fps = ui_state.frame_counter as f64 / elapsed_time.as_secs_f64();
+            ui_state.frame_counter = 0;
+            ui_state.last_fps_update = Instant::now();
+        }
+
+        // ✅ Delay to simulate ~60 FPS if needed
+        let frame_duration = start_time.elapsed();
+        if frame_duration < Duration::from_millis(16) {
+            std::thread::sleep(Duration::from_millis(16) - frame_duration);
+        }
     }
 
     info!("Shutting down...");

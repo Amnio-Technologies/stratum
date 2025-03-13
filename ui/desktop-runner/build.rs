@@ -1,45 +1,31 @@
 use std::env;
-use std::fs;
 use std::path::PathBuf;
 
 fn main() {
     let cwd = env::current_dir().unwrap();
     let amnio_root = cwd.parent().and_then(|p| p.parent()).unwrap();
-    let target_dir = amnio_root.join("target");
 
     let amnio_ui_build = amnio_root.join("ui").join("amnio-ui").join("build");
-    let dll_path = amnio_ui_build.join("libamnio-ui.dll");
-    let project_root_debug = target_dir.join("debug");
+    let lib_path = amnio_ui_build.join("libamnio-ui.a"); // Use static library now!
 
-    fs::create_dir_all(&project_root_debug).expect("Failed to create target/debug directory");
+    // Ensure the static library exists
+    if !lib_path.exists() {
+        panic!("❌ Static library libamnio-ui.a not found! Did you build amnio-ui?");
+    }
 
-    // Copy DLL to target/debug so it's next to the Rust exe
-    let dll_dest = project_root_debug.join("libamnio-ui.dll");
-    fs::copy(&dll_path, &dll_dest).expect("Failed to copy amnio-ui.dll to target/debug");
-
-    // Link against the import library (MinGW generates `libamnio-ui.dll.a`)
+    // Link against the static library
     println!(
         "cargo:rustc-link-search=native={}",
         amnio_ui_build.display()
     );
-    println!("cargo:rustc-link-lib=dylib=amnio-ui");
+    println!("cargo:rustc-link-lib=static=amnio-ui"); // Change `dylib` to `static` ✅
 
-    // Ensure Cargo rebuilds if the DLL changes
-    println!("cargo:rerun-if-changed={}", dll_path.display());
+    // Ensure Cargo rebuilds if the library changes
+    println!("cargo:rerun-if-changed={}", lib_path.display());
 
     let inc_dir_amnio = amnio_root.join("ui").join("amnio-ui").join("include");
-
-    let inc_dir_lvgl = amnio_root
-        .join("ui")
-        .join("amnio-ui")
-        .join("include")
-        .join("lvgl");
-
-    let header_to_bind = amnio_root
-        .join("ui")
-        .join("amnio-ui")
-        .join("include")
-        .join("amnio_ui.h");
+    let inc_dir_lvgl = inc_dir_amnio.join("lvgl");
+    let header_to_bind = inc_dir_amnio.join("amnio_ui.h");
 
     dbg!(&header_to_bind.clone());
     dbg!(format!("{}", header_to_bind.display()));
