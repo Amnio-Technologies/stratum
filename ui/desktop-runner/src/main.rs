@@ -39,7 +39,6 @@ struct UiState {
     system_controller: Arc<SystemController>,
     quit: bool,
     fps: f64,                            // ✅ Store FPS value
-    last_frame_time: f64,                // ✅ Track last frame time
     frame_counter: u32,                  // ✅ Count frames in a second
     last_fps_update: std::time::Instant, // ✅ Last time we updated FPS
 }
@@ -151,7 +150,6 @@ fn main() {
         system_controller: SystemController::new(),
         quit: false,
         fps: 0.0,
-        last_frame_time: 0.0,
         frame_counter: 0,
         last_fps_update: Instant::now(), // ✅ Start tracking FPS updates
     };

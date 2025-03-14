@@ -67,12 +67,6 @@ pub trait Module {
 
     fn metadata(&self) -> ModuleMetadata;
 
-    fn box_return<C: crate::modules::module::ModuleCommand + 'static>(
-        return_val: C::Response,
-    ) -> ModuleCommandExecutionResponse {
-        Ok(Box::new(return_val))
-    }
-
     fn process_command(&mut self, command: Self::ModuleCommand) -> ModuleCommandExecutionResponse;
 
     fn status(&self) -> Self::ModuleStatus;
@@ -187,7 +181,7 @@ macro_rules! def_module_commands {
 ///
 /// # Example
 /// ```
-/// type_enforced_match!(
+/// command_match!(
 ///     command_enum,
 ///     parent_module,
 ///     my_module,
@@ -196,7 +190,7 @@ macro_rules! def_module_commands {
 /// )
 /// ```
 #[macro_export]
-macro_rules! type_enforced_match {
+macro_rules! command_match {
     ($cmd_enum:expr, $parent:path, $module_name:ident, $( $variant:ident { $( $arg:ident ),* } => $body:expr ),* $(,)?) => {{
         paste::paste! {
             match $cmd_enum {
@@ -205,6 +199,7 @@ macro_rules! type_enforced_match {
                         let result = (|| -> <$parent::[<$module_name:snake>]::$variant as crate::modules::module::ModuleCommand>::Response {
                             $body
                         })(); // Invoke the closure immediately
+
                         Ok(Box::new(result) as Box<dyn std::any::Any>)
                     }
                 ),*

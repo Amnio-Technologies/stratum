@@ -1,4 +1,5 @@
 use crate::{
+    command_match,
     modules::{
         battery::{
             battery_module_commands::{BatteryModuleCommands, GetVoltage, SetOutput},
@@ -7,7 +8,6 @@ use crate::{
         module::{Module, ModuleError, ModuleKind, ModuleMetadata},
         system_controller::{CriticalEvent, SystemController},
     },
-    type_enforced_match,
 };
 use anyhow::Result;
 use std::{sync::Arc, time::Instant};
@@ -185,7 +185,7 @@ impl Module for DummyBatteryModule {
         &mut self,
         command: Self::ModuleCommand,
     ) -> Result<Box<dyn std::any::Any>, ModuleError> {
-        type_enforced_match!(command, crate::modules::battery, BatteryModuleCommands,
+        command_match!(command, crate::modules::battery, BatteryModuleCommands,
             SetOutput { state } => {
                 dbg!(state);
             },
