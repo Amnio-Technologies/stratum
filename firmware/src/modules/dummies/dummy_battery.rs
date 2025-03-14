@@ -1,7 +1,8 @@
 use crate::{
     command_match,
     modules::{
-        battery::{BatteryData, BatteryModuleCommands},
+        battery::BatteryData,
+        commands::BatteryModuleCommands,
         module::{Module, ModuleError, ModuleKind, ModuleMetadata},
         system_controller::{CriticalEvent, SystemController},
     },
@@ -182,11 +183,12 @@ impl Module for DummyBatteryModule {
         &mut self,
         command: Self::ModuleCommand,
     ) -> Result<Box<dyn std::any::Any>, ModuleError> {
-        command_match!(command, crate::modules::battery, BatteryModuleCommands,
+        command_match!(command, BatteryModuleCommands,
             SetOutput { state } => {
                 dbg!(state);
             },
             GetVoltage {} => ElectricPotential::new::<volt>(0.0),
+            Dummy => (),
         )
     }
 

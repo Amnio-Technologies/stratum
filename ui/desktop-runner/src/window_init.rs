@@ -1,5 +1,3 @@
-use std::u32;
-
 use egui::Context;
 use egui_sdl2_gl::{DpiScaling, EguiStateHandler, ShaderVersion};
 use sdl2::{

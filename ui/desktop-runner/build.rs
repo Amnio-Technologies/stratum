@@ -37,6 +37,7 @@ fn main() {
             format!("-I{}", inc_dir_amnio.display()),
             format!("-I{}", inc_dir_lvgl.display()),
         ])
+        .raw_line("#[allow(dead_code)]")
         .generate()
         .expect("Unable to generate bindings from amnio_ui.h");
 

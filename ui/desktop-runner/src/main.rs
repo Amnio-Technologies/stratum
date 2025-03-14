@@ -15,7 +15,12 @@ use sdl2::video::Window;
 use sdl2::EventPump;
 
 mod amnio_bindings {
-    #![allow(non_camel_case_types, non_snake_case, non_upper_case_globals)]
+    #![allow(
+        non_camel_case_types,
+        non_snake_case,
+        non_upper_case_globals,
+        dead_code
+    )]
 
     #[cfg(windows)]
     include!(concat!(env!("OUT_DIR"), "\\bindings.rs"));
@@ -48,7 +53,7 @@ fn handle_events(
     egui_state: &mut EguiStateHandler,
     window: &Window,
     painter: &mut Painter,
-    ui_state: &mut UiState,
+    _ui_state: &mut UiState,
 ) -> bool {
     for event in event_pump.poll_iter() {
         match event {

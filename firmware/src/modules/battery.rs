@@ -1,15 +1,5 @@
 use uom::si::f64::{ElectricCurrent, ElectricPotential, ThermodynamicTemperature};
 
-use crate::def_module_commands;
-
-def_module_commands! {
-    /// Commands that can be sent to the BatteryModule.
-    battery_module_commands {
-        SetOutput(state: bool) -> ();
-        GetVoltage() -> uom::si::f64::ElectricPotential;
-    }
-}
-
 /// Represents the state of a battery module.
 pub struct BatteryData {
     /// Battery charge level in percentage (0-100)%.

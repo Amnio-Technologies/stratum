@@ -1,10 +1,10 @@
+use super::system_controller::SystemController;
 use anyhow::Result;
 use std::{
     fmt::{self, Debug},
     sync::Arc,
 };
-
-use super::system_controller::SystemController;
+use thiserror::Error;
 
 #[derive(Debug, Clone)]
 pub struct ModuleMetadata {
@@ -39,8 +39,6 @@ pub trait ModuleCommand {
     fn as_any(&self) -> &dyn std::any::Any;
 }
 
-use thiserror::Error;
-
 #[derive(Debug, Error)]
 pub enum ModuleError {
     #[error("Invalid command: {0}")]
@@ -74,106 +72,6 @@ pub trait Module {
     fn initialize(&mut self, system_controller: Arc<SystemController>) -> Result<(), ModuleError>;
 }
 
-/// A macro to define module commands and their corresponding structures.
-///
-/// This macro generates an enum representing all possible commands for a given module,
-/// along with structs implementing the `ModuleCommand` trait for each command.
-///
-/// # Example
-/// ```
-/// def_module_commands! {
-///     my_module {
-///         Foo(arg1: u32, arg2: String) -> bool;
-///         Bar(arg: i32) -> ();
-///         Baz() -> ();
-///     }
-/// }
-/// ```
-///
-/// This expands to:
-/// ```rust
-/// pub mod my_module {
-///     use crate::modules::module::ModuleCommand;
-///
-///     /// Enum representing all commands for the module.
-///     #[derive(Debug)]
-///     pub enum MyModule {
-///         Foo { arg1: u32, arg2: String },
-///         Bar { arg: i32 },
-///         Baz { },
-///     }
-///
-///     /// Struct representing the `Foo` command.
-///     pub struct Foo;
-///
-///     impl ModuleCommand for Foo {
-///         type Response = bool;
-///
-///         fn as_any(&self) -> &dyn std::any::Any {
-///             self
-///         }
-///     }
-///
-///     /// Struct representing the `Bar` command.
-///     pub struct Bar;
-///
-///     impl ModuleCommand for Bar {
-///         type Response = ();
-///
-///         fn as_any(&self) -> &dyn std::any::Any {
-///             self
-///         }
-///     }
-///
-///     /// Struct representing the `Baz` command (unit struct).
-///     pub struct Baz;
-///
-///     impl ModuleCommand for Baz {
-///         type Response = ();
-///
-///         fn as_any(&self) -> &dyn std::any::Any {
-///             self
-///         }
-///     }
-/// }
-/// ```
-///
-/// This ensures that each command in the module has a corresponding struct that implements
-/// the `ModuleCommand` trait, defining the associated response type for each command.
-/// If a command has no arguments, it is treated as a unit struct variant instead of an empty struct.
-#[macro_export]
-macro_rules! def_module_commands {
-    ($(#[$meta:meta])* $module_name:ident {
-        $( $cmd_name:ident ($($arg_name:ident : $arg_ty:ty),* ) $(-> $ret_ty:ty)?; )*
-    }) => {
-        paste::paste! {
-            /// Enum representing all commands for the module.
-            #[derive(Debug)]
-            pub enum [<$module_name:camel>] {
-                $( $cmd_name { $( $arg_name: $arg_ty ),* } ),*
-            }
-        }
-
-        $(#[$meta])*
-        pub mod $module_name {
-            use crate::modules::module::ModuleCommand;
-
-            $(
-                /// Struct representing the `$cmd_name` command.
-                pub struct $cmd_name;
-
-                impl ModuleCommand for $cmd_name {
-                    type Response = $( $ret_ty )?;
-
-                    fn as_any(&self)  -> &dyn std::any::Any {
-                        self
-                    }
-                }
-            )*
-        }
-    };
-}
-
 /// A macro that performs a type-enforced match for a module command enum.
 ///
 /// This macro ensures that the response type of each command variant is correctly inferred.
@@ -191,14 +89,18 @@ macro_rules! def_module_commands {
 /// ```
 #[macro_export]
 macro_rules! command_match {
-    ($cmd_enum:expr, $parent:path, $module_name:ident, $( $variant:ident { $( $arg:ident ),* } => $body:expr ),* $(,)?) => {{
+    ($cmd_enum:expr, $module_name:ident,
+        $(
+            $variant:ident $( { $( $arg:ident ),* } )? => $body:expr
+        ),* $(,)?
+    ) => {{
         paste::paste! {
             match $cmd_enum {
                 $(
-                    $module_name::$variant { $( $arg ),* } => {
-                        let result = (|| -> <$parent::[<$module_name:snake>]::$variant as crate::modules::module::ModuleCommand>::Response {
+                    $module_name::$variant $( { $( $arg ),* } )? => {
+                        let result = (|| -> <crate::modules::commands::[<$module_name:snake>]::$variant as crate::modules::module::ModuleCommand>::Response {
                             $body
-                        })(); // Invoke the closure immediately
+                        })(); // Invoke the closure immediately (this is to allow early returns inside the body)
 
                         Ok(Box::new(result) as Box<dyn std::any::Any>)
                     }
@@ -208,31 +110,5 @@ macro_rules! command_match {
     }};
 }
 
-pub extern crate paste;
-
-#[macro_export]
-macro_rules! execute_command {
-    ($module:expr, $path:path, $command:ident, $variant:ident { $($args:tt)* }) => {{
-        use std::any::Any;
-        use amnio_firmware::modules::module::{Module, ModuleCommand, ModuleError};
-        use amnio_firmware::modules::module::paste::paste;
-
-        paste! {
-            let command_instance = $path::[<$command:camel>]::$variant { $($args)* };
-
-            type ResponseType = <$path::$command::$variant as ModuleCommand>::Response;
-        }
-
-        let response = $module.process_command(command_instance);
-
-        match response {
-            Ok(boxed_result) => {
-                boxed_result
-                    .downcast::<ResponseType>()
-                    .map(|boxed| *boxed)
-                    .map_err(|_| ModuleError::DowncastFailure)
-            }
-            Err(err) => Err(err),
-        }
-    }};
-}
+pub use amnio_macros::def_module_commands;
+pub use amnio_macros::execute_command;

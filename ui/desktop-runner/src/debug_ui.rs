@@ -1,5 +1,5 @@
 use amnio_common::ui_logging::UI_LOGS;
-use amnio_firmware::{execute_command, modules::dummies::dummy_battery::DummyBatteryModule};
+use amnio_firmware::modules::dummies::dummy_battery::DummyBatteryModule;
 use egui::{Checkbox, ScrollArea};
 
 use crate::UiState;
@@ -85,14 +85,7 @@ pub fn create_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
 
     // ✅ Add a new module
     if ui.button("➕ Add Battery Module").clicked() {
-        let mut dummy_module =
-            DummyBatteryModule::new(ui_state.module_manager.generate_unique_id());
-        let bru = execute_command!(
-            dummy_module,
-            amnio_firmware::modules::battery,
-            battery_module_commands,
-            GetVoltage {}
-        );
+        let dummy_module = DummyBatteryModule::new(ui_state.module_manager.generate_unique_id());
 
         ui_state
             .module_manager
