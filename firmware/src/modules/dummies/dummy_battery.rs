@@ -1,10 +1,7 @@
 use crate::{
     command_match,
     modules::{
-        battery::{
-            battery_module_commands::{BatteryModuleCommands, GetVoltage, SetOutput},
-            BatteryData,
-        },
+        battery::{BatteryData, BatteryModuleCommands},
         module::{Module, ModuleError, ModuleKind, ModuleMetadata},
         system_controller::{CriticalEvent, SystemController},
     },

@@ -8,4 +8,5 @@ members = [
     "ui/embedded-runner",
     "tools/module-sim",
     "tools/data-logger",
+    "amnio-macros",
 ]

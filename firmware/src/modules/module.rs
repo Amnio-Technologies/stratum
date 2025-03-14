@@ -146,17 +146,17 @@ macro_rules! def_module_commands {
     ($(#[$meta:meta])* $module_name:ident {
         $( $cmd_name:ident ($($arg_name:ident : $arg_ty:ty),* ) $(-> $ret_ty:ty)?; )*
     }) => {
+        paste::paste! {
+            /// Enum representing all commands for the module.
+            #[derive(Debug)]
+            pub enum [<$module_name:camel>] {
+                $( $cmd_name { $( $arg_name: $arg_ty ),* } ),*
+            }
+        }
+
         $(#[$meta])*
         pub mod $module_name {
             use crate::modules::module::ModuleCommand;
-
-            paste::paste! {
-                /// Enum representing all commands for the module.
-                #[derive(Debug)]
-                pub enum [<$module_name:camel>] {
-                    $( $cmd_name { $( $arg_name: $arg_ty ),* } ),*
-                }
-            }
 
             $(
                 /// Struct representing the `$cmd_name` command.
@@ -204,6 +204,35 @@ macro_rules! command_match {
                     }
                 ),*
             }
+        }
+    }};
+}
+
+pub extern crate paste;
+
+#[macro_export]
+macro_rules! execute_command {
+    ($module:expr, $path:path, $command:ident, $variant:ident { $($args:tt)* }) => {{
+        use std::any::Any;
+        use amnio_firmware::modules::module::{Module, ModuleCommand, ModuleError};
+        use amnio_firmware::modules::module::paste::paste;
+
+        paste! {
+            let command_instance = $path::[<$command:camel>]::$variant { $($args)* };
+
+            type ResponseType = <$path::$command::$variant as ModuleCommand>::Response;
+        }
+
+        let response = $module.process_command(command_instance);
+
+        match response {
+            Ok(boxed_result) => {
+                boxed_result
+                    .downcast::<ResponseType>()
+                    .map(|boxed| *boxed)
+                    .map_err(|_| ModuleError::DowncastFailure)
+            }
+            Err(err) => Err(err),
         }
     }};
 }

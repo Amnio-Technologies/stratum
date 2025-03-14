@@ -1,7 +1,6 @@
 #ifndef AMNIO_UI_H
 #define AMNIO_UI_H
 
-#include "lvgl.h"
 #include <stdint.h>
 
 #ifdef _WIN32

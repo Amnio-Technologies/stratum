@@ -1,4 +1,5 @@
 #include "amnio_ui.h"
+#include "lvgl.h"
 #include <stdio.h>
 #include <stdlib.h>
 
