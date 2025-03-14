@@ -3,7 +3,7 @@ use crate::{
     modules::{
         battery::BatteryData,
         commands::BatteryModuleCommands,
-        module::{Module, ModuleError, ModuleKind, ModuleMetadata},
+        module::{Module, ModuleCommandExecutionError, ModuleKind, ModuleMetadata},
         system_controller::{CriticalEvent, SystemController},
     },
 };
@@ -182,7 +182,7 @@ impl Module for DummyBatteryModule {
     fn process_command(
         &mut self,
         command: Self::ModuleCommand,
-    ) -> Result<Box<dyn std::any::Any>, ModuleError> {
+    ) -> Result<Box<dyn std::any::Any>, ModuleCommandExecutionError> {
         command_match!(command, BatteryModuleCommands,
             SetOutput { state } => {
                 dbg!(state);
@@ -206,7 +206,10 @@ impl Module for DummyBatteryModule {
         }
     }
 
-    fn initialize(&mut self, system_controller: Arc<SystemController>) -> Result<(), ModuleError> {
+    fn initialize(
+        &mut self,
+        system_controller: Arc<SystemController>,
+    ) -> Result<(), ModuleCommandExecutionError> {
         self.system_controller = Some(system_controller);
         Ok(())
     }

@@ -40,7 +40,7 @@ pub trait ModuleCommand {
 }
 
 #[derive(Debug, Error)]
-pub enum ModuleError {
+pub enum ModuleCommandExecutionError {
     #[error("Invalid command: {0}")]
     InvalidCommand(String),
 
@@ -57,7 +57,7 @@ pub enum ModuleError {
     Unknown,
 }
 
-type ModuleCommandExecutionResponse = Result<Box<dyn std::any::Any>, ModuleError>;
+type ModuleCommandExecutionResponse = Result<Box<dyn std::any::Any>, ModuleCommandExecutionError>;
 
 pub trait Module {
     type ModuleCommand;
@@ -69,7 +69,10 @@ pub trait Module {
 
     fn status(&self) -> Self::ModuleStatus;
 
-    fn initialize(&mut self, system_controller: Arc<SystemController>) -> Result<(), ModuleError>;
+    fn initialize(
+        &mut self,
+        system_controller: Arc<SystemController>,
+    ) -> Result<(), ModuleCommandExecutionError>;
 }
 
 /// A macro that performs a type-enforced match for a module command enum.

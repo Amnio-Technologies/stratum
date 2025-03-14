@@ -1,4 +1,5 @@
 use amnio_common::ui_logging::LogLevel;
+use log::error;
 use std::{
     any::Any,
     collections::{HashMap, VecDeque},
@@ -63,15 +64,10 @@ impl SystemController {
     }
 
     pub fn handle_event(&self, event: ModuleEvent) {
-        println!("Handling event: {:?}", event);
-
-        // Lock the mutex to modify the event log
-        let mut log = self.event_log.lock().unwrap();
-        log.push_back(format!("{:?}", event));
-
-        // Handle critical events
-        if let ModuleEvent::Critical(critical_event) = &event {
-            println!("⚠️ Critical Event: {:?}", critical_event);
+        if let Ok(mut log) = self.event_log.lock() {
+            log.push_back(format!("{:?}", event));
+        } else {
+            error!("⚠️ Failed to acquire event_log lock (mutex poisoned)");
         }
     }
 
@@ -80,22 +76,28 @@ impl SystemController {
     }
 
     pub fn log_module_event(&self, module_id: u16, entry: LogEntry) {
-        let mut logs = self.module_logs.lock().unwrap();
-
-        let module_log = logs
-            .entry(module_id)
-            .or_insert_with(|| VecDeque::with_capacity(100));
-        if module_log.len() >= 100 {
-            module_log.pop_front(); // Remove oldest entry to maintain a fixed size
+        if let Ok(mut logs) = self.module_logs.lock() {
+            let module_log = logs
+                .entry(module_id)
+                .or_insert_with(|| VecDeque::with_capacity(100));
+            if module_log.len() >= 100 {
+                module_log.pop_front();
+            }
+            module_log.push_back(entry);
+        } else {
+            error!("⚠️ Failed to acquire module_logs lock (mutex poisoned)");
         }
-        module_log.push_back(entry);
     }
 
     pub fn get_filtered_logs(&self, level: LogLevel) -> Vec<String> {
-        let logs = self.event_log.lock().unwrap();
-        logs.iter()
-            .filter(|entry| entry.contains(&format!("{:?}", level)))
-            .cloned()
-            .collect()
+        if let Ok(logs) = self.event_log.lock() {
+            logs.iter()
+                .filter(|entry| entry.contains(&format!("{:?}", level)))
+                .cloned()
+                .collect()
+        } else {
+            error!("⚠️ Failed to acquire event_log lock (mutex poisoned)");
+            Vec::new()
+        }
     }
 }

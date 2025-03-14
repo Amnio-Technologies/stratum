@@ -1,3 +1,4 @@
+use log::error;
 use rand::Rng;
 
 use super::module::ModuleMetadata;
@@ -51,7 +52,9 @@ impl ModuleManager {
     ) {
         let id = module.metadata().id;
 
-        module.initialize(system_controller.clone());
+        if let Err(err) = module.initialize(system_controller.clone()) {
+            error!("Unable to initalize module {}", err);
+        }
 
         self.modules.insert(id, Arc::new(module));
     }

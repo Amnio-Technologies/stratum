@@ -1,9 +1,9 @@
 use convert_case::{Case, Casing};
-use execute::CommandInput;
+use execute_command::CommandInput;
 use proc_macro::TokenStream;
 use syn::parse_macro_input;
-mod command_macro;
-mod execute;
+mod execute_command;
+mod generate_module_commands;
 use quote::{format_ident, quote};
 
 /// A macro to define module commands and their corresponding structures.
@@ -75,8 +75,8 @@ use quote::{format_ident, quote};
 /// If a command has no arguments, it is treated as a unit struct variant instead of an empty struct.
 #[proc_macro]
 pub fn def_module_commands(input: TokenStream) -> TokenStream {
-    let input = parse_macro_input!(input as command_macro::ModuleCommandDef);
-    command_macro::generate_module_commands(input)
+    let input = parse_macro_input!(input as generate_module_commands::ModuleCommandDef);
+    generate_module_commands::generate_module_commands(input)
 }
 /// A procedural macro for executing module commands while resolving the correct response type at compile time.
 ///
@@ -152,7 +152,12 @@ pub fn execute_command(input: TokenStream) -> TokenStream {
             let command = #command_creation;
 
             let result: Result<Box<dyn std::any::Any>, ModuleError> = #module.process_command(command);
-            let final_result: Result<ResponseType, ModuleError> = result.map(|boxed| *boxed.downcast::<ResponseType>().unwrap());
+            let final_result: Result<ResponseType, ModuleError> = result.and_then(|boxed| {
+                boxed
+                    .downcast::<ResponseType>()
+                    .map(|boxed_response| *boxed_response)
+                    .map_err(|_| ModuleError::DowncastFailure)
+            });
 
             final_result
         }
