@@ -197,11 +197,11 @@ macro_rules! def_module_commands {
 /// ```
 #[macro_export]
 macro_rules! type_enforced_match {
-    ($cmd_enum:expr, $parent:path, $module_name:ident, $( $variant:ident { $($arg:ident)? } => $body:expr ),* $(,)?) => {{
+    ($cmd_enum:expr, $parent:path, $module_name:ident, $( $variant:ident { $( $arg:ident ),* } => $body:expr ),* $(,)?) => {{
         paste::paste! {
             match $cmd_enum {
                 $(
-                    $module_name::$variant { $($arg)? } => {
+                    $module_name::$variant { $( $arg ),* } => {
                         let result = (|| -> <$parent::[<$module_name:snake>]::$variant as crate::modules::module::ModuleCommand>::Response {
                             $body
                         })(); // Invoke the closure immediately
