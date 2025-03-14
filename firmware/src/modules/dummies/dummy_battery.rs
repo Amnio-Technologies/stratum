@@ -1,10 +1,13 @@
-use crate::modules::{
-    battery::{
-        battery_module_commands::{BatteryModuleCommands, GetVoltage, SetOutput},
-        BatteryData,
+use crate::{
+    modules::{
+        battery::{
+            battery_module_commands::{BatteryModuleCommands, GetVoltage, SetOutput},
+            BatteryData,
+        },
+        module::{Module, ModuleError, ModuleKind, ModuleMetadata},
+        system_controller::{CriticalEvent, SystemController},
     },
-    module::{Module, ModuleError, ModuleKind, ModuleMetadata},
-    system_controller::{CriticalEvent, SystemController},
+    type_enforced_match,
 };
 use anyhow::Result;
 use std::{sync::Arc, time::Instant};
@@ -178,23 +181,16 @@ impl Module for DummyBatteryModule {
         }
     }
 
-    fn process_command<C>(&mut self, command: C) -> Result<Box<dyn std::any::Any>, ModuleError>
-    where
-        C: crate::modules::module::ModuleCommand,
-        C: Into<Self::ModuleCommand>,
-    {
-        match command.into() {
-            Self::ModuleCommand::SetOutput(cmd) => {
-                println!("Setting output: {}", cmd.state);
-                Self::box_return::<SetOutput>(())
-            }
-            Self::ModuleCommand::GetVoltage(_) => {
-                Self::box_return::<GetVoltage>(ElectricPotential::new::<volt>(0.0))
-            }
-            _ => Err(ModuleError::InvalidCommand(
-                "Unsupported command".to_string(),
-            )),
-        }
+    fn process_command(
+        &mut self,
+        command: Self::ModuleCommand,
+    ) -> Result<Box<dyn std::any::Any>, ModuleError> {
+        type_enforced_match!(command, crate::modules::battery, BatteryModuleCommands,
+            SetOutput { state } => {
+                dbg!(state);
+            },
+            GetVoltage {} => ElectricPotential::new::<volt>(0.0)
+        )
     }
 
     fn status(&self) -> Self::ModuleStatus {
