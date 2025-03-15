@@ -75,7 +75,7 @@ use quote::{format_ident, quote};
 /// If a command has no arguments, it is treated as a unit struct variant instead of an empty struct.
 #[proc_macro]
 pub fn def_module_commands(input: TokenStream) -> TokenStream {
-    let input = parse_macro_input!(input as generate_module_commands::ModuleCommandDef);
+    let input = parse_macro_input!(input as generate_module_commands::ModuleCommandsDefList);
     generate_module_commands::generate_module_commands(input)
 }
 /// A procedural macro for executing module commands while resolving the correct response type at compile time.
