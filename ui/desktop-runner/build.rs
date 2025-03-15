@@ -6,7 +6,7 @@ fn main() {
     let amnio_root = cwd.parent().and_then(|p| p.parent()).unwrap();
 
     let amnio_ui_build = amnio_root.join("ui").join("amnio-ui").join("build");
-    let lib_path = amnio_ui_build.join("libamnio-ui.a"); // Use static library now!
+    let lib_path = amnio_ui_build.join("libamnio-ui.a");
 
     // Ensure the static library exists
     if !lib_path.exists() {
@@ -18,7 +18,7 @@ fn main() {
         "cargo:rustc-link-search=native={}",
         amnio_ui_build.display()
     );
-    println!("cargo:rustc-link-lib=static=amnio-ui"); // Change `dylib` to `static` ✅
+    println!("cargo:rustc-link-lib=static=amnio-ui");
 
     // Ensure Cargo rebuilds if the library changes
     println!("cargo:rerun-if-changed={}", lib_path.display());
@@ -32,7 +32,6 @@ fn main() {
 
     let bindings = bindgen::Builder::default()
         .header(header_to_bind.to_string_lossy())
-        // Pass the same -I paths that your CMake uses
         .clang_args(&[
             format!("-I{}", inc_dir_amnio.display()),
             format!("-I{}", inc_dir_lvgl.display()),

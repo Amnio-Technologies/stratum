@@ -65,7 +65,7 @@ Rust needs to find `amnio-ui.dll`. Your `build.rs` already **copies the DLL auto
 
 ---
 
-## **✅ Next Steps**
+## **Next Steps**
 1. **Make sure `amnio-ui` builds first.**
 2. **Check that the DLL is copied to `target/debug/`.**
 3. **Run `cargo run` and test the UI!** 🚀

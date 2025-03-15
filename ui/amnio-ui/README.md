@@ -13,7 +13,7 @@ Ensure the following are installed:
 
 ---
 
-## **🚀 Build Instructions**
+## **Build Instructions**
 Run the following in **MSYS2 MinGW64** (or your shell of choice):
 
 ```sh
@@ -64,7 +64,7 @@ cp amnio-ui/build/libamnio-ui.dll target/debug/amnio-ui.dll
 ```
 ---
 
-## **✅ Next Steps**
+## **Next Steps**
 Now, you can build `desktop-runner` to run the UI:
 ```sh
 cd ../desktop-runner
