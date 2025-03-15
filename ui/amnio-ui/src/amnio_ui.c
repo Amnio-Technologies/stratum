@@ -27,9 +27,9 @@ void my_flush_cb(lv_display_t *display, const lv_area_t *area, uint8_t *px_map)
 int vasprintf(char **strp, const char *fmt, va_list args)
 {
     if (!strp || !fmt)
-        return -1; // ✅ Prevent null pointer issues
+        return -1; // Prevent null pointer issues
 
-    // ✅ Get required buffer size (+1 for null terminator)
+    // Get required buffer size (+1 for null terminator)
     int size = _vscprintf(fmt, args) + 1;
     if (size <= 0)
     {
@@ -37,7 +37,7 @@ int vasprintf(char **strp, const char *fmt, va_list args)
         return -1;
     }
 
-    // ✅ Allocate the required buffer
+    // Allocate the required buffer
     char *buffer = (char *)malloc(size);
     if (!buffer)
     {
@@ -45,7 +45,7 @@ int vasprintf(char **strp, const char *fmt, va_list args)
         return -1;
     }
 
-    // ✅ Format the string into the allocated buffer
+    // Format the string into the allocated buffer
     int written = vsnprintf(buffer, size, fmt, args);
     if (written < 0 || written >= size)
     {
@@ -55,7 +55,7 @@ int vasprintf(char **strp, const char *fmt, va_list args)
     }
 
     *strp = buffer;
-    return written; // ✅ Return actual string length (excluding null terminator)
+    return written; //  Return actual string length (excluding null terminator)
 }
 #endif
 

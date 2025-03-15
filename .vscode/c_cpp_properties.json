@@ -11,17 +11,15 @@
                 "LV_USE_LOG=1"
             ],
             "includePath": [
-                "${workspaceFolder}/include",
-                "${workspaceFolder}/include/lvgl",
-                "C:/msys64/mingw64/include",
-                "C:/msys64/mingw64/include/lvgl"
+                "${workspaceFolder}/ui/amnio-ui/include",
+                "${workspaceFolder}/ui/amnio-ui/include/lvgl",
+                "C:/msys64/mingw64/include"
             ],
             "browse": {
                 "path": [
-                    "${workspaceFolder}/include",
-                    "${workspaceFolder}/include/lvgl",
-                    "C:/msys64/mingw64/include",
-                    "C:/msys64/mingw64/include/lvgl"
+                    "${workspaceFolder}/ui/amnio-ui/include",
+                    "${workspaceFolder}/ui/amnio-ui/include/lvgl",
+                    "C:/msys64/mingw64/include"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""

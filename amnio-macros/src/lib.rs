@@ -138,7 +138,7 @@ pub fn execute_command(input: TokenStream) -> TokenStream {
         });
         quote! { #command_enum { #(#args_named),* } }
     } else {
-        // ✅ Handles unit variants
+        // Handles unit variants
         quote! { #command_enum }
     };
 

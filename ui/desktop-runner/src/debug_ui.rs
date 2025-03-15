@@ -22,7 +22,6 @@ pub fn create_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
 
     ui.separator();
 
-    // ✅ Debug Logs
     ui.horizontal(|ui| {
         ui.label("📝 Debug Logs:");
 
@@ -63,7 +62,6 @@ pub fn create_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
 
     ui.separator();
 
-    // ✅ Module Debugging UI
     ui.heading("🔌 Connected Modules");
 
     // Display connected modules
@@ -83,7 +81,6 @@ pub fn create_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
 
     ui.separator();
 
-    // ✅ Add a new module
     if ui.button("➕ Add Battery Module").clicked() {
         let dummy_module = DummyBatteryModule::new(ui_state.module_manager.generate_unique_id());
 

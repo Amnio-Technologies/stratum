@@ -23,9 +23,9 @@ impl Parse for KeyValuePair {
 pub struct CommandInput {
     pub module: Expr,              // The module instance (e.g., dummy_module)
     pub module_command_type: Type, // The explicit module type (e.g., DummyModule)
-    pub command_enum: Path,        // ✅ Full path (e.g., BatteryCommand::GetVoltage)
-    pub command_variant: Ident,    // ✅ Extracted variant (e.g., GetVoltage)
-    pub args: Option<Punctuated<KeyValuePair, Token![,]>>, // ✅ Key-value arguments
+    pub command_enum: Path,        // Full path (e.g., BatteryCommand::GetVoltage)
+    pub command_variant: Ident,    // Extracted variant (e.g., GetVoltage)
+    pub args: Option<Punctuated<KeyValuePair, Token![,]>>, //  Key-value arguments
 }
 
 impl Parse for CommandInput {
@@ -36,9 +36,9 @@ impl Parse for CommandInput {
         let module_command_type: Type = input.parse()?; // Parse module type
         input.parse::<Token![,]>()?; // Expect comma
 
-        let command_enum: Path = input.parse()?; // ✅ Parse full path (e.g., BatteryCommand::GetVoltage)
+        let command_enum: Path = input.parse()?; // Parse full path (e.g., BatteryCommand::GetVoltage)
 
-        // ✅ Extract the last segment as the command variant (e.g., GetVoltage)
+        // Extract the last segment as the command variant (e.g., GetVoltage)
         let command_variant = command_enum
             .segments
             .last()
@@ -50,7 +50,7 @@ impl Parse for CommandInput {
             let content;
             syn::braced!(content in input);
 
-            // ✅ Parse key-value arguments
+            // Parse key-value arguments
             let args_list = Punctuated::<KeyValuePair, Token![,]>::parse_terminated(&content)?;
             Some(args_list)
         } else {

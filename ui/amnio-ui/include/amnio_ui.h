@@ -28,7 +28,7 @@ extern "C"
 
     void ui_log(LogLevel level, const char *msg);
 
-    // ✅ Function declarations (No implementation here)
+    // Function declarations (No implementation here)
     AMNIO_API void lvgl_setup(void);
     AMNIO_API void lvgl_update(void);
     AMNIO_API uint16_t *get_lvgl_framebuffer(void);

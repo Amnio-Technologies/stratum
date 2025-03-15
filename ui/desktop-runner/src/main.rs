@@ -43,9 +43,9 @@ struct UiState {
     module_manager: ModuleManager,
     system_controller: Arc<SystemController>,
     quit: bool,
-    fps: f64,                            // ✅ Store FPS value
-    frame_counter: u32,                  // ✅ Count frames in a second
-    last_fps_update: std::time::Instant, // ✅ Last time we updated FPS
+    fps: f64,
+    frame_counter: u32, // Count frames in a second
+    last_fps_update: std::time::Instant,
 }
 
 fn handle_events(
@@ -156,7 +156,7 @@ fn main() {
         quit: false,
         fps: 0.0,
         frame_counter: 0,
-        last_fps_update: Instant::now(), // ✅ Start tracking FPS updates
+        last_fps_update: Instant::now(),
     };
 
     info!("Initializing LVGL...");
@@ -164,7 +164,7 @@ fn main() {
     info!("LVGL Initialized");
 
     while !ui_state.quit {
-        let start_time = Instant::now(); // ✅ Start measuring frame time
+        let start_time = Instant::now();
 
         if !handle_events(
             &mut event_pump,
@@ -185,21 +185,24 @@ fn main() {
             &mut ui,
         );
 
-        // ✅ Update FPS every second
-        ui_state.frame_counter += 1;
-        let elapsed_time = ui_state.last_fps_update.elapsed();
-        if elapsed_time >= Duration::from_secs(1) {
-            ui_state.fps = ui_state.frame_counter as f64 / elapsed_time.as_secs_f64();
-            ui_state.frame_counter = 0;
-            ui_state.last_fps_update = Instant::now();
-        }
-
-        // ✅ Delay to simulate ~60 FPS if needed
-        let frame_duration = start_time.elapsed();
-        if frame_duration < Duration::from_millis(16) {
-            std::thread::sleep(Duration::from_millis(16) - frame_duration);
-        }
+        update_fps(&mut ui_state, &start_time);
     }
 
     info!("Shutting down...");
+}
+
+fn update_fps(ui_state: &mut UiState, start_time: &Instant) {
+    ui_state.frame_counter += 1;
+    let elapsed_time = ui_state.last_fps_update.elapsed();
+    if elapsed_time >= Duration::from_secs(1) {
+        ui_state.fps = ui_state.frame_counter as f64 / elapsed_time.as_secs_f64();
+        ui_state.frame_counter = 0;
+        ui_state.last_fps_update = Instant::now();
+    }
+
+    // Delay to simulate ~60 FPS if needed
+    let frame_duration = start_time.elapsed();
+    if frame_duration < Duration::from_millis(16) {
+        std::thread::sleep(Duration::from_millis(16) - frame_duration);
+    }
 }
