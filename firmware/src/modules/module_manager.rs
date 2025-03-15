@@ -1,8 +1,7 @@
-use amnio_macros::execute_command;
 use log::error;
 use rand::Rng;
 
-use super::module::{ModuleCommandExecutionError, ModuleMetadata};
+use super::module::ModuleMetadata;
 use super::{module::Module, system_controller::SystemController};
 use std::any::Any;
 use std::collections::HashMap;
@@ -11,6 +10,7 @@ use std::sync::Arc;
 pub trait DynModule: Any + Send + Sync {
     fn metadata(&self) -> ModuleMetadata;
     fn as_any(&self) -> &dyn Any;
+    fn as_any_mut(&mut self) -> &mut dyn Any; // ✅ Add this
 }
 
 impl<M: Module + 'static + Send + Sync> DynModule for M {
@@ -21,10 +21,14 @@ impl<M: Module + 'static + Send + Sync> DynModule for M {
     fn as_any(&self) -> &dyn Any {
         self
     }
+
+    fn as_any_mut(&mut self) -> &mut dyn Any {
+        self
+    }
 }
 
 pub struct ModuleManager {
-    modules: HashMap<u16, Arc<dyn DynModule>>,
+    modules: HashMap<u16, Box<dyn DynModule>>,
 }
 
 impl ModuleManager {
@@ -39,9 +43,9 @@ impl ModuleManager {
         let mut rng = rand::rng();
 
         loop {
-            let id = rng.random_range(1..=9999); // Generate a random ID between 1-9999
+            let id = rng.random_range(1..=9999);
             if !self.modules.contains_key(&id) {
-                return id; // Ensure it's unique
+                return id;
             }
         }
     }
@@ -54,23 +58,29 @@ impl ModuleManager {
         let id = module.metadata().id;
 
         if let Err(err) = module.initialize(system_controller.clone()) {
-            error!("Unable to initalize module {}", err);
+            error!("Unable to initialize module {}", err);
         }
 
-        self.modules.insert(id, Arc::new(module));
+        self.modules.insert(id, Box::new(module));
     }
 
-    pub fn get_module<M: Module + Send + Sync + 'static>(&self, id: u16) -> Option<&M> {
+    pub fn get_module<M: Module + 'static>(&self, id: u16) -> Option<&M> {
         self.modules
             .get(&id)
             .and_then(|module| module.as_any().downcast_ref::<M>())
     }
 
-    pub fn list_modules(&self) -> Vec<ModuleMetadata> {
-        self.modules.values().map(|m| m.metadata()).collect()
+    pub fn get_module_mut<M: Module + 'static>(&mut self, id: u16) -> Option<&mut M> {
+        self.modules
+            .get_mut(&id)
+            .and_then(|module| module.as_any_mut().downcast_mut::<M>())
     }
 
     pub fn remove_module(&mut self, id: u16) -> bool {
         self.modules.remove(&id).is_some()
+    }
+
+    pub fn list_modules(&self) -> Vec<ModuleMetadata> {
+        self.modules.values().map(|m| m.metadata()).collect()
     }
 }

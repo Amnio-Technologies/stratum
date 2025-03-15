@@ -98,8 +98,8 @@ pub fn def_module_commands(input: TokenStream) -> TokenStream {
 ///     type ResponseType = <CommandStruct as ModuleCommand>::Response;
 ///
 ///     let command = BatteryCommand::SetOutput { state: false };
-///     let result: Result<Box<dyn Any>, ModuleError> = dummy_module.process_command(command);
-///     let final_result: Result<ResponseType, ModuleError> = result.map(|boxed| *boxed.downcast::<ResponseType>().unwrap());
+///     let result: Result<Box<dyn Any>, ModuleCommandExecutionError> = dummy_module.process_command(command);
+///     let final_result: Result<ResponseType, ModuleCommandExecutionError> = result.map(|boxed| *boxed.downcast::<ResponseType>().unwrap());
 ///
 ///     final_result
 /// }
@@ -144,19 +144,22 @@ pub fn execute_command(input: TokenStream) -> TokenStream {
 
     let expanded = quote! {
         {
-            use amnio_firmware::modules::module::{Module, ModuleCommand, ModuleError};
+            use crate::modules::module::{Module, ModuleCommand, ModuleCommandExecutionError};
 
-            type CommandEnum = amnio_firmware::modules::commands::#mod_module_commands::#command_variant;
+            type CommandEnum = crate::modules::commands::#mod_module_commands::#command_variant;
             type ResponseType = <CommandEnum as ModuleCommand>::Response;
+
+            let _: &dyn Module<ModuleCommand = #module_command_type, ModuleStatus = _> =
+                #module; // Assert that the given module is actually associated with the provided module command type hint
 
             let command = #command_creation;
 
-            let result: Result<Box<dyn std::any::Any>, ModuleError> = #module.process_command(command);
-            let final_result: Result<ResponseType, ModuleError> = result.and_then(|boxed| {
+            let result: Result<Box<dyn std::any::Any>, ModuleCommandExecutionError> = #module.process_command(command);
+            let final_result: Result<ResponseType, ModuleCommandExecutionError> = result.and_then(|boxed| {
                 boxed
                     .downcast::<ResponseType>()
                     .map(|boxed_response| *boxed_response)
-                    .map_err(|_| ModuleError::DowncastFailure)
+                    .map_err(|_| ModuleCommandExecutionError::DowncastFailure)
             });
 
             final_result
