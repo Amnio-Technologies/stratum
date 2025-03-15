@@ -15,7 +15,6 @@ impl LvglRenderer {
 
     /// Converts LVGL's RGB565 framebuffer to RGBA and uploads to GPU
     fn update_lvgl_framebuffer(&mut self, egui_ctx: &egui::Context) {
-        // dbg!(unsafe { amnio_bindings::get_debug() });
         let (fb, width, height) = match LvglEnvironment::get_framebuffer() {
             Some(fb) => fb,
             None => {

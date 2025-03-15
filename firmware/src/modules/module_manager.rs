@@ -1,7 +1,8 @@
+use amnio_macros::execute_command;
 use log::error;
 use rand::Rng;
 
-use super::module::ModuleMetadata;
+use super::module::{ModuleCommandExecutionError, ModuleMetadata};
 use super::{module::Module, system_controller::SystemController};
 use std::any::Any;
 use std::collections::HashMap;

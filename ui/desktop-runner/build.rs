@@ -27,9 +27,6 @@ fn main() {
     let inc_dir_lvgl = inc_dir_amnio.join("lvgl");
     let header_to_bind = inc_dir_amnio.join("amnio_ui.h");
 
-    dbg!(&header_to_bind.clone());
-    dbg!(format!("{}", header_to_bind.display()));
-
     let bindings = bindgen::Builder::default()
         .header(header_to_bind.to_string_lossy())
         .clang_args(&[
