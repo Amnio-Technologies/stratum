@@ -2,3 +2,4 @@ target/*
 Cargo.lock
 ui/amnio-ui/build
 build
+.vscode

@@ -16,13 +16,13 @@ struct Command {
 
 // Represents the entire macro input
 pub struct ModuleCommandDef {
-    module_name: Ident,
+    enum_name: Ident,
     commands: Vec<Command>,
 }
 
 impl Parse for ModuleCommandDef {
     fn parse(input: ParseStream) -> Result<Self> {
-        let module_name: Ident = input.parse()?;
+        let enum_name: Ident = input.parse()?;
         let content;
         syn::braced!(content in input);
 
@@ -68,7 +68,7 @@ impl Parse for ModuleCommandDef {
         }
 
         Ok(ModuleCommandDef {
-            module_name,
+            enum_name,
             commands,
         })
     }
@@ -76,8 +76,8 @@ impl Parse for ModuleCommandDef {
 
 // Generates the Rust code for the macro
 pub fn generate_module_commands(def: ModuleCommandDef) -> TokenStream {
-    let module_name = &def.module_name;
-    let enum_name = format_ident!("{}", module_name.to_string().to_case(Case::UpperCamel));
+    let enum_name = &def.enum_name;
+    let module_name = format_ident!("{}", enum_name.to_string().to_case(Case::Snake));
 
     let enum_variants = def.commands.iter().map(|cmd| {
         let name = &cmd.name;
