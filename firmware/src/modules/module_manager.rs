@@ -10,7 +10,7 @@ use std::sync::Arc;
 pub trait DynModule: Any {
     fn metadata(&self) -> ModuleMetadata;
     fn as_any(&self) -> &dyn Any;
-    fn as_any_mut(&mut self) -> &mut dyn Any; // ✅ Add this
+    fn as_any_mut(&mut self) -> &mut dyn Any;
 }
 
 impl<M: Module + 'static> DynModule for M {
