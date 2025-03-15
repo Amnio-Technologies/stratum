@@ -7,13 +7,13 @@ use std::any::Any;
 use std::collections::HashMap;
 use std::sync::Arc;
 
-pub trait DynModule: Any + Send + Sync {
+pub trait DynModule: Any {
     fn metadata(&self) -> ModuleMetadata;
     fn as_any(&self) -> &dyn Any;
     fn as_any_mut(&mut self) -> &mut dyn Any; // ✅ Add this
 }
 
-impl<M: Module + 'static + Send + Sync> DynModule for M {
+impl<M: Module + 'static> DynModule for M {
     fn metadata(&self) -> ModuleMetadata {
         self.metadata()
     }
@@ -50,7 +50,7 @@ impl ModuleManager {
         }
     }
 
-    pub fn register_module<M: Module + 'static + Send + Sync>(
+    pub fn register_module<M: Module + 'static>(
         &mut self,
         mut module: M,
         system_controller: Arc<SystemController>,
