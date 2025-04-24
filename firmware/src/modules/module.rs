@@ -57,7 +57,8 @@ pub enum ModuleCommandExecutionError {
     Unknown,
 }
 
-type ModuleCommandExecutionResponse = Result<Box<dyn std::any::Any>, ModuleCommandExecutionError>;
+pub type ModuleCommandExecutionResponse =
+    Result<Box<dyn std::any::Any>, ModuleCommandExecutionError>;
 
 pub trait Module {
     type ModuleCommand;

@@ -3,7 +3,10 @@ use crate::{
     modules::{
         battery::BatteryData,
         commands::BatteryModuleCommands,
-        module::{Module, ModuleCommandExecutionError, ModuleKind, ModuleMetadata},
+        module::{
+            Module, ModuleCommandExecutionError, ModuleCommandExecutionResponse, ModuleKind,
+            ModuleMetadata,
+        },
         system_controller::{CriticalEvent, SystemController},
     },
 };
@@ -179,13 +182,14 @@ impl Module for DummyBatteryModule {
         }
     }
 
-    fn process_command(
-        &mut self,
-        command: Self::ModuleCommand,
-    ) -> Result<Box<dyn std::any::Any>, ModuleCommandExecutionError> {
+    fn process_command(&mut self, command: Self::ModuleCommand) -> ModuleCommandExecutionResponse {
         command_match!(command, BatteryModuleCommands,
             SetOutput { state } => {
                 dbg!(state);
+            },
+            Multiple {two, three, one} => {
+                dbg!(two, three, one);
+                (true, 0.0)
             },
             GetVoltage {} => ElectricPotential::new::<volt>(0.0),
             Dummy => (),

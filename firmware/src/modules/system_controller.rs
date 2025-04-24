@@ -67,7 +67,7 @@ impl SystemController {
         if let Ok(mut log) = self.event_log.lock() {
             log.push_back(format!("{:?}", event));
         } else {
-            error!("⚠️ Failed to acquire event_log lock (mutex poisoned)");
+            error!("Failed to acquire event_log lock (mutex poisoned)");
         }
     }
 
@@ -85,7 +85,7 @@ impl SystemController {
             }
             module_log.push_back(entry);
         } else {
-            error!("⚠️ Failed to acquire module_logs lock (mutex poisoned)");
+            error!("Failed to acquire module_logs lock (mutex poisoned)");
         }
     }
 
@@ -96,7 +96,7 @@ impl SystemController {
                 .cloned()
                 .collect()
         } else {
-            error!("⚠️ Failed to acquire event_log lock (mutex poisoned)");
+            error!("Failed to acquire event_log lock (mutex poisoned)");
             Vec::new()
         }
     }
