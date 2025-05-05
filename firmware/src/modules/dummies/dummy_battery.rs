@@ -187,10 +187,6 @@ impl Module for DummyBatteryModule {
             SetOutput { state } => {
                 dbg!(state);
             },
-            Multiple {two, three, one} => {
-                dbg!(two, three, one);
-                (true, 0.0)
-            },
             GetVoltage {} => ElectricPotential::new::<volt>(0.0),
             Dummy => (),
         )

@@ -1,5 +1,5 @@
 {
-    "cmake.sourceDirectory": "C:/Users/erick/Documents/amnio/ui/amnio-ui",
+    "cmake.sourceDirectory": "C:/Users/erick/Documents/amnio/ui/stratum-ui",
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
     "files.associations": {
         "lvgl.h": "c",

@@ -1,4 +1,4 @@
-use amnio_common::ui_logging::LogLevel;
+use stratum_ui_common::ui_logging::LogLevel;
 use log::error;
 use std::{
     any::Any,

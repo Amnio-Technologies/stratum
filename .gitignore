@@ -1,5 +1,9 @@
 target/*
 Cargo.lock
-ui/amnio-ui/build
+stratum-ui/build
+stratum-ui/src/fonts
+stratum-ui/include/fonts
+desktop-runner/target/*
 build
 .vscode
+.embuild
