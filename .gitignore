@@ -3,7 +3,9 @@ Cargo.lock
 stratum-ui/build
 stratum-ui/src/fonts
 stratum-ui/include/fonts
+firmware/target
 desktop-runner/target/*
+amnio-macros/target
 build
 .vscode
 .embuild

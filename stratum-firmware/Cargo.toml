@@ -1,28 +1,31 @@
 [package]
-edition = "2021"
-name    = "stratum-firmware"
+name = "stratum-firmware"
 version = "0.1.0"
+authors = ["Erick <erick_torres@brown.edu>"]
+edition = "2021"
+resolver = "2"
+rust-version = "1.77"
 
 [[bin]]
 name = "stratum-firmware"
-path = "./src/bin/main.rs"
-
-[dependencies]
-critical-section = "1.2.0"
-esp-hal          = { version = "1.0.0-beta.0", features = ["esp32"] }
-esp-println      = { version = "0.13.0", features = ["esp32", "log"] }
-log              = { version = "0.4.21" }
-
-[profile.dev]
-# Rust debug is too slow.
-# For debug builds always builds with some optimization
-opt-level = "s"
+harness = false # do not use the built in cargo test harness -> resolve rust-analyzer errors
 
 [profile.release]
-codegen-units    = 1     # LLVM can perform better optimizations using a single thread
-debug            = 2
-debug-assertions = false
-incremental      = false
-lto              = 'fat'
-opt-level        = 's'
-overflow-checks  = false
+opt-level = "s"
+
+[profile.dev]
+debug = true    # Symbols are nice and they don't increase the size on Flash
+opt-level = "z"
+
+[features]
+default = []
+
+experimental = ["esp-idf-svc/experimental"]
+
+[dependencies]
+log = "0.4"
+esp-idf-svc = { version = "0.51", features = ["critical-section", "embassy-time-driver", "embassy-sync"] }
+esp-idf-hal = "0.45.2"
+
+[build-dependencies]
+embuild = "0.33"
