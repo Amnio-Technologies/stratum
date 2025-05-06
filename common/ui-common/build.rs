@@ -1,26 +1,50 @@
-use std::env;
-use std::path::PathBuf;
+use std::{
+    env, fs,
+    path::{Path, PathBuf},
+};
 
 fn main() {
-    let cwd = env::current_dir().unwrap();
-    let amnio_root = cwd.parent().and_then(|p| p.parent()).unwrap();
+    let manifest_dir = PathBuf::from(env::var("CARGO_MANIFEST_DIR").unwrap());
+    let amnio_root = manifest_dir.parent().and_then(|p| p.parent()).unwrap();
+    println!(
+        "cargo:warning=CARGO_MANIFEST_DIR = {}",
+        manifest_dir.display()
+    );
 
-    let stratum_ui_build = amnio_root.join("stratum-ui").join("build");
+    // Detect target type from Cargo.toml
+    let cargo_toml_path = Path::new(&manifest_dir).join("Cargo.toml");
+    let target_kind = fs::read_to_string(&cargo_toml_path)
+        .ok()
+        .and_then(|toml| toml.parse::<toml::Value>().ok())
+        .and_then(|doc| {
+            doc.get("package")?
+                .get("metadata")?
+                .get("stratum-ui-target")?
+                .as_str()
+                .map(|s| s.to_string())
+        })
+        .unwrap_or_else(|| "desktop".to_string());
+
+    // stratum-ui/build/<kind>/libstratum-ui.a
+    let stratum_ui_build = amnio_root
+        .join("stratum-ui")
+        .join("build")
+        .join(&target_kind);
     let lib_path = stratum_ui_build.join("libstratum-ui.a");
 
-    // Ensure the static library exists
     if !lib_path.exists() {
-        panic!("❌ Static library libstratum-ui.a not found! Did you build stratum-ui?");
+        panic!(
+            "❌ Static library not found for target '{}': {}",
+            target_kind,
+            lib_path.display()
+        );
     }
 
-    // Link against the static library
     println!(
         "cargo:rustc-link-search=native={}",
         stratum_ui_build.display()
     );
     println!("cargo:rustc-link-lib=static=stratum-ui");
-
-    // Ensure Cargo rebuilds if the library changes
     println!("cargo:rerun-if-changed={}", lib_path.display());
 
     let inc_dir_amnio = amnio_root.join("stratum-ui").join("include");

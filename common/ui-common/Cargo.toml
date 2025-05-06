@@ -5,6 +5,7 @@ edition = "2021"
 
 [build-dependencies]
 bindgen = "0.71.1"
+toml = "0.8.22"
 
 [dependencies]
 lazy_static = "1.5.0"

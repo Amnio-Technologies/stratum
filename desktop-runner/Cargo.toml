@@ -16,3 +16,7 @@ log = "0.4.26"
 amnio-firmware = { path = "../firmware" }
 stratum-ui-common = { path = "../common/ui-common" }
 re_ui = "0.23.1"
+
+
+[package.metadata]
+stratum-ui-target = "desktop"

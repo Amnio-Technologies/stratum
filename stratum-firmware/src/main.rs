@@ -1,6 +1,7 @@
 use esp_idf_hal::delay::FreeRtos;
 use esp_idf_hal::gpio::*;
 use esp_idf_hal::peripherals::Peripherals;
+use stratum_ui_common::amnio_bindings;
 
 fn main() {
     esp_idf_svc::sys::link_patches();

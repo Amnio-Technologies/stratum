@@ -1,5 +1,6 @@
 target/*
 Cargo.lock
+common/ui-common/target/*
 stratum-ui/build
 stratum-ui/src/fonts
 stratum-ui/include/fonts
