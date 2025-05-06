@@ -6,31 +6,36 @@ set(STRATUM_TARGET "desktop" CACHE STRING "Build target: desktop or firmware")
 message(STATUS "🎯 Building for: ${STRATUM_TARGET}")
 
 # -------- Platform-specific flags --------
-if(${STRATUM_TARGET} STREQUAL "desktop")
+if(STRATUM_TARGET STREQUAL "desktop")
     add_definitions(-DSTRATUM_TARGET_DESKTOP)
-elseif(${STRATUM_TARGET} STREQUAL "firmware")
+elseif(STRATUM_TARGET STREQUAL "firmware")
     add_definitions(-DSTRATUM_TARGET_FIRMWARE)
 endif()
 
-# -------- Sources --------
+# -------- LVGL Sources --------
 file(GLOB_RECURSE LVGL_SOURCES
     ${PROJECT_SOURCE_DIR}/include/lvgl/src/*.c
 )
 list(FILTER LVGL_SOURCES EXCLUDE REGEX ".*lvgl/demos/.*")
 list(FILTER LVGL_SOURCES EXCLUDE REGEX ".*lvgl/tests/.*")
 
+# -------- Font Sources --------
 file(GLOB FONT_SOURCES
     ${PROJECT_SOURCE_DIR}/fonts/*.c
+    ${PROJECT_SOURCE_DIR}/src/fonts/*.c
 )
 
+# -------- LVGL Configuration --------
 add_definitions(-DLV_CONF_INCLUDE_SIMPLE)
-add_definitions(-DLV_CONF_PATH=\"${PROJECT_SOURCE_DIR}/include/lv_conf.h\")
+add_definitions(-DLV_CONF_PATH="${PROJECT_SOURCE_DIR}/include/lv_conf.h")
 
+# -------- Include Directories --------
 include_directories(
-    ${PROJECT_SOURCE_DIR}/include
-    ${PROJECT_SOURCE_DIR}/include/lvgl
-    ${PROJECT_SOURCE_DIR}/src/fonts
-    ${CMAKE_SOURCE_DIR}/../../common/include
+    ${PROJECT_SOURCE_DIR}/include           # stratum_ui.h, extern_log.h, lv_conf.h
+    ${PROJECT_SOURCE_DIR}/include/lvgl      # LVGL headers
+    ${PROJECT_SOURCE_DIR}/fonts             # generated font headers
+    ${PROJECT_SOURCE_DIR}/src/fonts         # generated font C sources
+    ${CMAKE_SOURCE_DIR}/../../common/include  # Rust-generated headers
 )
 
 # -------- Library --------

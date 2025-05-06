@@ -2,7 +2,7 @@
 #include "extern_log.h"
 #include "lvgl.h"
 #include <stdio.h>
-#include "fonts/jetbrains_mono_nl_12.h"
+#include "fonts/jetbrains_mono_nl_regular_12.h"
 
 // LVGL framebuffer (RGB565 format)
 static uint16_t lvgl_framebuffer[LVGL_SCREEN_WIDTH * LVGL_SCREEN_HEIGHT];
@@ -51,7 +51,7 @@ void lv_example_get_started_1(void)
     lv_label_set_text(elapsed_label, "Elapsed: 0 sec");
 
     // Apply JetBrains Mono font style
-    lv_obj_set_style_text_font(elapsed_label, &jetbrains_mono_nl_12, LV_PART_MAIN);
+    lv_obj_set_style_text_font(elapsed_label, &jetbrains_mono_nl_regular_12, LV_PART_MAIN);
     lv_obj_set_style_text_color(elapsed_label, lv_color_hex(0xffffff), LV_PART_MAIN);
     lv_obj_align(elapsed_label, LV_ALIGN_CENTER, 0, 0);
 
