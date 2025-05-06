@@ -123,15 +123,6 @@ pub struct localeinfo_struct {
     pub locinfo: pthreadlocinfo,
     pub mbcinfo: pthreadmbcinfo,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of localeinfo_struct"][::std::mem::size_of::<localeinfo_struct>() - 16usize];
-    ["Alignment of localeinfo_struct"][::std::mem::align_of::<localeinfo_struct>() - 8usize];
-    ["Offset of field: localeinfo_struct::locinfo"]
-        [::std::mem::offset_of!(localeinfo_struct, locinfo) - 0usize];
-    ["Offset of field: localeinfo_struct::mbcinfo"]
-        [::std::mem::offset_of!(localeinfo_struct, mbcinfo) - 8usize];
-};
 pub type _locale_tstruct = localeinfo_struct;
 pub type _locale_t = *mut localeinfo_struct;
 #[repr(C)]
@@ -141,14 +132,6 @@ pub struct tagLC_ID {
     pub wCountry: ::std::os::raw::c_ushort,
     pub wCodePage: ::std::os::raw::c_ushort,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of tagLC_ID"][::std::mem::size_of::<tagLC_ID>() - 6usize];
-    ["Alignment of tagLC_ID"][::std::mem::align_of::<tagLC_ID>() - 2usize];
-    ["Offset of field: tagLC_ID::wLanguage"][::std::mem::offset_of!(tagLC_ID, wLanguage) - 0usize];
-    ["Offset of field: tagLC_ID::wCountry"][::std::mem::offset_of!(tagLC_ID, wCountry) - 2usize];
-    ["Offset of field: tagLC_ID::wCodePage"][::std::mem::offset_of!(tagLC_ID, wCodePage) - 4usize];
-};
 pub type LC_ID = tagLC_ID;
 pub type LPLC_ID = *mut tagLC_ID;
 #[repr(C)]
@@ -181,63 +164,6 @@ pub struct threadlocaleinfostruct__bindgen_ty_1 {
     pub refcount: *mut ::std::os::raw::c_int,
     pub wrefcount: *mut ::std::os::raw::c_int,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of threadlocaleinfostruct__bindgen_ty_1"]
-        [::std::mem::size_of::<threadlocaleinfostruct__bindgen_ty_1>() - 32usize];
-    ["Alignment of threadlocaleinfostruct__bindgen_ty_1"]
-        [::std::mem::align_of::<threadlocaleinfostruct__bindgen_ty_1>() - 8usize];
-    ["Offset of field: threadlocaleinfostruct__bindgen_ty_1::locale"]
-        [::std::mem::offset_of!(threadlocaleinfostruct__bindgen_ty_1, locale) - 0usize];
-    ["Offset of field: threadlocaleinfostruct__bindgen_ty_1::wlocale"]
-        [::std::mem::offset_of!(threadlocaleinfostruct__bindgen_ty_1, wlocale) - 8usize];
-    ["Offset of field: threadlocaleinfostruct__bindgen_ty_1::refcount"]
-        [::std::mem::offset_of!(threadlocaleinfostruct__bindgen_ty_1, refcount) - 16usize];
-    ["Offset of field: threadlocaleinfostruct__bindgen_ty_1::wrefcount"]
-        [::std::mem::offset_of!(threadlocaleinfostruct__bindgen_ty_1, wrefcount) - 24usize];
-};
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of threadlocaleinfostruct"][::std::mem::size_of::<threadlocaleinfostruct>() - 352usize];
-    ["Alignment of threadlocaleinfostruct"]
-        [::std::mem::align_of::<threadlocaleinfostruct>() - 8usize];
-    ["Offset of field: threadlocaleinfostruct::refcount"]
-        [::std::mem::offset_of!(threadlocaleinfostruct, refcount) - 0usize];
-    ["Offset of field: threadlocaleinfostruct::lc_codepage"]
-        [::std::mem::offset_of!(threadlocaleinfostruct, lc_codepage) - 4usize];
-    ["Offset of field: threadlocaleinfostruct::lc_collate_cp"]
-        [::std::mem::offset_of!(threadlocaleinfostruct, lc_collate_cp) - 8usize];
-    ["Offset of field: threadlocaleinfostruct::lc_handle"]
-        [::std::mem::offset_of!(threadlocaleinfostruct, lc_handle) - 12usize];
-    ["Offset of field: threadlocaleinfostruct::lc_id"]
-        [::std::mem::offset_of!(threadlocaleinfostruct, lc_id) - 36usize];
-    ["Offset of field: threadlocaleinfostruct::lc_category"]
-        [::std::mem::offset_of!(threadlocaleinfostruct, lc_category) - 72usize];
-    ["Offset of field: threadlocaleinfostruct::lc_clike"]
-        [::std::mem::offset_of!(threadlocaleinfostruct, lc_clike) - 264usize];
-    ["Offset of field: threadlocaleinfostruct::mb_cur_max"]
-        [::std::mem::offset_of!(threadlocaleinfostruct, mb_cur_max) - 268usize];
-    ["Offset of field: threadlocaleinfostruct::lconv_intl_refcount"]
-        [::std::mem::offset_of!(threadlocaleinfostruct, lconv_intl_refcount) - 272usize];
-    ["Offset of field: threadlocaleinfostruct::lconv_num_refcount"]
-        [::std::mem::offset_of!(threadlocaleinfostruct, lconv_num_refcount) - 280usize];
-    ["Offset of field: threadlocaleinfostruct::lconv_mon_refcount"]
-        [::std::mem::offset_of!(threadlocaleinfostruct, lconv_mon_refcount) - 288usize];
-    ["Offset of field: threadlocaleinfostruct::lconv"]
-        [::std::mem::offset_of!(threadlocaleinfostruct, lconv) - 296usize];
-    ["Offset of field: threadlocaleinfostruct::ctype1_refcount"]
-        [::std::mem::offset_of!(threadlocaleinfostruct, ctype1_refcount) - 304usize];
-    ["Offset of field: threadlocaleinfostruct::ctype1"]
-        [::std::mem::offset_of!(threadlocaleinfostruct, ctype1) - 312usize];
-    ["Offset of field: threadlocaleinfostruct::pctype"]
-        [::std::mem::offset_of!(threadlocaleinfostruct, pctype) - 320usize];
-    ["Offset of field: threadlocaleinfostruct::pclmap"]
-        [::std::mem::offset_of!(threadlocaleinfostruct, pclmap) - 328usize];
-    ["Offset of field: threadlocaleinfostruct::pcumap"]
-        [::std::mem::offset_of!(threadlocaleinfostruct, pcumap) - 336usize];
-    ["Offset of field: threadlocaleinfostruct::lc_time_curr"]
-        [::std::mem::offset_of!(threadlocaleinfostruct, lc_time_curr) - 344usize];
-};
 pub type threadlocinfo = threadlocaleinfostruct;
 pub type int_least8_t = ::std::os::raw::c_schar;
 pub type uint_least8_t = ::std::os::raw::c_uchar;

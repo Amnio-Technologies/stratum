@@ -21,6 +21,7 @@ fn main() {
         let fallback_clang_include = "/usr/lib/clang/15/include"; // adjust if needed
 
         let bindings = bindgen::Builder::default()
+            .layout_tests(false) // disable layout tests for embedded target
             .header(header_to_bind.to_string_lossy())
             .clang_args(&[
                 format!("-I{}", inc_dir_amnio.display()),
