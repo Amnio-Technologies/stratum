@@ -5,7 +5,7 @@
 #include "fonts/jetbrains_mono_nl_regular_12.h"
 
 // LVGL framebuffer (RGB565 format)
-static uint16_t lvgl_framebuffer[LVGL_SCREEN_WIDTH * LVGL_SCREEN_HEIGHT];
+static uint16_t *lvgl_framebuffer = NULL;
 
 static lv_display_t *global_display = NULL; // Store reference to the display
 static lv_obj_t *elapsed_label = NULL;      // Store reference to the label
@@ -92,4 +92,21 @@ AMNIO_API uint32_t get_lvgl_display_height(void)
 AMNIO_API void lvgl_advance_timer(uint32_t dt_ms)
 {
     lv_tick_inc(dt_ms);
+}
+
+AMNIO_API size_t lvgl_get_required_framebuffer_size(void)
+{
+    return LVGL_SCREEN_WIDTH * LVGL_SCREEN_HEIGHT * sizeof(uint16_t);
+}
+
+AMNIO_API void lvgl_register_external_buffer(uint16_t *buffer, size_t buffer_bytes)
+{
+    size_t expected = lvgl_get_required_framebuffer_size();
+    if (buffer_bytes < expected) {
+        ui_logf(LOG_ERROR, "Buffer too small! Need at least %zu bytes.", expected);
+        // abort();
+        return;
+    }
+
+    lvgl_framebuffer = buffer;
 }
