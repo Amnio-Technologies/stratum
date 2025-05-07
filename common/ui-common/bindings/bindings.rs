@@ -90,6 +90,55 @@ pub const WCHAR_MIN: u32 = 0;
 pub const WCHAR_MAX: u32 = 65535;
 pub const WINT_MIN: u32 = 0;
 pub const WINT_MAX: u32 = 65535;
+pub const _CRT_INTERNAL_PRINTF_LEGACY_VSPRINTF_NULL_TERMINATION: u32 = 1;
+pub const _CRT_INTERNAL_PRINTF_STANDARD_SNPRINTF_BEHAVIOR: u32 = 2;
+pub const _CRT_INTERNAL_PRINTF_LEGACY_WIDE_SPECIFIERS: u32 = 4;
+pub const _CRT_INTERNAL_PRINTF_LEGACY_MSVCRT_COMPATIBILITY: u32 = 8;
+pub const _CRT_INTERNAL_PRINTF_LEGACY_THREE_DIGIT_EXPONENTS: u32 = 16;
+pub const _CRT_INTERNAL_PRINTF_STANDARD_ROUNDING: u32 = 32;
+pub const _CRT_INTERNAL_SCANF_SECURECRT: u32 = 1;
+pub const _CRT_INTERNAL_SCANF_LEGACY_WIDE_SPECIFIERS: u32 = 2;
+pub const _CRT_INTERNAL_SCANF_LEGACY_MSVCRT_COMPATIBILITY: u32 = 4;
+pub const _CRT_INTERNAL_LOCAL_PRINTF_OPTIONS: u32 = 36;
+pub const _CRT_INTERNAL_LOCAL_SCANF_OPTIONS: u32 = 2;
+pub const BUFSIZ: u32 = 512;
+pub const _NSTREAM_: u32 = 512;
+pub const _IOB_ENTRIES: u32 = 20;
+pub const EOF: i32 = -1;
+pub const _P_tmpdir: &[u8; 2] = b"\\\0";
+pub const _wP_tmpdir: &[u8; 2] = b"\\\0";
+pub const SEEK_CUR: u32 = 1;
+pub const SEEK_END: u32 = 2;
+pub const SEEK_SET: u32 = 0;
+pub const STDIN_FILENO: u32 = 0;
+pub const STDOUT_FILENO: u32 = 1;
+pub const STDERR_FILENO: u32 = 2;
+pub const FILENAME_MAX: u32 = 260;
+pub const FOPEN_MAX: u32 = 20;
+pub const _SYS_OPEN: u32 = 20;
+pub const TMP_MAX: u32 = 32767;
+pub const _IOFBF: u32 = 0;
+pub const _IOLBF: u32 = 64;
+pub const _IONBF: u32 = 4;
+pub const _IOREAD: u32 = 1;
+pub const _IOWRT: u32 = 2;
+pub const _IOMYBUF: u32 = 8;
+pub const _IOEOF: u32 = 16;
+pub const _IOERR: u32 = 32;
+pub const _IOSTRG: u32 = 64;
+pub const _IORW: u32 = 128;
+pub const _TWO_DIGIT_EXPONENT: u32 = 1;
+pub const P_tmpdir: &[u8; 2] = b"\\\0";
+pub const SYS_OPEN: u32 = 20;
+pub const _P_WAIT: u32 = 0;
+pub const _P_NOWAIT: u32 = 1;
+pub const _OLD_P_OVERLAY: u32 = 2;
+pub const _P_NOWAITO: u32 = 3;
+pub const _P_DETACH: u32 = 4;
+pub const _P_OVERLAY: u32 = 2;
+pub const _WAIT_CHILD: u32 = 0;
+pub const _WAIT_GRANDCHILD: u32 = 1;
+pub const TMP_MAX_S: u32 = 32767;
 pub const LVGL_SCREEN_WIDTH: u32 = 320;
 pub const LVGL_SCREEN_HEIGHT: u32 = 240;
 pub type __gnuc_va_list = __builtin_va_list;
@@ -183,6 +232,1761 @@ pub type int_fast64_t = ::std::os::raw::c_longlong;
 pub type uint_fast64_t = ::std::os::raw::c_ulonglong;
 pub type intmax_t = ::std::os::raw::c_longlong;
 pub type uintmax_t = ::std::os::raw::c_ulonglong;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _iobuf {
+    pub _ptr: *mut ::std::os::raw::c_char,
+    pub _cnt: ::std::os::raw::c_int,
+    pub _base: *mut ::std::os::raw::c_char,
+    pub _flag: ::std::os::raw::c_int,
+    pub _file: ::std::os::raw::c_int,
+    pub _charbuf: ::std::os::raw::c_int,
+    pub _bufsiz: ::std::os::raw::c_int,
+    pub _tmpfname: *mut ::std::os::raw::c_char,
+}
+pub type FILE = _iobuf;
+pub type _off_t = ::std::os::raw::c_long;
+pub type off32_t = ::std::os::raw::c_long;
+pub type _off64_t = ::std::os::raw::c_longlong;
+pub type off64_t = ::std::os::raw::c_longlong;
+pub type off_t = off32_t;
+unsafe extern "C" {
+    pub fn __acrt_iob_func(index: ::std::os::raw::c_uint) -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn __iob_func() -> *mut FILE;
+}
+pub type fpos_t = ::std::os::raw::c_longlong;
+unsafe extern "C" {
+    pub fn __mingw_sscanf(
+        _Src: *const ::std::os::raw::c_char,
+        _Format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_vsscanf(
+        _Str: *const ::std::os::raw::c_char,
+        Format: *const ::std::os::raw::c_char,
+        argp: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_scanf(_Format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_vscanf(
+        Format: *const ::std::os::raw::c_char,
+        argp: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_fscanf(
+        _File: *mut FILE,
+        _Format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_vfscanf(
+        fp: *mut FILE,
+        Format: *const ::std::os::raw::c_char,
+        argp: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_vsnprintf(
+        _DstBuf: *mut ::std::os::raw::c_char,
+        _MaxCount: usize,
+        _Format: *const ::std::os::raw::c_char,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_snprintf(
+        s: *mut ::std::os::raw::c_char,
+        n: usize,
+        format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_printf(arg1: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_vprintf(
+        arg1: *const ::std::os::raw::c_char,
+        arg2: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_fprintf(
+        arg1: *mut FILE,
+        arg2: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_vfprintf(
+        arg1: *mut FILE,
+        arg2: *const ::std::os::raw::c_char,
+        arg3: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_sprintf(
+        arg1: *mut ::std::os::raw::c_char,
+        arg2: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_vsprintf(
+        arg1: *mut ::std::os::raw::c_char,
+        arg2: *const ::std::os::raw::c_char,
+        arg3: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_asprintf(
+        arg1: *mut *mut ::std::os::raw::c_char,
+        arg2: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_vasprintf(
+        arg1: *mut *mut ::std::os::raw::c_char,
+        arg2: *const ::std::os::raw::c_char,
+        arg3: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_sscanf(
+        _Src: *const ::std::os::raw::c_char,
+        _Format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_scanf(_Format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_fscanf(
+        _File: *mut FILE,
+        _Format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_printf(arg1: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_vprintf(
+        arg1: *const ::std::os::raw::c_char,
+        arg2: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_fprintf(
+        arg1: *mut FILE,
+        arg2: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_vfprintf(
+        arg1: *mut FILE,
+        arg2: *const ::std::os::raw::c_char,
+        arg3: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_sprintf(
+        arg1: *mut ::std::os::raw::c_char,
+        arg2: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_vsprintf(
+        arg1: *mut ::std::os::raw::c_char,
+        arg2: *const ::std::os::raw::c_char,
+        arg3: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _filbuf(_File: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _flsbuf(_Ch: ::std::os::raw::c_int, _File: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _fsopen(
+        _Filename: *const ::std::os::raw::c_char,
+        _Mode: *const ::std::os::raw::c_char,
+        _ShFlag: ::std::os::raw::c_int,
+    ) -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn clearerr(_File: *mut FILE);
+}
+unsafe extern "C" {
+    pub fn fclose(_File: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _fcloseall() -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _fdopen(
+        _FileHandle: ::std::os::raw::c_int,
+        _Mode: *const ::std::os::raw::c_char,
+    ) -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn feof(_File: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn ferror(_File: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn fflush(_File: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn fgetc(_File: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _fgetchar() -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn fgetpos(_File: *mut FILE, _Pos: *mut fpos_t) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn fgetpos64(_File: *mut FILE, _Pos: *mut fpos_t) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn fgets(
+        _Buf: *mut ::std::os::raw::c_char,
+        _MaxCount: ::std::os::raw::c_int,
+        _File: *mut FILE,
+    ) -> *mut ::std::os::raw::c_char;
+}
+unsafe extern "C" {
+    pub fn _fileno(_File: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _tempnam(
+        _DirName: *const ::std::os::raw::c_char,
+        _FilePrefix: *const ::std::os::raw::c_char,
+    ) -> *mut ::std::os::raw::c_char;
+}
+unsafe extern "C" {
+    pub fn _flushall() -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn fopen(
+        _Filename: *const ::std::os::raw::c_char,
+        _Mode: *const ::std::os::raw::c_char,
+    ) -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn fopen64(
+        filename: *const ::std::os::raw::c_char,
+        mode: *const ::std::os::raw::c_char,
+    ) -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn fputc(_Ch: ::std::os::raw::c_int, _File: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _fputchar(_Ch: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn fputs(_Str: *const ::std::os::raw::c_char, _File: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn fread(
+        _DstBuf: *mut ::std::os::raw::c_void,
+        _ElementSize: ::std::os::raw::c_ulonglong,
+        _Count: ::std::os::raw::c_ulonglong,
+        _File: *mut FILE,
+    ) -> ::std::os::raw::c_ulonglong;
+}
+unsafe extern "C" {
+    pub fn freopen(
+        _Filename: *const ::std::os::raw::c_char,
+        _Mode: *const ::std::os::raw::c_char,
+        _File: *mut FILE,
+    ) -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn fsetpos(_File: *mut FILE, _Pos: *const fpos_t) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn fsetpos64(_File: *mut FILE, _Pos: *const fpos_t) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn fseek(
+        _File: *mut FILE,
+        _Offset: ::std::os::raw::c_long,
+        _Origin: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn ftell(_File: *mut FILE) -> ::std::os::raw::c_long;
+}
+unsafe extern "C" {
+    pub fn _fseeki64(
+        _File: *mut FILE,
+        _Offset: ::std::os::raw::c_longlong,
+        _Origin: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _ftelli64(_File: *mut FILE) -> ::std::os::raw::c_longlong;
+}
+unsafe extern "C" {
+    pub fn fseeko64(
+        stream: *mut FILE,
+        offset: _off64_t,
+        whence: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn fseeko(
+        stream: *mut FILE,
+        offset: _off_t,
+        whence: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn ftello(stream: *mut FILE) -> _off_t;
+}
+unsafe extern "C" {
+    pub fn ftello64(stream: *mut FILE) -> _off64_t;
+}
+unsafe extern "C" {
+    pub fn fwrite(
+        _Str: *const ::std::os::raw::c_void,
+        _Size: ::std::os::raw::c_ulonglong,
+        _Count: ::std::os::raw::c_ulonglong,
+        _File: *mut FILE,
+    ) -> ::std::os::raw::c_ulonglong;
+}
+unsafe extern "C" {
+    pub fn getc(_File: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn getchar() -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _getmaxstdio() -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn gets(_Buffer: *mut ::std::os::raw::c_char) -> *mut ::std::os::raw::c_char;
+}
+unsafe extern "C" {
+    pub fn _getw(_File: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn perror(_ErrMsg: *const ::std::os::raw::c_char);
+}
+unsafe extern "C" {
+    pub fn _pclose(_File: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _popen(
+        _Command: *const ::std::os::raw::c_char,
+        _Mode: *const ::std::os::raw::c_char,
+    ) -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn putc(_Ch: ::std::os::raw::c_int, _File: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn putchar(_Ch: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn puts(_Str: *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _putw(_Word: ::std::os::raw::c_int, _File: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn remove(_Filename: *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn rename(
+        _OldFilename: *const ::std::os::raw::c_char,
+        _NewFilename: *const ::std::os::raw::c_char,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _unlink(_Filename: *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn unlink(_Filename: *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn rewind(_File: *mut FILE);
+}
+unsafe extern "C" {
+    pub fn _rmtmp() -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn setbuf(_File: *mut FILE, _Buffer: *mut ::std::os::raw::c_char);
+}
+unsafe extern "C" {
+    pub fn _setmaxstdio(_Max: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _set_output_format(_Format: ::std::os::raw::c_uint) -> ::std::os::raw::c_uint;
+}
+unsafe extern "C" {
+    pub fn _get_output_format() -> ::std::os::raw::c_uint;
+}
+unsafe extern "C" {
+    pub fn setvbuf(
+        _File: *mut FILE,
+        _Buf: *mut ::std::os::raw::c_char,
+        _Mode: ::std::os::raw::c_int,
+        _Size: usize,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _scprintf(_Format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _snscanf(
+        _Src: *const ::std::os::raw::c_char,
+        _MaxCount: usize,
+        _Format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vscprintf(
+        _Format: *const ::std::os::raw::c_char,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn tmpfile() -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn tmpnam(_Buffer: *mut ::std::os::raw::c_char) -> *mut ::std::os::raw::c_char;
+}
+unsafe extern "C" {
+    pub fn ungetc(_Ch: ::std::os::raw::c_int, _File: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _snprintf(
+        _Dest: *mut ::std::os::raw::c_char,
+        _Count: usize,
+        _Format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vsnprintf(
+        _Dest: *mut ::std::os::raw::c_char,
+        _Count: usize,
+        _Format: *const ::std::os::raw::c_char,
+        _Args: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _set_printf_count_output(_Value: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _get_printf_count_output() -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_swscanf(
+        _Src: *const wchar_t,
+        _Format: *const wchar_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_vswscanf(
+        _Str: *const wchar_t,
+        Format: *const wchar_t,
+        argp: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_wscanf(_Format: *const wchar_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_vwscanf(Format: *const wchar_t, argp: va_list) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_fwscanf(_File: *mut FILE, _Format: *const wchar_t, ...)
+        -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_vfwscanf(
+        fp: *mut FILE,
+        Format: *const wchar_t,
+        argp: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_fwprintf(
+        _File: *mut FILE,
+        _Format: *const wchar_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_wprintf(_Format: *const wchar_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_vfwprintf(
+        _File: *mut FILE,
+        _Format: *const wchar_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_vwprintf(_Format: *const wchar_t, _ArgList: va_list) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_snwprintf(
+        s: *mut wchar_t,
+        n: usize,
+        format: *const wchar_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_vsnwprintf(
+        arg1: *mut wchar_t,
+        arg2: usize,
+        arg3: *const wchar_t,
+        arg4: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_swprintf(
+        arg1: *mut wchar_t,
+        arg2: usize,
+        arg3: *const wchar_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_vswprintf(
+        arg1: *mut wchar_t,
+        arg2: usize,
+        arg3: *const wchar_t,
+        arg4: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_swscanf(
+        _Src: *const wchar_t,
+        _Format: *const wchar_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_wscanf(_Format: *const wchar_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_fwscanf(_File: *mut FILE, _Format: *const wchar_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_fwprintf(_File: *mut FILE, _Format: *const wchar_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_wprintf(_Format: *const wchar_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_vfwprintf(
+        _File: *mut FILE,
+        _Format: *const wchar_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_vwprintf(_Format: *const wchar_t, _ArgList: va_list) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_swprintf(
+        arg1: *mut wchar_t,
+        arg2: usize,
+        arg3: *const wchar_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_vswprintf(
+        arg1: *mut wchar_t,
+        arg2: usize,
+        arg3: *const wchar_t,
+        arg4: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _wfsopen(
+        _Filename: *const wchar_t,
+        _Mode: *const wchar_t,
+        _ShFlag: ::std::os::raw::c_int,
+    ) -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn fgetwc(_File: *mut FILE) -> wint_t;
+}
+unsafe extern "C" {
+    pub fn _fgetwchar() -> wint_t;
+}
+unsafe extern "C" {
+    pub fn fputwc(_Ch: wchar_t, _File: *mut FILE) -> wint_t;
+}
+unsafe extern "C" {
+    pub fn _fputwchar(_Ch: wchar_t) -> wint_t;
+}
+unsafe extern "C" {
+    pub fn getwc(_File: *mut FILE) -> wint_t;
+}
+unsafe extern "C" {
+    pub fn getwchar() -> wint_t;
+}
+unsafe extern "C" {
+    pub fn putwc(_Ch: wchar_t, _File: *mut FILE) -> wint_t;
+}
+unsafe extern "C" {
+    pub fn putwchar(_Ch: wchar_t) -> wint_t;
+}
+unsafe extern "C" {
+    pub fn ungetwc(_Ch: wint_t, _File: *mut FILE) -> wint_t;
+}
+unsafe extern "C" {
+    pub fn fgetws(
+        _Dst: *mut wchar_t,
+        _SizeInWords: ::std::os::raw::c_int,
+        _File: *mut FILE,
+    ) -> *mut wchar_t;
+}
+unsafe extern "C" {
+    pub fn fputws(_Str: *const wchar_t, _File: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _getws(_String: *mut wchar_t) -> *mut wchar_t;
+}
+unsafe extern "C" {
+    pub fn _putws(_Str: *const wchar_t) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _scwprintf(_Format: *const wchar_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _swprintf_c(
+        _DstBuf: *mut wchar_t,
+        _SizeInWords: usize,
+        _Format: *const wchar_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vswprintf_c(
+        _DstBuf: *mut wchar_t,
+        _SizeInWords: usize,
+        _Format: *const wchar_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _snwprintf(
+        _Dest: *mut wchar_t,
+        _Count: usize,
+        _Format: *const wchar_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vsnwprintf(
+        _Dest: *mut wchar_t,
+        _Count: usize,
+        _Format: *const wchar_t,
+        _Args: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vscwprintf(_Format: *const wchar_t, _ArgList: va_list) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _swprintf(_Dest: *mut wchar_t, _Format: *const wchar_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vswprintf(
+        _Dest: *mut wchar_t,
+        _Format: *const wchar_t,
+        _Args: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _wtempnam(_Directory: *const wchar_t, _FilePrefix: *const wchar_t) -> *mut wchar_t;
+}
+unsafe extern "C" {
+    pub fn _snwscanf(
+        _Src: *const wchar_t,
+        _MaxCount: usize,
+        _Format: *const wchar_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _wfdopen(_FileHandle: ::std::os::raw::c_int, _Mode: *const wchar_t) -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn _wfopen(_Filename: *const wchar_t, _Mode: *const wchar_t) -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn _wfreopen(
+        _Filename: *const wchar_t,
+        _Mode: *const wchar_t,
+        _OldFile: *mut FILE,
+    ) -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn _wperror(_ErrMsg: *const wchar_t);
+}
+unsafe extern "C" {
+    pub fn _wpopen(_Command: *const wchar_t, _Mode: *const wchar_t) -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn _wremove(_Filename: *const wchar_t) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _wtmpnam(_Buffer: *mut wchar_t) -> *mut wchar_t;
+}
+unsafe extern "C" {
+    pub fn _lock_file(_File: *mut FILE);
+}
+unsafe extern "C" {
+    pub fn _unlock_file(_File: *mut FILE);
+}
+unsafe extern "C" {
+    pub fn tempnam(
+        _Directory: *const ::std::os::raw::c_char,
+        _FilePrefix: *const ::std::os::raw::c_char,
+    ) -> *mut ::std::os::raw::c_char;
+}
+unsafe extern "C" {
+    pub fn fcloseall() -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn fdopen(
+        _FileHandle: ::std::os::raw::c_int,
+        _Format: *const ::std::os::raw::c_char,
+    ) -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn fgetchar() -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn fileno(_File: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn flushall() -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn fputchar(_Ch: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn getw(_File: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn putw(_Ch: ::std::os::raw::c_int, _File: *mut FILE) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn rmtmp() -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_str_wide_utf8(
+        wptr: *const wchar_t,
+        mbptr: *mut *mut ::std::os::raw::c_char,
+        buflen: *mut usize,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_str_utf8_wide(
+        mbptr: *const ::std::os::raw::c_char,
+        wptr: *mut *mut wchar_t,
+        buflen: *mut usize,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __mingw_str_free(ptr: *mut ::std::os::raw::c_void);
+}
+unsafe extern "C" {
+    pub fn _wspawnl(
+        _Mode: ::std::os::raw::c_int,
+        _Filename: *const wchar_t,
+        _ArgList: *const wchar_t,
+        ...
+    ) -> isize;
+}
+unsafe extern "C" {
+    pub fn _wspawnle(
+        _Mode: ::std::os::raw::c_int,
+        _Filename: *const wchar_t,
+        _ArgList: *const wchar_t,
+        ...
+    ) -> isize;
+}
+unsafe extern "C" {
+    pub fn _wspawnlp(
+        _Mode: ::std::os::raw::c_int,
+        _Filename: *const wchar_t,
+        _ArgList: *const wchar_t,
+        ...
+    ) -> isize;
+}
+unsafe extern "C" {
+    pub fn _wspawnlpe(
+        _Mode: ::std::os::raw::c_int,
+        _Filename: *const wchar_t,
+        _ArgList: *const wchar_t,
+        ...
+    ) -> isize;
+}
+unsafe extern "C" {
+    pub fn _wspawnv(
+        _Mode: ::std::os::raw::c_int,
+        _Filename: *const wchar_t,
+        _ArgList: *const *const wchar_t,
+    ) -> isize;
+}
+unsafe extern "C" {
+    pub fn _wspawnve(
+        _Mode: ::std::os::raw::c_int,
+        _Filename: *const wchar_t,
+        _ArgList: *const *const wchar_t,
+        _Env: *const *const wchar_t,
+    ) -> isize;
+}
+unsafe extern "C" {
+    pub fn _wspawnvp(
+        _Mode: ::std::os::raw::c_int,
+        _Filename: *const wchar_t,
+        _ArgList: *const *const wchar_t,
+    ) -> isize;
+}
+unsafe extern "C" {
+    pub fn _wspawnvpe(
+        _Mode: ::std::os::raw::c_int,
+        _Filename: *const wchar_t,
+        _ArgList: *const *const wchar_t,
+        _Env: *const *const wchar_t,
+    ) -> isize;
+}
+unsafe extern "C" {
+    pub fn _spawnv(
+        _Mode: ::std::os::raw::c_int,
+        _Filename: *const ::std::os::raw::c_char,
+        _ArgList: *const *const ::std::os::raw::c_char,
+    ) -> isize;
+}
+unsafe extern "C" {
+    pub fn _spawnve(
+        _Mode: ::std::os::raw::c_int,
+        _Filename: *const ::std::os::raw::c_char,
+        _ArgList: *const *const ::std::os::raw::c_char,
+        _Env: *const *const ::std::os::raw::c_char,
+    ) -> isize;
+}
+unsafe extern "C" {
+    pub fn _spawnvp(
+        _Mode: ::std::os::raw::c_int,
+        _Filename: *const ::std::os::raw::c_char,
+        _ArgList: *const *const ::std::os::raw::c_char,
+    ) -> isize;
+}
+unsafe extern "C" {
+    pub fn _spawnvpe(
+        _Mode: ::std::os::raw::c_int,
+        _Filename: *const ::std::os::raw::c_char,
+        _ArgList: *const *const ::std::os::raw::c_char,
+        _Env: *const *const ::std::os::raw::c_char,
+    ) -> isize;
+}
+unsafe extern "C" {
+    pub fn clearerr_s(_File: *mut FILE) -> errno_t;
+}
+unsafe extern "C" {
+    pub fn fread_s(
+        _DstBuf: *mut ::std::os::raw::c_void,
+        _DstSize: usize,
+        _ElementSize: usize,
+        _Count: usize,
+        _File: *mut FILE,
+    ) -> usize;
+}
+unsafe extern "C" {
+    pub fn fprintf_s(
+        _File: *mut FILE,
+        _Format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _fscanf_s_l(
+        _File: *mut FILE,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn fscanf_s(
+        _File: *mut FILE,
+        _Format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn printf_s(_Format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _scanf_l(
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _scanf_s_l(
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn scanf_s(_Format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _snprintf_c(
+        _DstBuf: *mut ::std::os::raw::c_char,
+        _MaxCount: usize,
+        _Format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vsnprintf_c(
+        _DstBuf: *mut ::std::os::raw::c_char,
+        _MaxCount: usize,
+        _Format: *const ::std::os::raw::c_char,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _fscanf_l(
+        _File: *mut FILE,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _sscanf_l(
+        _Src: *const ::std::os::raw::c_char,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _sscanf_s_l(
+        _Src: *const ::std::os::raw::c_char,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn sscanf_s(
+        _Src: *const ::std::os::raw::c_char,
+        _Format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _snscanf_s(
+        _Src: *const ::std::os::raw::c_char,
+        _MaxCount: usize,
+        _Format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _snscanf_l(
+        _Src: *const ::std::os::raw::c_char,
+        _MaxCount: usize,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _snscanf_s_l(
+        _Src: *const ::std::os::raw::c_char,
+        _MaxCount: usize,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn vfprintf_s(
+        _File: *mut FILE,
+        _Format: *const ::std::os::raw::c_char,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn vprintf_s(
+        _Format: *const ::std::os::raw::c_char,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn vsnprintf_s(
+        _DstBuf: *mut ::std::os::raw::c_char,
+        _DstSize: usize,
+        _MaxCount: usize,
+        _Format: *const ::std::os::raw::c_char,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vsnprintf_s(
+        _DstBuf: *mut ::std::os::raw::c_char,
+        _DstSize: usize,
+        _MaxCount: usize,
+        _Format: *const ::std::os::raw::c_char,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn vsprintf_s(
+        _DstBuf: *mut ::std::os::raw::c_char,
+        _Size: usize,
+        _Format: *const ::std::os::raw::c_char,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn sprintf_s(
+        _DstBuf: *mut ::std::os::raw::c_char,
+        _DstSize: usize,
+        _Format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _snprintf_s(
+        _DstBuf: *mut ::std::os::raw::c_char,
+        _DstSize: usize,
+        _MaxCount: usize,
+        _Format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _fprintf_p(
+        _File: *mut FILE,
+        _Format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _printf_p(_Format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _sprintf_p(
+        _Dst: *mut ::std::os::raw::c_char,
+        _MaxCount: usize,
+        _Format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vfprintf_p(
+        _File: *mut FILE,
+        _Format: *const ::std::os::raw::c_char,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vprintf_p(
+        _Format: *const ::std::os::raw::c_char,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vsprintf_p(
+        _Dst: *mut ::std::os::raw::c_char,
+        _MaxCount: usize,
+        _Format: *const ::std::os::raw::c_char,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _scprintf_p(_Format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vscprintf_p(
+        _Format: *const ::std::os::raw::c_char,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _printf_l(
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _printf_p_l(
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vprintf_l(
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vprintf_p_l(
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _fprintf_l(
+        _File: *mut FILE,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _fprintf_p_l(
+        _File: *mut FILE,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vfprintf_l(
+        _File: *mut FILE,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vfprintf_p_l(
+        _File: *mut FILE,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _sprintf_l(
+        _DstBuf: *mut ::std::os::raw::c_char,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _sprintf_p_l(
+        _DstBuf: *mut ::std::os::raw::c_char,
+        _MaxCount: usize,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vsprintf_l(
+        _DstBuf: *mut ::std::os::raw::c_char,
+        _Format: *const ::std::os::raw::c_char,
+        arg1: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vsprintf_p_l(
+        _DstBuf: *mut ::std::os::raw::c_char,
+        _MaxCount: usize,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _scprintf_l(
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _scprintf_p_l(
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vscprintf_l(
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vscprintf_p_l(
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _printf_s_l(
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vprintf_s_l(
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _fprintf_s_l(
+        _File: *mut FILE,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vfprintf_s_l(
+        _File: *mut FILE,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _sprintf_s_l(
+        _DstBuf: *mut ::std::os::raw::c_char,
+        _DstSize: usize,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vsprintf_s_l(
+        _DstBuf: *mut ::std::os::raw::c_char,
+        _DstSize: usize,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _snprintf_s_l(
+        _DstBuf: *mut ::std::os::raw::c_char,
+        _DstSize: usize,
+        _MaxCount: usize,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vsnprintf_s_l(
+        _DstBuf: *mut ::std::os::raw::c_char,
+        _DstSize: usize,
+        _MaxCount: usize,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _snprintf_l(
+        _DstBuf: *mut ::std::os::raw::c_char,
+        _MaxCount: usize,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _snprintf_c_l(
+        _DstBuf: *mut ::std::os::raw::c_char,
+        _MaxCount: usize,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vsnprintf_l(
+        _DstBuf: *mut ::std::os::raw::c_char,
+        _MaxCount: usize,
+        _Format: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vsnprintf_c_l(
+        _DstBuf: *mut ::std::os::raw::c_char,
+        _MaxCount: usize,
+        arg1: *const ::std::os::raw::c_char,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn fopen_s(
+        _File: *mut *mut FILE,
+        _Filename: *const ::std::os::raw::c_char,
+        _Mode: *const ::std::os::raw::c_char,
+    ) -> errno_t;
+}
+unsafe extern "C" {
+    pub fn freopen_s(
+        _File: *mut *mut FILE,
+        _Filename: *const ::std::os::raw::c_char,
+        _Mode: *const ::std::os::raw::c_char,
+        _Stream: *mut FILE,
+    ) -> errno_t;
+}
+unsafe extern "C" {
+    pub fn gets_s(arg1: *mut ::std::os::raw::c_char, arg2: rsize_t) -> *mut ::std::os::raw::c_char;
+}
+unsafe extern "C" {
+    pub fn tmpfile_s(_File: *mut *mut FILE) -> errno_t;
+}
+unsafe extern "C" {
+    pub fn tmpnam_s(arg1: *mut ::std::os::raw::c_char, arg2: rsize_t) -> errno_t;
+}
+unsafe extern "C" {
+    pub fn _getws_s(_Str: *mut wchar_t, _SizeInWords: usize) -> *mut wchar_t;
+}
+unsafe extern "C" {
+    pub fn fwprintf_s(_File: *mut FILE, _Format: *const wchar_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn wprintf_s(_Format: *const wchar_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn vfwprintf_s(
+        _File: *mut FILE,
+        _Format: *const wchar_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn vwprintf_s(_Format: *const wchar_t, _ArgList: va_list) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn vswprintf_s(
+        _Dst: *mut wchar_t,
+        _SizeInWords: usize,
+        _Format: *const wchar_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn swprintf_s(
+        _Dst: *mut wchar_t,
+        _SizeInWords: usize,
+        _Format: *const wchar_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vsnwprintf_s(
+        _DstBuf: *mut wchar_t,
+        _DstSizeInWords: usize,
+        _MaxCount: usize,
+        _Format: *const wchar_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _snwprintf_s(
+        _DstBuf: *mut wchar_t,
+        _DstSizeInWords: usize,
+        _MaxCount: usize,
+        _Format: *const wchar_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _wprintf_s_l(_Format: *const wchar_t, _Locale: _locale_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vwprintf_s_l(
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _fwprintf_s_l(
+        _File: *mut FILE,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vfwprintf_s_l(
+        _File: *mut FILE,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _swprintf_s_l(
+        _DstBuf: *mut wchar_t,
+        _DstSize: usize,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vswprintf_s_l(
+        _DstBuf: *mut wchar_t,
+        _DstSize: usize,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _snwprintf_s_l(
+        _DstBuf: *mut wchar_t,
+        _DstSize: usize,
+        _MaxCount: usize,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vsnwprintf_s_l(
+        _DstBuf: *mut wchar_t,
+        _DstSize: usize,
+        _MaxCount: usize,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _fwscanf_s_l(
+        _File: *mut FILE,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn fwscanf_s(_File: *mut FILE, _Format: *const wchar_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _swscanf_s_l(
+        _Src: *const wchar_t,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn swscanf_s(_Src: *const wchar_t, _Format: *const wchar_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _snwscanf_s(
+        _Src: *const wchar_t,
+        _MaxCount: usize,
+        _Format: *const wchar_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _snwscanf_s_l(
+        _Src: *const wchar_t,
+        _MaxCount: usize,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _wscanf_s_l(_Format: *const wchar_t, _Locale: _locale_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn wscanf_s(_Format: *const wchar_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _wfopen_s(
+        _File: *mut *mut FILE,
+        _Filename: *const wchar_t,
+        _Mode: *const wchar_t,
+    ) -> errno_t;
+}
+unsafe extern "C" {
+    pub fn _wfreopen_s(
+        _File: *mut *mut FILE,
+        _Filename: *const wchar_t,
+        _Mode: *const wchar_t,
+        _OldFile: *mut FILE,
+    ) -> errno_t;
+}
+unsafe extern "C" {
+    pub fn _wtmpnam_s(_DstBuf: *mut wchar_t, _SizeInWords: usize) -> errno_t;
+}
+unsafe extern "C" {
+    pub fn _fwprintf_p(_File: *mut FILE, _Format: *const wchar_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _wprintf_p(_Format: *const wchar_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vfwprintf_p(
+        _File: *mut FILE,
+        _Format: *const wchar_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vwprintf_p(_Format: *const wchar_t, _ArgList: va_list) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _swprintf_p(
+        _DstBuf: *mut wchar_t,
+        _MaxCount: usize,
+        _Format: *const wchar_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vswprintf_p(
+        _DstBuf: *mut wchar_t,
+        _MaxCount: usize,
+        _Format: *const wchar_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _scwprintf_p(_Format: *const wchar_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vscwprintf_p(_Format: *const wchar_t, _ArgList: va_list) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _wprintf_l(_Format: *const wchar_t, _Locale: _locale_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _wprintf_p_l(_Format: *const wchar_t, _Locale: _locale_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vwprintf_l(
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vwprintf_p_l(
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _fwprintf_l(
+        _File: *mut FILE,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _fwprintf_p_l(
+        _File: *mut FILE,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vfwprintf_l(
+        _File: *mut FILE,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vfwprintf_p_l(
+        _File: *mut FILE,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _swprintf_c_l(
+        _DstBuf: *mut wchar_t,
+        _MaxCount: usize,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _swprintf_p_l(
+        _DstBuf: *mut wchar_t,
+        _MaxCount: usize,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vswprintf_c_l(
+        _DstBuf: *mut wchar_t,
+        _MaxCount: usize,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vswprintf_p_l(
+        _DstBuf: *mut wchar_t,
+        _MaxCount: usize,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _scwprintf_l(_Format: *const wchar_t, _Locale: _locale_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _scwprintf_p_l(
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vscwprintf_p_l(
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _snwprintf_l(
+        _DstBuf: *mut wchar_t,
+        _MaxCount: usize,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vsnwprintf_l(
+        _DstBuf: *mut wchar_t,
+        _MaxCount: usize,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __swprintf_l(
+        _Dest: *mut wchar_t,
+        _Format: *const wchar_t,
+        _Plocinfo: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __vswprintf_l(
+        _Dest: *mut wchar_t,
+        _Format: *const wchar_t,
+        _Plocinfo: _locale_t,
+        _Args: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _vscwprintf_l(
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        _ArgList: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _fwscanf_l(
+        _File: *mut FILE,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _swscanf_l(
+        _Src: *const wchar_t,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _snwscanf_l(
+        _Src: *const wchar_t,
+        _MaxCount: usize,
+        _Format: *const wchar_t,
+        _Locale: _locale_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn _wscanf_l(_Format: *const wchar_t, _Locale: _locale_t, ...) -> ::std::os::raw::c_int;
+}
 pub const LogLevel_LOG_TRACE: LogLevel = 0;
 pub const LogLevel_LOG_DEBUG: LogLevel = 1;
 pub const LogLevel_LOG_INFO: LogLevel = 2;
@@ -209,6 +2013,12 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn lvgl_advance_timer(dt_ms: u32);
+}
+unsafe extern "C" {
+    pub fn lvgl_get_required_framebuffer_size() -> usize;
+}
+unsafe extern "C" {
+    pub fn lvgl_register_external_buffer(buffer: *mut u16, buffer_bytes: usize);
 }
 pub type __builtin_va_list = *mut ::std::os::raw::c_char;
 #[repr(C)]
