@@ -13,3 +13,8 @@ log = "0.4.26"
 
 [lib]
 crate-type = ["rlib", "staticlib", "cdylib"]
+
+[features]
+default = ["desktop"]
+desktop = []
+firmware = []

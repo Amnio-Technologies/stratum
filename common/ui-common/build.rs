@@ -8,7 +8,7 @@ fn main() {
     let bindings_src_file = bindings_src_dir.join("bindings.rs");
     let bindings_out_file = out_dir.join("bindings.rs");
 
-    // Host vs Target
+    // Host vs Target: generate or copy bindings
     let host = env::var("HOST").unwrap();
     let target = env::var("TARGET").unwrap();
 
@@ -21,7 +21,7 @@ fn main() {
         let fallback_clang_include = "/usr/lib/clang/15/include"; // adjust if needed
 
         let bindings = bindgen::Builder::default()
-            .layout_tests(false) // disable layout tests for embedded target
+            .layout_tests(false)
             .header(header_to_bind.to_string_lossy())
             .clang_args(&[
                 format!("-I{}", inc_dir_amnio.display()),
@@ -32,19 +32,17 @@ fn main() {
             .generate()
             .expect("Unable to generate bindings from stratum_ui.h");
 
-        // Write to OUT_DIR
         bindings
             .write_to_file(&bindings_out_file)
             .expect("Couldn't write bindings to OUT_DIR");
 
-        // Also update committed fallback
         fs::create_dir_all(&bindings_src_dir).unwrap();
         fs::copy(&bindings_out_file, &bindings_src_file)
             .expect("Failed to update committed bindings.rs");
 
         println!("cargo:rerun-if-changed={}", bindings_src_file.display());
     } else {
-        // Cross-compile: copy pre-generated bindings into OUT_DIR
+        // Cross-compile: copy pre-generated bindings
         fs::create_dir_all(&out_dir).unwrap();
         fs::copy(&bindings_src_file, &bindings_out_file)
             .expect("Failed to copy pre-generated bindings.rs into OUT_DIR");
@@ -53,25 +51,17 @@ fn main() {
     }
 
     // ----- Link static stratum-ui library -----
-    // Detect target kind from metadata
-    let cargo_toml_path = manifest_dir.join("Cargo.toml");
-    let target_kind = fs::read_to_string(&cargo_toml_path)
-        .ok()
-        .and_then(|s| toml::from_str::<toml::Value>(&s).ok())
-        .and_then(|doc| {
-            doc.get("package")?
-                .get("metadata")?
-                .get("stratum-ui-target")?
-                .as_str()
-                .map(|s| s.to_string())
-        })
-        .unwrap_or_else(|| "desktop".to_string());
+    // Determine build flavor via feature
+    #[cfg(feature = "firmware")]
+    let target_kind = "firmware";
+    #[cfg(not(feature = "firmware"))]
+    let target_kind = "desktop";
 
     let amnio_root = manifest_dir.parent().and_then(|p| p.parent()).unwrap();
     let stratum_ui_build = amnio_root
         .join("stratum-ui")
         .join("build")
-        .join(&target_kind);
+        .join(target_kind);
     let lib_path = stratum_ui_build.join("libstratum-ui.a");
 
     if !lib_path.exists() {

@@ -14,9 +14,5 @@ egui = "0.31.1"
 env_logger = "0.11.7"
 log = "0.4.26"
 amnio-firmware = { path = "../firmware" }
-stratum-ui-common = { path = "../common/ui-common" }
+stratum-ui-common = { path = "../common/ui-common", features = ["desktop"] }
 re_ui = "0.23.1"
-
-
-[package.metadata]
-stratum-ui-target = "desktop"
