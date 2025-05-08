@@ -139,6 +139,9 @@ pub const _P_OVERLAY: u32 = 2;
 pub const _WAIT_CHILD: u32 = 0;
 pub const _WAIT_GRANDCHILD: u32 = 1;
 pub const TMP_MAX_S: u32 = 32767;
+pub const __bool_true_false_are_defined: u32 = 1;
+pub const true_: u32 = 1;
+pub const false_: u32 = 0;
 pub const LVGL_SCREEN_WIDTH: u32 = 320;
 pub const LVGL_SCREEN_HEIGHT: u32 = 240;
 pub type __gnuc_va_list = __builtin_va_list;
@@ -2019,6 +2022,13 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn lvgl_register_external_buffer(buffer: *mut u16, buffer_bytes: usize);
+}
+#[doc = " SPI‐send callback type.  is_data==false → command, true → pixel data."]
+pub type ui_spi_send_cb_t =
+    ::std::option::Option<unsafe extern "C" fn(is_data: bool, data: *const u8, len: usize)>;
+unsafe extern "C" {
+    #[doc = " Called by LVGL’s flush_cb to push bytes out.  Must be registered\n by the platform code *before* lvgl_setup()."]
+    pub fn lvgl_register_spi_send_cb(cb: ui_spi_send_cb_t);
 }
 pub type __builtin_va_list = *mut ::std::os::raw::c_char;
 #[repr(C)]

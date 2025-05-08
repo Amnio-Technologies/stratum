@@ -7,9 +7,19 @@ use stratum_ui_common::{amnio_bindings, lvgl_backend::LvglBackend};
 
 pub struct DesktopLvglBackend;
 
+const WIDTH: usize = 320;
+const HEIGHT: usize = 240;
+
+// 💾 Static framebuffer lives for the entire program
+static mut FRAMEBUFFER: [u16; WIDTH * HEIGHT] = [0; WIDTH * HEIGHT];
+
 impl LvglBackend for DesktopLvglBackend {
     fn setup_ui(&self) {
         unsafe {
+            amnio_bindings::lvgl_register_external_buffer(
+                FRAMEBUFFER.as_mut_ptr(),
+                WIDTH * HEIGHT * 2,
+            );
             amnio_bindings::lvgl_setup();
         }
 
@@ -25,7 +35,7 @@ impl LvglBackend for DesktopLvglBackend {
                     amnio_bindings::lvgl_advance_timer(elapsed_ms);
                 }
 
-                thread::sleep(Duration::from_millis(5)); // Prevents CPU overuse
+                thread::sleep(Duration::from_millis(5));
             }
         });
     }

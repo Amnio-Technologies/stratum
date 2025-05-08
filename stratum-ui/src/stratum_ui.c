@@ -1,27 +1,57 @@
+#include "lv_conf.h"
 #include "stratum_ui.h"
 #include "extern_log.h"
 #include "lvgl.h"
 #include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
 #include "fonts/jetbrains_mono_nl_regular_12.h"
 
 // LVGL framebuffer (RGB565 format)
 static uint16_t *lvgl_framebuffer = NULL;
+static size_t lvgl_buffer_bytes = 0;
 
-static lv_display_t *global_display = NULL; // Store reference to the display
-static lv_obj_t *elapsed_label = NULL;      // Store reference to the label
-static uint32_t elapsed_seconds = 0;        // Track elapsed seconds
+static lv_display_t *global_display = NULL;
 
-void my_flush_cb(lv_display_t *display, const lv_area_t *area, uint8_t *px_map)
+static lv_obj_t *elapsed_label = NULL;
+static uint32_t elapsed_seconds = 0;
+
+static ui_spi_send_cb_t _spi_cb = NULL;
+
+// your existing flush:
+void my_flush_cb(lv_display_t *disp,
+                 const lv_area_t *area,
+                 uint8_t *px_map)
 {
-    uint16_t *src = (uint16_t *)px_map; // Convert to 16-bit color
-    for (int y = area->y1; y <= area->y2; y++)
+    const int32_t w = area->x2 - area->x1 + 1;
+    const int32_t h = area->y2 - area->y1 + 1;
+    const size_t bytes = (size_t)w * h * sizeof(uint16_t);
+
+    // 1) Copy into our registered framebuffer (if any)
+    if (lvgl_framebuffer)
     {
-        for (int x = area->x1; x <= area->x2; x++)
+        // src starts at the first pixel of the region
+        uint16_t *src = (uint16_t *)px_map;
+        for (int32_t row = 0; row < h; row++)
         {
-            lvgl_framebuffer[y * LVGL_SCREEN_WIDTH + x] = *src++; // Copy pixel to framebuffer
+            // compute the start of this scanline in the big framebuffer
+            uint16_t *dest = lvgl_framebuffer + ((area->y1 + row) * LVGL_SCREEN_WIDTH) + area->x1;
+            // copy exactly w pixels
+            memcpy(dest, src, (size_t)w * sizeof(uint16_t));
+            src += w;
         }
     }
-    lv_display_flush_ready(display); // Notify LVGL flush is done
+
+    // 2) Push out over SPI if callback registered
+    if (_spi_cb)
+    {
+        uint8_t cmd = 0x2C;           // RAMWR
+        _spi_cb(false, &cmd, 1);      // command mode
+        _spi_cb(true, px_map, bytes); // data mode
+    }
+
+    // tell LVGL we're done
+    lv_display_flush_ready(disp);
 }
 
 void update_elapsed_time(lv_timer_t *timer)
@@ -29,6 +59,8 @@ void update_elapsed_time(lv_timer_t *timer)
     elapsed_seconds++;
 
     ui_logf(LOG_INFO, "Updating Elapsed Time: %u sec", elapsed_seconds);
+    ui_logf(LOG_INFO, "LVGL depth=%d bits, lv_color_t=%zu bytes",
+            LV_COLOR_DEPTH, sizeof(lv_color_t));
 
     if (elapsed_label)
     {
@@ -102,11 +134,18 @@ AMNIO_API size_t lvgl_get_required_framebuffer_size(void)
 AMNIO_API void lvgl_register_external_buffer(uint16_t *buffer, size_t buffer_bytes)
 {
     size_t expected = lvgl_get_required_framebuffer_size();
-    if (buffer_bytes < expected) {
+    if (buffer_bytes < expected)
+    {
         ui_logf(LOG_ERROR, "Buffer too small! Need at least %zu bytes.", expected);
         // abort();
         return;
     }
 
     lvgl_framebuffer = buffer;
+    lvgl_buffer_bytes = buffer_bytes;
+}
+
+AMNIO_API void lvgl_register_spi_send_cb(ui_spi_send_cb_t cb)
+{
+    _spi_cb = cb;
 }

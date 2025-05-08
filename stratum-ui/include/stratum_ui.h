@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #ifdef _WIN32
 #define AMNIO_API __declspec(dllexport) // Windows DLL Export
@@ -37,6 +38,13 @@ extern "C"
     AMNIO_API void lvgl_advance_timer(uint32_t dt_ms);
     AMNIO_API size_t lvgl_get_required_framebuffer_size(void);
     AMNIO_API void lvgl_register_external_buffer(uint16_t *buffer, size_t buffer_bytes);
+
+    /// SPI‐send callback type.  is_data==false → command, true → pixel data.
+    typedef void (*ui_spi_send_cb_t)(bool is_data, const uint8_t *data, size_t len);
+
+    /// Called by LVGL’s flush_cb to push bytes out.  Must be registered
+    /// by the platform code *before* lvgl_setup().
+    AMNIO_API void lvgl_register_spi_send_cb(ui_spi_send_cb_t cb);
 
 #ifdef __cplusplus
 }

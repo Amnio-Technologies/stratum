@@ -27,7 +27,6 @@ file(GLOB FONT_SOURCES
 
 # -------- LVGL Configuration --------
 add_definitions(-DLV_CONF_INCLUDE_SIMPLE)
-add_definitions(-DLV_CONF_PATH="${PROJECT_SOURCE_DIR}/include/lv_conf.h")
 
 # -------- Include Directories --------
 include_directories(
