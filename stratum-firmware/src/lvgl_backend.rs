@@ -1,50 +1,42 @@
+use std::sync::Mutex;
 use std::sync::Once;
+use std::sync::OnceLock;
 use std::time::Duration;
 use std::time::Instant;
 
+use esp_idf_hal::delay::FreeRtos;
+use esp_idf_hal::gpio::Gpio2;
 use esp_idf_hal::gpio::Output;
-use esp_idf_hal::gpio::Pin;
 use esp_idf_hal::gpio::PinDriver;
 use esp_idf_hal::prelude::Peripherals;
 use esp_idf_hal::sys::spi_bus_config_t;
 use esp_idf_hal::sys::spi_bus_initialize;
 use esp_idf_hal::sys::spi_device_handle_t;
-use esp_idf_hal::sys::spi_device_transmit;
-use esp_idf_hal::sys::spi_transaction_t;
 use esp_idf_sys::esp;
 use esp_idf_sys::spi_bus_add_device;
 use esp_idf_sys::spi_device_interface_config_t;
-use esp_idf_sys::spi_host_device_t_SPI2_HOST;
+use esp_idf_sys::spi_host_device_t_SPI3_HOST;
 use stratum_ui_common::amnio_bindings;
 use stratum_ui_common::amnio_bindings::{get_lvgl_display_height, get_lvgl_display_width};
 use stratum_ui_common::lvgl_backend::LvglBackend;
+
+use crate::handle_spi;
 
 pub struct FirmwareLvglBackend;
 
 impl LvglBackend for FirmwareLvglBackend {
     fn setup_ui(&self) {
-        // In embedded context, likely sets up LVGL + display + input drivers
         unsafe {
-            amnio_bindings::lvgl_setup(); // Or a native setup()
+            amnio_bindings::lvgl_setup();
         }
     }
 
     fn update_ui(&self) {
         unsafe {
-            amnio_bindings::lvgl_update(); // Typically calls lv_task_handler()
+            amnio_bindings::lvgl_update();
         }
     }
 }
-
-// fn something() {
-//     let peripherals = Peripherals::take().unwrap();
-//     let pins = peripherals.pins;
-//     let sclk = pins.gpio18;
-//     let mosi = pins.gpio23;
-//     let cs = pins.gpio5;
-//     let dc = pins.gpio2;
-//     let rst = pins.gpio4;
-// }
 
 fn get_max_transfer_size() -> i32 {
     unsafe {
@@ -55,7 +47,9 @@ fn get_max_transfer_size() -> i32 {
 }
 
 // You'll store this globally after `spi_bus_add_device()`
-static mut SPI_DEV: Option<spi_device_handle_t> = None;
+pub static mut SPI_DEV: Option<spi_device_handle_t> = None;
+// static mut SPI_HANDLE: UnsafeCell<spi_device_handle_t> = UnsafeCell::new(core::ptr::null_mut());
+pub static DC_PIN: OnceLock<Mutex<PinDriver<'static, Gpio2, Output>>> = OnceLock::new();
 
 unsafe fn init_spi_bus() {
     let mut bus_cfg: spi_bus_config_t = core::mem::zeroed();
@@ -70,7 +64,7 @@ unsafe fn init_spi_bus() {
     bus_cfg.intr_flags = 0; // default
     bus_cfg.flags = 0; // no special flags
 
-    esp!(spi_bus_initialize(spi_host_device_t_SPI2_HOST, &bus_cfg, 1)).unwrap();
+    esp!(spi_bus_initialize(spi_host_device_t_SPI3_HOST, &bus_cfg, 1)).unwrap();
 
     let dev_cfg = spi_device_interface_config_t {
         command_bits: 0,
@@ -80,7 +74,7 @@ unsafe fn init_spi_bus() {
         duty_cycle_pos: 128,
         cs_ena_posttrans: 0,
         cs_ena_pretrans: 0,
-        clock_speed_hz: 40_000_000,
+        clock_speed_hz: 10_000_000,
         input_delay_ns: 0,
         spics_io_num: 5,
         flags: 0,
@@ -92,7 +86,7 @@ unsafe fn init_spi_bus() {
 
     let mut handle: spi_device_handle_t = core::ptr::null_mut();
     esp!(spi_bus_add_device(
-        spi_host_device_t_SPI2_HOST,
+        spi_host_device_t_SPI3_HOST,
         &dev_cfg,
         &mut handle
     ))
@@ -101,61 +95,108 @@ unsafe fn init_spi_bus() {
     SPI_DEV = Some(handle);
 }
 
-pub unsafe fn flush_st7789<'d, T: Pin>(framebuffer: &[u16], dc: &mut PinDriver<'d, T, Output>) {
-    let spi = SPI_DEV.expect("SPI device not initialized");
-
-    // --- Step 1: Send RAMWR command (0x2C) ---
-    dc.set_low().unwrap(); // Command mode
-
-    let cmd = [0x2C];
-    let mut trans_cmd: spi_transaction_t = core::mem::zeroed();
-    trans_cmd.length = 8; // bits
-    trans_cmd.__bindgen_anon_1.tx_buffer = cmd.as_ptr() as *const _;
-
-    esp!(spi_device_transmit(spi, &mut trans_cmd)).unwrap();
-
-    // --- Step 2: Send pixel data ---
-    dc.set_high().unwrap(); // Data mode
-
-    let byte_len = framebuffer.len() * 2;
-    let mut trans_data: spi_transaction_t = core::mem::zeroed();
-    trans_data.length = (byte_len * 8) as usize; // bits
-    trans_data.__bindgen_anon_1.tx_buffer = framebuffer.as_ptr() as *const _;
-
-    esp!(spi_device_transmit(spi, &mut trans_data)).unwrap();
-}
-
 pub struct Esp32LvglBackend;
 
 static INIT: Once = Once::new();
 
+pub unsafe fn write_cmd(cmd: u8) {
+    handle_spi(false, &cmd as *const u8, 1);
+}
+
+pub unsafe fn write_data(data: &[u8]) {
+    handle_spi(true, data.as_ptr(), data.len());
+}
+
+pub unsafe fn init_st7789vw() {
+    write_cmd(0x01); // Software reset
+    FreeRtos::delay_ms(150);
+
+    write_cmd(0x11); // Sleep out
+    FreeRtos::delay_ms(500);
+
+    write_cmd(0x36); // MADCTL: Memory Access Control
+    write_data(&[0x00]); // Try 0x00, 0x70, 0xC0 for orientation tweaks
+
+    write_cmd(0x3A); // COLMOD: Pixel Format Set
+    write_data(&[0x05]); // 16-bit/pixel
+
+    write_cmd(0xB2); // Porch Setting
+    write_data(&[0x0C, 0x0C, 0x00, 0x33, 0x33]);
+
+    write_cmd(0xB7); // Gate Control
+    write_data(&[0x35]);
+
+    write_cmd(0xBB); // VCOM Setting
+    write_data(&[0x19]);
+
+    write_cmd(0xC0); // Power Control 1
+    write_data(&[0x2C]);
+
+    write_cmd(0xC2); // VDV and VRH Control
+    write_data(&[0x01]);
+
+    write_cmd(0xC3); // VRH Set
+    write_data(&[0x12]);
+
+    write_cmd(0xC4); // VDV Set
+    write_data(&[0x20]);
+
+    write_cmd(0xC6); // Frame Rate Control in Normal Mode
+    write_data(&[0x0F]);
+
+    write_cmd(0xD0); // Power Control 2
+    write_data(&[0xA4, 0xA1]);
+
+    write_cmd(0xE0); // Positive Gamma Correction
+    write_data(&[
+        0xD0, 0x08, 0x11, 0x08, 0x0C, 0x15, 0x39, 0x33, 0x50, 0x36, 0x13, 0x14, 0x29, 0x2D,
+    ]);
+
+    write_cmd(0xE1); // Negative Gamma Correction
+    write_data(&[
+        0xD0, 0x08, 0x10, 0x08, 0x06, 0x06, 0x39, 0x44, 0x51, 0x0B, 0x16, 0x14, 0x2F, 0x31,
+    ]);
+
+    write_cmd(0x21); // Display inversion ON (optional but improves colors)
+    write_cmd(0x2A);
+    write_data(&[0x00, 0x00, 0x00, 0xEF]); // CASET: 0–239
+    write_cmd(0x2B);
+    write_data(&[0x00, 0x00, 0x01, 0x3F]); // RASET: 0–319
+    write_cmd(0x29); // Display ON
+    FreeRtos::delay_ms(100);
+}
+
 impl LvglBackend for Esp32LvglBackend {
     fn setup_ui(&self) {
         INIT.call_once(|| unsafe {
+            let peripherals = Peripherals::take().unwrap();
+            let mut rst = PinDriver::output(peripherals.pins.gpio4).unwrap();
+            rst.set_low().unwrap(); // assert reset
+            FreeRtos::delay_ms(20);
+            rst.set_high().unwrap(); // release reset
+            FreeRtos::delay_ms(120); // allow display to stabilize
+
+            let dc_pin = PinDriver::output(peripherals.pins.gpio2).unwrap();
+
+            // 💥 Assign to the OnceLock properly
+            DC_PIN.set(Mutex::new(dc_pin));
+
             init_spi_bus();
+            init_st7789vw();
+
+            write_cmd(0x2C);
+            let red_pixel = [0xF8, 0x00];
+            for _ in 0..(240 * 240) {
+                write_data(&red_pixel);
+            }
+
             amnio_bindings::lvgl_setup();
-            spawn_lvgl_timer_task();
         });
     }
 
     fn update_ui(&self) {
         unsafe {
             amnio_bindings::lvgl_update();
-
-            // Convert framebuffer to slice
-            let fb_ptr = amnio_bindings::get_lvgl_framebuffer();
-            let fb_len = (amnio_bindings::get_lvgl_display_width()
-                * amnio_bindings::get_lvgl_display_height()) as usize;
-            let framebuffer: &[u16] = core::slice::from_raw_parts(fb_ptr, fb_len);
-
-            // Re-acquire peripherals and configure DC pin
-            let peripherals = Peripherals::take().unwrap();
-            let dc_pin = PinDriver::output(peripherals.pins.gpio2).unwrap();
-
-            // Note: dc_pin needs to be mutable, so make it `mut`
-            let mut dc_pin = dc_pin;
-
-            flush_st7789(framebuffer, &mut dc_pin);
         }
     }
 }

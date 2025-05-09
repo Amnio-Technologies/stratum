@@ -1,55 +1,54 @@
-use esp_idf_hal::{delay::FreeRtos, gpio::*, prelude::Peripherals};
+use std::mem::MaybeUninit;
+
+use esp_idf_sys::{esp, spi_device_transmit, spi_transaction_t};
 use lvgl_backend::Esp32LvglBackend;
-use stratum_ui_common::{amnio_bindings, lvgl_backend::LvglBackend};
+use stratum_ui_common::{
+    amnio_bindings::{self, ui_spi_send_cb_t},
+    lvgl_backend::LvglBackend,
+};
 
 mod lvgl_backend;
 mod stratum_lvgl_ui;
 
-pub struct LvglBuffer {
-    buffer: Box<[u16]>,
-}
+#[no_mangle]
+unsafe extern "C" fn handle_spi(is_data: bool, data: *const u8, len: usize) {
+    let slice = core::slice::from_raw_parts(data, len);
+    // println!("SPI {}: {:?}", if is_data { "DATA" } else { "CMD" }, slice);
+    // let spi = *SPI_HANDLE.get(); // it's just a raw pointer now
+    let spi = lvgl_backend::SPI_DEV.unwrap();
+    let mut dc = lvgl_backend::DC_PIN.get().unwrap().lock().unwrap();
 
-impl LvglBuffer {
-    pub fn new() -> Self {
-        let byte_size = unsafe { amnio_bindings::lvgl_get_required_framebuffer_size() as usize };
-        let word_len = byte_size / core::mem::size_of::<u16>();
-
-        let buffer = vec![0u16; word_len].into_boxed_slice();
-
-        unsafe {
-            amnio_bindings::lvgl_register_external_buffer(buffer.as_ptr() as *mut u16, byte_size);
-        }
-
-        Self { buffer }
+    // 3a) set DC pin
+    if is_data {
+        dc.set_high().unwrap();
+    } else {
+        dc.set_low().unwrap();
     }
 
-    pub fn as_slice(&self) -> &[u16] {
-        &self.buffer
-    }
+    // 3b) build an esp-idf transaction
+    let mut trans: spi_transaction_t = MaybeUninit::zeroed().assume_init();
+    trans.length = (len * 8) as usize;
+    trans.__bindgen_anon_1.tx_buffer = data as *const _;
 
-    pub fn as_mut_ptr(&mut self) -> *mut u16 {
-        self.buffer.as_mut_ptr()
-    }
+    // 3c) send it!
+    esp!(spi_device_transmit(spi, &mut trans)).unwrap();
 }
 
 fn main() {
     esp_idf_svc::sys::link_patches();
-    let peripherals = Peripherals::take().unwrap();
-
-    let mut led = PinDriver::output(peripherals.pins.gpio2).unwrap();
-    const DELAY: u32 = 500;
 
     let backend = Esp32LvglBackend;
-    LvglBuffer::new();
+    let cb: ui_spi_send_cb_t = Some(handle_spi);
+    unsafe {
+        amnio_bindings::lvgl_register_spi_send_cb(cb);
+    }
     backend.setup_ui();
-    let free = unsafe { esp_idf_sys::heap_caps_get_free_size(esp_idf_sys::MALLOC_CAP_DEFAULT) };
-    println!("Free heap: {}", free);
 
     loop {
         backend.update_ui();
-        led.set_high().unwrap();
-        FreeRtos::delay_ms(DELAY);
-        led.set_low().unwrap();
-        FreeRtos::delay_ms(DELAY);
+        // led.set_high().unwrap();
+        // FreeRtos::delay_ms(DELAY);
+        // led.set_low().unwrap();
+        // FreeRtos::delay_ms(DELAY);
     }
 }
