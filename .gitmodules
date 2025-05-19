@@ -1,3 +1,3 @@
-[submodule "ui/stratum-ui/lvgl"]
-	path = ui/stratum-ui/lvgl
+[submodule "stratum-ui/include/lvgl"]
+	path = stratum-ui/include/lvgl
 	url = https://github.com/lvgl/lvgl.git
