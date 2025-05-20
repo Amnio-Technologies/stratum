@@ -8,7 +8,7 @@ Unlike traditional battery packs, Stratum is:
 * 🔋 **Cell-Swappable** – Open the enclosure and drop in new 18650 cells, no soldering or teardown required.
 * 🧠 **Smart** – Real-time diagnostics, per-cell health monitoring, and intelligent charge/discharge management via the onboard ESP32-S3.
 * 🛡️ **Safe** – Includes active balancing, thermal monitoring, and hard cutoff protection for sketchy cells.
-* 📟 **Readable** – Comes with a compact OLED or e-ink display for live stats: voltages, currents, cell health, and more.
+* 📟 **Readable** – Comes with a compact high resolution 2" display for live stats: voltages, currents, cell health, and more.
 
 Stratum is part of a broader vision at Amnio: making serious electronics tools **open, modular, and repairable** for anyone who's sick of black-box gear.
 
