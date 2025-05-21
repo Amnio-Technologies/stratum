@@ -1,7 +1,15 @@
 import os
+import argparse
+from pathlib import Path
 
-FONT_DIR = "src/fonts"
-HEADER_DIR = "include/fonts"
+# --- Argument Parsing ---
+parser = argparse.ArgumentParser()
+parser.add_argument("--no-cache", action="store_true", help="Disable header generation cache")
+args = parser.parse_args()
+USE_CACHE = not args.no_cache
+
+FONT_DIR = Path("src/fonts")
+HEADER_DIR = Path("include/fonts")
 HEADER_TEMPLATE = '''#pragma once
 
 #include "lvgl.h"
@@ -9,14 +17,16 @@ HEADER_TEMPLATE = '''#pragma once
 extern const lv_font_t {font_name};
 '''
 
-os.makedirs(HEADER_DIR, exist_ok=True)
+HEADER_DIR.mkdir(parents=True, exist_ok=True)
 
-for filename in os.listdir(FONT_DIR):
-    if filename.endswith(".c"):
-        font_basename = os.path.splitext(filename)[0]
-        header_path = os.path.join(HEADER_DIR, f"{font_basename}.h")
+for c_file in FONT_DIR.glob("*.c"):
+    font_basename = c_file.stem
+    header_path = HEADER_DIR / f"{font_basename}.h"
 
-        with open(header_path, "w") as f:
-            f.write(HEADER_TEMPLATE.format(font_name=font_basename))
+    if USE_CACHE and header_path.exists() and header_path.stat().st_mtime >= c_file.stat().st_mtime:
+        print(f"✅ Skipping {header_path.name} (cached)")
+        continue
 
-        print(f"✅ Created header: {header_path}")
+    with open(header_path, "w") as f:
+        f.write(HEADER_TEMPLATE.format(font_name=font_basename))
+    print(f"📝 Created header: {header_path.name}")

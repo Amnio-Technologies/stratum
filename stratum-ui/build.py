@@ -19,7 +19,9 @@ EXPORT_SH = Path.home() / "export-esp.sh"
 # -------- Parse Args --------
 target = "desktop"
 build_type = "Debug"
+
 args = sys.argv[1:]
+no_cache = "--no-cache" in args
 if "--target" in args:
     t = args[args.index("--target") + 1]
     if t in ("desktop", "firmware"):
@@ -41,10 +43,14 @@ if target == "firmware":
 # -------- Generate Fonts --------
 for script in (FONT_C_GEN, FONT_H_GEN):
     print(f"📁 Running {script}...")
-    r = subprocess.run(["python3", script], cwd=PROJECT_ROOT)
+    cmd = ["python3", script]
+    if no_cache:
+        cmd.append("--no-cache")
+    r = subprocess.run(cmd, cwd=PROJECT_ROOT)
     if r.returncode != 0:
         print(f"❌ {script} failed.")
         sys.exit(1)
+
 
 # -------- Prepare Build Dir --------
 build_dir = PROJECT_ROOT / "build" / target
