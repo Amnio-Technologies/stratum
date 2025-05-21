@@ -8,9 +8,8 @@ bindgen = "0.71.1"
 cc = "1.2.16"
 
 [dependencies]
-egui_sdl2_gl = "0.31.0"
-sdl2 = "0.37.0"
 egui = "0.31.1"
+eframe = "0.31.1"
 env_logger = "0.11.7"
 log = "0.4.26"
 amnio-firmware = { path = "../firmware" }

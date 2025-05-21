@@ -99,8 +99,6 @@ pub const _CRT_INTERNAL_PRINTF_STANDARD_ROUNDING: u32 = 32;
 pub const _CRT_INTERNAL_SCANF_SECURECRT: u32 = 1;
 pub const _CRT_INTERNAL_SCANF_LEGACY_WIDE_SPECIFIERS: u32 = 2;
 pub const _CRT_INTERNAL_SCANF_LEGACY_MSVCRT_COMPATIBILITY: u32 = 4;
-pub const _CRT_INTERNAL_LOCAL_PRINTF_OPTIONS: u32 = 36;
-pub const _CRT_INTERNAL_LOCAL_SCANF_OPTIONS: u32 = 2;
 pub const BUFSIZ: u32 = 512;
 pub const _NSTREAM_: u32 = 512;
 pub const _IOB_ENTRIES: u32 = 20;
@@ -235,6 +233,12 @@ pub type int_fast64_t = ::std::os::raw::c_longlong;
 pub type uint_fast64_t = ::std::os::raw::c_ulonglong;
 pub type intmax_t = ::std::os::raw::c_longlong;
 pub type uintmax_t = ::std::os::raw::c_ulonglong;
+unsafe extern "C" {
+    pub fn __local_stdio_printf_options() -> *mut ::std::os::raw::c_ulonglong;
+}
+unsafe extern "C" {
+    pub fn __local_stdio_scanf_options() -> *mut ::std::os::raw::c_ulonglong;
+}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _iobuf {
@@ -372,13 +376,36 @@ unsafe extern "C" {
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[link_name = "\u{1}vsscanf"]
+    pub fn __ms_vsscanf(
+        _Str: *const ::std::os::raw::c_char,
+        _Format: *const ::std::os::raw::c_char,
+        argp: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
     pub fn __ms_scanf(_Format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[link_name = "\u{1}vscanf"]
+    pub fn __ms_vscanf(
+        _Format: *const ::std::os::raw::c_char,
+        argp: va_list,
+    ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
     pub fn __ms_fscanf(
         _File: *mut FILE,
         _Format: *const ::std::os::raw::c_char,
         ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[link_name = "\u{1}vfscanf"]
+    pub fn __ms_vfscanf(
+        _File: *mut FILE,
+        _Format: *const ::std::os::raw::c_char,
+        argp: va_list,
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
@@ -416,6 +443,22 @@ unsafe extern "C" {
         arg1: *mut ::std::os::raw::c_char,
         arg2: *const ::std::os::raw::c_char,
         arg3: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_snprintf(
+        arg1: *mut ::std::os::raw::c_char,
+        arg2: usize,
+        arg3: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_vsnprintf(
+        arg1: *mut ::std::os::raw::c_char,
+        arg2: usize,
+        arg3: *const ::std::os::raw::c_char,
+        arg4: va_list,
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
@@ -795,10 +838,30 @@ unsafe extern "C" {
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[link_name = "\u{1}vswscanf"]
+    pub fn __ms_vswscanf(
+        _Src: *const wchar_t,
+        _Format: *const wchar_t,
+        arg1: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
     pub fn __ms_wscanf(_Format: *const wchar_t, ...) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[link_name = "\u{1}vwscanf"]
+    pub fn __ms_vwscanf(_Format: *const wchar_t, arg1: va_list) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
     pub fn __ms_fwscanf(_File: *mut FILE, _Format: *const wchar_t, ...) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[link_name = "\u{1}vfwscanf"]
+    pub fn __ms_vfwscanf(
+        _File: *mut FILE,
+        _Format: *const wchar_t,
+        arg1: va_list,
+    ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
     pub fn __ms_fwprintf(_File: *mut FILE, _Format: *const wchar_t, ...) -> ::std::os::raw::c_int;
@@ -826,6 +889,22 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn __ms_vswprintf(
+        arg1: *mut wchar_t,
+        arg2: usize,
+        arg3: *const wchar_t,
+        arg4: va_list,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_snwprintf(
+        arg1: *mut wchar_t,
+        arg2: usize,
+        arg3: *const wchar_t,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn __ms_vsnwprintf(
         arg1: *mut wchar_t,
         arg2: usize,
         arg3: *const wchar_t,
