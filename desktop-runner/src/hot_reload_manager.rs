@@ -159,16 +159,20 @@ impl HotReloadManager {
         println!("👁️ Hot reload watcher started.");
     }
 
-    /// Runs build.py --dynamic and reloads the plugin if successful
-    pub fn rebuild_and_reload(&mut self) -> Result<(), String> {
-        // determine extension
-        let ext = if cfg!(target_os = "windows") {
+    fn dylib_file_ext() -> &'static str {
+        if cfg!(target_os = "windows") {
             "dll"
         } else if cfg!(target_os = "macos") {
             "dylib"
         } else {
             "so"
-        };
+        }
+    }
+
+    /// Runs build.py --dynamic and reloads the plugin if successful
+    pub fn rebuild_and_reload(&mut self) -> Result<(), String> {
+        // determine extension
+        let ext = Self::dylib_file_ext();
 
         // generate reload filename
         let timestamp = Local::now().format("%Y%m%d_%H%M%S");
@@ -213,13 +217,8 @@ impl HotReloadManager {
             .parent()
             .expect("Hot reload plugin path should point to a file within a directory");
 
-        let pattern = if cfg!(windows) {
-            "libstratum-ui*.dll"
-        } else if cfg!(target_os = "macos") {
-            "libstratum-ui*.dylib"
-        } else {
-            "libstratum-ui*.so"
-        };
+        let ext = Self::dylib_file_ext();
+        let pattern = format!("libstratum-ui*.{ext}");
 
         let mut builds: Vec<_> = glob::glob(&format!("{}/{}", parent.display(), pattern))
             .unwrap()
