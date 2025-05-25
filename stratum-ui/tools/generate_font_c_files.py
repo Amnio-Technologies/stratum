@@ -2,6 +2,10 @@ import subprocess
 from pathlib import Path
 import argparse
 
+import io
+import sys
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+
 # --- Argument Parsing ---
 parser = argparse.ArgumentParser()
 parser.add_argument("--no-cache", action="store_true", help="Disable font generation cache")

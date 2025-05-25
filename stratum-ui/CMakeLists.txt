@@ -3,7 +3,14 @@ project(stratum-ui C)
 
 # -------- Options --------
 set(STRATUM_TARGET "desktop" CACHE STRING "Build target: desktop or firmware")
+option(STRATUM_BUILD_DYNAMIC "Build shared library (.so/.dll) instead of static" OFF)
+set(STRATUM_OUTPUT_NAME "" CACHE STRING "Override output library name (no extension)")
+
 message(STATUS "🎯 Building for: ${STRATUM_TARGET}")
+message(STATUS "🔗 Dynamic Linking Enabled: ${STRATUM_BUILD_DYNAMIC}")
+if (STRATUM_OUTPUT_NAME)
+    message(STATUS "📛 Custom Output Name: ${STRATUM_OUTPUT_NAME}")
+endif()
 
 # -------- Platform-specific flags --------
 if(STRATUM_TARGET STREQUAL "desktop")
@@ -29,23 +36,46 @@ file(GLOB FONT_SOURCES
 add_definitions(-DLV_CONF_INCLUDE_SIMPLE)
 
 # -------- Include Directories --------
-include_directories(
-    ${PROJECT_SOURCE_DIR}/include           # stratum_ui.h, extern_log.h, lv_conf.h
-    ${PROJECT_SOURCE_DIR}/include/lvgl      # LVGL headers
-    ${PROJECT_SOURCE_DIR}/fonts             # generated font headers
-    ${PROJECT_SOURCE_DIR}/src/fonts         # generated font C sources
-    ${CMAKE_SOURCE_DIR}/../../common/include  # Rust-generated headers
+include_directories(                       
+    ${PROJECT_SOURCE_DIR}/include            # stratum_ui.h, extern_log.h, lv_conf.h
+    ${PROJECT_SOURCE_DIR}/include/lvgl       # LVGL headers
+    ${PROJECT_SOURCE_DIR}/fonts              # generated font headers
+    ${PROJECT_SOURCE_DIR}/src/fonts          # generated font C sources
+    ${CMAKE_SOURCE_DIR}/../../common/include # Rust-generated headers
 )
 
-# -------- Library --------
-add_library(stratum-ui STATIC
-    ${PROJECT_SOURCE_DIR}/src/stratum_ui.c
-    ${PROJECT_SOURCE_DIR}/src/extern_log.c
-    ${FONT_SOURCES}
-    ${LVGL_SOURCES}
-)
+# -------- Separate LVGL build --------
+add_library(lvgl_objs OBJECT ${LVGL_SOURCES})
+set_property(TARGET lvgl_objs PROPERTY POSITION_INDEPENDENT_CODE ON)
 
-# -------- Properties --------
-set_property(TARGET stratum-ui PROPERTY POSITION_INDEPENDENT_CODE ON)
+# -------- stratum-ui Library --------
+set(LIB_NAME stratum-ui)
+if(STRATUM_OUTPUT_NAME)
+    set(LIB_NAME "${STRATUM_OUTPUT_NAME}")
+endif()
+
+if(STRATUM_BUILD_DYNAMIC)
+    add_library(${LIB_NAME} SHARED
+        ${PROJECT_SOURCE_DIR}/src/stratum_ui.c
+        ${PROJECT_SOURCE_DIR}/src/extern_log.c
+        ${FONT_SOURCES}
+        $<TARGET_OBJECTS:lvgl_objs>
+    )
+else()
+    add_library(${LIB_NAME} STATIC
+        ${PROJECT_SOURCE_DIR}/src/stratum_ui.c
+        ${PROJECT_SOURCE_DIR}/src/extern_log.c
+        ${FONT_SOURCES}
+        $<TARGET_OBJECTS:lvgl_objs>
+    )
+endif()
+
+# Windows: export all symbols automatically for DLLs
+if(WIN32 AND STRATUM_BUILD_DYNAMIC)
+    set_target_properties(${LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
+endif()
+
+# Required for shared object safety
+set_property(TARGET ${LIB_NAME} PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 message(STATUS "📦 CMake Build Type: ${CMAKE_BUILD_TYPE}")

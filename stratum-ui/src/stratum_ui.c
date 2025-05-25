@@ -101,8 +101,9 @@ AMNIO_API void lvgl_setup(void)
     lv_example_get_started_1();
 }
 
-AMNIO_API void lvgl_update(void)
+AMNIO_API void lvgl_update(uint32_t dt_ms)
 {
+    lv_tick_inc(dt_ms);
     lv_timer_handler();
 }
 
@@ -121,11 +122,6 @@ AMNIO_API uint32_t get_lvgl_display_height(void)
     return LVGL_SCREEN_HEIGHT;
 }
 
-AMNIO_API void lvgl_advance_timer(uint32_t dt_ms)
-{
-    lv_tick_inc(dt_ms);
-}
-
 AMNIO_API size_t lvgl_get_required_framebuffer_size(void)
 {
     return LVGL_SCREEN_WIDTH * LVGL_SCREEN_HEIGHT * sizeof(uint16_t);
@@ -134,12 +130,15 @@ AMNIO_API size_t lvgl_get_required_framebuffer_size(void)
 AMNIO_API void lvgl_register_external_buffer(uint16_t *buffer, size_t buffer_bytes)
 {
     size_t expected = lvgl_get_required_framebuffer_size();
+    ui_logf(LOG_INFO, "attempting to register buffer: %p", buffer);
+
     if (buffer_bytes < expected)
     {
         ui_logf(LOG_ERROR, "Buffer too small! Need at least %zu bytes.", expected);
         // abort();
         return;
     }
+    ui_logf(LOG_INFO, "registered buffer: %p", buffer);
 
     lvgl_framebuffer = buffer;
     lvgl_buffer_bytes = buffer_bytes;

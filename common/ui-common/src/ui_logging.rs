@@ -1,10 +1,9 @@
+use crate::amnio_bindings::{self, register_ui_log_callback};
 use std::ffi::CStr;
-use std::sync::mpsc::{self, Sender};
-use std::sync::{Arc, Mutex, OnceLock};
-use std::thread;
+use std::os::raw::{c_char, c_void};
+use std::sync::{Arc, Mutex};
 
-use log::{error, info, warn};
-
+/// Mirror the C enum exactly.
 #[repr(C)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum LogLevel {
@@ -15,58 +14,61 @@ pub enum LogLevel {
     Error = 4,
 }
 
-const MAX_LOGS: usize = 10_000;
-
-lazy_static::lazy_static! {
-    pub static ref UI_LOGS: Arc<Mutex<Vec<String>>> = Arc::new(Mutex::new(vec![]));
+/// Holds all logger state, including a cap on retained entries.
+pub struct UiLogger {
+    logs: Mutex<Vec<String>>,
+    max_logs: usize,
 }
 
-static UI_LOG_SENDER: OnceLock<Sender<String>> = OnceLock::new();
+impl UiLogger {
+    /// Creates the logger, registers the C callback, and returns a shared handle.
+    pub fn new(max_logs: usize) -> Arc<Self> {
+        let logger = Arc::new(UiLogger {
+            logs: Mutex::new(Vec::with_capacity(max_logs)),
+            max_logs,
+        });
 
-/// Background thread to move logs from C into UI_LOGS safely
-pub fn start_ui_log_worker() {
-    info!("UI log worker initialized");
-
-    let (tx, rx) = mpsc::channel();
-    let result = UI_LOG_SENDER.set(tx);
-
-    match result {
-        Ok(_) => info!("UI_LOG_SENDER set successfully"),
-        Err(_) => warn!("UI_LOG_SENDER was already set!"),
-    }
-
-    thread::spawn(move || {
-        info!("Log worker thread started");
-
-        while let Ok(log) = rx.recv() {
-            if let Ok(mut logs) = UI_LOGS.lock() {
-                if logs.len() >= MAX_LOGS {
-                    logs.remove(0); // Remove the oldest log to maintain limit
-                }
-                logs.push(log);
-            }
+        // Pass an Arc pointer as `user_data`; callback recovers it.
+        let user_data = Arc::into_raw(logger.clone()) as *mut c_void;
+        unsafe {
+            register_ui_log_callback(Some(ui_log_callback), user_data);
         }
 
-        info!("Log worker thread shutting down");
-    });
+        logger
+    }
+
+    /// Grab a snapshot of all logs so far and clear the buffer.
+    pub fn take_logs(&self) -> Vec<String> {
+        let mut guard = self.logs.lock().unwrap();
+        std::mem::take(&mut *guard)
+    }
 }
 
-/// Expose logging function to C (non-blocking)
-#[no_mangle]
-pub extern "C" fn ui_log(level: LogLevel, msg: *const std::ffi::c_char) {
-    if msg.is_null() {
+/// Function pointer C will call.
+/// Reconstructs the Arc, bumps the refcount, then forgets the original.
+unsafe extern "C" fn ui_log_callback(
+    user_data: *mut c_void,
+    level: amnio_bindings::LogLevel,
+    msg: *const c_char,
+) {
+    if user_data.is_null() || msg.is_null() {
         return;
     }
 
-    let msg = unsafe { CStr::from_ptr(msg) }.to_string_lossy().to_string();
-    let formatted_msg = format!("[{:?}] {}", level, msg);
+    // Recover Arc<UiLogger>
+    let arc = unsafe { Arc::from_raw(user_data as *const UiLogger) };
+    let logger = arc.clone(); // bump reference count
+    std::mem::forget(arc); // avoid dropping the original
 
-    match UI_LOG_SENDER.get() {
-        Some(sender) => {
-            let _ = sender.send(formatted_msg);
-        }
-        None => {
-            error!("UI_LOG_SENDER is still None! Did start_ui_log_worker() run?");
-        }
+    // Convert C string
+    let s = unsafe { CStr::from_ptr(msg) }
+        .to_string_lossy()
+        .into_owned();
+
+    // Push into buffer with rotation
+    let mut logs = logger.logs.lock().unwrap();
+    if logs.len() >= logger.max_logs {
+        logs.remove(0);
     }
+    logs.push(format!("[{:?}] {}", level, s));
 }

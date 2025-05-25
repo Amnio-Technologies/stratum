@@ -1,31 +1,36 @@
+use std::{pin::Pin, slice};
+
 use egui::{ColorImage, TextureHandle, TextureOptions};
-use stratum_ui_common::lvgl_backend::LvglBackend;
+use stratum_ui_common::{amnio_bindings, lvgl_backend::LvglBackend};
 
 use crate::lvgl_backend::DesktopLvglBackend;
-static mut DESKTOP_LVGL_BACKEND: DesktopLvglBackend = DesktopLvglBackend;
 
 pub struct StratumLvglUI {
-    lvgl_renderer: LvglRenderer,
+    backend: Pin<Box<DesktopLvglBackend>>,
+    renderer: LvglRenderer,
 }
 
 impl StratumLvglUI {
     pub fn new() -> Self {
-        unsafe {
-            DESKTOP_LVGL_BACKEND.setup_ui();
-        }
+        let mut backend = Box::pin(DesktopLvglBackend::new());
+        // safe: backend is now heap-pinned, won’t move after this
+        backend.as_mut().get_mut().setup_ui();
 
         Self {
-            lvgl_renderer: LvglRenderer::new(),
+            backend,
+            renderer: LvglRenderer::new(),
         }
     }
 
-    pub fn update(&mut self, egui_ctx: &egui::Context) -> Option<&TextureHandle> {
-        unsafe {
-            DESKTOP_LVGL_BACKEND.update_ui();
-        }
-        self.lvgl_renderer.update_lvgl_framebuffer(egui_ctx);
+    pub fn update(&mut self, ctx: &egui::Context) -> Option<&TextureHandle> {
+        // 1) Let LVGL run timers & tasks
+        self.backend.as_mut().get_mut().update_ui();
 
-        self.lvgl_renderer.get_texture()
+        // 2) Grab a fresh read-only view and upload it
+        self.backend
+            .with_framebuffer(|fb| self.renderer.render_lvgl_framebuffer(fb, ctx));
+
+        self.renderer.get_texture()
     }
 }
 
@@ -39,19 +44,20 @@ impl LvglRenderer {
     }
 
     /// Converts LVGL's RGB565 framebuffer to RGBA and uploads to GPU
-    fn update_lvgl_framebuffer(&mut self, egui_ctx: &egui::Context) {
+    fn render_lvgl_framebuffer(&mut self, frame_buffer: &[u16], egui_ctx: &egui::Context) {
         unsafe {
-            let (fb, width, height) = match DESKTOP_LVGL_BACKEND.get_framebuffer() {
-                Some(fb) => fb,
-                None => {
-                    eprintln!("🛑 LVGL framebuffer is null! Skipping update.");
-                    return;
-                }
-            };
-
+            let (width, height) = (
+                amnio_bindings::get_lvgl_display_width() as usize,
+                amnio_bindings::get_lvgl_display_height() as usize,
+            );
             let mut rgba_data = vec![0u8; width * height * 4];
 
-            for (i, &pixel) in fb.iter().enumerate() {
+            let fb_ptr = unsafe { amnio_bindings::get_lvgl_framebuffer() };
+            let fb: &mut [u16] = unsafe { slice::from_raw_parts_mut(fb_ptr, width * height) };
+
+            // dbg!(&fb);
+
+            for (i, &pixel) in frame_buffer.iter().enumerate() {
                 let r = ((pixel >> 11) & 0x1F) << 3;
                 let g = ((pixel >> 5) & 0x3F) << 2;
                 let b = (pixel & 0x1F) << 3;

@@ -1,11 +1,13 @@
 use eframe::{egui, CreationContext, Frame};
 use egui::TextureHandle;
+use std::sync::Arc;
 
 use crate::{
     debug_ui,
     state::{update_fps, UiState},
     stratum_lvgl_ui::StratumLvglUI,
 };
+use stratum_ui_common::ui_logging::UiLogger;
 
 pub struct StratumApp {
     ui_state: UiState,
@@ -15,10 +17,13 @@ pub struct StratumApp {
 }
 
 impl StratumApp {
-    pub fn new(_cc: &CreationContext<'_>) -> Self {
+    /// Now takes an Arc<UiLogger> and passes it into UiState
+    pub fn new(cc: &CreationContext<'_>, ui_logger: Arc<UiLogger>) -> Self {
+        let ui_state = UiState::new(cc, ui_logger);
+        let lvgl_ui = StratumLvglUI::new();
         Self {
-            ui_state: UiState::new(),
-            lvgl_ui: StratumLvglUI::new(),
+            ui_state,
+            lvgl_ui,
             lvgl_tex: None,
             last_frame_start: std::time::Instant::now(),
         }

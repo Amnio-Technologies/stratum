@@ -28,21 +28,22 @@ extern "C"
         LOG_ERROR = 4
     } LogLevel;
 
-    void ui_log(LogLevel level, const char *msg);
+    // Callback registration for UI logging
+    typedef void (*ui_log_cb_t)(void *user_data, LogLevel level, const char *msg);
+    AMNIO_API void register_ui_log_callback(ui_log_cb_t cb, void *user_data);
 
     AMNIO_API void lvgl_setup(void);
-    AMNIO_API void lvgl_update(void);
+    AMNIO_API void lvgl_update(uint32_t dt_ms);
     AMNIO_API uint16_t *get_lvgl_framebuffer(void);
     AMNIO_API uint32_t get_lvgl_display_width(void);
     AMNIO_API uint32_t get_lvgl_display_height(void);
-    AMNIO_API void lvgl_advance_timer(uint32_t dt_ms);
     AMNIO_API size_t lvgl_get_required_framebuffer_size(void);
     AMNIO_API void lvgl_register_external_buffer(uint16_t *buffer, size_t buffer_bytes);
 
-    /// SPI‐send callback type.  is_data==false → command, true → pixel data.
+    /// SPI-send callback type.  is_data==false → command, true → pixel data.
     typedef void (*ui_spi_send_cb_t)(bool is_data, const uint8_t *data, size_t len);
 
-    /// Called by LVGL’s flush_cb to push bytes out.  Must be registered
+    /// Called by LVGL's flush_cb to push bytes out.  Must be registered
     /// by the platform code *before* lvgl_setup().
     AMNIO_API void lvgl_register_spi_send_cb(ui_spi_send_cb_t cb);
 

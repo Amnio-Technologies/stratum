@@ -2,6 +2,10 @@ import os
 import argparse
 from pathlib import Path
 
+import io
+import sys
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+
 # --- Argument Parsing ---
 parser = argparse.ArgumentParser()
 parser.add_argument("--no-cache", action="store_true", help="Disable header generation cache")
