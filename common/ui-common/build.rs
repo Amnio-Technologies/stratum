@@ -325,16 +325,20 @@ fn generate_internal_api(bindings: &PathBuf, out_dir: &PathBuf) {
             #(#api_fields)*
         }
 
-        pub unsafe fn init_dynamic_bindings<P: AsRef<OsStr>>(lib_path: P) {
-            let lib = Library::new(lib_path)
-                .expect("Failed to load dynamic lib");
+        pub unsafe fn init_dynamic_bindings<P: AsRef<OsStr>>(lib_path: P) -> Result<(), String> {
+            let lib = Library::new(&lib_path)
+                .map_err(|e| format!("Failed to load dynamic lib: {e}"))?;
+
             let api = Api {
                 #(#api_loads)*
             };
+
             *API.write().unwrap() = Some(LoadedApi {
                 _lib: lib,
                 api
             });
+
+            Ok(())
         }
     };
 

@@ -13,7 +13,6 @@ pub struct StratumLvglUI {
 impl StratumLvglUI {
     pub fn new() -> Self {
         let mut backend = Box::pin(DesktopLvglBackend::new());
-        // safe: backend is now heap-pinned, won’t move after this
         backend.as_mut().get_mut().setup_ui();
 
         Self {
@@ -23,10 +22,8 @@ impl StratumLvglUI {
     }
 
     pub fn update(&mut self, ctx: &egui::Context) -> Option<&TextureHandle> {
-        // 1) Let LVGL run timers & tasks
         self.backend.as_mut().get_mut().update_ui();
 
-        // 2) Grab a fresh read-only view and upload it
         self.backend
             .with_framebuffer(|fb| self.renderer.render_lvgl_framebuffer(fb, ctx));
 
@@ -51,11 +48,6 @@ impl LvglRenderer {
                 amnio_bindings::get_lvgl_display_height() as usize,
             );
             let mut rgba_data = vec![0u8; width * height * 4];
-
-            let fb_ptr = unsafe { amnio_bindings::get_lvgl_framebuffer() };
-            let fb: &mut [u16] = unsafe { slice::from_raw_parts_mut(fb_ptr, width * height) };
-
-            // dbg!(&fb);
 
             for (i, &pixel) in frame_buffer.iter().enumerate() {
                 let r = ((pixel >> 11) & 0x1F) << 3;

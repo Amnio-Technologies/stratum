@@ -4,6 +4,7 @@ use std::sync::Arc;
 
 use crate::{
     debug_ui,
+    hot_reload_manager::SharedHotReloadManager,
     state::{update_fps, UiState},
     stratum_lvgl_ui::StratumLvglUI,
 };
@@ -17,10 +18,14 @@ pub struct StratumApp {
 }
 
 impl StratumApp {
-    /// Now takes an Arc<UiLogger> and passes it into UiState
-    pub fn new(cc: &CreationContext<'_>, ui_logger: Arc<UiLogger>) -> Self {
-        let ui_state = UiState::new(cc, ui_logger);
+    pub fn new(
+        cc: &CreationContext<'_>,
+        ui_logger: Arc<UiLogger>,
+        hot_reload_manager: SharedHotReloadManager,
+    ) -> Self {
+        let ui_state = UiState::new(cc, ui_logger, hot_reload_manager);
         let lvgl_ui = StratumLvglUI::new();
+
         Self {
             ui_state,
             lvgl_ui,
@@ -32,10 +37,8 @@ impl StratumApp {
 
 impl eframe::App for StratumApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut Frame) {
-        // ――― update LVGL & grab texture ―――
         self.lvgl_tex = self.lvgl_ui.update(ctx).cloned();
 
-        // ――― build UI ―――
         egui::CentralPanel::default().show(ctx, |ui| {
             ui.horizontal(|ui| {
                 draw_lvgl_canvas(ui, self.lvgl_tex.as_ref());
@@ -43,7 +46,6 @@ impl eframe::App for StratumApp {
             });
         });
 
-        // ――― FPS calc & continuous repaint ―――
         update_fps(&mut self.ui_state, &self.last_frame_start);
         self.last_frame_start = std::time::Instant::now();
         ctx.request_repaint(); // keep it real-time

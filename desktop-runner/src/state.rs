@@ -1,9 +1,12 @@
 // state.rs
 use amnio_firmware::modules::{module_manager::ModuleManager, system_controller::SystemController};
 use eframe::CreationContext;
+use std::path::PathBuf;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 use stratum_ui_common::ui_logging::UiLogger;
+
+use crate::hot_reload_manager::SharedHotReloadManager;
 
 /// Holds global UI state, including the LVGL renderer, modules, and logs.
 pub struct UiState {
@@ -17,13 +20,21 @@ pub struct UiState {
     /// Logger for UI messages (forwarded from C).
     pub ui_logger: Arc<UiLogger>,
 
+    pub hot_reload_manager: SharedHotReloadManager,
+
     /// Accumulated lines for debug display.
     pub log_buffer: Vec<String>,
+
+    pub selected_build: Option<PathBuf>,
 }
 
 impl UiState {
     /// Create a new UiState, registering the UI logger and initializing fields.
-    pub fn new(_cc: &CreationContext<'_>, ui_logger: Arc<UiLogger>) -> Self {
+    pub fn new(
+        _cc: &CreationContext<'_>,
+        ui_logger: Arc<UiLogger>,
+        hot_reload_manager: SharedHotReloadManager,
+    ) -> Self {
         UiState {
             enable_vsync: false,
             module_manager: ModuleManager::new(),
@@ -32,7 +43,9 @@ impl UiState {
             frame_counter: 0,
             last_fps_update: Instant::now(),
             ui_logger,
+            hot_reload_manager,
             log_buffer: Vec::new(),
+            selected_build: None,
         }
     }
 }

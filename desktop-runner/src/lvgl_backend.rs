@@ -1,8 +1,5 @@
-use std::{
-    cell::UnsafeCell,
-    thread,
-    time::{Duration, Instant},
-};
+use std::mem::size_of;
+use std::{cell::UnsafeCell, time::Instant};
 
 use stratum_ui_common::{amnio_bindings, lvgl_backend::LvglBackend};
 
@@ -10,17 +7,18 @@ const WIDTH: usize = 320;
 const HEIGHT: usize = 240;
 
 pub struct DesktopLvglBackend {
-    // May be mutated by LVGL at any time, must live in an UnsafeCell
     frame_buffer: UnsafeCell<[u16; WIDTH * HEIGHT]>,
+    last_update: Instant,
 }
 
-// Safety: it’s OK to share this across threads because LVGL is the only writer
+// Safety: LVGL is the only writer; we only expose shared references safely.
 unsafe impl Sync for DesktopLvglBackend {}
 
 impl DesktopLvglBackend {
     pub fn new() -> Self {
         Self {
             frame_buffer: UnsafeCell::new([0; WIDTH * HEIGHT]),
+            last_update: Instant::now(),
         }
     }
 
@@ -29,9 +27,8 @@ impl DesktopLvglBackend {
         self.frame_buffer.get() as *mut u16
     }
 
-    /// Provides a read-only snapshot of the current framebuffer
+    /// Read-only framebuffer snapshot.
     pub fn with_framebuffer<R>(&self, f: impl FnOnce(&[u16]) -> R) -> R {
-        // Safety: we create a fresh slice; it lives only inside `f`
         let slice = unsafe {
             core::slice::from_raw_parts(self.frame_buffer.get() as *const u16, WIDTH * HEIGHT)
         };
@@ -49,26 +46,17 @@ impl LvglBackend for DesktopLvglBackend {
             amnio_bindings::lvgl_setup();
         }
 
-        thread::spawn(move || {
-            let mut last_update = Instant::now();
-
-            loop {
-                let now = Instant::now();
-                let elapsed_ms = now.duration_since(last_update).as_millis() as u32;
-                last_update = now;
-
-                unsafe {
-                    amnio_bindings::lvgl_update(elapsed_ms);
-                }
-
-                thread::sleep(Duration::from_millis(5));
-            }
-        });
+        self.last_update = Instant::now(); // Reset timer
     }
 
     fn update_ui(&mut self) {
+        let now = Instant::now();
+        let dt = now.duration_since(self.last_update);
+        self.last_update = now;
+
+        let elapsed_ms = dt.as_millis().min(32) as u32; // Cap to ~30fps for stability
         unsafe {
-            // amnio_bindings::lvgl_update();
+            amnio_bindings::lvgl_update(elapsed_ms);
         }
     }
 }

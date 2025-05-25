@@ -17,3 +17,4 @@ stratum-ui-common = { path = "../common/ui-common", features = ["desktop"] }
 re_ui = "0.23.1"
 notify = "8.0.0"
 chrono = "0.4.41"
+glob = "0.3.2"

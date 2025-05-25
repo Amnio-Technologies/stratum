@@ -8,15 +8,16 @@ mod stratum_app;
 mod stratum_lvgl_ui;
 
 use hot_reload_manager::HotReloadManager;
-use std::sync::Arc;
+use std::sync::{Arc, Mutex};
 use std::{path::PathBuf, time::Duration};
 use stratum_ui_common::{amnio_bindings, ui_logging::UiLogger};
 fn main() {
     env_logger::init();
 
-    // Spin up our C→Rust logger with a 10_000-entry cap
+    // Spin up our C -> Rust logger with a 10_000-entry cap
     let ui_logger: Arc<UiLogger> = UiLogger::new(10_000);
-    let manager = HotReloadManager::new(
+
+    let hot_reload_manager = Arc::new(Mutex::new(HotReloadManager::new(
         PathBuf::from("../stratum-ui/build/desktop/libstratum-ui.dll"),
         PathBuf::from("../stratum-ui/build.py"),
         vec![
@@ -24,13 +25,9 @@ fn main() {
             PathBuf::from("../stratum-ui/include"),
         ],
         Duration::from_millis(300),
-    );
+    )));
 
-    manager.start();
-
-    unsafe {
-        amnio_bindings::init_dynamic_bindings("../stratum-ui/build/desktop/libstratum-ui.dll");
-    };
+    HotReloadManager::start(hot_reload_manager.clone());
 
     eframe::run_native(
         "amnIO Stratum Simulator",
@@ -40,6 +37,7 @@ fn main() {
             Ok(Box::new(stratum_app::StratumApp::new(
                 cc,
                 ui_logger.clone(),
+                hot_reload_manager,
             )))
         }),
     )

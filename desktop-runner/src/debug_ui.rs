@@ -81,33 +81,69 @@ pub fn create_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
     // ─── 🔥 Hot Reload Debugger Panel ───────────────────────────────
     ui.heading("🔥 Hot Reload Debugger");
 
-    // ui.add(Checkbox::new(
-    //     &mut ui_state.auto_reload_enabled,
-    //     "Auto Reload on .so Change",
-    // ));
+    let manager = &mut ui_state.hot_reload_manager.lock().unwrap();
 
-    // ui.horizontal(|ui| {
-    //     if ui.button("⟲ Reload Plugin").clicked() {
-    //         ui_state.request_reload = true;
-    //     }
+    ui.group(|ui| {
+        // Row: Auto reload toggle + max builds spinner
+        ui.horizontal(|ui| {
+            ui.checkbox(&mut manager.auto_reload, "Auto Reload on File Change");
 
-    //     if ui.button("⏪ Rollback Plugin").clicked() {
-    //         ui_state.request_rollback = true;
-    //     }
-    // });
+            ui.label("Max Builds to Keep:");
+            ui.add(
+                egui::DragValue::new(&mut manager.max_builds_to_keep)
+                    .range(1..=20)
+                    .speed(1),
+            );
+        });
 
-    // ui.label(format!("Plugin Path: {}", ui_state.plugin_path));
-    // ui.label(format!("Status: {}", ui_state.plugin_status));
-    // ui.label(format!("Last Reload: {}", ui_state.last_reload_time));
-    // ui.label(format!("ABI Hash: {}", ui_state.plugin_abi_hash));
+        ui.separator();
 
-    // ui.separator();
+        // Active plugin info
+        ui.group(|ui| {
+            ui.label(egui::RichText::new("📦 Active Plugin").strong());
 
-    // ui.heading("📄 Reload Log");
+            ui.label(format!("Status:        {}", manager.status));
+            ui.label(format!("Last Reloaded: {}", manager.last_reload_timestamp));
+            ui.label(format!("ABI Hash:      {}", manager.current_abi_hash));
+        });
 
-    // ScrollArea::vertical().max_height(120.0).show(ui, |ui| {
-    //     for entry in ui_state.reload_log.iter().rev().take(100).rev() {
-    //         ui.monospace(entry);
-    //     }
-    // });
+        ui.separator();
+
+        ui.label(egui::RichText::new("🧩 Available Builds").strong());
+
+        egui::ComboBox::from_id_salt("build_selector")
+            .width(ui.available_width())
+            .selected_text(manager.selected_build_display())
+            .show_ui(ui, |cb| {
+                for build in &manager.available_builds() {
+                    let label = if build.is_active {
+                        format!("{} [ACTIVE]", build.filename())
+                    } else {
+                        build.filename().clone()
+                    };
+
+                    cb.selectable_value(
+                        &mut ui_state.selected_build,
+                        Some(build.clone().path),
+                        label,
+                    );
+                }
+            });
+
+        if ui.button("Load Selected").clicked() {
+            if let Some(build_path) = &ui_state.selected_build {
+                manager.load_build(build_path.as_path());
+            }
+        }
+
+        ui.separator();
+
+        ui.label(egui::RichText::new("📜 Reload Log").strong());
+
+        ScrollArea::vertical().max_height(120.0).show(ui, |ui| {
+            for entry in manager.reload_log.iter().rev().take(100).rev() {
+                ui.label(egui::RichText::new(entry).monospace());
+            }
+        });
+    });
 }
