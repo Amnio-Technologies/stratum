@@ -16,7 +16,9 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 PROJECT_ROOT = Path(__file__).parent.resolve()
 FONT_C_GEN = "tools/generate_font_c_files.py"
 FONT_H_GEN = "tools/generate_font_headers.py"
-GENERATOR = "MinGW Makefiles"
+# Prefer Ninja if available
+GENERATOR = "Ninja" if shutil.which("ninja") else "MinGW Makefiles"
+
 
 ESP_IDF_PATH = Path.home() / "esp" / "esp-idf"
 TOOLCHAIN_FILE = ESP_IDF_PATH / "tools" / "cmake" / "toolchain-esp32.cmake"
@@ -122,7 +124,7 @@ else:
 # -------- End Timer --------
 elapsed = time.time() - build_start
 minutes = int(elapsed // 60)
-seconds = int(elapsed % 60)
+seconds = elapsed % 60
 
 # -------- Output Summary --------
 base_name = output_name if output_name else "stratum-ui"

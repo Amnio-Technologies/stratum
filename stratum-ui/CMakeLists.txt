@@ -1,6 +1,14 @@
 cmake_minimum_required(VERSION 3.16)
 project(stratum-ui C)
 
+# -------- Linker Optimization --------
+if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+    message(STATUS "⚡ Using LLD for faster linking")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=lld")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fuse-ld=lld")
+    set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -fuse-ld=lld")
+endif()
+
 # -------- Options --------
 set(STRATUM_TARGET "desktop" CACHE STRING "Build target: desktop or firmware")
 option(STRATUM_BUILD_DYNAMIC "Build shared library (.so/.dll) instead of static" OFF)

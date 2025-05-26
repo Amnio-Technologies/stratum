@@ -10,7 +10,8 @@ pacman -Syu --needed --noconfirm \
   mingw-w64-x86_64-cmake \
   mingw-w64-x86_64-gdb-multiarch \
   mingw-w64-x86_64-make \
-  mingw-w64-x86_64-nodejs
+  mingw-w64-x86_64-nodejs \
+  mingw-w64-x86_64-ninja
 
 # Git-based packages (need pacman-git or an AUR-like helper like `paru`, `yay`)
 pacman -Syu --needed --noconfirm \
