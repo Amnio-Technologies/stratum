@@ -1,7 +1,7 @@
 use std::pin::Pin;
 
 use egui::{ColorImage, TextureHandle, TextureOptions};
-use stratum_ui_common::{amnio_bindings, lvgl_backend::LvglBackend};
+use stratum_ui_common::{lvgl_backend::LvglBackend, stratum_ui_ffi};
 
 use crate::lvgl_backend::DesktopLvglBackend;
 
@@ -48,8 +48,8 @@ impl LvglRenderer {
     fn render_lvgl_framebuffer(&mut self, frame_buffer: &[u16], egui_ctx: &egui::Context) {
         let (width, height) = unsafe {
             (
-                amnio_bindings::get_lvgl_display_width() as usize,
-                amnio_bindings::get_lvgl_display_height() as usize,
+                stratum_ui_ffi::get_lvgl_display_width() as usize,
+                stratum_ui_ffi::get_lvgl_display_height() as usize,
             )
         };
 

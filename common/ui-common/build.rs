@@ -75,7 +75,7 @@ fn main() {
 
         commit_bindings(&bindings_src_dir, &bindings_src_file, &bindings_out_file);
 
-        generate_dynamic_exports(&bindings_out_file, &out_dir);
+        generate_dynamic_api(&bindings_out_file, &out_dir);
         generate_internal_api(&bindings_out_file, &out_dir);
     } else {
         copy_prebuilt_bindings(&bindings_src_file, &bindings_out_file);
@@ -215,7 +215,7 @@ fn commit_bindings(src_dir: &PathBuf, src: &PathBuf, out: &PathBuf) {
     println!("cargo:rerun-if-changed={}", src.display());
 }
 
-fn generate_dynamic_exports(bindings: &PathBuf, out_dir: &PathBuf) {
+fn generate_dynamic_api(bindings: &PathBuf, out_dir: &PathBuf) {
     use proc_macro2::TokenStream;
     use quote::quote;
     use syn::{File, FnArg, ForeignItem, Item, ItemForeignMod};
@@ -224,7 +224,7 @@ fn generate_dynamic_exports(bindings: &PathBuf, out_dir: &PathBuf) {
     let parsed: File = syn::parse_str(&src).unwrap();
 
     let mut out = String::new();
-    out.push_str("use crate::amnio_bindings::dynamic_overrides::internal_api::API;\n\n");
+    out.push_str("use crate::stratum_ui_ffi::dynamic_api::internal_api::API;\n\n");
 
     for item in parsed.items {
         if let Item::ForeignMod(ItemForeignMod { items, .. }) = item {
@@ -258,8 +258,8 @@ fn generate_dynamic_exports(bindings: &PathBuf, out_dir: &PathBuf) {
         }
     }
 
-    let dst = out_dir.join("dynamic_exports.rs");
-    fs::write(dst, out).expect("Failed to write dynamic_exports.rs");
+    let dst = out_dir.join("dynamic_api.rs");
+    fs::write(dst, out).expect("Failed to write dynamic_api.rs");
 }
 
 fn generate_internal_api(bindings: &PathBuf, out_dir: &PathBuf) {
@@ -312,7 +312,7 @@ fn generate_internal_api(bindings: &PathBuf, out_dir: &PathBuf) {
         use std::sync::RwLock;
         use libloading::Library;
         use std::ffi::OsStr;
-        use crate::amnio_bindings::*;
+        use crate::stratum_ui_ffi::*;
 
         pub static API: RwLock<Option<LoadedApi>> = RwLock::new(None);
 

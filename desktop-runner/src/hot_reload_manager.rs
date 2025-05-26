@@ -14,7 +14,7 @@ use std::{
     thread,
     time::{Duration, Instant},
 };
-use stratum_ui_common::amnio_bindings;
+use stratum_ui_common::stratum_ui_ffi;
 
 #[derive(Debug, Clone)]
 pub enum HotReloadStatus {
@@ -113,7 +113,7 @@ impl HotReloadManager {
         };
 
         unsafe {
-            amnio_bindings::init_dynamic_bindings(plugin_path).unwrap();
+            stratum_ui_ffi::init_dynamic_bindings(plugin_path).unwrap();
         }
 
         thread::spawn(move || {
@@ -245,13 +245,13 @@ impl HotReloadManager {
             self.status = HotReloadStatus::BuildFailed;
             return;
         }
+
         unsafe {
-            println!("tearing down");
-            // amnio_bindings::lvgl_teardown();
+            stratum_ui_ffi::lvgl_teardown();
         }
-        // Attempt to load the selected build
+
         unsafe {
-            match crate::amnio_bindings::init_dynamic_bindings(selected) {
+            match crate::stratum_ui_ffi::init_dynamic_bindings(selected) {
                 Ok(()) => {
                     self.plugin_path = selected.to_path_buf();
 

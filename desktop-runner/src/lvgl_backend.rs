@@ -1,7 +1,7 @@
 use std::mem::size_of;
 use std::{cell::UnsafeCell, time::Instant};
 
-use stratum_ui_common::{amnio_bindings, lvgl_backend::LvglBackend};
+use stratum_ui_common::{lvgl_backend::LvglBackend, stratum_ui_ffi};
 
 const WIDTH: usize = 320;
 const HEIGHT: usize = 240;
@@ -39,11 +39,11 @@ impl DesktopLvglBackend {
 impl LvglBackend for DesktopLvglBackend {
     fn setup_ui(&mut self) {
         unsafe {
-            amnio_bindings::lvgl_register_external_buffer(
+            stratum_ui_ffi::lvgl_register_external_buffer(
                 self.fb_ptr(),
                 WIDTH * HEIGHT * size_of::<u16>(),
             );
-            amnio_bindings::lvgl_setup();
+            stratum_ui_ffi::lvgl_setup();
         }
 
         self.last_update = Instant::now(); // Reset timer
@@ -56,7 +56,7 @@ impl LvglBackend for DesktopLvglBackend {
 
         let elapsed_ms = dt.as_millis().min(32) as u32; // Cap to ~30fps for stability
         unsafe {
-            amnio_bindings::lvgl_update(elapsed_ms);
+            stratum_ui_ffi::lvgl_update(elapsed_ms);
         }
     }
 }

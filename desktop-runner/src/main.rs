@@ -10,7 +10,7 @@ mod stratum_lvgl_ui;
 use hot_reload_manager::HotReloadManager;
 use std::sync::{Arc, Mutex};
 use std::{path::PathBuf, time::Duration};
-use stratum_ui_common::{amnio_bindings, ui_logging::UiLogger};
+use stratum_ui_common::{stratum_ui_ffi, ui_logging::UiLogger};
 fn main() {
     env_logger::init();
 

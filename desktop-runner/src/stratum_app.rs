@@ -67,7 +67,7 @@ impl eframe::App for StratumApp {
 // ---------- helpers ----------
 
 fn draw_lvgl_canvas(ui: &mut egui::Ui, tex: Option<&TextureHandle>) {
-    let width = unsafe { stratum_ui_common::amnio_bindings::get_lvgl_display_width() as f32 };
+    let width = unsafe { stratum_ui_common::stratum_ui_ffi::get_lvgl_display_width() as f32 };
     let height = ui.available_height();
 
     ui.allocate_ui_with_layout(

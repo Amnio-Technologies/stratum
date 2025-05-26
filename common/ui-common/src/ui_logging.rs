@@ -1,4 +1,4 @@
-use crate::amnio_bindings::{self, register_ui_log_callback};
+use crate::stratum_ui_ffi::{self, register_ui_log_callback};
 use std::ffi::CStr;
 use std::os::raw::{c_char, c_void};
 use std::sync::{Arc, Mutex};
@@ -48,7 +48,7 @@ impl UiLogger {
 /// Reconstructs the Arc, bumps the refcount, then forgets the original.
 unsafe extern "C" fn ui_log_callback(
     user_data: *mut c_void,
-    level: amnio_bindings::LogLevel,
+    level: stratum_ui_ffi::LogLevel,
     msg: *const c_char,
 ) {
     if user_data.is_null() || msg.is_null() {
