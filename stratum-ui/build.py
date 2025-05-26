@@ -14,8 +14,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 # -------- Configuration --------
 PROJECT_ROOT = Path(__file__).parent.resolve()
-FONT_C_GEN = "tools/generate_font_c_files.py"
-FONT_H_GEN = "tools/generate_font_headers.py"
+FONT_GEN = "tools/generate_fonts.py"
 GENERATOR = "Ninja" if shutil.which("ninja") else "MinGW Makefiles"
 
 ESP_IDF_PATH = Path.home() / "esp" / "esp-idf"
@@ -61,7 +60,8 @@ if target == "firmware":
         print("❌ Missing ESP toolchain/export script.")
         sys.exit(1)
 
-for script in (FONT_C_GEN, FONT_H_GEN):
+scripts = [FONT_GEN]
+for script in scripts:
     print(f"📁 Running {script}...")
     cmd = ["python3", script]
     if no_cache:
