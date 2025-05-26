@@ -25,7 +25,7 @@ EXPORT_SH = Path.home() / "export-esp.sh"
 # -------- Argument Parsing --------
 parser = argparse.ArgumentParser()
 parser.add_argument("--dynamic", action="store_true", help="Build a shared library")
-parser.add_argument("--no-cache", action="store_true", help="Force rebuild")
+parser.add_argument("--nocache", action="store_true", help="Force rebuild")
 parser.add_argument("--target", type=str, default="desktop", choices=["desktop", "firmware"])
 parser.add_argument("--release", action="store_true", help="Use Release build")
 parser.add_argument("--output-name", type=str, help="Override output library name (without extension)")
@@ -34,7 +34,7 @@ args = parser.parse_args()
 target = args.target
 build_type = "Release" if args.release else "Debug"
 is_dynamic = args.dynamic
-no_cache = args.no_cache
+no_cache = args.nocache
 output_name = args.output_name
 
 lib_type_str = "DYNAMIC SHARED LIBRARY" if is_dynamic else "STATIC LIBRARY"
@@ -125,22 +125,19 @@ minutes = int(elapsed // 60)
 seconds = int(elapsed % 60)
 
 # -------- Output Summary --------
-if output_name:
-    base_name = output_name
+base_name = output_name if output_name else "stratum-ui"
+if is_dynamic:
+    ext = "dll" if sys.platform == "win32" else "dylib" if sys.platform == "darwin" else "so"
+    out_filename = f"lib{base_name}.{ext}"
 else:
-    if is_dynamic:
-        ext = ".dll" if sys.platform == "win32" else ".dylib" if sys.platform == "darwin" else ".so"
-        base_name = f"libstratum-ui{ext}"
-    else:
-        base_name = "libstratum-ui.a"
+    out_filename = f"lib{base_name}.a"
 
-print(f"✅ Build Complete! Output: {build_dir / base_name}")
+print(f"✅ Build Complete! Output: {build_dir / out_filename}")
 print(f"⏱️ Build finished in {minutes}m {seconds}s")
 
 # -------- Clean up unneeded import libraries (Windows-only) --------
 if sys.platform == "win32" and is_dynamic:
     import_lib = build_dir / f"lib{base_name}.dll.a"
-    print(import_lib);
     
     if import_lib.exists():
         import_lib.unlink()
