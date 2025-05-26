@@ -1,6 +1,7 @@
 use chrono::Local;
 use notify::{Event, RecommendedWatcher, RecursiveMode, Watcher};
 use std::path::Path;
+use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Mutex;
 use std::{
     ffi::OsStr,
@@ -53,6 +54,7 @@ pub struct HotReloadManager {
     pub status: HotReloadStatus,
     pub last_reload_timestamp: String,
     pub current_abi_hash: String,
+    pub should_reload_ui: AtomicBool,
 }
 
 pub type SharedHotReloadManager = Arc<Mutex<HotReloadManager>>;
@@ -96,6 +98,7 @@ impl HotReloadManager {
             status: HotReloadStatus::Unknown,
             last_reload_timestamp: "".into(),
             current_abi_hash: "".into(),
+            should_reload_ui: AtomicBool::new(false),
         }
     }
 
@@ -242,7 +245,10 @@ impl HotReloadManager {
             self.status = HotReloadStatus::BuildFailed;
             return;
         }
-
+        unsafe {
+            println!("tearing down");
+            // amnio_bindings::lvgl_teardown();
+        }
         // Attempt to load the selected build
         unsafe {
             match crate::amnio_bindings::init_dynamic_bindings(selected) {
@@ -264,6 +270,8 @@ impl HotReloadManager {
 
                     self.reload_log
                         .push(format!("✅ Manually loaded: {}", selected.display()));
+
+                    self.should_reload_ui.store(true, Ordering::Relaxed);
                 }
                 Err(e) => {
                     self.status = HotReloadStatus::BuildFailed;

@@ -1,6 +1,6 @@
 use eframe::{egui, CreationContext, Frame};
 use egui::TextureHandle;
-use std::sync::Arc;
+use std::sync::{atomic::Ordering, Arc};
 
 use crate::{
     debug_ui,
@@ -37,6 +37,18 @@ impl StratumApp {
 
 impl eframe::App for StratumApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut Frame) {
+        if self
+            .ui_state
+            .hot_reload_manager
+            .lock()
+            .unwrap()
+            .should_reload_ui
+            .swap(false, Ordering::Relaxed)
+        {
+            println!("reloading the ui");
+            self.lvgl_ui.reload_ui();
+        }
+
         self.lvgl_tex = self.lvgl_ui.update(ctx).cloned();
 
         egui::CentralPanel::default().show(ctx, |ui| {

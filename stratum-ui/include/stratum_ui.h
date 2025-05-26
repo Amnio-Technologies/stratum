@@ -33,6 +33,7 @@ extern "C"
     AMNIO_API void register_ui_log_callback(ui_log_cb_t cb, void *user_data);
 
     AMNIO_API void lvgl_setup(void);
+    AMNIO_API void lvgl_teardown(void);
     AMNIO_API void lvgl_update(uint32_t dt_ms);
     AMNIO_API uint16_t *get_lvgl_framebuffer(void);
     AMNIO_API uint32_t get_lvgl_display_width(void);

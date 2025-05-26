@@ -24,6 +24,9 @@ unsafe extern "C" {
     pub fn lvgl_setup();
 }
 unsafe extern "C" {
+    pub fn lvgl_teardown();
+}
+unsafe extern "C" {
     pub fn lvgl_update(dt_ms: u32);
 }
 unsafe extern "C" {

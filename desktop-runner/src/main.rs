@@ -14,9 +14,6 @@ use stratum_ui_common::{amnio_bindings, ui_logging::UiLogger};
 fn main() {
     env_logger::init();
 
-    // Spin up our C -> Rust logger with a 10_000-entry cap
-    let ui_logger: Arc<UiLogger> = UiLogger::new(10_000);
-
     let hot_reload_manager = Arc::new(Mutex::new(HotReloadManager::new(
         PathBuf::from("../stratum-ui/build/desktop/libstratum-ui.dll"),
         PathBuf::from("../stratum-ui/build.py"),
@@ -28,6 +25,9 @@ fn main() {
     )));
 
     HotReloadManager::start(hot_reload_manager.clone());
+
+    // Spin up our C -> Rust logger with a 10_000-entry cap
+    let ui_logger: Arc<UiLogger> = UiLogger::new(10_000);
 
     eframe::run_native(
         "amnIO Stratum Simulator",

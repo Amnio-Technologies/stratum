@@ -1,8 +1,6 @@
 pub mod lvgl_backend;
 pub mod ui_logging;
 
-/* -------------------------------------------------------------------------- */
-/*  Public FFI surface  ───────────────────────────────────────────────────── */
 pub mod amnio_bindings {
     #![allow(
         non_camel_case_types,
@@ -11,18 +9,20 @@ pub mod amnio_bindings {
         dead_code
     )]
 
-    /* raw bindgen output (always present) */
-    #[cfg(windows)]
-    include!(concat!(env!("OUT_DIR"), "\\bindings.rs"));
-    #[cfg(unix)]
-    include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
+    // Raw bindgen declarations (always compiled)
+    mod raw {
+        #[cfg(windows)]
+        include!(concat!(env!("OUT_DIR"), "\\bindings.rs"));
+        #[cfg(unix)]
+        include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
+    }
 
+    // Dynamic loader + API table (desktop hot-reload only)
     #[cfg(feature = "desktop")]
     mod dynamic_overrides {
-        /* bring raw types / consts into scope for the wrappers */
-        use super::*;
+        pub use super::raw::*; // bring raw types, constants into scope
 
-        /* loader + Api struct (generated) */
+        // Generated loader and Api struct
         mod internal_api {
             #[cfg(windows)]
             include!(concat!(env!("OUT_DIR"), "\\internal_api.rs"));
@@ -30,15 +30,19 @@ pub mod amnio_bindings {
             include!(concat!(env!("OUT_DIR"), "/internal_api.rs"));
         }
 
-        /* shadow functions with wrappers that call API.read()… */
+        // Generated wrapper functions that dispatch via the Api table
         #[cfg(windows)]
         include!(concat!(env!("OUT_DIR"), "\\dynamic_exports.rs"));
         #[cfg(unix)]
         include!(concat!(env!("OUT_DIR"), "/dynamic_exports.rs"));
 
+        // Expose only the loader function from internal_api
         pub use internal_api::init_dynamic_bindings;
     }
 
+    // Public exports: choose dynamic overrides on desktop, else raw externs
     #[cfg(feature = "desktop")]
     pub use dynamic_overrides::*;
+    #[cfg(not(feature = "desktop"))]
+    pub use raw::*;
 }

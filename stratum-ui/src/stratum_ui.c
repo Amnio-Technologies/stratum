@@ -101,6 +101,25 @@ AMNIO_API void lvgl_setup(void)
     lv_example_get_started_1();
 }
 
+AMNIO_API void lvgl_teardown(void)
+{
+    // Wipe current screen and all children
+    lv_obj_clean(lv_screen_active());
+
+    // Optional: delete all timers (LVGL might auto-delete them with objects)
+    lv_timer_t *t;
+    while ((t = lv_timer_get_next(NULL)) != NULL)
+    {
+        lv_timer_del(t);
+    }
+
+    elapsed_label = NULL;
+    global_display = NULL;
+    elapsed_seconds = 0;
+
+    // Don't touch lvgl_framebuffer here unless you're managing it
+}
+
 AMNIO_API void lvgl_update(uint32_t dt_ms)
 {
     lv_tick_inc(dt_ms);
