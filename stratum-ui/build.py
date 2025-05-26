@@ -73,7 +73,6 @@ if no_cache and build_dir.exists():
 build_dir.mkdir(parents=True, exist_ok=True)
 
 # -------- Configure CMake --------
-print("⚙️  Running CMake configuration...")
 cmake_cmd = [
     "cmake",
     f"-DCMAKE_BUILD_TYPE={build_type}",
@@ -85,22 +84,35 @@ cmake_cmd = [
 if output_name:
     cmake_cmd.insert(-1, f"-DSTRATUM_OUTPUT_NAME={output_name}")
 
+cmake_cache = build_dir / "CMakeCache.txt"
+should_rerun_cmake = no_cache or not cmake_cache.exists()
+
 if target == "desktop":
     cmake_cmd[1:1] = ["-G", GENERATOR]
-    try:
-        subprocess.run(cmake_cmd, cwd=build_dir, check=True)
-    except subprocess.CalledProcessError:
-        print("❌ CMake configuration failed.")
-        sys.exit(1)
+
+    if should_rerun_cmake:
+        print("⚙️  Running CMake configuration...")
+        try:
+            subprocess.run(cmake_cmd, cwd=build_dir, check=True)
+        except subprocess.CalledProcessError:
+            print("❌ CMake configuration failed.")
+            sys.exit(1)
+    else:
+        print("⚙️  Skipping CMake config (already exists)")
 else:
     cmake_cmd.insert(1, f"-DCMAKE_TOOLCHAIN_FILE={TOOLCHAIN_FILE}")
     cmake_cmd.insert(2, f"-DIDF_TARGET=esp32")
     full = f'export IDF_PATH="{ESP_IDF_PATH}" && source "{EXPORT_SH}" && ' + " ".join(cmake_cmd)
-    try:
-        subprocess.run(["bash", "-c", full], cwd=build_dir, check=True)
-    except subprocess.CalledProcessError:
-        print("❌ CMake configuration failed.")
-        sys.exit(1)
+
+    if should_rerun_cmake:
+        print("⚙️  Running CMake configuration (firmware)...")
+        try:
+            subprocess.run(["bash", "-c", full], cwd=build_dir, check=True)
+        except subprocess.CalledProcessError:
+            print("❌ CMake configuration failed.")
+            sys.exit(1)
+    else:
+        print("⚙️  Skipping CMake config (already exists)")
 
 # -------- Build --------
 print("🏗️  Building stratum-ui...")
