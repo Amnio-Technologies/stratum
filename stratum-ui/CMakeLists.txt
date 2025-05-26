@@ -16,7 +16,7 @@ set(STRATUM_OUTPUT_NAME "" CACHE STRING "Override output library name (no extens
 
 message(STATUS "🎯 Building for: ${STRATUM_TARGET}")
 message(STATUS "🔗 Dynamic Linking Enabled: ${STRATUM_BUILD_DYNAMIC}")
-if (STRATUM_OUTPUT_NAME)
+if(STRATUM_OUTPUT_NAME)
     message(STATUS "📛 Custom Output Name: ${STRATUM_OUTPUT_NAME}")
 endif()
 
@@ -31,8 +31,9 @@ endif()
 file(GLOB_RECURSE LVGL_SOURCES
     ${PROJECT_SOURCE_DIR}/include/lvgl/src/*.c
 )
-list(FILTER LVGL_SOURCES EXCLUDE REGEX ".*lvgl/demos/.*")
-list(FILTER LVGL_SOURCES EXCLUDE REGEX ".*lvgl/tests/.*")
+# Exclude demos and tests
+list(FILTER LVGL_SOURCES EXCLUDE REGEX ".*/demos/.*")
+list(FILTER LVGL_SOURCES EXCLUDE REGEX ".*/tests/.*")
 
 # -------- Font Sources --------
 file(GLOB FONT_SOURCES
@@ -40,21 +41,21 @@ file(GLOB FONT_SOURCES
     ${PROJECT_SOURCE_DIR}/src/fonts/*.c
 )
 
+# -------- Build LVGL as OBJECT library --------
+add_library(lvgl_objs OBJECT ${LVGL_SOURCES})
+set_property(TARGET lvgl_objs PROPERTY POSITION_INDEPENDENT_CODE ON)
+
 # -------- LVGL Configuration --------
 add_definitions(-DLV_CONF_INCLUDE_SIMPLE)
 
 # -------- Include Directories --------
-include_directories(                       
+include_directories(
     ${PROJECT_SOURCE_DIR}/include            # stratum_ui.h, extern_log.h, lv_conf.h
     ${PROJECT_SOURCE_DIR}/include/lvgl       # LVGL headers
     ${PROJECT_SOURCE_DIR}/fonts              # generated font headers
     ${PROJECT_SOURCE_DIR}/src/fonts          # generated font C sources
     ${CMAKE_SOURCE_DIR}/../../common/include # Rust-generated headers
 )
-
-# -------- Separate LVGL build --------
-add_library(lvgl_objs OBJECT ${LVGL_SOURCES})
-set_property(TARGET lvgl_objs PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 # -------- stratum-ui Library --------
 set(LIB_NAME stratum-ui)
