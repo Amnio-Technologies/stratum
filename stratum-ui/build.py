@@ -19,7 +19,6 @@ FONT_H_GEN = "tools/generate_font_headers.py"
 # Prefer Ninja if available
 GENERATOR = "Ninja" if shutil.which("ninja") else "MinGW Makefiles"
 
-
 ESP_IDF_PATH = Path.home() / "esp" / "esp-idf"
 TOOLCHAIN_FILE = ESP_IDF_PATH / "tools" / "cmake" / "toolchain-esp32.cmake"
 EXPORT_SH = Path.home() / "export-esp.sh"
@@ -38,9 +37,6 @@ build_type = "Release" if args.release else "Debug"
 is_dynamic = args.dynamic
 no_cache = args.nocache
 output_name = args.output_name
-
-lib_type_str = "DYNAMIC SHARED LIBRARY" if is_dynamic else "STATIC LIBRARY"
-print(f"🔧 Building stratum-ui as a {lib_type_str} ({target.upper()}, {build_type})")
 
 # -------- Start Timer --------
 build_start = time.time()
@@ -68,7 +64,7 @@ for script in (FONT_C_GEN, FONT_H_GEN):
 # -------- Prepare Build Dir --------
 build_dir = PROJECT_ROOT / "build" / target
 if no_cache and build_dir.exists():
-    print("🧹 Cleaning previous build...")
+    print("🧹 Cleaning previous build directory...", build_dir)
     shutil.rmtree(build_dir)
 build_dir.mkdir(parents=True, exist_ok=True)
 
@@ -80,16 +76,49 @@ cmake_cmd = [
     f"-DSTRATUM_BUILD_DYNAMIC={'ON' if is_dynamic else 'OFF'}",
     str(PROJECT_ROOT),
 ]
-
 if output_name:
     cmake_cmd.insert(-1, f"-DSTRATUM_OUTPUT_NAME={output_name}")
 
+# Check cache to decide reconfigure
 cmake_cache = build_dir / "CMakeCache.txt"
 should_rerun_cmake = no_cache or not cmake_cache.exists()
 
+# Detect dynamic vs static and target changes
+dynamic_changed = False
+target_changed = False
+if cmake_cache.exists():
+    cache = cmake_cache.read_text()
+    # Dynamic build flag change
+    cached_dynamic = "STRATUM_BUILD_DYNAMIC:BOOL=ON" in cache
+    if cached_dynamic != is_dynamic:
+        print("♻️  Build type changed (static <-> dynamic). Forcing reconfigure.")
+        dynamic_changed = True
+        should_rerun_cmake = True
+    # Target change (desktop <-> firmware)
+    cached_target = None
+    for line in cache.splitlines():
+        if line.startswith("STRATUM_TARGET:STRING="):
+            cached_target = line.split("=")[-1]
+            break
+    if cached_target and cached_target != target:
+        print(f"♻️  Target changed ({cached_target} -> {target}). Forcing reconfigure.")
+        target_changed = True
+        should_rerun_cmake = True
+
+# Only clean CMake files on full rebuild or target change
+if (no_cache or target_changed) and build_dir.exists():
+    print("🧹 Cleaning CMake files for reconfiguration...")
+    for p in ["CMakeFiles", "CMakeCache.txt", "cmake_install.cmake"]:
+        path = build_dir / p
+        if path.exists():
+            if path.is_dir():
+                shutil.rmtree(path)
+            else:
+                path.unlink()
+
+# Generate build files
 if target == "desktop":
     cmake_cmd[1:1] = ["-G", GENERATOR]
-
     if should_rerun_cmake:
         print("⚙️  Running CMake configuration...")
         try:
@@ -103,7 +132,6 @@ else:
     cmake_cmd.insert(1, f"-DCMAKE_TOOLCHAIN_FILE={TOOLCHAIN_FILE}")
     cmake_cmd.insert(2, f"-DIDF_TARGET=esp32")
     full = f'export IDF_PATH="{ESP_IDF_PATH}" && source "{EXPORT_SH}" && ' + " ".join(cmake_cmd)
-
     if should_rerun_cmake:
         print("⚙️  Running CMake configuration (firmware)...")
         try:
@@ -114,11 +142,14 @@ else:
     else:
         print("⚙️  Skipping CMake config (already exists)")
 
+# Print final build settings
+lib_type_str = "DYNAMIC SHARED LIBRARY" if is_dynamic else "STATIC LIBRARY"
+print(f"🔧 Building stratum-ui as a {lib_type_str} ({target.upper()}, {build_type})")
+
 # -------- Build --------
 print("🏗️  Building stratum-ui...")
 cpu = multiprocessing.cpu_count()
 build_cmd = ["cmake", "--build", ".", "--", f"-j{cpu}"]
-
 if target == "desktop":
     try:
         subprocess.run(build_cmd, cwd=build_dir, check=True)
@@ -152,7 +183,6 @@ print(f"⏱️ Build finished in {minutes}m {seconds}s")
 # -------- Clean up unneeded import libraries (Windows-only) --------
 if sys.platform == "win32" and is_dynamic:
     import_lib = build_dir / f"lib{base_name}.dll.a"
-    
     if import_lib.exists():
         import_lib.unlink()
         print(f"🧹 Removed import library: {import_lib}")
