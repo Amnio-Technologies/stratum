@@ -140,9 +140,18 @@ pub fn create_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
 
         ui.label(egui::RichText::new("📜 Reload Log").strong());
 
+        fn sanitize(entry: &str) -> String {
+            entry
+                .chars()
+                // strip out FE0F (emoji VS-16) and FFFD (� replacement char)
+                .filter(|&c| c != '\u{FE0F}' && c != '\u{FFFD}')
+                .collect()
+        }
+
         ScrollArea::vertical().max_height(120.0).show(ui, |ui| {
             for entry in manager.reload_log.iter().rev().take(100).rev() {
-                ui.label(egui::RichText::new(entry).monospace());
+                let clean = sanitize(entry);
+                ui.label(egui::RichText::new(clean).monospace());
             }
         });
     });

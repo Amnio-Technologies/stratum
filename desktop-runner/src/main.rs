@@ -10,10 +10,9 @@ mod stratum_lvgl_ui;
 use hot_reload_manager::HotReloadManager;
 use std::sync::{Arc, Mutex};
 use std::{path::PathBuf, time::Duration};
-use stratum_ui_common::{stratum_ui_ffi, ui_logging::UiLogger};
-fn main() {
-    env_logger::init();
+use stratum_ui_common::ui_logging::UiLogger;
 
+fn main() {
     let hot_reload_manager = Arc::new(Mutex::new(HotReloadManager::new(
         PathBuf::from("../stratum-ui/build/desktop/libstratum-ui.dll"),
         PathBuf::from("../stratum-ui/build.py"),
@@ -24,6 +23,7 @@ fn main() {
         Duration::from_millis(300),
     )));
 
+    env_logger::init();
     HotReloadManager::start(hot_reload_manager.clone());
 
     // Spin up our C -> Rust logger with a 10_000-entry cap

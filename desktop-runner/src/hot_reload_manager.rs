@@ -121,11 +121,22 @@ impl HotReloadManager {
 
         {
             let mut guard = manager.lock().unwrap();
-            guard.install_plugin(&plugin_path).unwrap();
+            if let Err(e) = guard.install_plugin(&plugin_path) {
+                guard
+                    .reload_log
+                    .push(format!("❌ Initial load failed: {e}"));
+                guard.status = HotReloadStatus::BuildFailed;
+            }
         }
 
-        Self::spawn_watch_thread(manager, watch_dirs, debounce);
-        println!("👁️ Hot reload watcher started.");
+        Self::spawn_watch_thread(manager.clone(), watch_dirs, debounce);
+        // Log startup
+        {
+            let mut guard = manager.lock().unwrap();
+            guard
+                .reload_log
+                .push("👁️ Hot reload watcher started.".into());
+        }
     }
 
     fn spawn_watch_thread(
@@ -162,33 +173,28 @@ impl HotReloadManager {
 
     fn watch_loop(manager: SharedHotReloadManager, rx: Receiver<()>, debounce: Duration) {
         let mut last_event: Option<Instant> = None;
-
         loop {
             match rx.recv_timeout(Duration::from_millis(50)) {
                 Ok(_) => {
-                    // We got a notification
                     last_event = Some(Instant::now());
                 }
                 Err(std::sync::mpsc::RecvTimeoutError::Timeout) => {
-                    // No new notification this tick; check for debounce
                     if let Some(time) = last_event {
                         if time.elapsed() >= debounce {
                             last_event = None;
-                            println!("🔄 Stable change detected. Rebuilding...");
                             let mut guard = manager.lock().unwrap();
+                            guard
+                                .reload_log
+                                .push("🔄 Stable change detected. Rebuilding...".into());
                             guard.status = HotReloadStatus::Rebuilding;
-                            if let Err(e) = guard.rebuild_and_reload() {
-                                eprintln!("❌ Reload failed: {e}");
-                            } else {
-                                println!("✅ Hot reload successful");
+                            match guard.rebuild_and_reload() {
+                                Err(e) => guard.reload_log.push(format!("❌ Reload failed: {e}")),
+                                Ok(_) => guard.reload_log.push("✅ Hot reload successful".into()),
                             }
                         }
                     }
                 }
-                Err(_) => {
-                    // Channel disconnected or other error—exit loop
-                    break;
-                }
+                Err(_) => break,
             }
         }
     }
@@ -274,7 +280,7 @@ impl HotReloadManager {
         self.should_reload_ui.store(true, Ordering::Relaxed);
     }
 
-    pub fn cull_old_builds(&self) {
+    pub fn cull_old_builds(&mut self) {
         for build in self
             .sorted_builds()
             .into_iter()
@@ -282,9 +288,11 @@ impl HotReloadManager {
         {
             if !build.is_active {
                 if let Err(e) = std::fs::remove_file(&build.path) {
-                    eprintln!("⚠️ Failed to remove {}: {e}", build.path.display());
+                    self.reload_log
+                        .push(format!("⚠️ Failed to remove {}: {e}", build.path.display()));
                 } else {
-                    println!("🗑️ Removed old build: {}", build.path.display());
+                    self.reload_log
+                        .push(format!("🗑️ Removed old build: {}", build.path.display()));
                 }
             }
         }
