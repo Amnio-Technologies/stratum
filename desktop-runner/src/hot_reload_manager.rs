@@ -59,7 +59,7 @@ pub struct HotReloadManager {
 
 pub type SharedHotReloadManager = Arc<Mutex<HotReloadManager>>;
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct BuildInfo {
     pub path: PathBuf,
     pub is_active: bool,
@@ -95,7 +95,7 @@ impl HotReloadManager {
             auto_reload: true,
             max_builds_to_keep: 5,
             reload_log: vec![],
-            status: HotReloadStatus::Unknown,
+            status: HotReloadStatus::Idle,
             last_reload_timestamp: "".into(),
             current_abi_hash: "".into(),
             should_reload_ui: AtomicBool::new(false),
@@ -146,6 +146,8 @@ impl HotReloadManager {
                                 println!("🔄 Stable change detected. Rebuilding...");
 
                                 let mut guard = manager.lock().unwrap();
+
+                                guard.status = HotReloadStatus::Rebuilding;
                                 if let Err(e) = guard.rebuild_and_reload() {
                                     eprintln!("❌ Reload failed: {e}");
                                 } else {
@@ -210,8 +212,30 @@ impl HotReloadManager {
         }
 
         self.load_build(&full_path);
+        self.cull_old_builds();
 
         Ok(())
+    }
+
+    fn cull_old_builds(&self) {
+        let builds = self.available_builds();
+
+        // Skip the newest `max_builds_to_keep` builds
+        for build in builds.iter().skip(self.max_builds_to_keep) {
+            // Make sure not to delete the active plugin!
+            dbg!(build);
+            if !build.is_active {
+                dbg!(build);
+                if let Err(e) = std::fs::remove_file(&build.path) {
+                    eprintln!(
+                        "⚠️ Failed to remove old build {}: {e}",
+                        build.path.display()
+                    );
+                } else {
+                    println!("🗑️ Removed old build: {}", build.path.display());
+                }
+            }
+        }
     }
 
     pub fn available_builds(&self) -> Vec<BuildInfo> {
