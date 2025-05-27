@@ -1,5 +1,5 @@
 use amnio_firmware::modules::dummies::dummy_battery::DummyBatteryModule;
-use egui::{Checkbox, ScrollArea};
+use egui::{Checkbox, Id, ScrollArea};
 
 use crate::state::UiState;
 
@@ -36,22 +36,18 @@ pub fn create_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
         }
     });
 
-    let mut scroll_to_bottom = false;
-    ScrollArea::vertical().max_height(200.0).show(ui, |ui| {
-        let log_count = ui_state.log_buffer.len();
-        unsafe {
-            if log_count > LAST_LOG_COUNT {
-                scroll_to_bottom = true;
+    // give the debug log scroll area a stable ID:
+    let scroll_id = Id::new("debug_log_scroll");
+
+    ScrollArea::vertical()
+        .id_salt(scroll_id)
+        .stick_to_bottom(true) // auto-scroll only if you were already at the bottom
+        .max_height(200.0)
+        .show(ui, |ui| {
+            for line in &ui_state.log_buffer {
+                ui.monospace(line);
             }
-            LAST_LOG_COUNT = log_count;
-        }
-        for line in &ui_state.log_buffer {
-            ui.monospace(line);
-        }
-        if scroll_to_bottom {
-            ui.scroll_to_cursor(Some(egui::Align::BOTTOM));
-        }
-    });
+        });
 
     ui.separator();
 
@@ -148,11 +144,18 @@ pub fn create_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
                 .collect()
         }
 
-        ScrollArea::vertical().max_height(120.0).show(ui, |ui| {
-            for entry in manager.reload_log.iter().rev().take(100).rev() {
-                let clean = sanitize(entry);
-                ui.label(egui::RichText::new(clean).monospace());
-            }
-        });
+        // give the reload‐log scroll area a stable ID:
+        let reload_scroll_id = Id::new("reload_log_scroll");
+
+        ScrollArea::vertical()
+            .id_salt(reload_scroll_id)
+            .stick_to_bottom(true) // only auto-scroll when already at the bottom
+            .max_height(200.0)
+            .show(ui, |ui| {
+                for entry in manager.reload_log.iter().rev().take(100).rev() {
+                    let clean = sanitize(entry);
+                    ui.label(egui::RichText::new(clean).monospace());
+                }
+            });
     });
 }
