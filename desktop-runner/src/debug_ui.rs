@@ -3,11 +3,6 @@ use stratum_firmware_common::modules::dummies::dummy_battery::DummyBatteryModule
 
 use crate::state::UiState;
 
-pub const DEBUG_UI_WIDTH: u32 = 300;
-
-/// Tracks last log count to determine when to auto-scroll
-static mut LAST_LOG_COUNT: usize = 0;
-
 /// Creates the debugging UI inside a right-aligned panel.
 pub fn create_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
     ui.heading("amnIO UI Debugger");

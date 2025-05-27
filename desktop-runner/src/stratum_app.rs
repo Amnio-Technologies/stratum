@@ -1,13 +1,12 @@
-use eframe::{egui, CreationContext, Frame};
-use egui::TextureHandle;
-use std::sync::{atomic::Ordering, Arc};
-
 use crate::{
     debug_ui,
     hot_reload_manager::SharedHotReloadManager,
     state::{update_fps, UiState},
     stratum_lvgl_ui::StratumLvglUI,
 };
+use eframe::{egui, CreationContext, Frame};
+use egui::{Direction, Layout, ScrollArea, TextureHandle};
+use std::sync::{atomic::Ordering, Arc};
 use stratum_ui_common::ui_logging::UiLogger;
 
 pub struct StratumApp {
@@ -84,9 +83,13 @@ fn draw_lvgl_canvas(ui: &mut egui::Ui, tex: Option<&TextureHandle>) {
 }
 
 fn draw_debug_panel(ui: &mut egui::Ui, state: &mut UiState) {
-    ui.allocate_ui_with_layout(
-        ui.available_size(),
-        egui::Layout::top_down(egui::Align::Min),
-        |ui| debug_ui::create_debug_ui(ui, state),
-    );
+    egui::SidePanel::right("debug_panel")
+        .resizable(true)
+        .show(ui.ctx(), |ui| {
+            ScrollArea::vertical()
+                .auto_shrink([false, false])
+                .show(ui, |ui| {
+                    debug_ui::create_debug_ui(ui, state);
+                });
+        });
 }
