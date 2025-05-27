@@ -127,16 +127,12 @@ impl HotReloadManager {
                     .push(format!("❌ Initial load failed: {e}"));
                 guard.status = HotReloadStatus::BuildFailed;
             }
-        }
-
-        Self::spawn_watch_thread(manager.clone(), watch_dirs, debounce);
-        // Log startup
-        {
-            let mut guard = manager.lock().unwrap();
             guard
                 .reload_log
                 .push("👁️ Hot reload watcher started.".into());
         }
+
+        Self::spawn_watch_thread(manager.clone(), watch_dirs, debounce);
     }
 
     fn spawn_watch_thread(
@@ -173,8 +169,9 @@ impl HotReloadManager {
 
     fn watch_loop(manager: SharedHotReloadManager, rx: Receiver<()>, debounce: Duration) {
         let mut last_event: Option<Instant> = None;
+        const WATCHER_TICK_MS: u64 = 50;
         loop {
-            match rx.recv_timeout(Duration::from_millis(50)) {
+            match rx.recv_timeout(Duration::from_millis(WATCHER_TICK_MS)) {
                 Ok(_) => {
                     last_event = Some(Instant::now());
                 }
