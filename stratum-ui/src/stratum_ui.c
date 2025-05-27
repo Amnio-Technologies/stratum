@@ -59,8 +59,6 @@ void update_elapsed_time(lv_timer_t *timer)
     elapsed_seconds++;
 
     ui_logf(LOG_INFO, "Updating Elapsed Time: %u sec", elapsed_seconds);
-    ui_logf(LOG_INFO, "LVGL depth=%d bits, lv_color_t=%zu bytes",
-            LV_COLOR_DEPTH, sizeof(lv_color_t));
 
     if (elapsed_label)
     {

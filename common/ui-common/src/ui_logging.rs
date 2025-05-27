@@ -28,13 +28,17 @@ impl UiLogger {
             max_logs,
         });
 
-        // Pass an Arc pointer as `user_data`; callback recovers it.
-        let user_data = Arc::into_raw(logger.clone()) as *mut c_void;
+        Self::bind_callback(logger.clone());
+
+        logger
+    }
+
+    /// Re-registers the C log callback.
+    pub fn bind_callback(self: Arc<Self>) {
+        let user_data = Arc::into_raw(self) as *mut c_void;
         unsafe {
             register_ui_log_callback(Some(ui_log_callback), user_data);
         }
-
-        logger
     }
 
     /// Grab a snapshot of all logs so far and clear the buffer.
