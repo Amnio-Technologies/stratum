@@ -109,7 +109,7 @@ pub fn create_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
 
         ui.separator();
 
-        ui.label(egui::RichText::new("🧩 Available Builds").strong());
+        ui.label(egui::RichText::new("📃 Available Builds").strong());
 
         egui::ComboBox::from_id_salt("build_selector")
             .width(ui.available_width())
