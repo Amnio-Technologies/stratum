@@ -123,7 +123,7 @@ else:
         print("⚙️  Skipping CMake config")
 
 # -------- Build --------
-print(f"🔧 Building ({target}/{build_type}/{'DYN' if is_dynamic else 'STA'})...")
+print(f"🔧 Building ({target}/{build_type}/{'DYN' if is_dynamic else 'STATIC'})...")
 cpu = multiprocessing.cpu_count()
 build_cmd = ["cmake", "--build", ".", "--", f"-j{cpu}"]
 if target == "desktop":
@@ -154,5 +154,5 @@ if is_dynamic and sys.platform == "win32":
         imp.unlink()
 
 end = time.time() - build_start
-m, s = divmod(int(end), 60)
-print(f"✅ Built {final.name} in {m}m {s}s")
+m, s = divmod(end, 60)
+print(f"✅ Built {final.name} in {int(m)}m {s:.3f}s")
