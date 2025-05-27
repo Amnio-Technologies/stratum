@@ -112,7 +112,7 @@ if target == "desktop":
         print("⚙️  Skipping CMake config")
 else:
     cmake_cmd.insert(1, f"-DCMAKE_TOOLCHAIN_FILE={TOOLCHAIN_FILE}")
-    cmake_cmd.insert(2, f"-DIDF_TARGET=esp32")
+    cmake_cmd.insert(2, "-DIDF_TARGET=esp32")
     full = f'export IDF_PATH="{ESP_IDF_PATH}" && source "{EXPORT_SH}" && ' + " ".join(
         cmake_cmd
     )
