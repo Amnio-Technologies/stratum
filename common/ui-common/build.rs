@@ -1,7 +1,7 @@
 use std::{collections::HashSet, env, fs, path::PathBuf, process::Command};
 
 /// C macro used to tag exported functions from the plugin interface
-const EXPORT_TAG: &str = "AMNIO_API";
+const EXPORT_TAG: &str = "UI_EXPORT";
 
 /// Constants from the C header we want to expose in Rust
 const LVGL_BIND_VARS: &[&str] = &["LVGL_SCREEN_WIDTH", "LVGL_SCREEN_HEIGHT"];

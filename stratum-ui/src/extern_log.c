@@ -8,7 +8,7 @@ static ui_log_cb_t g_log_cb = NULL;
 static void *g_log_user_data = NULL;
 
 // Register the Rust logging callback. Call this before lvgl_setup().
-AMNIO_API void register_ui_log_callback(ui_log_cb_t cb, void *user_data)
+UI_EXPORT void register_ui_log_callback(ui_log_cb_t cb, void *user_data)
 {
     g_log_cb = cb;
     g_log_user_data = user_data;

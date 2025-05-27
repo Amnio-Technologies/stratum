@@ -89,7 +89,7 @@ void lv_example_get_started_1(void)
     lv_timer_create(update_elapsed_time, 1000, NULL);
 }
 
-AMNIO_API void lvgl_setup(void)
+UI_EXPORT void lvgl_setup(void)
 {
     lv_init();
     static lv_color_t buf[LVGL_SCREEN_WIDTH * 10]; // Display buffer
@@ -99,7 +99,7 @@ AMNIO_API void lvgl_setup(void)
     lv_example_get_started_1();
 }
 
-AMNIO_API void lvgl_teardown(void)
+UI_EXPORT void lvgl_teardown(void)
 {
     // Wipe current screen and all children
     lv_obj_clean(lv_screen_active());
@@ -118,33 +118,33 @@ AMNIO_API void lvgl_teardown(void)
     // Don't touch lvgl_framebuffer here unless you're managing it
 }
 
-AMNIO_API void lvgl_update(uint32_t dt_ms)
+UI_EXPORT void lvgl_update(uint32_t dt_ms)
 {
     lv_tick_inc(dt_ms);
     lv_timer_handler();
 }
 
-AMNIO_API uint16_t *get_lvgl_framebuffer(void)
+UI_EXPORT uint16_t *get_lvgl_framebuffer(void)
 {
     return lvgl_framebuffer;
 }
 
-AMNIO_API uint32_t get_lvgl_display_width(void)
+UI_EXPORT uint32_t get_lvgl_display_width(void)
 {
     return LVGL_SCREEN_WIDTH;
 }
 
-AMNIO_API uint32_t get_lvgl_display_height(void)
+UI_EXPORT uint32_t get_lvgl_display_height(void)
 {
     return LVGL_SCREEN_HEIGHT;
 }
 
-AMNIO_API size_t lvgl_get_required_framebuffer_size(void)
+UI_EXPORT size_t lvgl_get_required_framebuffer_size(void)
 {
     return LVGL_SCREEN_WIDTH * LVGL_SCREEN_HEIGHT * sizeof(uint16_t);
 }
 
-AMNIO_API void lvgl_register_external_buffer(uint16_t *buffer, size_t buffer_bytes)
+UI_EXPORT void lvgl_register_external_buffer(uint16_t *buffer, size_t buffer_bytes)
 {
     size_t expected = lvgl_get_required_framebuffer_size();
     ui_logf(LOG_INFO, "attempting to register buffer: %p", buffer);
@@ -161,7 +161,7 @@ AMNIO_API void lvgl_register_external_buffer(uint16_t *buffer, size_t buffer_byt
     lvgl_buffer_bytes = buffer_bytes;
 }
 
-AMNIO_API void lvgl_register_spi_send_cb(ui_spi_send_cb_t cb)
+UI_EXPORT void lvgl_register_spi_send_cb(ui_spi_send_cb_t cb)
 {
     _spi_cb = cb;
 }
