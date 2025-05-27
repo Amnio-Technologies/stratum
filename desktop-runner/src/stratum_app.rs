@@ -36,6 +36,7 @@ impl StratumApp {
 
 impl eframe::App for StratumApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut Frame) {
+        // Hot-reload check
         if self
             .ui_state
             .hot_reload_manager
@@ -48,18 +49,24 @@ impl eframe::App for StratumApp {
             self.lvgl_ui.reload_ui();
         }
 
+        // Generate the latest LVGL texture
         self.lvgl_tex = self.lvgl_ui.update(ctx).cloned();
 
+        draw_debug_panel(ctx, &mut self.ui_state);
+
         egui::CentralPanel::default().show(ctx, |ui| {
-            ui.horizontal(|ui| {
-                draw_lvgl_canvas(ui, self.lvgl_tex.as_ref());
-                draw_debug_panel(ui, &mut self.ui_state);
-            });
+            ui.with_layout(
+                Layout::centered_and_justified(Direction::LeftToRight),
+                |ui| {
+                    draw_lvgl_canvas(ui, self.lvgl_tex.as_ref());
+                },
+            );
         });
 
+        // Update FPS counter and loop
         update_fps(&mut self.ui_state, &self.last_frame_start);
         self.last_frame_start = std::time::Instant::now();
-        ctx.request_repaint(); // keep it real-time
+        ctx.request_repaint();
     }
 }
 
@@ -69,9 +76,10 @@ fn draw_lvgl_canvas(ui: &mut egui::Ui, tex: Option<&TextureHandle>) {
     let width = unsafe { stratum_ui_common::stratum_ui_ffi::get_lvgl_display_width() as f32 };
     let height = ui.available_height();
 
+    // Allocate exactly the display size and center the image
     ui.allocate_ui_with_layout(
         egui::vec2(width, height),
-        egui::Layout::left_to_right(egui::Align::TOP),
+        Layout::centered_and_justified(Direction::LeftToRight),
         |ui| {
             if let Some(t) = tex {
                 ui.image(t);
@@ -82,10 +90,10 @@ fn draw_lvgl_canvas(ui: &mut egui::Ui, tex: Option<&TextureHandle>) {
     );
 }
 
-fn draw_debug_panel(ui: &mut egui::Ui, state: &mut UiState) {
+fn draw_debug_panel(ctx: &egui::Context, state: &mut UiState) {
     egui::SidePanel::right("debug_panel")
         .resizable(true)
-        .show(ui.ctx(), |ui| {
+        .show(ctx, |ui| {
             ScrollArea::vertical()
                 .auto_shrink([false, false])
                 .show(ui, |ui| {
