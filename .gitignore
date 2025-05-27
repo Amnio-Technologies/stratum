@@ -2,6 +2,7 @@ target/*
 Cargo.lock
 common/ui-common/target/*
 stratum-ui/build
+stratum-ui/__pycache__
 stratum-ui/src/fonts
 stratum-ui/include/fonts
 firmware/target

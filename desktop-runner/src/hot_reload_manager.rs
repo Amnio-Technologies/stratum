@@ -1,5 +1,8 @@
 use chrono::Local;
 use notify::{Event, RecommendedWatcher, RecursiveMode, Watcher};
+use serde_json::json;
+use std::io::{Read, Write};
+use std::net::TcpStream;
 use std::path::Path;
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Mutex;
@@ -235,13 +238,42 @@ impl HotReloadManager {
     }
 
     fn run_build_script(&self, output_stem: &str) -> Result<(), String> {
+        // 1) Try the long-lived build_server daemon
+        if let Ok(mut stream) = TcpStream::connect("127.0.0.1:9123") {
+            // Build request
+            let req = json!({
+                "dynamic": true,
+                "target": "desktop",
+                "output_name": output_stem,
+            })
+            .to_string();
+            // Send request
+            stream
+                .write_all(req.as_bytes())
+                .map_err(|e| format!("Daemon write error: {}", e))?;
+            let _ = stream.shutdown(std::net::Shutdown::Write);
+            // Read response
+            let mut buf = String::new();
+            stream
+                .read_to_string(&mut buf)
+                .map_err(|e| format!("Daemon read error: {}", e))?;
+            let resp: serde_json::Value = serde_json::from_str(&buf)
+                .map_err(|e| format!("Invalid daemon response: {}", e))?;
+            if resp.get("success").and_then(|v| v.as_bool()) == Some(true) {
+                return Ok(());
+            } else {
+                return Err("Build daemon reported failure".into());
+            }
+        }
+
+        // 2) Fallback to the original build.py invocation
         let status = Command::new("python3")
             .arg(&self.build_script)
             .arg("--dynamic")
             .arg("--output-name")
             .arg(output_stem)
             .status()
-            .map_err(|e| format!("Build script failed to launch: {e}"))?;
+            .map_err(|e| format!("Build script failed to launch: {}", e))?;
         if status.success() {
             Ok(())
         } else {
