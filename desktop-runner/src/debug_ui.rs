@@ -132,7 +132,7 @@ pub fn create_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
 
         if ui.button("Load Selected").clicked() {
             if let Some(build_path) = &ui_state.selected_build {
-                manager.load_build(build_path.as_path());
+                manager.load_plugin(build_path.as_path());
             }
         }
 

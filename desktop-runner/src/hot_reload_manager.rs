@@ -16,6 +16,15 @@ use std::{
 };
 use stratum_ui_common::stratum_ui_ffi;
 
+// Compile-time plugin extension
+const PLUGIN_EXT: &str = if cfg!(target_os = "windows") {
+    "dll"
+} else if cfg!(target_os = "macos") {
+    "dylib"
+} else {
+    "so"
+};
+
 #[derive(Debug, Clone)]
 pub enum HotReloadStatus {
     Idle,
@@ -47,7 +56,6 @@ pub struct HotReloadManager {
     build_script: PathBuf,
     watch_dirs: Vec<PathBuf>,
     debounce: Duration,
-    tx_stop: Option<std::sync::mpsc::Sender<()>>,
     pub auto_reload: bool,
     pub max_builds_to_keep: usize,
     pub reload_log: Vec<String>,
@@ -91,29 +99,29 @@ impl HotReloadManager {
             build_script,
             watch_dirs,
             debounce,
-            tx_stop: None,
             auto_reload: true,
             max_builds_to_keep: 5,
             reload_log: vec![],
             status: HotReloadStatus::Idle,
-            last_reload_timestamp: "".into(),
-            current_abi_hash: "".into(),
+            last_reload_timestamp: String::new(),
+            current_abi_hash: String::new(),
             should_reload_ui: AtomicBool::new(false),
         }
     }
 
     pub fn start(manager: SharedHotReloadManager) {
-        let (watch_dirs, plugin_path, debounce) = {
+        let (plugin_path, watch_dirs, debounce) = {
             let guard = manager.lock().unwrap();
             (
-                guard.watch_dirs.clone(),
                 guard.plugin_path.clone(),
+                guard.watch_dirs.clone(),
                 guard.debounce,
             )
         };
 
-        unsafe {
-            stratum_ui_ffi::init_dynamic_bindings(plugin_path).unwrap();
+        {
+            let mut guard = manager.lock().unwrap();
+            guard.install_plugin(&plugin_path).unwrap();
         }
 
         Self::spawn_watch_thread(manager, watch_dirs, debounce);
@@ -126,20 +134,18 @@ impl HotReloadManager {
         debounce: Duration,
     ) {
         thread::spawn(move || {
-            // now we *keep* watcher alive in this scope
             let (_watcher, _tx, rx) = Self::init_watcher(&watch_dirs);
             Self::watch_loop(manager, rx, debounce);
-            // `_watcher` only drops here, after watch_loop exits
         });
     }
 
     fn init_watcher(watch_dirs: &[PathBuf]) -> (RecommendedWatcher, Sender<()>, Receiver<()>) {
         let (tx, rx) = channel();
-        let transmit = tx.clone();
-        let mut watcher = notify::recommended_watcher(move |res: Result<Event, _>| {
-            if let Ok(event) = res {
-                if !event.paths.is_empty() {
-                    let _ = transmit.send(());
+        let tx_clone = tx.clone();
+        let mut watcher = notify::recommended_watcher(move |res| {
+            if let Ok(Event { paths, .. }) = res {
+                if !paths.is_empty() {
+                    let _ = tx_clone.send(());
                 }
             }
         })
@@ -159,13 +165,16 @@ impl HotReloadManager {
 
         loop {
             match rx.recv_timeout(Duration::from_millis(50)) {
-                Ok(_) => last_event = Some(Instant::now()),
+                Ok(_) => {
+                    // We got a notification
+                    last_event = Some(Instant::now());
+                }
                 Err(std::sync::mpsc::RecvTimeoutError::Timeout) => {
+                    // No new notification this tick; check for debounce
                     if let Some(time) = last_event {
                         if time.elapsed() >= debounce {
                             last_event = None;
                             println!("🔄 Stable change detected. Rebuilding...");
-
                             let mut guard = manager.lock().unwrap();
                             guard.status = HotReloadStatus::Rebuilding;
                             if let Err(e) = guard.rebuild_and_reload() {
@@ -176,35 +185,50 @@ impl HotReloadManager {
                         }
                     }
                 }
-                Err(_) => break,
+                Err(_) => {
+                    // Channel disconnected or other error—exit loop
+                    break;
+                }
             }
         }
     }
 
-    fn generate_reload_stem() -> String {
-        let timestamp = Local::now().format("%Y%m%d_%H%M%S");
-        format!("stratum-ui_reload_{}", timestamp)
+    fn install_plugin(&mut self, path: &Path) -> Result<(), String> {
+        unsafe { stratum_ui_ffi::init_dynamic_bindings(path.to_path_buf()) }
+            .map_err(|e| format!("Failed to install plugin: {e}"))
+    }
+
+    fn build_output_dir() -> PathBuf {
+        PathBuf::from("../stratum-ui/build/desktop")
+    }
+
+    fn sorted_builds(&self) -> Vec<BuildInfo> {
+        let mut infos: Vec<_> = glob::glob(&format!(
+            "{}/libstratum-ui*.{}",
+            Self::build_output_dir().display(),
+            PLUGIN_EXT
+        ))
+        .unwrap()
+        .filter_map(Result::ok)
+        .map(|p| BuildInfo::new(p.clone(), p == self.plugin_path))
+        .collect();
+        infos.sort_by_key(|b| b.path.metadata().and_then(|m| m.modified()).ok());
+        infos.reverse();
+        infos
     }
 
     pub fn rebuild_and_reload(&mut self) -> Result<(), String> {
-        let stem = Self::generate_reload_stem();
-        let ext = Self::dylib_file_ext();
-        let filename = format!("lib{}.{}", stem, ext);
-        let full_path = PathBuf::from("../stratum-ui/build/desktop").join(&filename);
+        let now = Local::now();
+        let stem = format!("stratum-ui_reload_{}", now.format("%Y%m%d_%H%M%S"));
+        let filename = format!("lib{}.{}", stem, PLUGIN_EXT);
+        let full_path = Self::build_output_dir().join(&filename);
 
-        // 👉 pass *just* the stem to Python:
         self.run_build_script(&stem)?;
         self.validate_plugin_exists(&full_path)?;
 
-        self.load_build(&full_path);
+        self.load_and_install(&full_path, now.clone());
         self.cull_old_builds();
         Ok(())
-    }
-
-    fn generate_reload_filename() -> String {
-        let ext = Self::dylib_file_ext();
-        let timestamp = Local::now().format("%Y%m%d_%H%M%S");
-        format!("libstratum-ui_reload_{}.{}", timestamp, ext)
     }
 
     fn run_build_script(&self, output_stem: &str) -> Result<(), String> {
@@ -215,85 +239,50 @@ impl HotReloadManager {
             .arg(output_stem)
             .status()
             .map_err(|e| format!("Build script failed to launch: {e}"))?;
-        if !status.success() {
-            Err(format!(
-                "Build script failed with status: {:?}",
-                status.code()
-            ))
-        } else {
+        if status.success() {
             Ok(())
+        } else {
+            Err(format!("Build script failed: {:?}", status.code()))
         }
     }
 
     fn validate_plugin_exists(&self, path: &Path) -> Result<(), String> {
-        if !path.exists() {
-            Err(format!("Built plugin not found at: {}", path.display()))
-        } else {
+        if path.exists() {
             Ok(())
+        } else {
+            Err(format!("Plugin not found: {}", path.display()))
         }
     }
 
-    pub fn load_build(&mut self, selected: &Path) {
-        if !selected.exists() {
+    fn load_and_install(&mut self, path: &Path, now: chrono::DateTime<Local>) {
+        if let Err(e) = self.install_plugin(path) {
             self.status = HotReloadStatus::BuildFailed;
+            self.reload_log.push(format!("❌ Error: {e}"));
             return;
         }
-
-        unsafe { stratum_ui_ffi::lvgl_teardown() }
-
-        unsafe {
-            match stratum_ui_ffi::init_dynamic_bindings(selected) {
-                Ok(()) => {
-                    self.plugin_path = selected.to_path_buf();
-                    self.status = HotReloadStatus::ReloadSuccessful;
-                    self.last_reload_timestamp = Self::now_string();
-                    self.current_abi_hash = Self::generate_abi_hash(selected);
-                    self.log_reload_result(true, selected);
-                    self.should_reload_ui.store(true, Ordering::Relaxed);
-                }
-                Err(e) => {
-                    self.status = HotReloadStatus::BuildFailed;
-                    self.log_reload_result(false, selected);
-                    self.reload_log.push(format!("❌ Error: {e}"));
-                }
-            }
-        }
-    }
-
-    fn now_string() -> String {
-        Local::now().format("%Y-%m-%d %H:%M:%S").to_string()
-    }
-
-    fn generate_abi_hash(path: &Path) -> String {
-        format!(
+        self.plugin_path = path.to_path_buf();
+        self.status = HotReloadStatus::ReloadSuccessful;
+        self.last_reload_timestamp = now.format("%Y-%m-%d %H:%M:%S").to_string();
+        self.current_abi_hash = format!(
             "hash_{}",
             path.file_name()
                 .unwrap_or_else(|| OsStr::new("unknown"))
                 .to_string_lossy()
-        )
-    }
-
-    fn log_reload_result(&mut self, success: bool, path: &Path) {
-        let msg = if success {
-            format!("✅ Manually loaded: {}", path.display())
-        } else {
-            format!("❌ Failed to load: {}", path.display())
-        };
-        self.reload_log.push(msg);
+        );
+        self.reload_log
+            .push(format!("✅ Loaded: {}", path.display()));
+        self.should_reload_ui.store(true, Ordering::Relaxed);
     }
 
     pub fn cull_old_builds(&self) {
-        let mut builds = self.available_builds();
-        builds.sort_by_key(|b| std::fs::metadata(&b.path).and_then(|m| m.modified()).ok());
-        builds.reverse();
-
-        for build in builds.iter().skip(self.max_builds_to_keep) {
+        for build in self
+            .sorted_builds()
+            .into_iter()
+            .skip(self.max_builds_to_keep)
+        {
             if !build.is_active {
                 if let Err(e) = std::fs::remove_file(&build.path) {
-                    eprintln!(
-                        "⚠️ Failed to remove old build {}: {e}",
-                        build.path.display()
-                    );
+                    eprintln!("⚠️ Failed to remove {}: {e}", build.path.display());
                 } else {
                     println!("🗑️ Removed old build: {}", build.path.display());
                 }
@@ -302,42 +291,15 @@ impl HotReloadManager {
     }
 
     pub fn available_builds(&self) -> Vec<BuildInfo> {
-        let parent = self
-            .plugin_path
-            .parent()
-            .expect("Hot reload plugin path should point to a file within a directory");
-
-        let ext = Self::dylib_file_ext();
-        let pattern = format!("libstratum-ui*.{ext}");
-
-        let mut builds: Vec<_> = glob::glob(&format!("{}/{}", parent.display(), pattern))
-            .unwrap()
-            .filter_map(Result::ok)
-            .collect();
-
-        builds.sort_by_key(|p| std::fs::metadata(p).and_then(|m| m.modified()).ok());
-        builds.reverse();
-
-        builds
-            .into_iter()
-            .map(|path| {
-                let is_active = path == self.plugin_path;
-                BuildInfo { path, is_active }
-            })
-            .collect()
+        self.sorted_builds()
     }
 
     pub fn selected_build_display(&self) -> String {
         BuildInfo::new(self.plugin_path.clone(), true).filename()
     }
 
-    fn dylib_file_ext() -> &'static str {
-        if cfg!(target_os = "windows") {
-            "dll"
-        } else if cfg!(target_os = "macos") {
-            "dylib"
-        } else {
-            "so"
-        }
+    pub fn load_plugin(&mut self, path: &Path) {
+        let now = Local::now();
+        self.load_and_install(path, now);
     }
 }
