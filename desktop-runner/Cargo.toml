@@ -12,7 +12,7 @@ egui = "0.31.1"
 eframe = "0.31.1"
 env_logger = "0.11.7"
 log = "0.4.26"
-amnio-firmware = { path = "../firmware" }
+stratum-firmware-common = { path = "../common/firmware-common" }
 stratum-ui-common = { path = "../common/ui-common", features = ["desktop"] }
 re_ui = "0.23.1"
 notify = "8.0.0"

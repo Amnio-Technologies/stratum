@@ -1,5 +1,5 @@
-use amnio_firmware::modules::dummies::dummy_battery::DummyBatteryModule;
 use egui::{Checkbox, Id, ScrollArea};
+use stratum_firmware_common::modules::dummies::dummy_battery::DummyBatteryModule;
 
 use crate::state::UiState;
 

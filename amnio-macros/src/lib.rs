@@ -94,7 +94,7 @@ pub fn def_module_commands(input: TokenStream) -> TokenStream {
 /// ## **Expands To**
 /// ```rust
 /// {
-///     type CommandStruct = amnio_firmware::modules::commands::battery_command::SetOutput;
+///     type CommandStruct = stratum_firmware_common::modules::commands::battery_command::SetOutput;
 ///     type ResponseType = <CommandStruct as ModuleCommand>::Response;
 ///
 ///     let command = BatteryCommand::SetOutput { state: false };

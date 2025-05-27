@@ -1,9 +1,11 @@
 // state.rs
-use amnio_firmware::modules::{module_manager::ModuleManager, system_controller::SystemController};
 use eframe::CreationContext;
 use std::path::PathBuf;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
+use stratum_firmware_common::modules::{
+    module_manager::ModuleManager, system_controller::SystemController,
+};
 use stratum_ui_common::ui_logging::UiLogger;
 
 use crate::hot_reload_manager::SharedHotReloadManager;
