@@ -113,6 +113,13 @@ impl HotReloadManager {
     }
 
     pub fn start(manager: SharedHotReloadManager) {
+        let _ = std::process::Command::new("python3")
+            .arg("../stratum-ui/build_server.py")
+            .stdin(std::process::Stdio::null())
+            .stdout(std::process::Stdio::null())
+            .stderr(std::process::Stdio::null())
+            .spawn();
+
         let (plugin_path, watch_dirs, debounce) = {
             let guard = manager.lock().unwrap();
             (

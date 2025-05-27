@@ -74,7 +74,7 @@ void lv_example_get_started_1(void)
     if (!screen)
         return;
 
-    lv_obj_set_style_bg_color(screen, lv_color_hex(0x003a57), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(screen, lv_color_hex(0xff3a57), LV_PART_MAIN);
 
     // Create the label for elapsed time
     elapsed_label = lv_label_create(screen);
