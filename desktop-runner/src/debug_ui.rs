@@ -5,7 +5,7 @@ use crate::state::UiState;
 
 /// Creates the debugging UI inside a right-aligned panel.
 pub fn create_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
-    ui.heading("amnIO UI Debugger");
+    ui.heading("Amnio LVScope");
 
     ui.separator();
     ui.label(format!("FPS: {:.2}", ui_state.fps));
@@ -106,7 +106,7 @@ pub fn create_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
             .width(ui.available_width())
             .selected_text(manager.selected_build_display())
             .show_ui(ui, |cb| {
-                for build in &manager.available_builds() {
+                for build in &manager.sorted_builds() {
                     let label = if build.is_active {
                         format!("{} [ACTIVE]", build.filename())
                     } else {

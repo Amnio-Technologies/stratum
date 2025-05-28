@@ -79,6 +79,8 @@ def do_build(
         f"-DSTRATUM_TARGET={target}",
         f"-DSTRATUM_BUILD_DYNAMIC={'ON' if is_dynamic else 'OFF'}",
         f"-DSTRATUM_OUTPUT_NAME={intermediary}",
+        "-DCMAKE_C_COMPILER_LAUNCHER=ccache",
+        "-DCMAKE_CXX_COMPILER_LAUNCHER=ccache",
         str(PROJECT_ROOT),
     ]
 

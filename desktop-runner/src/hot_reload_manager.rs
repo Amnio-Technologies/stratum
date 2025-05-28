@@ -58,7 +58,6 @@ pub struct HotReloadManager {
     plugin_path: PathBuf,
     build_script: PathBuf,
     watch_dirs: Vec<PathBuf>,
-    debounce: Duration,
     pub auto_reload: bool,
     pub max_builds_to_keep: usize,
     pub reload_log: Vec<String>,
@@ -91,17 +90,11 @@ impl BuildInfo {
 }
 
 impl HotReloadManager {
-    pub fn new(
-        plugin_path: PathBuf,
-        build_script: PathBuf,
-        watch_dirs: Vec<PathBuf>,
-        debounce: Duration,
-    ) -> Self {
+    pub fn new(plugin_path: PathBuf, build_script: PathBuf, watch_dirs: Vec<PathBuf>) -> Self {
         Self {
             plugin_path,
             build_script,
             watch_dirs,
-            debounce,
             auto_reload: true,
             max_builds_to_keep: 5,
             reload_log: vec![],
@@ -120,13 +113,9 @@ impl HotReloadManager {
             .stderr(std::process::Stdio::null())
             .spawn();
 
-        let (plugin_path, watch_dirs, debounce) = {
+        let (plugin_path, watch_dirs) = {
             let guard = manager.lock().unwrap();
-            (
-                guard.plugin_path.clone(),
-                guard.watch_dirs.clone(),
-                guard.debounce,
-            )
+            (guard.plugin_path.clone(), guard.watch_dirs.clone())
         };
 
         {
@@ -142,17 +131,13 @@ impl HotReloadManager {
                 .push("👁️ Hot reload watcher started.".into());
         }
 
-        Self::spawn_watch_thread(manager.clone(), watch_dirs, debounce);
+        Self::spawn_watch_thread(manager.clone(), watch_dirs);
     }
 
-    fn spawn_watch_thread(
-        manager: SharedHotReloadManager,
-        watch_dirs: Vec<PathBuf>,
-        debounce: Duration,
-    ) {
+    fn spawn_watch_thread(manager: SharedHotReloadManager, watch_dirs: Vec<PathBuf>) {
         thread::spawn(move || {
             let (_watcher, _tx, rx) = Self::init_watcher(&watch_dirs);
-            Self::watch_loop(manager, rx, debounce);
+            Self::watch_loop(manager, rx);
         });
     }
 
@@ -177,26 +162,41 @@ impl HotReloadManager {
         (watcher, tx, rx)
     }
 
-    fn watch_loop(manager: SharedHotReloadManager, rx: Receiver<()>, debounce: Duration) {
-        let mut last_event: Option<Instant> = None;
+    fn watch_loop(manager: SharedHotReloadManager, rx: Receiver<()>) {
+        let mut pending = false;
+        let mut batch_started_at: Option<Instant> = None;
+        const BATCH_DURATION: Duration = Duration::from_millis(50);
+
         const WATCHER_TICK_MS: u64 = 50;
         loop {
             match rx.recv_timeout(Duration::from_millis(WATCHER_TICK_MS)) {
                 Ok(_) => {
-                    last_event = Some(Instant::now());
+                    if !pending {
+                        pending = true;
+                        batch_started_at = Some(Instant::now());
+                    }
                 }
                 Err(std::sync::mpsc::RecvTimeoutError::Timeout) => {
-                    if let Some(time) = last_event {
-                        if time.elapsed() >= debounce {
-                            last_event = None;
-                            let mut guard = manager.lock().unwrap();
-                            guard
-                                .reload_log
-                                .push("🔄 Stable change detected. Rebuilding...".into());
-                            guard.status = HotReloadStatus::Rebuilding;
-                            match guard.rebuild_and_reload() {
-                                Err(e) => guard.reload_log.push(format!("❌ Reload failed: {e}")),
-                                Ok(_) => guard.reload_log.push("✅ Hot reload successful".into()),
+                    if pending {
+                        if let Some(start) = batch_started_at {
+                            if start.elapsed() >= BATCH_DURATION {
+                                // ✅ BATCH FLUSH HERE
+                                pending = false;
+                                batch_started_at = None;
+
+                                let mut guard = manager.lock().unwrap();
+                                guard
+                                    .reload_log
+                                    .push("🔄 Stable change detected. Rebuilding...".into());
+                                guard.status = HotReloadStatus::Rebuilding;
+                                match guard.rebuild_and_reload() {
+                                    Err(e) => {
+                                        guard.reload_log.push(format!("❌ Reload failed: {e}"))
+                                    }
+                                    Ok(_) => {
+                                        guard.reload_log.push("✅ Hot reload successful".into())
+                                    }
+                                }
                             }
                         }
                     }
@@ -215,7 +215,7 @@ impl HotReloadManager {
         PathBuf::from("../stratum-ui/build/desktop")
     }
 
-    fn sorted_builds(&self) -> Vec<BuildInfo> {
+    pub fn sorted_builds(&self) -> Vec<BuildInfo> {
         let mut infos: Vec<_> = glob::glob(&format!(
             "{}/libstratum-ui*.{}",
             Self::build_output_dir().display(),
@@ -223,8 +223,17 @@ impl HotReloadManager {
         ))
         .unwrap()
         .filter_map(Result::ok)
+        // Exclude any file with "intermediary" in its filename
+        .filter(|path| {
+            if let Some(name) = path.file_name().and_then(|n| n.to_str()) {
+                !name.contains("intermediary")
+            } else {
+                true
+            }
+        })
         .map(|p| BuildInfo::new(p.clone(), p == self.plugin_path))
         .collect();
+
         infos.sort_by_key(|b| b.path.metadata().and_then(|m| m.modified()).ok());
         infos.reverse();
         infos
@@ -332,10 +341,6 @@ impl HotReloadManager {
                 }
             }
         }
-    }
-
-    pub fn available_builds(&self) -> Vec<BuildInfo> {
-        self.sorted_builds()
     }
 
     pub fn selected_build_display(&self) -> String {

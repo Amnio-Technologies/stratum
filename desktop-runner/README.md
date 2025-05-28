@@ -4,7 +4,7 @@ Here’s a **unified README** that supports both **Windows (MSYS2 + GNU toolchai
 
 # desktop-runner (amnIO Debug UI)
 
-This is the **amnIO UI Debugger**, a Rust-based application that **renders the UI and integrates LVGL**.
+This is the **amnIO LVScope**, a Rust-based application that **renders the UI and integrates LVGL**.
 It supports both **Windows (MSYS2)** and **Linux/WSL** setups.
 
 ---
@@ -115,4 +115,4 @@ Rust looks for the C backend via `build.rs`. If linking fails:
 
 * Ensure `stratum-ui` builds before anything else.
 * Confirm the C library is copied or linked correctly.
-* Run `cargo run` to launch the amnIO UI Debugger.
+* Run `cargo run` to launch LVScope.

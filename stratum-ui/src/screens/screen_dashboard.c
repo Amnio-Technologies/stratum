@@ -1,5 +1,5 @@
-#include "screen_dashboard.h"
-#include "../components/component_output_card.h"
+#include "screens/screen_dashboard.h"
+#include "components/component_output_card.h"
 #include "lvgl.h"
 
 static lv_obj_t *screen;

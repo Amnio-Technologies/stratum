@@ -5,7 +5,10 @@ use crate::{
     stratum_lvgl_ui::StratumLvglUI,
 };
 use eframe::{egui, CreationContext, Frame};
-use egui::{Direction, Layout, ScrollArea, TextureHandle};
+use egui::{
+    epaint::text::{FontInsert, InsertFontFamily},
+    Direction, Layout, ScrollArea, TextureHandle,
+};
 use std::sync::{atomic::Ordering, Arc};
 use stratum_ui_common::ui_logging::UiLogger;
 
@@ -25,6 +28,8 @@ impl StratumApp {
         let ui_state = UiState::new(cc, ui_logger, hot_reload_manager);
         let lvgl_ui = StratumLvglUI::new();
 
+        add_fonts(&cc.egui_ctx);
+
         Self {
             ui_state,
             lvgl_ui,
@@ -32,6 +37,38 @@ impl StratumApp {
             last_frame_start: std::time::Instant::now(),
         }
     }
+}
+
+fn add_fonts(ctx: &egui::Context) {
+    ctx.add_font(FontInsert::new(
+        "atkinson",
+        egui::FontData::from_static(include_bytes!("../fonts/AtkinsonHyperlegible-Regular.ttf")),
+        vec![
+            InsertFontFamily {
+                family: egui::FontFamily::Proportional,
+                priority: egui::epaint::text::FontPriority::Highest,
+            },
+            InsertFontFamily {
+                family: egui::FontFamily::Monospace,
+                priority: egui::epaint::text::FontPriority::Lowest,
+            },
+        ],
+    ));
+
+    ctx.add_font(FontInsert::new(
+        "jetbrains_mono",
+        egui::FontData::from_static(include_bytes!("../fonts/JetBrainsMonoNL-Regular.ttf")),
+        vec![
+            InsertFontFamily {
+                family: egui::FontFamily::Proportional,
+                priority: egui::epaint::text::FontPriority::Lowest,
+            },
+            InsertFontFamily {
+                family: egui::FontFamily::Monospace,
+                priority: egui::epaint::text::FontPriority::Highest,
+            },
+        ],
+    ));
 }
 
 impl eframe::App for StratumApp {

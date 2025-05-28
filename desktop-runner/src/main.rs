@@ -8,8 +8,8 @@ mod stratum_app;
 mod stratum_lvgl_ui;
 
 use hot_reload_manager::HotReloadManager;
+use std::path::PathBuf;
 use std::sync::{Arc, Mutex};
-use std::{path::PathBuf, time::Duration};
 use stratum_ui_common::ui_logging::UiLogger;
 
 fn main() {
@@ -20,7 +20,6 @@ fn main() {
             PathBuf::from("../stratum-ui/src"),
             PathBuf::from("../stratum-ui/include"),
         ],
-        Duration::from_millis(300),
     )));
 
     env_logger::init();
@@ -30,7 +29,7 @@ fn main() {
     let ui_logger: Arc<UiLogger> = UiLogger::new(10_000);
 
     eframe::run_native(
-        "amnIO Stratum Simulator",
+        "Amnio LVScope",
         eframe::NativeOptions::default(),
         Box::new(move |cc| {
             // Pass the logger through into your app

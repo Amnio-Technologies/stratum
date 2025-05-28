@@ -21,35 +21,34 @@ pub struct UiLogger {
 }
 
 impl UiLogger {
-    /// Creates the logger, registers the C callback, and returns a shared handle.
+    /// Create, register once, and return the Arc.
     pub fn new(max_logs: usize) -> Arc<Self> {
         let logger = Arc::new(UiLogger {
             logs: Mutex::new(Vec::with_capacity(max_logs)),
             max_logs,
         });
 
-        Self::bind_callback(logger.clone());
+        // Register the callback now (initial load)
+        unsafe {
+            register_ui_log_callback(Some(ui_log_callback), Arc::as_ptr(&logger) as *mut c_void);
+        }
 
         logger
     }
 
-    /// Re-registers the C log callback.
+    /// Re‐register after each hot reload.
     pub fn bind_callback(self: Arc<Self>) {
-        let user_data = Arc::into_raw(self) as *mut c_void;
         unsafe {
-            register_ui_log_callback(Some(ui_log_callback), user_data);
+            register_ui_log_callback(Some(ui_log_callback), Arc::as_ptr(&self) as *mut c_void);
         }
     }
 
-    /// Grab a snapshot of all logs so far and clear the buffer.
     pub fn take_logs(&self) -> Vec<String> {
         let mut guard = self.logs.lock().unwrap();
         std::mem::take(&mut *guard)
     }
 }
 
-/// Function pointer C will call.
-/// Reconstructs the Arc, bumps the refcount, then forgets the original.
 unsafe extern "C" fn ui_log_callback(
     user_data: *mut c_void,
     level: stratum_ui_ffi::LogLevel,
@@ -59,20 +58,18 @@ unsafe extern "C" fn ui_log_callback(
         return;
     }
 
-    // Recover Arc<UiLogger>
-    let arc = unsafe { Arc::from_raw(user_data as *const UiLogger) };
-    let logger = arc.clone(); // bump reference count
-    std::mem::forget(arc); // avoid dropping the original
+    let ptr = user_data as *const UiLogger;
+    Arc::increment_strong_count(ptr);
 
-    // Convert C string
-    let s = unsafe { CStr::from_ptr(msg) }
-        .to_string_lossy()
-        .into_owned();
+    let logger: Arc<UiLogger> = Arc::from_raw(ptr);
 
-    // Push into buffer with rotation
-    let mut logs = logger.logs.lock().unwrap();
-    if logs.len() >= logger.max_logs {
-        logs.remove(0);
+    let s = CStr::from_ptr(msg).to_string_lossy().into_owned();
+
+    {
+        let mut logs = logger.logs.lock().unwrap();
+        if logs.len() >= logger.max_logs {
+            logs.remove(0);
+        }
+        logs.push(format!("[{:?}] {}", level, s));
     }
-    logs.push(format!("[{:?}] {}", level, s));
 }
