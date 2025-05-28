@@ -6,6 +6,8 @@
 #include <stdbool.h>
 #include <string.h>
 #include "fonts/jetbrains_mono_nl_regular_12.h"
+#include "screens/screen_dashboard.h"
+#include "lvgl/src/core/lv_obj_class_private.h"
 
 // LVGL framebuffer (RGB565 format)
 static uint16_t *lvgl_framebuffer = NULL;
@@ -17,6 +19,46 @@ static lv_obj_t *elapsed_label = NULL;
 static uint32_t elapsed_seconds = 0;
 
 static ui_spi_send_cb_t _spi_cb = NULL;
+
+// // Helper to print indentation
+// static void print_indent(int depth)
+// {
+//     for (int i = 0; i < depth; i++)
+//     {
+//         printf("  ");
+//     }
+// }
+
+// // Recursive object walker
+// void walk_lvgl_tree(lv_obj_t *obj, int depth)
+// {
+//     if (!obj)
+//         return;
+
+//     print_indent(depth);
+
+//     // Use public API to get type name
+//     // const char *type_str = lv_obj_check_type(obj); // e.g. "lv_btn -> lv_obj"
+
+//     // Get object coordinates
+//     lv_area_t coords;
+//     lv_obj_get_coords(obj, &coords);
+
+//     // Print info
+//     printf("Obj: %s (%p) [%d,%d - %d,%d]\n",
+//            type_str,
+//            (void *)obj,
+//            coords.x1, coords.y1,
+//            coords.x2, coords.y2);
+
+//     // Walk children
+//     uint32_t child_count = lv_obj_get_child_cnt(obj);
+//     for (uint32_t i = 0; i < child_count; i++)
+//     {
+//         lv_obj_t *child = lv_obj_get_child(obj, i);
+//         walk_lvgl_tree(child, depth + 1);
+//     }
+// }
 
 // your existing flush:
 void my_flush_cb(lv_display_t *disp,
@@ -74,6 +116,11 @@ void lv_example_get_started_1(void)
     if (!screen)
         return;
 
+    lv_obj_class_t *class = lv_obj_get_class(screen);
+
+    const char *name = class ? ((const struct _lv_obj_class_t *)class)->name : "unknown";
+    printf("Class name: %s\n", name);
+
     lv_obj_set_style_bg_color(screen, lv_color_hex(0xff3a57), LV_PART_MAIN);
 
     // Create the label for elapsed time
@@ -96,7 +143,15 @@ UI_EXPORT void lvgl_setup(void)
     global_display = lv_display_create(LVGL_SCREEN_WIDTH, LVGL_SCREEN_HEIGHT);
     lv_display_set_flush_cb(global_display, my_flush_cb);
     lv_display_set_buffers(global_display, buf, NULL, sizeof(buf), LV_DISPLAY_RENDER_MODE_PARTIAL);
-    lv_example_get_started_1();
+
+    // 👇 Load the actual dashboard screen now
+    screen_dashboard_create();
+    // walk_lvgl_tree(lv_screen_active(), 0);
+
+    lv_obj_class_t *class = lv_obj_get_class(lv_screen_active());
+
+    const char *name = class ? ((const struct _lv_obj_class_t *)class)->name : "unknown";
+    ui_logf(LOG_INFO, "Class name: %s\n", name);
 }
 
 UI_EXPORT void lvgl_teardown(void)

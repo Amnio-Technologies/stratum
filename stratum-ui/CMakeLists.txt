@@ -63,17 +63,19 @@ if(STRATUM_OUTPUT_NAME)
     set(LIB_NAME "${STRATUM_OUTPUT_NAME}")
 endif()
 
+file(GLOB_RECURSE STRATUM_SOURCES CONFIGURE_DEPENDS
+    ${PROJECT_SOURCE_DIR}/src/*.c
+)
+
 if(STRATUM_BUILD_DYNAMIC)
     add_library(${LIB_NAME} SHARED
-        ${PROJECT_SOURCE_DIR}/src/stratum_ui.c
-        ${PROJECT_SOURCE_DIR}/src/extern_log.c
+        ${STRATUM_SOURCES}
         ${FONT_SOURCES}
         $<TARGET_OBJECTS:lvgl_objs>
     )
 else()
     add_library(${LIB_NAME} STATIC
-        ${PROJECT_SOURCE_DIR}/src/stratum_ui.c
-        ${PROJECT_SOURCE_DIR}/src/extern_log.c
+        ${STRATUM_SOURCES}
         ${FONT_SOURCES}
         $<TARGET_OBJECTS:lvgl_objs>
     )
