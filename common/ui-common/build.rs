@@ -21,67 +21,126 @@ fn get_dynamic_lib_path(root: &PathBuf, kind: &str) -> PathBuf {
         .join(format!("libstratum-ui.{ext}"))
 }
 
-fn build_dynamic_library(manifest: &PathBuf) {
+/// figure out “firmware” vs “desktop” once
+fn kind() -> &'static str {
     #[cfg(feature = "firmware")]
-    let kind = "firmware";
+    {
+        "firmware"
+    }
     #[cfg(not(feature = "firmware"))]
-    let kind = "desktop";
+    {
+        "desktop"
+    }
+}
 
-    let root = manifest.parent().unwrap().parent().unwrap();
-    let lib = get_dynamic_lib_path(&root.to_path_buf(), kind);
-    let script = root.join("stratum-ui").join("build.py");
+/// climb up from manifest/ to the project root
+fn project_root(manifest: &PathBuf) -> PathBuf {
+    manifest.parent().unwrap().parent().unwrap().to_path_buf()
+}
 
-    let status = Command::new("python3")
-        .arg(&script)
-        .arg("--dynamic")
+fn produce_artifact(
+    script: &PathBuf,
+    script_args: &[&str],
+    artifact: &PathBuf,
+    rerun_if_changed: &[&PathBuf],
+) {
+    let mut cmd = Command::new("python3");
+    cmd.arg(script);
+    script_args.iter().for_each(|a| {
+        cmd.arg(a);
+    });
+
+    let status = cmd
         .status()
-        .expect("Failed to run build.py --dynamic");
-
+        .unwrap_or_else(|e| panic!("failed to launch {:?}: {e}", script));
     if !status.success() {
         panic!(
-            "build.py --dynamic failed with exit code {:?}",
+            "{:?} {:?} failed with exit code {:?}",
+            script,
+            script_args,
             status.code()
         );
     }
 
-    if !lib.exists() {
-        panic!("Dynamic lib not found after build: {}", lib.display());
+    if !artifact.exists() {
+        panic!("Artifact not found after build: {}", artifact.display());
     }
 
-    println!("cargo:rerun-if-changed={}", script.display());
-    println!("cargo:rerun-if-changed={}", lib.display());
+    for path in rerun_if_changed {
+        println!("cargo:rerun-if-changed={}", path.display());
+    }
+}
+
+fn link_static_library(manifest: &PathBuf) {
+    let root = project_root(manifest);
+    let kind = kind();
+    let build_dir = root.join("stratum-ui").join("build").join(kind);
+    let lib = build_dir.join("libstratum-ui.a");
+    let script = root.join("stratum-ui").join("build.py");
+
+    produce_artifact(&script, &[], &lib, &[&lib]);
+
+    println!("cargo:rustc-link-search=native={}", build_dir.display());
+    println!("cargo:rustc-link-lib=static=stratum-ui");
+}
+
+fn build_dynamic_library(manifest: &PathBuf) {
+    let root = project_root(manifest);
+    let kind = kind();
+    let lib = get_dynamic_lib_path(&root, kind);
+    let script = root.join("stratum-ui").join("build.py");
+
+    produce_artifact(&script, &["--dynamic"], &lib, &[&script, &lib]);
+}
+
+fn generate_bindings_via_bindgen(
+    manifest_dir: &PathBuf,
+    out_dir: &PathBuf,
+    bindings_src_dir: &PathBuf,
+    bindings_src_file: &PathBuf,
+    bindings_out_file: &PathBuf,
+) {
+    let (inc_dir_amnio, inc_dir_lvgl, header_to_bind) = locate_include_dirs(&manifest_dir);
+    // TODO remove this hard-coded slop. find a better way to get clang's path. make it clear to users that they must have clang
+    let fallback = "/mingw64/bin/clang";
+
+    let (_api_funcs, allow_funcs, allow_types) =
+        parse_lvscope_ffi_api(&header_to_bind, &inc_dir_amnio);
+
+    run_bindgen(
+        &header_to_bind,
+        &inc_dir_amnio,
+        &inc_dir_lvgl,
+        fallback,
+        &allow_funcs,
+        &allow_types,
+        &bindings_out_file,
+    );
+
+    commit_bindings(&bindings_src_dir, &bindings_src_file, &bindings_out_file);
+
+    generate_dynamic_api(&bindings_out_file, &out_dir);
+    generate_internal_api(&bindings_out_file, &out_dir);
 }
 
 fn main() {
     let manifest_dir = PathBuf::from(env::var("CARGO_MANIFEST_DIR").unwrap());
+
     let out_dir = PathBuf::from(env::var("OUT_DIR").unwrap());
     let bindings_src_dir = manifest_dir.join("bindings");
     let bindings_src_file = bindings_src_dir.join("bindings.rs");
     let bindings_out_file = out_dir.join("bindings.rs");
 
-    if is_native_build() {
-        let (inc_dir_amnio, inc_dir_lvgl, header_to_bind) = locate_include_dirs(&manifest_dir);
-        let fallback = "/mingw64/bin/clang";
-
-        let (_api_funcs, allow_funcs, allow_types) =
-            parse_lvscope_ffi_api(&header_to_bind, &inc_dir_amnio);
-
-        run_bindgen(
-            &header_to_bind,
-            &inc_dir_amnio,
-            &inc_dir_lvgl,
-            fallback,
-            &allow_funcs,
-            &allow_types,
+    if is_cross_compile() {
+        copy_prebuilt_bindings(&bindings_src_file, &bindings_out_file);
+    } else {
+        generate_bindings_via_bindgen(
+            &manifest_dir,
+            &out_dir,
+            &bindings_src_dir,
+            &bindings_src_file,
             &bindings_out_file,
         );
-
-        commit_bindings(&bindings_src_dir, &bindings_src_file, &bindings_out_file);
-
-        generate_dynamic_api(&bindings_out_file, &out_dir);
-        generate_internal_api(&bindings_out_file, &out_dir);
-    } else {
-        copy_prebuilt_bindings(&bindings_src_file, &bindings_out_file);
     }
 
     link_static_library(&manifest_dir);
@@ -89,8 +148,8 @@ fn main() {
 }
 
 // Detect native vs cross-compile
-fn is_native_build() -> bool {
-    env::var("HOST").unwrap() == env::var("TARGET").unwrap()
+fn is_cross_compile() -> bool {
+    env::var("HOST").unwrap() != env::var("TARGET").unwrap()
 }
 
 fn locate_include_dirs(manifest: &PathBuf) -> (PathBuf, PathBuf, PathBuf) {
@@ -420,40 +479,4 @@ fn copy_prebuilt_bindings(src: &PathBuf, dst: &PathBuf) {
     fs::copy(src, dst).expect("Failed to copy pre-generated bindings.rs");
     println!("cargo:warning=Skipping bindgen (cross-compile)");
     println!("cargo:rerun-if-changed={}", src.display());
-}
-
-fn link_static_library(manifest: &PathBuf) {
-    #[cfg(feature = "firmware")]
-    let kind = "firmware";
-    #[cfg(not(feature = "firmware"))]
-    let kind = "desktop";
-
-    let root = manifest.parent().unwrap().parent().unwrap();
-    let build = root.join("stratum-ui").join("build").join(kind);
-    let lib = build.join("libstratum-ui.a");
-
-    if !lib.exists() {
-        let script = root.join("stratum-ui").join("build.py");
-        println!(
-            "cargo:warning=libstratum-ui.a not found, running build script: {}",
-            script.display()
-        );
-
-        let status = Command::new("python3")
-            .arg(script)
-            .status()
-            .expect("Failed to run build.py");
-
-        if !status.success() {
-            panic!("build.py failed with exit code {:?}", status.code());
-        }
-    }
-
-    if !lib.exists() {
-        panic!("Static lib still not found after build: {}", lib.display());
-    }
-
-    println!("cargo:rustc-link-search=native={}", build.display());
-    println!("cargo:rustc-link-lib=static=stratum-ui");
-    println!("cargo:rerun-if-changed={}", lib.display());
 }
