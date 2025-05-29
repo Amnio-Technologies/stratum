@@ -39,6 +39,7 @@ fn copy_prebuilt_bindings(src: &PathBuf, dst: &PathBuf) -> Result<(), Box<dyn Er
     fs::copy(src, dst)?;
     println!("cargo:warning=Skipping bindgen (cross-compile)");
     println!("cargo:rerun-if-changed={}", src.display());
+
     Ok(())
 }
 
