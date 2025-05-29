@@ -37,7 +37,7 @@ impl UiLogger {
     }
 
     /// Re‐register after each hot reload.
-    pub fn bind_callback(self: Arc<Self>) {
+    pub fn bind_ffi_callback(self: Arc<Self>) {
         unsafe {
             register_ui_log_callback(Some(ui_log_callback), Arc::as_ptr(&self) as *mut c_void);
         }

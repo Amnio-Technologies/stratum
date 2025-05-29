@@ -82,7 +82,7 @@ impl eframe::App for StratumApp {
             .should_reload_ui
             .swap(false, Ordering::Relaxed)
         {
-            self.ui_state.ui_logger.clone().bind_callback();
+            self.ui_state.ui_logger.clone().bind_ffi_callback();
             self.lvgl_ui.reload_ui();
         }
 
