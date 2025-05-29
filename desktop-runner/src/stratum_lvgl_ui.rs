@@ -1,6 +1,6 @@
 use std::pin::Pin;
 
-use egui::{ColorImage, TextureHandle, TextureOptions};
+use egui::TextureHandle;
 use stratum_ui_common::{lvgl_backend::LvglBackend, stratum_ui_ffi};
 
 use crate::lvgl_backend::DesktopLvglBackend;
@@ -49,8 +49,8 @@ impl LvglRenderer {
         // 1) Convert to RGBA_u8
         let (width, height) = unsafe {
             (
-                stratum_ui_common::stratum_ui_ffi::get_lvgl_display_width() as usize,
-                stratum_ui_common::stratum_ui_ffi::get_lvgl_display_height() as usize,
+                stratum_ui_ffi::get_lvgl_display_width() as usize,
+                stratum_ui_ffi::get_lvgl_display_height() as usize,
             )
         };
         let mut rgba_data = Vec::with_capacity(width * height * 4);

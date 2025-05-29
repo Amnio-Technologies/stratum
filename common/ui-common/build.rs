@@ -1,6 +1,8 @@
 use std::error::Error;
 use std::{collections::HashSet, env, fs, path::PathBuf, process::Command};
 
+// TODO: add rerun-if-changed directives for UI code changes
+
 use regex::Regex;
 
 /// C macro used to tag exported functions from the plugin interface

@@ -14,5 +14,6 @@ typedef struct
     void *debug_id;
 } FlatNode;
 
-typedef void (*tree_send_cb_t)(const FlatNode *nodes, size_t count, void *user_data);
+typedef void (*tree_send_cb_t)(void *user_data, const FlatNode *nodes, size_t count);
 UI_EXPORT void register_tree_send_callback(tree_send_cb_t cb, void *user_data);
+UI_EXPORT void export_tree(void);

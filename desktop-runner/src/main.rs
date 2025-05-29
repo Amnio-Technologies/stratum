@@ -10,6 +10,7 @@ mod stratum_lvgl_ui;
 use hot_reload_manager::HotReloadManager;
 use std::path::PathBuf;
 use std::sync::{Arc, Mutex};
+use stratum_ui_common::lvgl_obj_tree::TreeManager;
 use stratum_ui_common::ui_logging::UiLogger;
 
 fn main() {
@@ -24,6 +25,7 @@ fn main() {
 
     env_logger::init();
     HotReloadManager::start(hot_reload_manager.clone());
+    let tree_manager = TreeManager::new();
 
     // Spin up our C -> Rust logger with a 10_000-entry cap
     let ui_logger: Arc<UiLogger> = UiLogger::new(10_000);
@@ -37,6 +39,7 @@ fn main() {
                 cc,
                 ui_logger.clone(),
                 hot_reload_manager,
+                tree_manager,
             )))
         }),
     )

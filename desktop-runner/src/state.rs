@@ -6,6 +6,7 @@ use std::time::{Duration, Instant};
 use stratum_firmware_common::modules::{
     module_manager::ModuleManager, system_controller::SystemController,
 };
+use stratum_ui_common::lvgl_obj_tree::TreeManager;
 use stratum_ui_common::ui_logging::UiLogger;
 
 use crate::hot_reload_manager::SharedHotReloadManager;
@@ -24,6 +25,8 @@ pub struct UiState {
 
     pub hot_reload_manager: SharedHotReloadManager,
 
+    pub tree_manager: Arc<TreeManager>,
+
     /// Accumulated lines for debug display.
     pub log_buffer: Vec<String>,
 
@@ -36,6 +39,7 @@ impl UiState {
         _cc: &CreationContext<'_>,
         ui_logger: Arc<UiLogger>,
         hot_reload_manager: SharedHotReloadManager,
+        tree_manager: Arc<TreeManager>,
     ) -> Self {
         UiState {
             enable_vsync: false,
@@ -46,6 +50,7 @@ impl UiState {
             last_fps_update: Instant::now(),
             ui_logger,
             hot_reload_manager,
+            tree_manager,
             log_buffer: Vec::new(),
             selected_build: None,
         }

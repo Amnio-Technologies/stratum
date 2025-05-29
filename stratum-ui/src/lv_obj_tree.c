@@ -1,9 +1,8 @@
-#include "lv_obj_tree.h"
-#include "lvgl.h" // required for lv_obj_* and lv_area_t
 #include <stdlib.h>
 #include <string.h>
+#include "lvgl.h"
 #include "lvgl/src/core/lv_obj_class_private.h"
-#include "stratum_ui.h"
+#include "lv_obj_tree.h"
 
 // Static storage for the callback and its user data
 static tree_send_cb_t tree_send_cb = NULL;
@@ -62,7 +61,7 @@ static size_t count_all_objects(lv_obj_t *obj)
     return total;
 }
 
-void lvscope_export_tree(void)
+UI_EXPORT void export_tree(void)
 {
     lv_obj_t *root = lv_scr_act();
     size_t total = count_all_objects(root);
@@ -78,7 +77,7 @@ void lvscope_export_tree(void)
 
     if (tree_send_cb)
     {
-        tree_send_cb(nodes, total, tree_send_user_data);
+        tree_send_cb(tree_send_user_data, nodes, total);
     }
 
     free(nodes);

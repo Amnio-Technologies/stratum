@@ -10,7 +10,7 @@ use egui::{
     Direction, Layout, ScrollArea, TextureHandle,
 };
 use std::sync::{atomic::Ordering, Arc};
-use stratum_ui_common::ui_logging::UiLogger;
+use stratum_ui_common::{lvgl_obj_tree::TreeManager, ui_logging::UiLogger};
 
 pub struct StratumApp {
     ui_state: UiState,
@@ -24,8 +24,9 @@ impl StratumApp {
         cc: &CreationContext<'_>,
         ui_logger: Arc<UiLogger>,
         hot_reload_manager: SharedHotReloadManager,
+        tree_manager: Arc<TreeManager>,
     ) -> Self {
-        let ui_state = UiState::new(cc, ui_logger, hot_reload_manager);
+        let ui_state = UiState::new(cc, ui_logger, hot_reload_manager, tree_manager);
         let lvgl_ui = StratumLvglUI::new();
 
         add_fonts(&cc.egui_ctx);

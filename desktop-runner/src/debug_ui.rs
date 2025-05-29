@@ -1,4 +1,5 @@
 use egui::{Checkbox, Id, ScrollArea};
+use egui_ltreeview::TreeView;
 use stratum_firmware_common::modules::dummies::dummy_battery::DummyBatteryModule;
 
 use crate::state::UiState;
@@ -152,5 +153,25 @@ pub fn create_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
                     ui.label(egui::RichText::new(clean).monospace());
                 }
             });
+    });
+
+    dbg!(ui_state.tree_manager.take_nodes());
+
+    TreeView::new(ui.make_persistent_id("Names tree view")).show(ui, |builder| {
+        builder.dir(0, "Root");
+        builder.dir(1, "Foo");
+        builder.leaf(2, "Ava");
+        builder.dir(3, "Bar");
+        builder.leaf(4, "Benjamin");
+        builder.leaf(5, "Charlotte");
+        builder.close_dir();
+        builder.close_dir();
+        builder.leaf(6, "Daniel");
+        builder.leaf(7, "Emma");
+        builder.dir(8, "Baz");
+        builder.leaf(9, "Finn");
+        builder.leaf(10, "Grayson");
+        builder.close_dir();
+        builder.close_dir();
     });
 }

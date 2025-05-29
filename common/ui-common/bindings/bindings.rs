@@ -35,13 +35,16 @@ pub struct FlatNode {
 }
 pub type tree_send_cb_t = ::std::option::Option<
     unsafe extern "C" fn(
+        user_data: *mut ::std::os::raw::c_void,
         nodes: *const FlatNode,
         count: usize,
-        user_data: *mut ::std::os::raw::c_void,
     ),
 >;
 unsafe extern "C" {
     pub fn register_tree_send_callback(cb: tree_send_cb_t, user_data: *mut ::std::os::raw::c_void);
+}
+unsafe extern "C" {
+    pub fn export_tree();
 }
 unsafe extern "C" {
     pub fn lvgl_setup();
