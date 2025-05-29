@@ -1,3 +1,4 @@
+use std::error::Error;
 use std::{collections::HashSet, env, fs, path::PathBuf, process::Command};
 
 use regex::Regex;
@@ -8,16 +9,15 @@ const EXPORT_TAG: &str = "UI_EXPORT";
 /// Constants from the C header we want to expose in Rust
 const LVGL_BIND_VARS: &[&str] = &["LVGL_SCREEN_WIDTH", "LVGL_SCREEN_HEIGHT"];
 
-fn main() {
-    let manifest_dir = PathBuf::from(env::var("CARGO_MANIFEST_DIR").unwrap());
-
-    let out_dir = PathBuf::from(env::var("OUT_DIR").unwrap());
+fn main() -> Result<(), Box<dyn Error>> {
+    let manifest_dir = PathBuf::from(env::var("CARGO_MANIFEST_DIR")?);
+    let out_dir = PathBuf::from(env::var("OUT_DIR")?);
     let bindings_src_dir = manifest_dir.join("bindings");
     let bindings_src_file = bindings_src_dir.join("bindings.rs");
     let bindings_out_file = out_dir.join("bindings.rs");
 
     if is_cross_compile() {
-        copy_prebuilt_bindings(&bindings_src_file, &bindings_out_file);
+        copy_prebuilt_bindings(&bindings_src_file, &bindings_out_file)?;
     } else {
         generate_bindings_via_bindgen(
             &manifest_dir,
@@ -25,18 +25,21 @@ fn main() {
             &bindings_src_dir,
             &bindings_src_file,
             &bindings_out_file,
-        );
+        )?;
     }
 
-    link_static_library(&manifest_dir);
-    build_dynamic_library(&manifest_dir);
+    link_static_library(&manifest_dir)?;
+    build_dynamic_library(&manifest_dir)?;
+
+    Ok(())
 }
 
-fn copy_prebuilt_bindings(src: &PathBuf, dst: &PathBuf) {
-    fs::create_dir_all(dst.parent().unwrap()).unwrap();
-    fs::copy(src, dst).expect("Failed to copy pre-generated bindings.rs");
+fn copy_prebuilt_bindings(src: &PathBuf, dst: &PathBuf) -> Result<(), Box<dyn Error>> {
+    fs::create_dir_all(dst.parent().unwrap())?;
+    fs::copy(src, dst)?;
     println!("cargo:warning=Skipping bindgen (cross-compile)");
     println!("cargo:rerun-if-changed={}", src.display());
+    Ok(())
 }
 
 fn generate_bindings_via_bindgen(
@@ -45,9 +48,9 @@ fn generate_bindings_via_bindgen(
     bindings_src_dir: &PathBuf,
     bindings_src_file: &PathBuf,
     bindings_out_file: &PathBuf,
-) {
+) -> Result<(), Box<dyn Error>> {
     let (inc_dir_amnio, inc_dir_lvgl, header_to_bind) = locate_include_dirs(&manifest_dir);
-    // TODO remove this hard-coded slop. find a better way to get clang's path. make it clear to users that they must have clang
+    // TODO remove this hard-coded clang path
     let fallback = "/mingw64/bin/clang";
 
     let (_api_funcs, allow_funcs, allow_types) =
@@ -61,27 +64,30 @@ fn generate_bindings_via_bindgen(
         &allow_funcs,
         &allow_types,
         &bindings_out_file,
-    );
+    )?;
 
-    commit_bindings(&bindings_src_dir, &bindings_src_file, &bindings_out_file);
+    commit_bindings(&bindings_src_dir, &bindings_src_file, &bindings_out_file)?;
+    generate_dynamic_api(&bindings_out_file, &out_dir)?;
+    generate_internal_api(&bindings_out_file, &out_dir)?;
 
-    generate_dynamic_api(&bindings_out_file, &out_dir);
-    generate_internal_api(&bindings_out_file, &out_dir);
+    Ok(())
 }
 
-fn commit_bindings(src_dir: &PathBuf, src: &PathBuf, out: &PathBuf) {
-    fs::create_dir_all(src_dir).unwrap();
-    fs::copy(out, src).expect("Failed to update committed bindings.rs");
+fn commit_bindings(src_dir: &PathBuf, src: &PathBuf, out: &PathBuf) -> Result<(), Box<dyn Error>> {
+    fs::create_dir_all(src_dir)?;
+    fs::copy(out, src)?;
     println!("cargo:rerun-if-changed={}", src.display());
+
+    Ok(())
 }
 
-fn generate_dynamic_api(bindings: &PathBuf, out_dir: &PathBuf) {
+fn generate_dynamic_api(bindings: &PathBuf, out_dir: &PathBuf) -> Result<(), Box<dyn Error>> {
     use proc_macro2::TokenStream;
     use quote::quote;
     use syn::{File, FnArg, ForeignItem, Item, ItemForeignMod};
 
-    let src = fs::read_to_string(bindings).unwrap();
-    let parsed: File = syn::parse_str(&src).unwrap();
+    let src = fs::read_to_string(bindings)?;
+    let parsed: File = syn::parse_str(&src)?;
 
     let mut out = String::new();
     out.push_str("use crate::stratum_ui_ffi::dynamic_api::internal_api::API;\n\n");
@@ -98,8 +104,7 @@ fn generate_dynamic_api(bindings: &PathBuf, out_dir: &PathBuf) {
                         .filter_map(|arg| {
                             if let FnArg::Typed(p) = arg {
                                 if let syn::Pat::Ident(id) = &*p.pat {
-                                    let i = &id.ident;
-                                    return Some(quote! {#i});
+                                    return Some(quote! { #id });
                                 }
                             }
                             None
@@ -119,45 +124,50 @@ fn generate_dynamic_api(bindings: &PathBuf, out_dir: &PathBuf) {
     }
 
     let dst = out_dir.join("dynamic_api.rs");
-    fs::write(dst, out).expect("Failed to write dynamic_api.rs");
+    fs::write(dst, out)?;
+
+    Ok(())
 }
 
-fn generate_internal_api(bindings: &PathBuf, out_dir: &PathBuf) {
+fn generate_internal_api(bindings: &PathBuf, out_dir: &PathBuf) -> Result<(), Box<dyn Error>> {
     use quote::quote;
     use syn::{File, FnArg, ForeignItem, Item, ItemForeignMod, ReturnType};
 
-    let src = fs::read_to_string(bindings).unwrap();
-    let parsed: File = syn::parse_str(&src).unwrap();
+    let src = fs::read_to_string(bindings)?;
+    let parsed: File = syn::parse_str(&src)?;
 
     let mut api_fields = Vec::new();
     let mut api_loads = Vec::new();
 
     for item in parsed.items {
         if let Item::ForeignMod(ItemForeignMod { items, .. }) = item {
-            for item in items {
-                if let ForeignItem::Fn(func) = item {
+            for fi in items {
+                if let ForeignItem::Fn(func) = fi {
                     let name = &func.sig.ident;
 
-                    let mut arg_types = Vec::new();
-                    for input in &func.sig.inputs {
-                        if let FnArg::Typed(pat_type) = input {
-                            let ty = &*pat_type.ty;
-                            arg_types.push(quote! { #ty });
-                        }
-                    }
+                    let arg_types = func
+                        .sig
+                        .inputs
+                        .iter()
+                        .filter_map(|input| {
+                            if let FnArg::Typed(pat_type) = input {
+                                let ty = &*pat_type.ty;
+                                return Some(quote! { #ty });
+                            }
+                            None
+                        })
+                        .collect::<Vec<_>>();
 
                     let ret_type = match &func.sig.output {
                         ReturnType::Default => quote! {},
-                        ReturnType::Type(_, ty) => quote! { -> #ty },
+                        ReturnType::Type(_, t) => quote! { -> #t },
                     };
 
                     let fn_type = quote! {
                         unsafe extern "C" fn(#(#arg_types),*) #ret_type
                     };
 
-                    api_fields.push(quote! {
-                        pub #name: #fn_type,
-                    });
+                    api_fields.push(quote! { pub #name: #fn_type, });
 
                     let symbol = format!("{}\0", name);
                     api_loads.push(quote! {
@@ -177,7 +187,7 @@ fn generate_internal_api(bindings: &PathBuf, out_dir: &PathBuf) {
         pub static API: RwLock<Option<LoadedApi>> = RwLock::new(None);
 
         pub struct LoadedApi {
-            _lib: Library, // must be retained to keep function pointers valid
+            _lib: Library,
             pub api: Api,
         }
 
@@ -193,65 +203,73 @@ fn generate_internal_api(bindings: &PathBuf, out_dir: &PathBuf) {
                 #(#api_loads)*
             };
 
-            *API.write().unwrap() = Some(LoadedApi {
-                _lib: lib,
-                api
-            });
-
+            *API.write().unwrap() = Some(LoadedApi { _lib: lib, api });
             Ok(())
         }
     };
 
     let dst = out_dir.join("internal_api.rs");
-    fs::write(dst, code.to_string()).expect("Failed to write internal_api.rs");
+    fs::write(dst, code.to_string())?;
+
+    Ok(())
 }
 
-fn link_static_library(manifest: &PathBuf) {
+fn link_static_library(manifest: &PathBuf) -> Result<(), Box<dyn Error>> {
     let root = project_root(manifest);
-    let kind = kind();
-    let build_dir = root.join("stratum-ui").join("build").join(kind);
+    let kind_str = kind();
+    let build_dir = root.join("stratum-ui").join("build").join(kind_str);
     let lib = build_dir.join("libstratum-ui.a");
     let script = root.join("stratum-ui").join("build.py");
 
-    produce_artifact(&script, &[], &lib);
-
+    produce_artifact(&script, &[], &lib)?;
     println!("cargo:rustc-link-search=native={}", build_dir.display());
     println!("cargo:rustc-link-lib=static=stratum-ui");
+
+    Ok(())
 }
 
-fn build_dynamic_library(manifest: &PathBuf) {
+fn build_dynamic_library(manifest: &PathBuf) -> Result<(), Box<dyn Error>> {
     let root = project_root(manifest);
-    let kind = kind();
-    let lib = get_dynamic_lib_path(&root, kind);
+    let kind_str = kind();
+    let lib = get_dynamic_lib_path(&root, kind_str);
     let script = root.join("stratum-ui").join("build.py");
 
-    produce_artifact(&script, &["--dynamic"], &lib);
+    produce_artifact(&script, &["--dynamic"], &lib)?;
+
+    Ok(())
 }
 
-fn produce_artifact(script: &PathBuf, script_args: &[&str], artifact: &PathBuf) {
+fn produce_artifact(
+    script: &PathBuf,
+    script_args: &[&str],
+    artifact: &PathBuf,
+) -> Result<(), Box<dyn Error>> {
     let mut cmd = Command::new("python3");
     cmd.arg(script);
-    script_args.iter().for_each(|a| {
-        cmd.arg(a);
-    });
+    for arg in script_args {
+        cmd.arg(arg);
+    }
 
     let status = cmd
         .status()
-        .unwrap_or_else(|e| panic!("failed to launch {:?}: {e}", script));
+        .map_err(|e| format!("failed to launch {:?}: {e}", script))?;
     if !status.success() {
-        panic!(
+        return Err(format!(
             "{:?} {:?} failed with exit code {:?}",
             script,
             script_args,
             status.code()
-        );
+        )
+        .into());
     }
 
     if !artifact.exists() {
-        panic!("Artifact not found after build: {}", artifact.display());
+        return Err(format!("Artifact not found after build: {}", artifact.display()).into());
     }
 
     println!("cargo:rerun-if-changed={}", script.display());
+
+    Ok(())
 }
 
 fn get_dynamic_lib_path(root: &PathBuf, kind: &str) -> PathBuf {
@@ -310,7 +328,6 @@ fn collect_headers(header: &PathBuf, include_dir: &PathBuf) -> Vec<PathBuf> {
         result: &mut Vec<PathBuf>,
         inc_re: &Regex,
     ) {
-        // avoid cycles
         if !visited.insert(path.clone()) {
             return;
         }
@@ -320,8 +337,7 @@ fn collect_headers(header: &PathBuf, include_dir: &PathBuf) -> Vec<PathBuf> {
             .unwrap_or_else(|_| panic!("Failed to read header: {}", path.display()));
 
         for cap in inc_re.captures_iter(&text) {
-            let inc_file = &cap[1];
-            let candidate = include_dir.join(inc_file);
+            let candidate = include_dir.join(&cap[1]);
             if candidate.exists() {
                 recurse(&candidate, include_dir, visited, result, inc_re);
             }
@@ -341,7 +357,6 @@ fn parse_lvscope_ffi_api(
     HashSet<String>,
 ) {
     let headers_to_parse = collect_headers(header, include_dir);
-
     parse_exported_apis(headers_to_parse)
 }
 
@@ -352,7 +367,7 @@ fn extract_from_text(
     funcs: &mut HashSet<String>,
     types: &mut HashSet<String>,
 ) {
-    for cap in re.captures_iter(&header_text) {
+    for cap in re.captures_iter(header_text) {
         let name = cap[1].to_string();
         funcs.insert(name.clone());
 
@@ -427,7 +442,6 @@ fn parse_exported_apis(
     for header in headers {
         let header_text = fs::read_to_string(&header)
             .unwrap_or_else(|_| panic!("Failed to read header: {}", header.display()));
-
         extract_from_text(&re, &header_text, &mut api, &mut funcs, &mut types);
     }
 
@@ -442,7 +456,7 @@ fn run_bindgen(
     funcs: &HashSet<String>,
     types: &HashSet<String>,
     out_file: &PathBuf,
-) {
+) -> Result<(), Box<dyn Error>> {
     let mut b = bindgen::Builder::default()
         .layout_tests(false)
         .derive_default(false)
@@ -457,18 +471,15 @@ fn run_bindgen(
     for f in funcs {
         b = b.allowlist_function(f);
     }
-
     for t in types {
         b = b.allowlist_type(t);
     }
-
     for v in LVGL_BIND_VARS {
         b = b.allowlist_var(v);
     }
 
-    let bindings = b.generate().expect("Failed to generate bindings");
+    let bindings = b.generate()?;
+    bindings.write_to_file(out_file)?;
 
-    bindings
-        .write_to_file(out_file)
-        .expect("Couldn't write bindings.rs");
+    Ok(())
 }
