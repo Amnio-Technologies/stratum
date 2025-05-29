@@ -213,7 +213,7 @@ fn link_static_library(manifest: &PathBuf) {
     let lib = build_dir.join("libstratum-ui.a");
     let script = root.join("stratum-ui").join("build.py");
 
-    produce_artifact(&script, &[], &lib, &[&lib]);
+    produce_artifact(&script, &[], &lib);
 
     println!("cargo:rustc-link-search=native={}", build_dir.display());
     println!("cargo:rustc-link-lib=static=stratum-ui");
@@ -225,15 +225,10 @@ fn build_dynamic_library(manifest: &PathBuf) {
     let lib = get_dynamic_lib_path(&root, kind);
     let script = root.join("stratum-ui").join("build.py");
 
-    produce_artifact(&script, &["--dynamic"], &lib, &[&script, &lib]);
+    produce_artifact(&script, &["--dynamic"], &lib);
 }
 
-fn produce_artifact(
-    script: &PathBuf,
-    script_args: &[&str],
-    artifact: &PathBuf,
-    rerun_if_changed: &[&PathBuf],
-) {
+fn produce_artifact(script: &PathBuf, script_args: &[&str], artifact: &PathBuf) {
     let mut cmd = Command::new("python3");
     cmd.arg(script);
     script_args.iter().for_each(|a| {
@@ -256,9 +251,7 @@ fn produce_artifact(
         panic!("Artifact not found after build: {}", artifact.display());
     }
 
-    for path in rerun_if_changed {
-        println!("cargo:rerun-if-changed={}", path.display());
-    }
+    println!("cargo:rerun-if-changed={}", script.display());
 }
 
 fn get_dynamic_lib_path(root: &PathBuf, kind: &str) -> PathBuf {
