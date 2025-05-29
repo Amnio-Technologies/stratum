@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include "ui_export_marker.h"
 
 typedef struct
 {
@@ -12,3 +13,6 @@ typedef struct
     bool hidden;
     void *debug_id;
 } FlatNode;
+
+typedef void (*tree_send_cb_t)(const FlatNode *nodes, size_t count, void *user_data);
+UI_EXPORT void register_tree_send_callback(tree_send_cb_t cb, void *user_data);

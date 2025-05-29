@@ -1,5 +1,7 @@
 use std::{collections::HashSet, env, fs, path::PathBuf, process::Command};
 
+use regex::Regex;
+
 /// C macro used to tag exported functions from the plugin interface
 const EXPORT_TAG: &str = "UI_EXPORT";
 
@@ -59,9 +61,10 @@ fn main() {
 
     if is_native_build() {
         let (inc_dir_amnio, inc_dir_lvgl, header_to_bind) = locate_include_dirs(&manifest_dir);
-        let fallback = "/usr/lib/clang/15/include";
+        let fallback = "/mingw64/bin/clang";
 
-        let (_api_funcs, allow_funcs, allow_types) = parse_amnio_api(&header_to_bind);
+        let (_api_funcs, allow_funcs, allow_types) =
+            parse_lvscope_ffi_api(&header_to_bind, &inc_dir_amnio);
 
         run_bindgen(
             &header_to_bind,
@@ -98,17 +101,121 @@ fn locate_include_dirs(manifest: &PathBuf) -> (PathBuf, PathBuf, PathBuf) {
     (inc_amnio, inc_lvgl, header)
 }
 
-fn parse_amnio_api(
+/// Recursively collect every header referenced by `header` via `#include "…"`
+/// (only looking under `include_dir`), returning a flat Vec of PathBuf.
+fn collect_headers(header: &PathBuf, include_dir: &PathBuf) -> Vec<PathBuf> {
+    let mut visited = HashSet::new();
+    let mut result = Vec::new();
+    let inc_re = Regex::new(r#"#include\s*"([^"]+)""#).unwrap();
+
+    fn recurse(
+        path: &PathBuf,
+        include_dir: &PathBuf,
+        visited: &mut HashSet<PathBuf>,
+        result: &mut Vec<PathBuf>,
+        inc_re: &Regex,
+    ) {
+        // avoid cycles
+        if !visited.insert(path.clone()) {
+            return;
+        }
+        result.push(path.clone());
+
+        let text = fs::read_to_string(path)
+            .unwrap_or_else(|_| panic!("Failed to read header: {}", path.display()));
+
+        for cap in inc_re.captures_iter(&text) {
+            let inc_file = &cap[1];
+            let candidate = include_dir.join(inc_file);
+            if candidate.exists() {
+                recurse(&candidate, include_dir, visited, result, inc_re);
+            }
+        }
+    }
+
+    recurse(header, include_dir, &mut visited, &mut result, &inc_re);
+    result
+}
+
+fn parse_lvscope_ffi_api(
     header: &PathBuf,
+    include_dir: &PathBuf,
 ) -> (
     Vec<(String, Vec<(String, String)>)>,
     HashSet<String>,
     HashSet<String>,
 ) {
-    use regex::Regex;
-    let text = fs::read_to_string(header)
-        .unwrap_or_else(|_| panic!("Failed to read header: {}", header.display()));
+    let headers_to_parse = collect_headers(header, include_dir);
 
+    parse_exported_apis(headers_to_parse)
+}
+
+fn extract_from_text(
+    re: &Regex,
+    header_text: &str,
+    api: &mut Vec<(String, Vec<(String, String)>)>,
+    funcs: &mut HashSet<String>,
+    types: &mut HashSet<String>,
+) {
+    for cap in re.captures_iter(&header_text) {
+        let name = cap[1].to_string();
+        funcs.insert(name.clone());
+
+        let raw = cap[2].trim();
+        let mut args = Vec::new();
+
+        // Skip no-argument functions
+        if raw == "void" || raw.is_empty() {
+            api.push((name, args));
+            continue;
+        }
+
+        for p in raw.split(',') {
+            // tokenise on whitespace
+            let mut toks: Vec<_> = p.trim().split_whitespace().collect();
+            if toks.is_empty() {
+                continue;
+            }
+
+            // last token is the identifier (+ maybe leading '*'s)
+            let mut var = toks.pop().unwrap().to_string();
+
+            // collect pointer stars
+            let mut ptr = String::new();
+
+            // 1) stars glued to the identifier
+            while var.starts_with('*') {
+                ptr.push('*');
+                var.remove(0);
+            }
+
+            // 2) stand-alone “*” tokens immediately before the identifier
+            while toks.last().map_or(false, |t| *t == "*") {
+                toks.pop();
+                ptr.push('*');
+            }
+
+            // rebuild type and append the stars
+            let mut ty = toks.join(" ");
+            ty.push_str(&ptr);
+
+            if !ty.is_empty() && !var.is_empty() {
+                types.insert(ty.clone());
+                args.push((ty, var));
+            }
+        }
+
+        api.push((name, args));
+    }
+}
+
+fn parse_exported_apis(
+    headers: Vec<PathBuf>,
+) -> (
+    Vec<(String, Vec<(String, String)>)>,
+    HashSet<String>,
+    HashSet<String>,
+) {
     let re = Regex::new(
         format!(
             r"{}\s+[^\s\(]+(?:\s*\*+)?\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*\(([^)]*)\)\s*;",
@@ -122,50 +229,11 @@ fn parse_amnio_api(
     let mut funcs = HashSet::new();
     let mut types = HashSet::new();
 
-    for cap in re.captures_iter(&text) {
-        let name = cap[1].to_string();
-        funcs.insert(name.clone());
+    for header in headers {
+        let header_text = fs::read_to_string(&header)
+            .unwrap_or_else(|_| panic!("Failed to read header: {}", header.display()));
 
-        let raw = cap[2].trim();
-        let mut args = Vec::new();
-
-        if raw != "void" && !raw.is_empty() {
-            for p in raw.split(',') {
-                // tokenise on whitespace
-                let mut toks: Vec<_> = p.trim().split_whitespace().collect();
-                if toks.is_empty() {
-                    continue;
-                }
-
-                // last token is the identifier (+ maybe leading '*'s)
-                let mut var = toks.pop().unwrap().to_string();
-
-                // collect pointer stars
-                let mut ptr = String::new();
-
-                // 1) stars glued to the identifier
-                while var.starts_with('*') {
-                    ptr.push('*');
-                    var.remove(0);
-                }
-
-                // 2) stand-alone “*” tokens immediately before the identifier
-                while toks.last().map_or(false, |t| *t == "*") {
-                    toks.pop();
-                    ptr.push('*');
-                }
-
-                // rebuild type and append the stars
-                let mut ty = toks.join(" ");
-                ty.push_str(&ptr);
-
-                if !ty.is_empty() && !var.is_empty() {
-                    types.insert(ty.clone());
-                    args.push((ty, var));
-                }
-            }
-        }
-        api.push((name, args));
+        extract_from_text(&re, &header_text, &mut api, &mut funcs, &mut types);
     }
 
     (api, funcs, types)
@@ -194,6 +262,7 @@ fn run_bindgen(
     for f in funcs {
         b = b.allowlist_function(f);
     }
+
     for t in types {
         b = b.allowlist_type(t);
     }
