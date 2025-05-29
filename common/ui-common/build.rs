@@ -8,34 +8,224 @@ const EXPORT_TAG: &str = "UI_EXPORT";
 /// Constants from the C header we want to expose in Rust
 const LVGL_BIND_VARS: &[&str] = &["LVGL_SCREEN_WIDTH", "LVGL_SCREEN_HEIGHT"];
 
-fn get_dynamic_lib_path(root: &PathBuf, kind: &str) -> PathBuf {
-    let ext = match env::var("CARGO_CFG_TARGET_OS").unwrap().as_str() {
-        "windows" => "dll",
-        "macos" => "dylib",
-        _ => "so",
+fn main() {
+    let manifest_dir = PathBuf::from(env::var("CARGO_MANIFEST_DIR").unwrap());
+
+    let out_dir = PathBuf::from(env::var("OUT_DIR").unwrap());
+    let bindings_src_dir = manifest_dir.join("bindings");
+    let bindings_src_file = bindings_src_dir.join("bindings.rs");
+    let bindings_out_file = out_dir.join("bindings.rs");
+
+    if is_cross_compile() {
+        copy_prebuilt_bindings(&bindings_src_file, &bindings_out_file);
+    } else {
+        generate_bindings_via_bindgen(
+            &manifest_dir,
+            &out_dir,
+            &bindings_src_dir,
+            &bindings_src_file,
+            &bindings_out_file,
+        );
+    }
+
+    link_static_library(&manifest_dir);
+    build_dynamic_library(&manifest_dir);
+}
+
+fn copy_prebuilt_bindings(src: &PathBuf, dst: &PathBuf) {
+    fs::create_dir_all(dst.parent().unwrap()).unwrap();
+    fs::copy(src, dst).expect("Failed to copy pre-generated bindings.rs");
+    println!("cargo:warning=Skipping bindgen (cross-compile)");
+    println!("cargo:rerun-if-changed={}", src.display());
+}
+
+fn generate_bindings_via_bindgen(
+    manifest_dir: &PathBuf,
+    out_dir: &PathBuf,
+    bindings_src_dir: &PathBuf,
+    bindings_src_file: &PathBuf,
+    bindings_out_file: &PathBuf,
+) {
+    let (inc_dir_amnio, inc_dir_lvgl, header_to_bind) = locate_include_dirs(&manifest_dir);
+    // TODO remove this hard-coded slop. find a better way to get clang's path. make it clear to users that they must have clang
+    let fallback = "/mingw64/bin/clang";
+
+    let (_api_funcs, allow_funcs, allow_types) =
+        parse_lvscope_ffi_api(&header_to_bind, &inc_dir_amnio);
+
+    run_bindgen(
+        &header_to_bind,
+        &inc_dir_amnio,
+        &inc_dir_lvgl,
+        fallback,
+        &allow_funcs,
+        &allow_types,
+        &bindings_out_file,
+    );
+
+    commit_bindings(&bindings_src_dir, &bindings_src_file, &bindings_out_file);
+
+    generate_dynamic_api(&bindings_out_file, &out_dir);
+    generate_internal_api(&bindings_out_file, &out_dir);
+}
+
+fn commit_bindings(src_dir: &PathBuf, src: &PathBuf, out: &PathBuf) {
+    fs::create_dir_all(src_dir).unwrap();
+    fs::copy(out, src).expect("Failed to update committed bindings.rs");
+    println!("cargo:rerun-if-changed={}", src.display());
+}
+
+fn generate_dynamic_api(bindings: &PathBuf, out_dir: &PathBuf) {
+    use proc_macro2::TokenStream;
+    use quote::quote;
+    use syn::{File, FnArg, ForeignItem, Item, ItemForeignMod};
+
+    let src = fs::read_to_string(bindings).unwrap();
+    let parsed: File = syn::parse_str(&src).unwrap();
+
+    let mut out = String::new();
+    out.push_str("use crate::stratum_ui_ffi::dynamic_api::internal_api::API;\n\n");
+
+    for item in parsed.items {
+        if let Item::ForeignMod(ItemForeignMod { items, .. }) = item {
+            for fi in items {
+                if let ForeignItem::Fn(func) = fi {
+                    let sig = &func.sig;
+                    let name = &sig.ident;
+                    let args = sig
+                        .inputs
+                        .iter()
+                        .filter_map(|arg| {
+                            if let FnArg::Typed(p) = arg {
+                                if let syn::Pat::Ident(id) = &*p.pat {
+                                    let i = &id.ident;
+                                    return Some(quote! {#i});
+                                }
+                            }
+                            None
+                        })
+                        .collect::<Vec<TokenStream>>();
+
+                    let code = quote! {
+                        pub unsafe #sig {
+                            (API.read().unwrap().as_ref().unwrap().api.#name)(#(#args),*)
+                        }
+                    };
+                    out.push_str(&code.to_string());
+                    out.push_str("\n\n");
+                }
+            }
+        }
+    }
+
+    let dst = out_dir.join("dynamic_api.rs");
+    fs::write(dst, out).expect("Failed to write dynamic_api.rs");
+}
+
+fn generate_internal_api(bindings: &PathBuf, out_dir: &PathBuf) {
+    use quote::quote;
+    use syn::{File, FnArg, ForeignItem, Item, ItemForeignMod, ReturnType};
+
+    let src = fs::read_to_string(bindings).unwrap();
+    let parsed: File = syn::parse_str(&src).unwrap();
+
+    let mut api_fields = Vec::new();
+    let mut api_loads = Vec::new();
+
+    for item in parsed.items {
+        if let Item::ForeignMod(ItemForeignMod { items, .. }) = item {
+            for item in items {
+                if let ForeignItem::Fn(func) = item {
+                    let name = &func.sig.ident;
+
+                    let mut arg_types = Vec::new();
+                    for input in &func.sig.inputs {
+                        if let FnArg::Typed(pat_type) = input {
+                            let ty = &*pat_type.ty;
+                            arg_types.push(quote! { #ty });
+                        }
+                    }
+
+                    let ret_type = match &func.sig.output {
+                        ReturnType::Default => quote! {},
+                        ReturnType::Type(_, ty) => quote! { -> #ty },
+                    };
+
+                    let fn_type = quote! {
+                        unsafe extern "C" fn(#(#arg_types),*) #ret_type
+                    };
+
+                    api_fields.push(quote! {
+                        pub #name: #fn_type,
+                    });
+
+                    let symbol = format!("{}\0", name);
+                    api_loads.push(quote! {
+                        #name: *lib.get::<#fn_type>(#symbol.as_bytes()).unwrap(),
+                    });
+                }
+            }
+        }
+    }
+
+    let code = quote! {
+        use std::sync::RwLock;
+        use libloading::Library;
+        use std::ffi::OsStr;
+        use crate::stratum_ui_ffi::*;
+
+        pub static API: RwLock<Option<LoadedApi>> = RwLock::new(None);
+
+        pub struct LoadedApi {
+            _lib: Library, // must be retained to keep function pointers valid
+            pub api: Api,
+        }
+
+        pub struct Api {
+            #(#api_fields)*
+        }
+
+        pub unsafe fn init_dynamic_bindings<P: AsRef<OsStr>>(lib_path: P) -> Result<(), String> {
+            let lib = Library::new(&lib_path)
+                .map_err(|e| format!("Failed to load dynamic lib: {e}"))?;
+
+            let api = Api {
+                #(#api_loads)*
+            };
+
+            *API.write().unwrap() = Some(LoadedApi {
+                _lib: lib,
+                api
+            });
+
+            Ok(())
+        }
     };
 
-    root.join("stratum-ui")
-        .join("build")
-        .join(kind)
-        .join(format!("libstratum-ui.{ext}"))
+    let dst = out_dir.join("internal_api.rs");
+    fs::write(dst, code.to_string()).expect("Failed to write internal_api.rs");
 }
 
-/// figure out “firmware” vs “desktop” once
-fn kind() -> &'static str {
-    #[cfg(feature = "firmware")]
-    {
-        "firmware"
-    }
-    #[cfg(not(feature = "firmware"))]
-    {
-        "desktop"
-    }
+fn link_static_library(manifest: &PathBuf) {
+    let root = project_root(manifest);
+    let kind = kind();
+    let build_dir = root.join("stratum-ui").join("build").join(kind);
+    let lib = build_dir.join("libstratum-ui.a");
+    let script = root.join("stratum-ui").join("build.py");
+
+    produce_artifact(&script, &[], &lib, &[&lib]);
+
+    println!("cargo:rustc-link-search=native={}", build_dir.display());
+    println!("cargo:rustc-link-lib=static=stratum-ui");
 }
 
-/// climb up from manifest/ to the project root
-fn project_root(manifest: &PathBuf) -> PathBuf {
-    manifest.parent().unwrap().parent().unwrap().to_path_buf()
+fn build_dynamic_library(manifest: &PathBuf) {
+    let root = project_root(manifest);
+    let kind = kind();
+    let lib = get_dynamic_lib_path(&root, kind);
+    let script = root.join("stratum-ui").join("build.py");
+
+    produce_artifact(&script, &["--dynamic"], &lib, &[&script, &lib]);
 }
 
 fn produce_artifact(
@@ -71,80 +261,33 @@ fn produce_artifact(
     }
 }
 
-fn link_static_library(manifest: &PathBuf) {
-    let root = project_root(manifest);
-    let kind = kind();
-    let build_dir = root.join("stratum-ui").join("build").join(kind);
-    let lib = build_dir.join("libstratum-ui.a");
-    let script = root.join("stratum-ui").join("build.py");
+fn get_dynamic_lib_path(root: &PathBuf, kind: &str) -> PathBuf {
+    let ext = match env::var("CARGO_CFG_TARGET_OS").unwrap().as_str() {
+        "windows" => "dll",
+        "macos" => "dylib",
+        _ => "so",
+    };
 
-    produce_artifact(&script, &[], &lib, &[&lib]);
-
-    println!("cargo:rustc-link-search=native={}", build_dir.display());
-    println!("cargo:rustc-link-lib=static=stratum-ui");
+    root.join("stratum-ui")
+        .join("build")
+        .join(kind)
+        .join(format!("libstratum-ui.{ext}"))
 }
 
-fn build_dynamic_library(manifest: &PathBuf) {
-    let root = project_root(manifest);
-    let kind = kind();
-    let lib = get_dynamic_lib_path(&root, kind);
-    let script = root.join("stratum-ui").join("build.py");
-
-    produce_artifact(&script, &["--dynamic"], &lib, &[&script, &lib]);
-}
-
-fn generate_bindings_via_bindgen(
-    manifest_dir: &PathBuf,
-    out_dir: &PathBuf,
-    bindings_src_dir: &PathBuf,
-    bindings_src_file: &PathBuf,
-    bindings_out_file: &PathBuf,
-) {
-    let (inc_dir_amnio, inc_dir_lvgl, header_to_bind) = locate_include_dirs(&manifest_dir);
-    // TODO remove this hard-coded slop. find a better way to get clang's path. make it clear to users that they must have clang
-    let fallback = "/mingw64/bin/clang";
-
-    let (_api_funcs, allow_funcs, allow_types) =
-        parse_lvscope_ffi_api(&header_to_bind, &inc_dir_amnio);
-
-    run_bindgen(
-        &header_to_bind,
-        &inc_dir_amnio,
-        &inc_dir_lvgl,
-        fallback,
-        &allow_funcs,
-        &allow_types,
-        &bindings_out_file,
-    );
-
-    commit_bindings(&bindings_src_dir, &bindings_src_file, &bindings_out_file);
-
-    generate_dynamic_api(&bindings_out_file, &out_dir);
-    generate_internal_api(&bindings_out_file, &out_dir);
-}
-
-fn main() {
-    let manifest_dir = PathBuf::from(env::var("CARGO_MANIFEST_DIR").unwrap());
-
-    let out_dir = PathBuf::from(env::var("OUT_DIR").unwrap());
-    let bindings_src_dir = manifest_dir.join("bindings");
-    let bindings_src_file = bindings_src_dir.join("bindings.rs");
-    let bindings_out_file = out_dir.join("bindings.rs");
-
-    if is_cross_compile() {
-        copy_prebuilt_bindings(&bindings_src_file, &bindings_out_file);
-    } else {
-        generate_bindings_via_bindgen(
-            &manifest_dir,
-            &out_dir,
-            &bindings_src_dir,
-            &bindings_src_file,
-            &bindings_out_file,
-        );
+fn kind() -> &'static str {
+    #[cfg(feature = "firmware")]
+    {
+        "firmware"
     }
+    #[cfg(not(feature = "firmware"))]
+    {
+        "desktop"
+    }
+}
 
-    link_static_library(&manifest_dir);
-    build_dynamic_library(&manifest_dir);
+/// climb up from manifest/ to the project root
+fn project_root(manifest: &PathBuf) -> PathBuf {
+    manifest.parent().unwrap().parent().unwrap().to_path_buf()
 }
 
 // Detect native vs cross-compile
@@ -335,148 +478,4 @@ fn run_bindgen(
     bindings
         .write_to_file(out_file)
         .expect("Couldn't write bindings.rs");
-}
-
-fn commit_bindings(src_dir: &PathBuf, src: &PathBuf, out: &PathBuf) {
-    fs::create_dir_all(src_dir).unwrap();
-    fs::copy(out, src).expect("Failed to update committed bindings.rs");
-    println!("cargo:rerun-if-changed={}", src.display());
-}
-
-fn generate_dynamic_api(bindings: &PathBuf, out_dir: &PathBuf) {
-    use proc_macro2::TokenStream;
-    use quote::quote;
-    use syn::{File, FnArg, ForeignItem, Item, ItemForeignMod};
-
-    let src = fs::read_to_string(bindings).unwrap();
-    let parsed: File = syn::parse_str(&src).unwrap();
-
-    let mut out = String::new();
-    out.push_str("use crate::stratum_ui_ffi::dynamic_api::internal_api::API;\n\n");
-
-    for item in parsed.items {
-        if let Item::ForeignMod(ItemForeignMod { items, .. }) = item {
-            for fi in items {
-                if let ForeignItem::Fn(func) = fi {
-                    let sig = &func.sig;
-                    let name = &sig.ident;
-                    let args = sig
-                        .inputs
-                        .iter()
-                        .filter_map(|arg| {
-                            if let FnArg::Typed(p) = arg {
-                                if let syn::Pat::Ident(id) = &*p.pat {
-                                    let i = &id.ident;
-                                    return Some(quote! {#i});
-                                }
-                            }
-                            None
-                        })
-                        .collect::<Vec<TokenStream>>();
-
-                    let code = quote! {
-                        pub unsafe #sig {
-                            (API.read().unwrap().as_ref().unwrap().api.#name)(#(#args),*)
-                        }
-                    };
-                    out.push_str(&code.to_string());
-                    out.push_str("\n\n");
-                }
-            }
-        }
-    }
-
-    let dst = out_dir.join("dynamic_api.rs");
-    fs::write(dst, out).expect("Failed to write dynamic_api.rs");
-}
-
-fn generate_internal_api(bindings: &PathBuf, out_dir: &PathBuf) {
-    use quote::quote;
-    use syn::{File, FnArg, ForeignItem, Item, ItemForeignMod, ReturnType};
-
-    let src = fs::read_to_string(bindings).unwrap();
-    let parsed: File = syn::parse_str(&src).unwrap();
-
-    let mut api_fields = Vec::new();
-    let mut api_loads = Vec::new();
-
-    for item in parsed.items {
-        if let Item::ForeignMod(ItemForeignMod { items, .. }) = item {
-            for item in items {
-                if let ForeignItem::Fn(func) = item {
-                    let name = &func.sig.ident;
-
-                    let mut arg_types = Vec::new();
-                    for input in &func.sig.inputs {
-                        if let FnArg::Typed(pat_type) = input {
-                            let ty = &*pat_type.ty;
-                            arg_types.push(quote! { #ty });
-                        }
-                    }
-
-                    let ret_type = match &func.sig.output {
-                        ReturnType::Default => quote! {},
-                        ReturnType::Type(_, ty) => quote! { -> #ty },
-                    };
-
-                    let fn_type = quote! {
-                        unsafe extern "C" fn(#(#arg_types),*) #ret_type
-                    };
-
-                    api_fields.push(quote! {
-                        pub #name: #fn_type,
-                    });
-
-                    let symbol = format!("{}\0", name);
-                    api_loads.push(quote! {
-                        #name: *lib.get::<#fn_type>(#symbol.as_bytes()).unwrap(),
-                    });
-                }
-            }
-        }
-    }
-
-    let code = quote! {
-        use std::sync::RwLock;
-        use libloading::Library;
-        use std::ffi::OsStr;
-        use crate::stratum_ui_ffi::*;
-
-        pub static API: RwLock<Option<LoadedApi>> = RwLock::new(None);
-
-        pub struct LoadedApi {
-            _lib: Library, // must be retained to keep function pointers valid
-            pub api: Api,
-        }
-
-        pub struct Api {
-            #(#api_fields)*
-        }
-
-        pub unsafe fn init_dynamic_bindings<P: AsRef<OsStr>>(lib_path: P) -> Result<(), String> {
-            let lib = Library::new(&lib_path)
-                .map_err(|e| format!("Failed to load dynamic lib: {e}"))?;
-
-            let api = Api {
-                #(#api_loads)*
-            };
-
-            *API.write().unwrap() = Some(LoadedApi {
-                _lib: lib,
-                api
-            });
-
-            Ok(())
-        }
-    };
-
-    let dst = out_dir.join("internal_api.rs");
-    fs::write(dst, code.to_string()).expect("Failed to write internal_api.rs");
-}
-
-fn copy_prebuilt_bindings(src: &PathBuf, dst: &PathBuf) {
-    fs::create_dir_all(dst.parent().unwrap()).unwrap();
-    fs::copy(src, dst).expect("Failed to copy pre-generated bindings.rs");
-    println!("cargo:warning=Skipping bindgen (cross-compile)");
-    println!("cargo:rerun-if-changed={}", src.display());
 }
