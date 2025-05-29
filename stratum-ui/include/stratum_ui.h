@@ -1,9 +1,9 @@
-#ifndef stratum_ui_H
-#define stratum_ui_H
+#pragma once
 
 #include <stdint.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include "lv_obj_tree.h"
 
 #ifdef _WIN32
 #define UI_EXPORT __declspec(dllexport) // Windows DLL Export
@@ -48,8 +48,9 @@ extern "C"
     /// by the platform code *before* lvgl_setup().
     UI_EXPORT void lvgl_register_spi_send_cb(ui_spi_send_cb_t cb);
 
+    typedef void (*tree_send_cb_t)(const FlatNode *nodes, size_t count, void *user_data);
+    UI_EXPORT void register_tree_send_callback(tree_send_cb_t cb, void *user_data);
+
 #ifdef __cplusplus
 }
 #endif
-
-#endif // stratum_ui_H

@@ -4,6 +4,19 @@
 
 pub const LVGL_SCREEN_WIDTH: u32 = 320;
 pub const LVGL_SCREEN_HEIGHT: u32 = 240;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct FlatNode {
+    pub ptr: usize,
+    pub parent_ptr: usize,
+    pub class_name: *const ::std::os::raw::c_char,
+    pub x: i16,
+    pub y: i16,
+    pub w: i16,
+    pub h: i16,
+    pub hidden: bool,
+    pub debug_id: u32,
+}
 pub const LogLevel_LOG_TRACE: LogLevel = 0;
 pub const LogLevel_LOG_DEBUG: LogLevel = 1;
 pub const LogLevel_LOG_INFO: LogLevel = 2;
@@ -50,4 +63,7 @@ pub type ui_spi_send_cb_t =
 unsafe extern "C" {
     #[doc = " Called by LVGL's flush_cb to push bytes out.  Must be registered\n by the platform code *before* lvgl_setup()."]
     pub fn lvgl_register_spi_send_cb(cb: ui_spi_send_cb_t);
+}
+unsafe extern "C" {
+    pub fn send_tree(nodes: *const FlatNode, count: usize);
 }
