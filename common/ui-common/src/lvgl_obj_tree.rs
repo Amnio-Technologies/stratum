@@ -1,13 +1,29 @@
 use crate::stratum_ui_ffi::{export_tree, register_tree_send_callback, FlatNode as FlatNodeRaw};
-use std::ffi::CStr;
-use std::os::raw::c_void;
-use std::sync::{Arc, Mutex};
+use std::{
+    collections::HashMap,
+    ffi::CStr,
+    os::raw::c_void,
+    sync::{Arc, Mutex},
+};
 
-/// A cleaned‐up Rust-side version of the C `FlatNode`.
+/// Intermediate, cleaned‐up version of the C `FlatNode`.
 #[derive(Debug, Clone)]
-pub struct Node {
+struct FlatNode {
+    ptr: usize,
+    parent_ptr: usize,
+    class_name: String,
+    x: i16,
+    y: i16,
+    w: i16,
+    h: i16,
+    hidden: bool,
+    debug_id: usize,
+}
+
+/// A real tree node: owns its children.
+#[derive(Debug, Clone)]
+pub struct TreeNode {
     pub ptr: usize,
-    pub parent_ptr: usize,
     pub class_name: String,
     pub x: i16,
     pub y: i16,
@@ -15,43 +31,37 @@ pub struct Node {
     pub h: i16,
     pub hidden: bool,
     pub debug_id: usize,
+    pub children: Vec<TreeNode>,
 }
 
-/// Manages the latest tree snapshot and handles FFI registration.
+/// Manages a single‐root tree snapshot and FFI callback setup.
 pub struct TreeManager {
-    /// Protected buffer of the last-received nodes
-    pub nodes: Mutex<Vec<Node>>,
+    root: Mutex<Option<TreeNode>>,
 }
 
 impl TreeManager {
-    /// Create & register the callback; returns an Arc you hold onto.
+    /// Construct, register the callback, and return an Arc handle.
     pub fn new() -> Arc<Self> {
         let mgr = Arc::new(TreeManager {
-            nodes: Mutex::new(Vec::new()),
+            root: Mutex::new(None),
         });
-
-        // Register the C callback, passing our Arc pointer as user_data
         unsafe {
             register_tree_send_callback(Some(tree_send_cb), Arc::as_ptr(&mgr) as *mut c_void);
         }
-
         mgr
     }
 
-    /// Re‐register after each hot reload.
+    /// Re-register after a hot reload, if needed.
     pub fn bind_ffi_callback(self: Arc<Self>) {
         unsafe {
             register_tree_send_callback(Some(tree_send_cb), Arc::as_ptr(&self) as *mut c_void);
         }
     }
 
-    /// Take the last tree snapshot out
-    pub fn take_nodes(&self) -> Vec<Node> {
-        unsafe {
-            export_tree();
-        }
-
-        std::mem::take(&mut *self.nodes.lock().unwrap())
+    /// Trigger C to export the tree, then take ownership of the single root.
+    pub fn take_root(&self) -> Option<TreeNode> {
+        unsafe { export_tree() };
+        std::mem::take(&mut *self.root.lock().unwrap())
     }
 }
 
@@ -65,20 +75,14 @@ unsafe extern "C" fn tree_send_cb(
     }
 
     // Reconstruct our Arc<TreeManager> without dropping the real one
-    let ptr = user_data as *const TreeManager;
-    Arc::increment_strong_count(ptr);
-    let mgr: Arc<TreeManager> = Arc::from_raw(ptr);
+    let mgr_ptr = user_data as *const TreeManager;
+    Arc::increment_strong_count(mgr_ptr);
+    let mgr: Arc<TreeManager> = Arc::from_raw(mgr_ptr);
 
-    // Turn the C array into a Rust slice
+    // Build a Vec<FlatNode> from the raw C array
     let slice = std::slice::from_raw_parts(raw_nodes, count);
-
-    // Lock & rebuild the Vec<Node>
-    let mut guard = mgr.nodes.lock().unwrap();
-    guard.clear();
-    guard.reserve(count);
-
+    let mut flat = Vec::with_capacity(count);
     for raw in slice {
-        // SAFE: class_name is always a NUL-terminated C string
         let cname = if raw.class_name.is_null() {
             "<null>".to_string()
         } else {
@@ -86,8 +90,7 @@ unsafe extern "C" fn tree_send_cb(
                 .to_string_lossy()
                 .into_owned()
         };
-
-        guard.push(Node {
+        flat.push(FlatNode {
             ptr: raw.ptr,
             parent_ptr: raw.parent_ptr,
             class_name: cname,
@@ -100,7 +103,59 @@ unsafe extern "C" fn tree_send_cb(
         });
     }
 
-    // Drop the Arc we created via from_raw, balancing the increment
-    // (but leaving the original Arc alive)
-    // mgr goes out of scope here
+    // Convert the flat list into a single‐root TreeNode
+    let tree = build_tree(&flat);
+
+    // Store it
+    *mgr.root.lock().unwrap() = tree;
+
+    // Drop the temporary Arc; the original Arc still lives elsewhere
+    // mgr is dropped here
+}
+
+/// Build a single TreeNode root (if any) from the flat list.
+fn build_tree(flat: &[FlatNode]) -> Option<TreeNode> {
+    // 1) index by ptr
+    let mut by_ptr = HashMap::with_capacity(flat.len());
+    for node in flat {
+        by_ptr.insert(node.ptr, node);
+    }
+
+    // 2) group children ptrs under each parent_ptr
+    let mut kids = HashMap::<usize, Vec<_>>::with_capacity(flat.len());
+    for node in flat {
+        kids.entry(node.parent_ptr).or_default().push(node.ptr);
+    }
+
+    // 3) recursive constructor
+    fn make_node(
+        ptr: usize,
+        by_ptr: &HashMap<usize, &FlatNode>,
+        kids: &HashMap<usize, Vec<usize>>,
+    ) -> TreeNode {
+        let n = by_ptr.get(&ptr).expect("node pointer must exist");
+        let mut tn = TreeNode {
+            ptr: n.ptr,
+            class_name: n.class_name.clone(),
+            x: n.x,
+            y: n.y,
+            w: n.w,
+            h: n.h,
+            hidden: n.hidden,
+            debug_id: n.debug_id,
+            children: Vec::new(),
+        };
+        if let Some(cptrs) = kids.get(&ptr) {
+            tn.children = cptrs
+                .iter()
+                .map(|&cptr| make_node(cptr, by_ptr, kids))
+                .collect();
+        }
+        tn
+    }
+
+    // 4) find the single top-level ptr (parent_ptr == 0)
+    kids.get(&0)
+        .and_then(|roots| roots.first().copied())
+        .map(|root_ptr| make_node(root_ptr, &by_ptr, &kids))
 }

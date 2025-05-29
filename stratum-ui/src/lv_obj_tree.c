@@ -24,7 +24,7 @@ static void fill_flat_nodes(lv_obj_t *obj, uintptr_t parent_ptr, FlatNode *out, 
     n->ptr = (uintptr_t)obj;
     n->parent_ptr = parent_ptr;
 
-    lv_obj_class_t *class = lv_obj_get_class(lv_screen_active());
+    lv_obj_class_t *class = lv_obj_get_class(obj);
     const char *name = class ? ((const struct _lv_obj_class_t *)class)->name : "unknown";
     n->class_name = name;
 
