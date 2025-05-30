@@ -2,10 +2,14 @@
 import json
 from socketserver import ThreadingTCPServer, StreamRequestHandler
 from build_lib import do_build
-import setproctitle
 
-# TODO: Only works on linux, macos
-setproctitle.setproctitle("Amnio LVScope: Python Build Server")
+try:
+    # TODO: Only works on linux, macos
+    import setproctitle
+
+    setproctitle.setproctitle("Amnio LVScope: Python Build Server")
+except (ImportError, OSError):
+    pass  # No-op on platforms that don't support it
 
 
 class BuildRequestHandler(StreamRequestHandler):
