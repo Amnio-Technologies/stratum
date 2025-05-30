@@ -10,8 +10,8 @@ use stratum_firmware_common::modules::{
 use stratum_ui_common::lvgl_obj_tree::TreeManager;
 use stratum_ui_common::ui_logging::UiLogger;
 
-use crate::debug_panel::pages::DebugSidebarPages;
 use crate::hot_reload_manager::SharedHotReloadManager;
+use crate::ui::debug_panel::pages::DebugSidebarPages;
 
 pub struct CanvasView {
     pub zoom: f32,

@@ -1,11 +1,11 @@
 // main.rs
 
-mod debug_panel;
 mod hot_reload_manager;
 mod lvgl_backend;
 mod state;
 mod stratum_app;
 mod stratum_lvgl_ui;
+mod ui;
 
 use hot_reload_manager::HotReloadManager;
 use std::path::PathBuf;
