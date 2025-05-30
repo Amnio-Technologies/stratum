@@ -30,8 +30,25 @@ fn main() -> Result<(), Box<dyn Error>> {
         )?;
     }
 
-    link_static_library(&manifest_dir)?;
-    build_dynamic_library(&manifest_dir)?;
+    let project_root = project_root(&manifest_dir);
+
+    link_static_library(&manifest_dir).or_else(|_| {
+        if get_static_lib_path(&project_root, kind()).exists() {
+            println!("cargo:warning=Unable to build static library, using previously built artifact as a fallback.");
+            Ok(())
+        } else {
+            Err("Static library build failed and no previously prepared artifact exists to proceed.")
+        }
+    })?;
+
+    build_dynamic_library(&manifest_dir).or_else(|_| {
+        if get_dynamic_lib_path(&project_root, kind()).exists() {
+            println!("cargo:warning=Unable to build dynamic library, using previously built artifact as a fallback.");
+            Ok(())
+        } else {
+            Err("Dynamic library build failed and no previously prepared artifact exists to proceed.")
+        }
+    })?;
 
     Ok(())
 }
@@ -221,7 +238,7 @@ fn link_static_library(manifest: &PathBuf) -> Result<(), Box<dyn Error>> {
     let root = project_root(manifest);
     let kind_str = kind();
     let build_dir = root.join("stratum-ui").join("build").join(kind_str);
-    let lib = build_dir.join("libstratum-ui.a");
+    let lib = get_static_lib_path(&root, kind());
     let script = root.join("stratum-ui").join("build.py");
 
     produce_artifact(&script, &[], &lib)?;
@@ -229,6 +246,13 @@ fn link_static_library(manifest: &PathBuf) -> Result<(), Box<dyn Error>> {
     println!("cargo:rustc-link-lib=static=stratum-ui");
 
     Ok(())
+}
+
+fn get_static_lib_path(root: &PathBuf, kind: &str) -> PathBuf {
+    let build_dir = root.join("stratum-ui").join("build").join(kind);
+    let lib = build_dir.join("libstratum-ui.a");
+
+    lib
 }
 
 fn build_dynamic_library(manifest: &PathBuf) -> Result<(), Box<dyn Error>> {
