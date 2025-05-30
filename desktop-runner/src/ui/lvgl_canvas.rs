@@ -86,7 +86,7 @@ fn draw_lvgl_canvas(ui: &mut egui::Ui, tex: Option<&TextureHandle>, view: &mut C
         let painter = ui.painter();
         let stroke = Stroke::new(1.0, Color32::from_rgb(40, 40, 40));
 
-        let cols = (display_w as usize) + 1;
+        let cols = display_w as usize;
         for col in 0..=cols {
             let x = (rect.left() + (col as f32) * view.zoom).round();
             painter.line_segment(
