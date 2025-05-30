@@ -223,54 +223,51 @@ pub fn draw_lvgl_canvas(ui: &mut egui::Ui, tex: Option<&TextureHandle>, view: &m
     let display_w = unsafe { stratum_ui_common::stratum_ui_ffi::get_lvgl_display_width() as f32 };
     let display_h = unsafe { stratum_ui_common::stratum_ui_ffi::get_lvgl_display_height() as f32 };
 
-    // 2) Compute scaled size
-    let scaled = Vec2::new(display_w, display_h) * view.zoom;
-
-    // 3) Center + pan
+    // 2) Grab available rect once
     let avail = ui.available_rect_before_wrap();
-    let top_left = avail.center() + view.offset - scaled * 0.5;
-    let rect = Rect::from_min_size(top_left, scaled);
 
-    // 4) Allocate with both hover (for zoom) and drag sense
-    let response: Response = ui.allocate_rect(rect, Sense::click_and_drag());
-
-    // 5) Zooming (scroll) — only when hovering
-    if response.hovered() {
+    // 3) Handle scroll‐to‐zoom BEFORE computing rect so everything
+    //    uses the new zoom/offset in the same frame
+    if let Some(cursor) = ui
+        .ctx()
+        .input(|i| i.pointer.hover_pos())
+        .filter(|pos| avail.contains(*pos))
+    {
         let scroll = ui.ctx().input(|i| i.raw_scroll_delta.y);
         if scroll != 0.0 {
-            // 1) Capture old zoom & compute new zoom
+            // compute new zoom
             let old_zoom = view.zoom;
-            let factor = (1.0 + scroll * 0.001).clamp(ZOOM_MIN, ZOOM_MAX);
-            view.zoom = (old_zoom * factor).clamp(ZOOM_MIN, ZOOM_MAX);
+            let new_zoom = (old_zoom * (1.0 + scroll * 0.001)).clamp(ZOOM_MIN, ZOOM_MAX);
+            view.zoom = new_zoom;
 
-            // 2) Where is the mouse?
-            let cursor = ui
-                .ctx()
-                .input(|i| i.pointer.hover_pos())
-                .unwrap_or_else(|| avail.center());
+            // figure out which LVGL‐pixel was under cursor before zoom
+            let world_pixel = (cursor
+                - (avail.center() + view.offset
+                    - Vec2::new(display_w, display_h) * old_zoom * 0.5))
+                / old_zoom;
 
-            // 3) Which LVGL‐pixel (world coord) is under the mouse right now?
-            //    offset from the top-left corner of the current image:
-            let world_pixel = (cursor - rect.min) / old_zoom;
-
-            // 4) After zoom, that same world_pixel should land at `cursor`, so
-            //    new_top_left = cursor - world_pixel * new_zoom
-            let new_top_left = cursor - world_pixel * view.zoom;
-
-            // 5) Finally, recompute your view.offset so that
-            //    top_left = avail.center() + offset - scaled*0.5
-            //    ⇒ offset = new_top_left + scaled*0.5 - avail.center()
-            let scaled = Vec2::new(display_w, display_h) * view.zoom;
+            // after zoom, we want world_pixel to still sit under cursor
+            let scaled = Vec2::new(display_w, display_h) * new_zoom;
+            let new_top_left = cursor - world_pixel * new_zoom;
             view.offset = new_top_left + scaled * 0.5 - avail.center();
         }
     }
+
+    // 4) Compute scaled size & snapped top-left
+    let scaled = Vec2::new(display_w, display_h) * view.zoom;
+    let unrounded_tl = avail.center() + view.offset - scaled * 0.5;
+    let top_left = unrounded_tl.round(); // snap to pixel grid
+    let rect = Rect::from_min_size(top_left, scaled);
+
+    // 5) Allocate for both hover (zoom) and drag sense
+    let response: Response = ui.allocate_rect(rect, Sense::click_and_drag());
 
     // 6) Panning (drag)
     if response.dragged() {
         view.offset += response.drag_delta();
     }
 
-    // 7) Finally draw the texture
+    // 7) Draw the texture (hover/drag highlight)
     if let (Some(tex), true) = (tex, response.hovered() || response.dragged()) {
         ui.painter().image(
             tex.id(),
@@ -279,7 +276,7 @@ pub fn draw_lvgl_canvas(ui: &mut egui::Ui, tex: Option<&TextureHandle>, view: &m
             egui::Color32::WHITE,
         );
     } else if let Some(tex) = tex {
-        // draw even when idle
+        // normal draw
         ui.painter().image(
             tex.id(),
             rect,
@@ -296,26 +293,23 @@ pub fn draw_lvgl_canvas(ui: &mut egui::Ui, tex: Option<&TextureHandle>, view: &m
         );
     }
 
+    // 8) Draw pixel grid at high zoom
     if view.zoom > 8.0 {
         let painter = ui.painter();
-
-        // line style: thin & semi-transparent white
         let stroke = Stroke::new(1.0, Color32::from_rgb(40, 40, 40));
 
-        // draw vertical pixel lines every 1 original px
         let cols = (display_w as usize) + 1;
         for col in 0..=cols {
-            let x = rect.left() + (col as f32) * view.zoom;
+            let x = (rect.left() + (col as f32) * view.zoom).round();
             painter.line_segment(
                 [Pos2::new(x, rect.top()), Pos2::new(x, rect.bottom())],
                 stroke,
             );
         }
 
-        // draw horizontal pixel lines
         let rows = (display_h as usize) + 1;
         for row in 0..=rows {
-            let y = rect.top() + (row as f32) * view.zoom;
+            let y = (rect.top() + (row as f32) * view.zoom).round();
             painter.line_segment(
                 [Pos2::new(rect.left(), y), Pos2::new(rect.right(), y)],
                 stroke,
