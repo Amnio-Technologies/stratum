@@ -1,5 +1,5 @@
 use crate::{
-    debug_ui,
+    debug_panel,
     hot_reload_manager::SharedHotReloadManager,
     state::{update_fps, UiState},
     stratum_lvgl_ui::StratumLvglUI,
@@ -29,7 +29,7 @@ impl StratumApp {
         let ui_state = UiState::new(cc, ui_logger, hot_reload_manager, tree_manager);
         let lvgl_ui = StratumLvglUI::new();
 
-        add_fonts(&cc.egui_ctx);
+        Self::add_fonts(&cc.egui_ctx);
 
         Self {
             ui_state,
@@ -38,43 +38,42 @@ impl StratumApp {
             last_frame_start: std::time::Instant::now(),
         }
     }
-}
 
-fn add_fonts(ctx: &egui::Context) {
-    ctx.add_font(FontInsert::new(
-        "atkinson",
-        egui::FontData::from_static(include_bytes!("../fonts/AtkinsonHyperlegible-Regular.ttf")),
-        vec![
-            InsertFontFamily {
-                family: egui::FontFamily::Proportional,
-                priority: egui::epaint::text::FontPriority::Highest,
-            },
-            InsertFontFamily {
-                family: egui::FontFamily::Monospace,
-                priority: egui::epaint::text::FontPriority::Lowest,
-            },
-        ],
-    ));
+    fn add_fonts(ctx: &egui::Context) {
+        ctx.add_font(FontInsert::new(
+            "atkinson",
+            egui::FontData::from_static(include_bytes!(
+                "../fonts/AtkinsonHyperlegible-Regular.ttf"
+            )),
+            vec![
+                InsertFontFamily {
+                    family: egui::FontFamily::Proportional,
+                    priority: egui::epaint::text::FontPriority::Highest,
+                },
+                InsertFontFamily {
+                    family: egui::FontFamily::Monospace,
+                    priority: egui::epaint::text::FontPriority::Lowest,
+                },
+            ],
+        ));
 
-    ctx.add_font(FontInsert::new(
-        "jetbrains_mono",
-        egui::FontData::from_static(include_bytes!("../fonts/JetBrainsMonoNL-Regular.ttf")),
-        vec![
-            InsertFontFamily {
-                family: egui::FontFamily::Proportional,
-                priority: egui::epaint::text::FontPriority::Lowest,
-            },
-            InsertFontFamily {
-                family: egui::FontFamily::Monospace,
-                priority: egui::epaint::text::FontPriority::Highest,
-            },
-        ],
-    ));
-}
+        ctx.add_font(FontInsert::new(
+            "jetbrains_mono",
+            egui::FontData::from_static(include_bytes!("../fonts/JetBrainsMonoNL-Regular.ttf")),
+            vec![
+                InsertFontFamily {
+                    family: egui::FontFamily::Proportional,
+                    priority: egui::epaint::text::FontPriority::Lowest,
+                },
+                InsertFontFamily {
+                    family: egui::FontFamily::Monospace,
+                    priority: egui::epaint::text::FontPriority::Highest,
+                },
+            ],
+        ));
+    }
 
-impl eframe::App for StratumApp {
-    fn update(&mut self, ctx: &egui::Context, _frame: &mut Frame) {
-        // Hot-reload check
+    fn hot_reload_check(&mut self) {
         if self
             .ui_state
             .hot_reload_manager
@@ -87,19 +86,63 @@ impl eframe::App for StratumApp {
             self.ui_state.tree_manager.clone().bind_ffi_callback();
             self.lvgl_ui.reload_ui();
         }
+    }
+}
+
+impl eframe::App for StratumApp {
+    fn update(&mut self, ctx: &egui::Context, _frame: &mut Frame) {
+        // Hot-reload check
+        self.hot_reload_check();
 
         // Generate the latest LVGL texture
         self.lvgl_tex = self.lvgl_ui.update(ctx).cloned();
 
         draw_debug_panel(ctx, &mut self.ui_state);
 
-        egui::CentralPanel::default().show(ctx, |ui| {
-            ui.with_layout(
-                Layout::centered_and_justified(Direction::LeftToRight),
-                |ui| {
-                    draw_lvgl_canvas(ui, self.lvgl_tex.as_ref());
-                },
-            );
+        egui::TopBottomPanel::top("menu_bar").show(ctx, |ui| {
+            egui::menu::bar(ui, |ui| {
+                ui.menu_button("File", |ui| {
+                    if ui.button("Save").clicked() {
+                        //functionality
+                    }
+                    if ui.button("Quit").clicked() {
+                        std::process::exit(0);
+                    }
+                });
+
+                ui.menu_button("Edit", |ui| {
+                    if ui.button("Cut").clicked() {
+                        //functionality
+                    }
+                    if ui.button("Copy").clicked() {
+                        //functionality
+                    }
+                    if ui.button("Paste").clicked() {
+                        //funtionality
+                    }
+                })
+            });
+        });
+
+        egui::CentralPanel::default()
+            .frame(
+                egui::Frame::central_panel(&ctx.style()).fill(egui::Color32::from_rgb(20, 20, 20)),
+            )
+            .show(ctx, |ui| {
+                ui.with_layout(
+                    Layout::centered_and_justified(Direction::LeftToRight),
+                    |ui| {
+                        draw_lvgl_canvas(ui, self.lvgl_tex.as_ref());
+                    },
+                );
+            });
+
+        egui::TopBottomPanel::bottom("status_bar").show(ctx, |ui| {
+            ui.horizontal(|ui| {
+                ui.label(format!("FPS: {:.2}", self.ui_state.fps));
+                ui.separator();
+                ui.label(format!("Zoom: {:.0}%", self.ui_state.zoom * 100.0));
+            });
         });
 
         // Update FPS counter and loop
@@ -136,7 +179,7 @@ fn draw_debug_panel(ctx: &egui::Context, state: &mut UiState) {
             ScrollArea::vertical()
                 .auto_shrink([false, false])
                 .show(ui, |ui| {
-                    debug_ui::create_debug_ui(ui, state);
+                    debug_panel::create_debug_ui(ui, state);
                 });
         });
 }

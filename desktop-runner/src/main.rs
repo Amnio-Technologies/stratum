@@ -1,6 +1,6 @@
 // main.rs
 
-mod debug_ui;
+mod debug_panel;
 mod hot_reload_manager;
 mod lvgl_backend;
 mod state;

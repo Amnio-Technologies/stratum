@@ -8,7 +8,9 @@ use stratum_firmware_common::modules::{
 };
 use stratum_ui_common::lvgl_obj_tree::TreeManager;
 use stratum_ui_common::ui_logging::UiLogger;
+use strum_macros::EnumIter;
 
+use crate::debug_panel::pages::DebugSidebarPages;
 use crate::hot_reload_manager::SharedHotReloadManager;
 
 /// Holds global UI state, including the LVGL renderer, modules, and logs.
@@ -31,6 +33,8 @@ pub struct UiState {
     pub log_buffer: Vec<String>,
 
     pub selected_build: Option<PathBuf>,
+    pub selected_debug_page: DebugSidebarPages,
+    pub zoom: f64,
 }
 
 impl UiState {
@@ -53,6 +57,8 @@ impl UiState {
             tree_manager,
             log_buffer: Vec::new(),
             selected_build: None,
+            selected_debug_page: DebugSidebarPages::UiBuild,
+            zoom: 1.0,
         }
     }
 }

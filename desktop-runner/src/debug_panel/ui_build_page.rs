@@ -1,18 +1,9 @@
 use egui::{Checkbox, Id, ScrollArea};
-use egui_ltreeview::{TreeView, TreeViewBuilder};
 use stratum_firmware_common::modules::dummies::dummy_battery::DummyBatteryModule;
-use stratum_ui_common::lvgl_obj_tree::TreeNode;
 
 use crate::state::UiState;
 
-/// Creates the debugging UI inside a right-aligned panel.
-pub fn create_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
-    ui.heading("Amnio LVScope");
-
-    ui.separator();
-    ui.label(format!("FPS: {:.2}", ui_state.fps));
-
-    ui.separator();
+pub fn draw_uibuild_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
     ui.add(Checkbox::new(&mut ui_state.enable_vsync, "Enable VSync"));
     ui.label("Toggle VSync for smoother rendering");
 
@@ -33,12 +24,11 @@ pub fn create_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
         }
     });
 
-    // give the debug log scroll area a stable ID:
     let scroll_id = Id::new("debug_log_scroll");
 
     ScrollArea::vertical()
         .id_salt(scroll_id)
-        .stick_to_bottom(true) // auto-scroll only if you were already at the bottom
+        .stick_to_bottom(true)
         .max_height(200.0)
         .show(ui, |ui| {
             for line in &ui_state.log_buffer {
@@ -146,7 +136,7 @@ pub fn create_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
 
         ScrollArea::vertical()
             .id_salt(reload_scroll_id)
-            .stick_to_bottom(true) // only auto-scroll when already at the bottom
+            .stick_to_bottom(true)
             .max_height(200.0)
             .show(ui, |ui| {
                 for entry in manager.reload_log.iter().rev().take(100).rev() {
@@ -155,28 +145,4 @@ pub fn create_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
                 }
             });
     });
-
-    if let Some(root) = ui_state.tree_manager.take_root() {
-        // Create a TreeView with a stable id for the whole panel:
-        TreeView::new(ui.make_persistent_id("lvgl-object-tree")).show(ui, |builder| {
-            // A helper that recurses for each node:
-            fn add_node(builder: &mut TreeViewBuilder<'_, usize>, node: &TreeNode) {
-                // use `node.ptr` as an ID (usize impl Hash+Eq)
-                if node.children.is_empty() {
-                    // leaf
-                    builder.leaf(node.ptr, &node.class_name);
-                } else {
-                    // directory
-                    builder.dir(node.ptr, &node.class_name);
-                    for child in &node.children {
-                        add_node(builder, child);
-                    }
-                    builder.close_dir();
-                }
-            }
-
-            // Kick off at the root:
-            add_node(builder, &root);
-        });
-    }
 }
