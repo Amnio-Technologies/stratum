@@ -66,15 +66,20 @@ impl LvglRenderer {
         }
         let img = egui::ColorImage::from_rgba_unmultiplied([width, height], &rgba_data);
 
+        let tex_opts = egui::TextureOptions {
+            minification: egui::TextureFilter::Nearest,
+            magnification: egui::TextureFilter::Nearest,
+            ..Default::default()
+        };
+
         // 2) If we already have a texture handle, just call .set() to update it
         if let Some(tex) = &mut self.texture {
-            tex.set(img, egui::TextureOptions::default());
+            tex.set(img, tex_opts);
         } else {
             // First time only: allocate it
             self.texture = Some(egui_ctx.load_texture(
                 "lvgl_fb", // the same id, persistent
-                img,
-                egui::TextureOptions::default(),
+                img, tex_opts,
             ));
         }
     }

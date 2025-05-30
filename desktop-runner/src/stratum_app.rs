@@ -7,7 +7,8 @@ use crate::{
 use eframe::{egui, CreationContext, Frame};
 use egui::{
     epaint::text::{FontInsert, InsertFontFamily},
-    Direction, Layout, Pos2, Rect, Response, ScrollArea, Sense, TextureHandle, Vec2,
+    Color32, Direction, Layout, Pos2, Rect, Response, ScrollArea, Sense, Stroke, TextureHandle,
+    Vec2,
 };
 use std::sync::{atomic::Ordering, Arc};
 use stratum_ui_common::{lvgl_obj_tree::TreeManager, ui_logging::UiLogger};
@@ -224,6 +225,33 @@ pub fn draw_lvgl_canvas(ui: &mut egui::Ui, tex: Option<&TextureHandle>, view: &m
             egui::FontId::proportional(16.0),
             egui::Color32::GRAY,
         );
+    }
+
+    if view.zoom > 8.0 {
+        let painter = ui.painter();
+
+        // line style: thin & semi-transparent white
+        let stroke = Stroke::new(1.0, Color32::from_rgb(40, 40, 40));
+
+        // draw vertical pixel lines every 1 original px
+        let cols = (display_w as usize) + 1;
+        for col in 0..=cols {
+            let x = rect.left() + (col as f32) * view.zoom;
+            painter.line_segment(
+                [Pos2::new(x, rect.top()), Pos2::new(x, rect.bottom())],
+                stroke,
+            );
+        }
+
+        // draw horizontal pixel lines
+        let rows = (display_h as usize) + 1;
+        for row in 0..=rows {
+            let y = rect.top() + (row as f32) * view.zoom;
+            painter.line_segment(
+                [Pos2::new(rect.left(), y), Pos2::new(rect.right(), y)],
+                stroke,
+            );
+        }
     }
 }
 
