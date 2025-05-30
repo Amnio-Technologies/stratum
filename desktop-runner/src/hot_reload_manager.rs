@@ -282,6 +282,8 @@ impl HotReloadManager {
             }
         }
 
+        println!("BUILD SERVER FAILED");
+
         // 2) Fallback to the original build.py invocation
         let status = Command::new("python3")
             .arg(&self.build_script)
