@@ -16,6 +16,17 @@ use crate::hot_reload_manager::SharedHotReloadManager;
 pub struct CanvasView {
     pub zoom: f32,
     pub offset: Vec2,
+    pub pending_zoom: Option<f32>,
+}
+
+impl CanvasView {
+    pub fn reset_zoom(&mut self) {
+        self.zoom = 1.0;
+        self.pending_zoom = None;
+    }
+    pub fn reset_position(&mut self) {
+        self.offset = Default::default();
+    }
 }
 
 impl Default for CanvasView {
@@ -23,6 +34,7 @@ impl Default for CanvasView {
         Self {
             zoom: 1.0,
             offset: Default::default(),
+            pending_zoom: None,
         }
     }
 }

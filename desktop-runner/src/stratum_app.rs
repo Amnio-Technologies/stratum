@@ -7,8 +7,8 @@ use crate::{
 use eframe::{egui, CreationContext, Frame};
 use egui::{
     epaint::text::{FontInsert, InsertFontFamily},
-    Color32, Direction, Layout, Pos2, Rect, Response, ScrollArea, Sense, Stroke, TextureHandle,
-    Vec2,
+    Color32, Direction, DragValue, Layout, Pos2, Rect, Response, ScrollArea, Sense, Stroke,
+    TextureHandle, Vec2,
 };
 use std::sync::{atomic::Ordering, Arc};
 use stratum_ui_common::{lvgl_obj_tree::TreeManager, ui_logging::UiLogger};
@@ -146,10 +146,63 @@ impl eframe::App for StratumApp {
             ui.horizontal(|ui| {
                 ui.label(format!("FPS: {:.2}", self.ui_state.fps));
                 ui.separator();
-                ui.label(format!(
-                    "Zoom: {:.0}%",
-                    self.ui_state.canvas_view.zoom * 100.0
-                ));
+
+                ui.label("Zoom:");
+
+                let initial_zoom = (self.ui_state.canvas_view.zoom * 100.0).round() / 100.0;
+                let mut zoom_pct = self
+                    .ui_state
+                    .canvas_view
+                    .pending_zoom
+                    .unwrap_or(initial_zoom)
+                    * 100.0;
+
+                // 2) Draw the drag‐value widget
+                let resp = ui.add(
+                    DragValue::new(&mut zoom_pct)
+                        .range((ZOOM_MIN * 100.0)..=(ZOOM_MAX * 100.0))
+                        .speed(1.0)
+                        .suffix("%"),
+                );
+
+                let new_zoom = (zoom_pct as f32) / 100.0;
+
+                // 3) While the widget has focus, stash whatever they type/drag
+                if resp.has_focus() {
+                    self.ui_state.canvas_view.pending_zoom = Some(new_zoom);
+                }
+
+                // 4) Commit on drag-release OR text-entry focus-loss
+                if resp.dragged() || resp.lost_focus() {
+                    self.ui_state.canvas_view.zoom = new_zoom.clamp(ZOOM_MIN, ZOOM_MAX);
+                    // clear the pending buffer
+                    self.ui_state.canvas_view.pending_zoom = None;
+                }
+
+                // 5) Your Reset button stays the same
+                if ui
+                    .add_enabled(
+                        (self.ui_state.canvas_view.zoom - 1.0).abs() > f32::EPSILON,
+                        egui::Button::new("Reset"),
+                    )
+                    .clicked()
+                {
+                    self.ui_state.canvas_view.reset_zoom();
+                    self.ui_state.canvas_view.reset_position();
+                }
+                ui.separator();
+
+                if ui
+                    .add_enabled(
+                        self.ui_state.canvas_view.offset != Default::default(),
+                        egui::Button::new("Re-center"),
+                    )
+                    .clicked()
+                {
+                    self.ui_state.canvas_view.reset_position()
+                }
+
+                ui.separator();
             });
         });
 
@@ -159,6 +212,9 @@ impl eframe::App for StratumApp {
         ctx.request_repaint();
     }
 }
+
+const ZOOM_MIN: f32 = 0.1;
+const ZOOM_MAX: f32 = 200.0;
 
 // ---------- helpers ----------
 
@@ -182,17 +238,30 @@ pub fn draw_lvgl_canvas(ui: &mut egui::Ui, tex: Option<&TextureHandle>, view: &m
     if response.hovered() {
         let scroll = ui.ctx().input(|i| i.raw_scroll_delta.y);
         if scroll != 0.0 {
-            // adjust zoom (clamped)
-            let factor = (1.0 + scroll * 0.001).clamp(0.1, 10.0);
-            view.zoom *= factor;
+            // 1) Capture old zoom & compute new zoom
+            let old_zoom = view.zoom;
+            let factor = (1.0 + scroll * 0.001).clamp(ZOOM_MIN, ZOOM_MAX);
+            view.zoom = (old_zoom * factor).clamp(ZOOM_MIN, ZOOM_MAX);
 
-            // optional: zoom about cursor
+            // 2) Where is the mouse?
             let cursor = ui
                 .ctx()
                 .input(|i| i.pointer.hover_pos())
-                .unwrap_or(avail.center());
-            let to_cursor = cursor - rect.center();
-            view.offset = (view.offset + to_cursor) * factor - to_cursor;
+                .unwrap_or_else(|| avail.center());
+
+            // 3) Which LVGL‐pixel (world coord) is under the mouse right now?
+            //    offset from the top-left corner of the current image:
+            let world_pixel = (cursor - rect.min) / old_zoom;
+
+            // 4) After zoom, that same world_pixel should land at `cursor`, so
+            //    new_top_left = cursor - world_pixel * new_zoom
+            let new_top_left = cursor - world_pixel * view.zoom;
+
+            // 5) Finally, recompute your view.offset so that
+            //    top_left = avail.center() + offset - scaled*0.5
+            //    ⇒ offset = new_top_left + scaled*0.5 - avail.center()
+            let scaled = Vec2::new(display_w, display_h) * view.zoom;
+            view.offset = new_top_left + scaled * 0.5 - avail.center();
         }
     }
 
