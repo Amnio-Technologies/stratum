@@ -1,4 +1,5 @@
 use egui::ScrollArea;
+use std::mem::discriminant;
 use strum::IntoEnumIterator;
 
 use crate::state::UiState;
@@ -9,7 +10,10 @@ fn create_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
     ui.horizontal(|ui| {
         for page in DebugSidebarPages::iter() {
             if ui
-                .selectable_label(ui_state.selected_debug_page == page, page.as_str())
+                .selectable_label(
+                    discriminant(&ui_state.selected_debug_page) == discriminant(&page),
+                    page.as_str(),
+                )
                 .clicked()
             {
                 ui_state.selected_debug_page = page;
