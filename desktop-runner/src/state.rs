@@ -1,5 +1,6 @@
 // state.rs
 use eframe::CreationContext;
+use egui::Vec2;
 use std::path::PathBuf;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
@@ -8,10 +9,23 @@ use stratum_firmware_common::modules::{
 };
 use stratum_ui_common::lvgl_obj_tree::TreeManager;
 use stratum_ui_common::ui_logging::UiLogger;
-use strum_macros::EnumIter;
 
 use crate::debug_panel::pages::DebugSidebarPages;
 use crate::hot_reload_manager::SharedHotReloadManager;
+
+pub struct CanvasView {
+    pub zoom: f32,
+    pub offset: Vec2,
+}
+
+impl Default for CanvasView {
+    fn default() -> Self {
+        Self {
+            zoom: 1.0,
+            offset: Default::default(),
+        }
+    }
+}
 
 /// Holds global UI state, including the LVGL renderer, modules, and logs.
 pub struct UiState {
@@ -34,7 +48,7 @@ pub struct UiState {
 
     pub selected_build: Option<PathBuf>,
     pub selected_debug_page: DebugSidebarPages,
-    pub zoom: f64,
+    pub canvas_view: CanvasView,
 }
 
 impl UiState {
@@ -58,7 +72,7 @@ impl UiState {
             log_buffer: Vec::new(),
             selected_build: None,
             selected_debug_page: DebugSidebarPages::UiBuild,
-            zoom: 1.0,
+            canvas_view: CanvasView::default(),
         }
     }
 }

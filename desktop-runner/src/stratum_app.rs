@@ -1,13 +1,13 @@
 use crate::{
     debug_panel,
     hot_reload_manager::SharedHotReloadManager,
-    state::{update_fps, UiState},
+    state::{update_fps, CanvasView, UiState},
     stratum_lvgl_ui::StratumLvglUI,
 };
 use eframe::{egui, CreationContext, Frame};
 use egui::{
     epaint::text::{FontInsert, InsertFontFamily},
-    Direction, Layout, ScrollArea, TextureHandle,
+    Direction, Layout, Pos2, Rect, Response, ScrollArea, Sense, TextureHandle, Vec2,
 };
 use std::sync::{atomic::Ordering, Arc};
 use stratum_ui_common::{lvgl_obj_tree::TreeManager, ui_logging::UiLogger};
@@ -132,7 +132,11 @@ impl eframe::App for StratumApp {
                 ui.with_layout(
                     Layout::centered_and_justified(Direction::LeftToRight),
                     |ui| {
-                        draw_lvgl_canvas(ui, self.lvgl_tex.as_ref());
+                        draw_lvgl_canvas(
+                            ui,
+                            self.lvgl_tex.as_ref(),
+                            &mut self.ui_state.canvas_view,
+                        );
                     },
                 );
             });
@@ -141,7 +145,10 @@ impl eframe::App for StratumApp {
             ui.horizontal(|ui| {
                 ui.label(format!("FPS: {:.2}", self.ui_state.fps));
                 ui.separator();
-                ui.label(format!("Zoom: {:.0}%", self.ui_state.zoom * 100.0));
+                ui.label(format!(
+                    "Zoom: {:.0}%",
+                    self.ui_state.canvas_view.zoom * 100.0
+                ));
             });
         });
 
@@ -154,22 +161,70 @@ impl eframe::App for StratumApp {
 
 // ---------- helpers ----------
 
-fn draw_lvgl_canvas(ui: &mut egui::Ui, tex: Option<&TextureHandle>) {
-    let width = unsafe { stratum_ui_common::stratum_ui_ffi::get_lvgl_display_width() as f32 };
-    let height = ui.available_height();
+pub fn draw_lvgl_canvas(ui: &mut egui::Ui, tex: Option<&TextureHandle>, view: &mut CanvasView) {
+    // 1) Figure out native LVGL size
+    let display_w = unsafe { stratum_ui_common::stratum_ui_ffi::get_lvgl_display_width() as f32 };
+    let display_h = unsafe { stratum_ui_common::stratum_ui_ffi::get_lvgl_display_height() as f32 };
 
-    // Allocate exactly the display size and center the image
-    ui.allocate_ui_with_layout(
-        egui::vec2(width, height),
-        Layout::centered_and_justified(Direction::LeftToRight),
-        |ui| {
-            if let Some(t) = tex {
-                ui.image(t);
-            } else {
-                ui.label("No LVGL texture");
-            }
-        },
-    );
+    // 2) Compute scaled size
+    let scaled = Vec2::new(display_w, display_h) * view.zoom;
+
+    // 3) Center + pan
+    let avail = ui.available_rect_before_wrap();
+    let top_left = avail.center() + view.offset - scaled * 0.5;
+    let rect = Rect::from_min_size(top_left, scaled);
+
+    // 4) Allocate with both hover (for zoom) and drag sense
+    let response: Response = ui.allocate_rect(rect, Sense::click_and_drag());
+
+    // 5) Zooming (scroll) — only when hovering
+    if response.hovered() {
+        let scroll = ui.ctx().input(|i| i.raw_scroll_delta.y);
+        if scroll != 0.0 {
+            // adjust zoom (clamped)
+            let factor = (1.0 + scroll * 0.001).clamp(0.1, 10.0);
+            view.zoom *= factor;
+
+            // optional: zoom about cursor
+            let cursor = ui
+                .ctx()
+                .input(|i| i.pointer.hover_pos())
+                .unwrap_or(avail.center());
+            let to_cursor = cursor - rect.center();
+            view.offset = (view.offset + to_cursor) * factor - to_cursor;
+        }
+    }
+
+    // 6) Panning (drag)
+    if response.dragged() {
+        view.offset += response.drag_delta();
+    }
+
+    // 7) Finally draw the texture
+    if let (Some(tex), true) = (tex, response.hovered() || response.dragged()) {
+        ui.painter().image(
+            tex.id(),
+            rect,
+            Rect::from_min_max(Pos2::ZERO, Pos2::new(1.0, 1.0)),
+            egui::Color32::WHITE,
+        );
+    } else if let Some(tex) = tex {
+        // draw even when idle
+        ui.painter().image(
+            tex.id(),
+            rect,
+            Rect::from_min_max(Pos2::ZERO, Pos2::new(1.0, 1.0)),
+            egui::Color32::WHITE,
+        );
+    } else {
+        ui.painter().text(
+            rect.center(),
+            egui::Align2::CENTER_CENTER,
+            "No LVGL texture",
+            egui::FontId::proportional(16.0),
+            egui::Color32::GRAY,
+        );
+    }
 }
 
 fn draw_debug_panel(ctx: &egui::Context, state: &mut UiState) {
