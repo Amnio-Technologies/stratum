@@ -1,4 +1,4 @@
-use egui_ltreeview::{TreeView, TreeViewBuilder};
+use egui_ltreeview::{NodeBuilder, TreeView, TreeViewBuilder};
 use stratum_ui_common::lvgl_obj_tree::TreeNode;
 use strum::IntoEnumIterator;
 use strum_macros::EnumIter;
@@ -7,28 +7,45 @@ use crate::state::UiState;
 
 use super::pages::DebugSidebarPages;
 
-fn draw_lvgl_obj_tree(ui: &mut egui::Ui, ui_state: &UiState) {
+fn draw_lvgl_obj_tree(ui: &mut egui::Ui, ui_state: &mut UiState) {
     if let Some(root) = ui_state.tree_manager.take_root() {
         ui.heading("LVGL Object Tree");
         TreeView::new(ui.make_persistent_id("lvgl-object-tree")).show(ui, |builder| {
             // A helper that recurses for each node:
-            fn add_node(builder: &mut TreeViewBuilder<'_, usize>, node: &TreeNode) {
+            fn add_node(
+                builder: &mut TreeViewBuilder<'_, usize>,
+                node: &TreeNode,
+                ui_state: &mut UiState,
+            ) {
                 // use `node.ptr` as an ID (usize impl Hash+Eq)
                 if node.children.is_empty() {
                     // leaf
-                    builder.leaf(node.ptr, &node.class_name);
+                    let leaf = NodeBuilder::leaf(node.ptr)
+                        .label(&node.class_name)
+                        .icon(|ui| {
+                            let icon_tex = ui_state
+                                .icon_manager
+                                .icon(include_bytes!("../../../assets/icons/braces.svg"))
+                                .square(100);
+
+                            let img = egui::Image::new(&icon_tex)
+                                .tint(ui.visuals().widgets.noninteractive.fg_stroke.color);
+                            img.paint_at(ui, ui.max_rect());
+                        });
+
+                    builder.node(leaf);
                 } else {
                     // directory
                     builder.dir(node.ptr, &node.class_name);
                     for child in &node.children {
-                        add_node(builder, child);
+                        add_node(builder, child, ui_state);
                     }
                     builder.close_dir();
                 }
             }
 
             // Kick off at the root:
-            add_node(builder, &root);
+            add_node(builder, &root, ui_state);
         });
     }
 }

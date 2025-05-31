@@ -8,6 +8,7 @@ stratum-ui/__pycache__
 stratum-ui/src/fonts
 stratum-ui/include/fonts
 desktop-runner/target/*
+desktop-runner/.asset_cache
 amnio-macros/target
 build
 .vscode

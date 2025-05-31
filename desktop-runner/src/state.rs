@@ -11,6 +11,7 @@ use stratum_ui_common::lvgl_obj_tree::TreeManager;
 use stratum_ui_common::ui_logging::UiLogger;
 
 use crate::hot_reload_manager::SharedHotReloadManager;
+use crate::icon::IconManager;
 use crate::ui::debug_panel::pages::DebugSidebarPages;
 
 pub struct CanvasView {
@@ -61,6 +62,7 @@ pub struct UiState {
     pub selected_build: Option<PathBuf>,
     pub selected_debug_page: DebugSidebarPages,
     pub canvas_view: CanvasView,
+    pub icon_manager: IconManager,
 }
 
 impl UiState {
@@ -70,6 +72,7 @@ impl UiState {
         ui_logger: Arc<UiLogger>,
         hot_reload_manager: SharedHotReloadManager,
         tree_manager: Arc<TreeManager>,
+        icon_manager: IconManager,
     ) -> Self {
         UiState {
             enable_vsync: false,
@@ -85,6 +88,7 @@ impl UiState {
             selected_build: None,
             selected_debug_page: DebugSidebarPages::UiBuild,
             canvas_view: CanvasView::default(),
+            icon_manager,
         }
     }
 }

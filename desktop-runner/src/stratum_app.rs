@@ -1,32 +1,56 @@
 use crate::{
-    hot_reload_manager::SharedHotReloadManager,
+    hot_reload_manager::HotReloadManager,
+    icon::IconManager,
     state::{update_fps, UiState},
     stratum_lvgl_ui::StratumLvglUI,
 };
 use eframe::{egui, CreationContext, Frame};
 use egui::epaint::text::{FontInsert, InsertFontFamily};
-use std::sync::{atomic::Ordering, Arc};
+use std::{
+    path::PathBuf,
+    sync::{atomic::Ordering, Arc, Mutex},
+};
 use stratum_ui_common::{lvgl_obj_tree::TreeManager, ui_logging::UiLogger};
 
 pub struct StratumApp {
+    egui_ctx: egui::Context,
     ui_state: UiState,
     lvgl_ui: StratumLvglUI,
     last_frame_start: std::time::Instant,
 }
 
-impl StratumApp {
-    pub fn new(
-        cc: &CreationContext<'_>,
-        ui_logger: Arc<UiLogger>,
-        hot_reload_manager: SharedHotReloadManager,
-        tree_manager: Arc<TreeManager>,
-    ) -> Self {
-        let ui_state = UiState::new(cc, ui_logger, hot_reload_manager, tree_manager);
+impl<'ctx> StratumApp {
+    pub fn new(cc: &'ctx CreationContext<'ctx>) -> Self {
+        let hot_reload_manager = Arc::new(Mutex::new(HotReloadManager::new(
+            PathBuf::from("../stratum-ui/build/desktop/libstratum-ui.dll"),
+            PathBuf::from("../stratum-ui/build.py"),
+            vec![
+                PathBuf::from("../stratum-ui/src"),
+                PathBuf::from("../stratum-ui/include"),
+            ],
+        )));
+
+        let egui_ctx = cc.egui_ctx.clone();
+
+        env_logger::init();
+        HotReloadManager::start(hot_reload_manager.clone());
+        let tree_manager = TreeManager::new();
+        let ui_logger: Arc<UiLogger> = UiLogger::new(10_000);
+        let icon_manager = IconManager::new(egui_ctx.clone(), "./.asset_cache");
+        let ui_state = UiState::new(
+            cc,
+            ui_logger,
+            hot_reload_manager,
+            tree_manager,
+            icon_manager,
+        );
+
         let lvgl_ui = StratumLvglUI::new();
 
         Self::add_fonts(&cc.egui_ctx);
 
         Self {
+            egui_ctx,
             ui_state,
             lvgl_ui,
             last_frame_start: std::time::Instant::now(),
@@ -37,7 +61,7 @@ impl StratumApp {
         ctx.add_font(FontInsert::new(
             "atkinson",
             egui::FontData::from_static(include_bytes!(
-                "../fonts/AtkinsonHyperlegible-Regular.ttf"
+                "../assets/fonts/AtkinsonHyperlegible-Regular.ttf"
             )),
             vec![
                 InsertFontFamily {
@@ -53,7 +77,9 @@ impl StratumApp {
 
         ctx.add_font(FontInsert::new(
             "jetbrains_mono",
-            egui::FontData::from_static(include_bytes!("../fonts/JetBrainsMonoNL-Regular.ttf")),
+            egui::FontData::from_static(include_bytes!(
+                "../assets/fonts/JetBrainsMonoNL-Regular.ttf"
+            )),
             vec![
                 InsertFontFamily {
                     family: egui::FontFamily::Proportional,
@@ -89,7 +115,6 @@ impl eframe::App for StratumApp {
 
         crate::ui::draw_ui(ctx, &mut self.ui_state, &mut self.lvgl_ui);
 
-        // Update FPS counter and loop
         update_fps(&mut self.ui_state, &self.last_frame_start);
         self.last_frame_start = std::time::Instant::now();
         ctx.request_repaint();
