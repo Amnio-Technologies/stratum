@@ -1,7 +1,7 @@
 // main.rs
 
 mod hot_reload_manager;
-mod icon;
+mod icon_manager;
 mod lvgl_backend;
 mod state;
 mod stratum_app;

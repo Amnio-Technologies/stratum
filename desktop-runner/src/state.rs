@@ -11,7 +11,7 @@ use stratum_ui_common::lvgl_obj_tree::TreeManager;
 use stratum_ui_common::ui_logging::UiLogger;
 
 use crate::hot_reload_manager::SharedHotReloadManager;
-use crate::icon::IconManager;
+use crate::icon_manager::IconManager;
 use crate::ui::debug_panel::pages::DebugSidebarPages;
 
 pub struct CanvasView {
@@ -68,7 +68,6 @@ pub struct UiState {
 impl UiState {
     /// Create a new UiState, registering the UI logger and initializing fields.
     pub fn new(
-        _cc: &CreationContext<'_>,
         ui_logger: Arc<UiLogger>,
         hot_reload_manager: SharedHotReloadManager,
         tree_manager: Arc<TreeManager>,

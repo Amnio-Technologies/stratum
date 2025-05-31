@@ -54,11 +54,13 @@ impl<'a> IconRequest<'a> {
         // 3) parse & compute scales
         let opts = usvg::Options::default();
         let tree = usvg::Tree::from_data(&self.svg_bytes, &opts).expect("invalid SVG data");
-        let bb = tree.root().bounding_box();
+        // SVG viewport size
+        let bb = tree.size();
         let orig_w = bb.width();
         let orig_h = bb.height();
         let sx = width as f32 / orig_w;
         let sy = height as f32 / orig_h;
+        dbg!(&bb);
 
         // 4) rasterize into a tiny-skia Pixmap
         let mut pixmap = Pixmap::new(width, height).expect("failed to allocate pixmap");

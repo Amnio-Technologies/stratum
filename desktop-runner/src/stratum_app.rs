@@ -1,6 +1,6 @@
 use crate::{
     hot_reload_manager::HotReloadManager,
-    icon::IconManager,
+    icon_manager::IconManager,
     state::{update_fps, UiState},
     stratum_lvgl_ui::StratumLvglUI,
 };
@@ -13,7 +13,6 @@ use std::{
 use stratum_ui_common::{lvgl_obj_tree::TreeManager, ui_logging::UiLogger};
 
 pub struct StratumApp {
-    egui_ctx: egui::Context,
     ui_state: UiState,
     lvgl_ui: StratumLvglUI,
     last_frame_start: std::time::Instant,
@@ -30,27 +29,18 @@ impl<'ctx> StratumApp {
             ],
         )));
 
-        let egui_ctx = cc.egui_ctx.clone();
-
         env_logger::init();
         HotReloadManager::start(hot_reload_manager.clone());
         let tree_manager = TreeManager::new();
         let ui_logger: Arc<UiLogger> = UiLogger::new(10_000);
-        let icon_manager = IconManager::new(egui_ctx.clone(), "./.asset_cache");
-        let ui_state = UiState::new(
-            cc,
-            ui_logger,
-            hot_reload_manager,
-            tree_manager,
-            icon_manager,
-        );
+        let icon_manager = IconManager::new(cc.egui_ctx.clone(), "./.asset_cache");
+        let ui_state = UiState::new(ui_logger, hot_reload_manager, tree_manager, icon_manager);
 
         let lvgl_ui = StratumLvglUI::new();
 
         Self::add_fonts(&cc.egui_ctx);
 
         Self {
-            egui_ctx,
             ui_state,
             lvgl_ui,
             last_frame_start: std::time::Instant::now(),
