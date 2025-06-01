@@ -1,4 +1,6 @@
-use crate::stratum_ui_ffi::{export_tree, register_tree_send_callback, FlatNode as FlatNodeRaw};
+use crate::stratum_ui_ffi::{
+    self, export_tree, register_tree_send_callback, FlatNode as FlatNodeRaw,
+};
 use std::{
     collections::HashMap,
     ffi::CStr,
@@ -36,15 +38,19 @@ pub struct TreeNode {
 
 /// Manages a single‐root tree snapshot and FFI callback setup.
 pub struct TreeManager {
-    root: Mutex<Option<TreeNode>>,
+    root: Option<TreeNode>,
+    pub selected_obj_ptr: Option<usize>,
 }
+
+pub type SharedTreeManager = Arc<Mutex<TreeManager>>;
 
 impl TreeManager {
     /// Construct, register the callback, and return an Arc handle.
-    pub fn new() -> Arc<Self> {
-        let mgr = Arc::new(TreeManager {
-            root: Mutex::new(None),
-        });
+    pub fn new() -> SharedTreeManager {
+        let mgr = Arc::new(Mutex::new(TreeManager {
+            root: None,
+            selected_obj_ptr: None,
+        }));
         unsafe {
             register_tree_send_callback(Some(tree_send_cb), Arc::as_ptr(&mgr) as *mut c_void);
         }
@@ -52,16 +58,30 @@ impl TreeManager {
     }
 
     /// Re-register after a hot reload, if needed.
-    pub fn bind_ffi_callback(self: Arc<Self>) {
+    pub fn bind_ffi_callback(manager: SharedTreeManager) {
         unsafe {
-            register_tree_send_callback(Some(tree_send_cb), Arc::as_ptr(&self) as *mut c_void);
+            register_tree_send_callback(Some(tree_send_cb), Arc::as_ptr(&manager) as *mut c_void);
         }
     }
 
     /// Trigger C to export the tree, then take ownership of the single root.
-    pub fn take_root(&self) -> Option<TreeNode> {
+    pub fn update_and_take_root(manager: &SharedTreeManager) -> Option<TreeNode> {
         unsafe { export_tree() };
-        std::mem::take(&mut *self.root.lock().unwrap())
+        let guard = manager.lock().unwrap();
+        guard.root.clone()
+    }
+
+    pub fn request_obj_at_point(manager: &SharedTreeManager, x: usize, y: usize) {
+        let mut guard = manager.lock().unwrap();
+
+        unsafe {
+            let ptr = stratum_ui_ffi::lvgl_obj_at_point(x as i32, y as i32) as *const c_void;
+            guard.selected_obj_ptr = if ptr.is_null() {
+                None
+            } else {
+                Some(ptr as usize)
+            };
+        }
     }
 }
 
@@ -75,9 +95,9 @@ unsafe extern "C" fn tree_send_cb(
     }
 
     // Reconstruct our Arc<TreeManager> without dropping the real one
-    let mgr_ptr = user_data as *const TreeManager;
+    let mgr_ptr = user_data as *const Mutex<TreeManager>;
     Arc::increment_strong_count(mgr_ptr);
-    let mgr: Arc<TreeManager> = Arc::from_raw(mgr_ptr);
+    let mgr: SharedTreeManager = Arc::from_raw(mgr_ptr);
 
     // Build a Vec<FlatNode> from the raw C array
     let slice = std::slice::from_raw_parts(raw_nodes, count);
@@ -105,9 +125,13 @@ unsafe extern "C" fn tree_send_cb(
 
     // Convert the flat list into a single‐root TreeNode
     let tree = build_tree(&flat);
-
+    dbg!("hey yall");
     // Store it
-    *mgr.root.lock().unwrap() = tree;
+    {
+        let mut guard = mgr.lock().unwrap();
+        guard.root = tree;
+    }
+    dbg!("hey yall but here now");
 
     // Drop the temporary Arc; the original Arc still lives elsewhere
     // mgr is dropped here

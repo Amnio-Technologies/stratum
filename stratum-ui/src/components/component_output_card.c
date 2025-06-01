@@ -53,6 +53,7 @@ lv_obj_t *component_output_card_create(lv_obj_t *parent)
     lv_obj_set_style_text_color(label, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
     lv_obj_set_style_text_font(label, &jetbrains_mono_nl_regular_12, 0);
     lv_obj_set_style_pad_top(label, 6, 0);
+    lv_obj_add_flag(label, LV_OBJ_FLAG_CLICKABLE);
 
     lv_obj_clear_flag(tile, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_set_scrollbar_mode(tile, LV_SCROLLBAR_MODE_OFF);

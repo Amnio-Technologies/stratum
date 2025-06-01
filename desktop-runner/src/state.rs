@@ -7,7 +7,7 @@ use std::time::{Duration, Instant};
 use stratum_firmware_common::modules::{
     module_manager::ModuleManager, system_controller::SystemController,
 };
-use stratum_ui_common::lvgl_obj_tree::TreeManager;
+use stratum_ui_common::lvgl_obj_tree::{SharedTreeManager, TreeManager};
 use stratum_ui_common::ui_logging::UiLogger;
 
 use crate::hot_reload_manager::SharedHotReloadManager;
@@ -54,7 +54,7 @@ pub struct UiState {
 
     pub hot_reload_manager: SharedHotReloadManager,
 
-    pub tree_manager: Arc<TreeManager>,
+    pub tree_manager: SharedTreeManager,
 
     /// Accumulated lines for debug display.
     pub log_buffer: Vec<String>,
@@ -63,6 +63,7 @@ pub struct UiState {
     pub selected_debug_page: DebugSidebarPages,
     pub canvas_view: CanvasView,
     pub icon_manager: IconManager,
+    pub cursor_pos: Option<(usize, usize)>,
 }
 
 impl UiState {
@@ -70,7 +71,7 @@ impl UiState {
     pub fn new(
         ui_logger: Arc<UiLogger>,
         hot_reload_manager: SharedHotReloadManager,
-        tree_manager: Arc<TreeManager>,
+        tree_manager: SharedTreeManager,
         icon_manager: IconManager,
     ) -> Self {
         UiState {
@@ -88,6 +89,7 @@ impl UiState {
             selected_debug_page: DebugSidebarPages::UiBuild,
             canvas_view: CanvasView::default(),
             icon_manager,
+            cursor_pos: None,
         }
     }
 }

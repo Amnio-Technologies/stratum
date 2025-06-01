@@ -20,6 +20,8 @@ pub struct StratumApp {
 
 impl<'ctx> StratumApp {
     pub fn new(cc: &'ctx CreationContext<'ctx>) -> Self {
+        env_logger::init();
+
         let hot_reload_manager = Arc::new(Mutex::new(HotReloadManager::new(
             PathBuf::from("../stratum-ui/build/desktop/libstratum-ui.dll"),
             PathBuf::from("../stratum-ui/build.py"),
@@ -28,9 +30,8 @@ impl<'ctx> StratumApp {
                 PathBuf::from("../stratum-ui/include"),
             ],
         )));
-
-        env_logger::init();
         HotReloadManager::start(hot_reload_manager.clone());
+
         let tree_manager = TreeManager::new();
         let ui_logger: Arc<UiLogger> = UiLogger::new(10_000);
         let icon_manager = IconManager::new(cc.egui_ctx.clone(), "./.asset_cache");
@@ -93,7 +94,7 @@ impl<'ctx> StratumApp {
             .swap(false, Ordering::Relaxed)
         {
             self.ui_state.ui_logger.clone().bind_ffi_callback();
-            self.ui_state.tree_manager.clone().bind_ffi_callback();
+            TreeManager::bind_ffi_callback(self.ui_state.tree_manager.clone());
             self.lvgl_ui.reload_ui();
         }
     }

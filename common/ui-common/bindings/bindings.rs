@@ -87,3 +87,6 @@ pub type lv_obj_t = _lv_obj_t;
 unsafe extern "C" {
     pub fn lvgl_label_text(label: *const lv_obj_t) -> *mut ::std::os::raw::c_char;
 }
+unsafe extern "C" {
+    pub fn lvgl_obj_at_point(x: i32, y: i32) -> *mut lv_obj_t;
+}

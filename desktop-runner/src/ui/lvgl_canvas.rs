@@ -6,6 +6,7 @@ use egui::{
     Align2, CentralPanel, Color32, Context, Direction, FontId, Frame, Layout, Pos2, Rect, Response,
     Sense, Stroke, TextureHandle, Vec2,
 };
+use stratum_ui_common::lvgl_obj_tree::TreeManager;
 
 pub const ZOOM_MIN: f32 = 0.1;
 pub const ZOOM_MAX: f32 = 200.0;
@@ -98,9 +99,10 @@ fn maybe_draw_pixel_grid(ui: &mut egui::Ui, view: &CanvasView, rect: Rect, displ
     }
 }
 
-fn draw_lvgl_canvas(ui: &mut egui::Ui, tex: Option<&TextureHandle>, view: &mut CanvasView) {
+fn draw_lvgl_canvas(ui: &mut egui::Ui, ui_state: &mut UiState, tex: Option<&TextureHandle>) {
     let display_size = get_lvgl_display_size();
     let available_rect = ui.available_rect_before_wrap();
+    let view = &mut ui_state.canvas_view;
 
     handle_zoom(ui, view, display_size, available_rect);
 
@@ -110,6 +112,45 @@ fn draw_lvgl_canvas(ui: &mut egui::Ui, tex: Option<&TextureHandle>, view: &mut C
     update_pan(view, &response);
     draw_canvas(ui, tex, rect, &response);
     maybe_draw_pixel_grid(ui, view, rect, display_size);
+
+    let zoom = view.zoom;
+    update_user_cursor_pos(ui, ui_state, rect, display_size, zoom);
+
+    if response.clicked() {
+        if let Some((lvgl_x, lvgl_y)) = ui_state.cursor_pos {
+            TreeManager::request_obj_at_point(&ui_state.tree_manager, lvgl_x, lvgl_y);
+        }
+    }
+}
+
+fn update_user_cursor_pos(
+    ui: &mut egui::Ui,
+    ui_state: &mut UiState,
+    rect: Rect,
+    display_size: Vec2,
+    zoom: f32,
+) {
+    if let Some(cursor_pos) = ui.ctx().input(|i| i.pointer.hover_pos()) {
+        if rect.contains(cursor_pos) {
+            // local offset inside the drawn rect (in “screen-pixels”)
+            let local = cursor_pos - rect.min;
+
+            let raw_x = local.x / zoom;
+            let raw_y = local.y / zoom;
+
+            let mut lvgl_x = raw_x.floor() as usize;
+            let mut lvgl_y = raw_y.floor() as usize;
+
+            lvgl_x = lvgl_x.clamp(0, display_size.x as usize - 1);
+            lvgl_y = lvgl_y.clamp(0, display_size.y as usize - 1);
+
+            ui_state.cursor_pos = Some((lvgl_x, lvgl_y));
+        } else {
+            ui_state.cursor_pos = None;
+        }
+    } else {
+        ui_state.cursor_pos = None;
+    }
 }
 
 pub fn draw(ctx: &Context, ui_state: &mut UiState, lvgl_ui: &mut StratumLvglUI) {
@@ -119,7 +160,7 @@ pub fn draw(ctx: &Context, ui_state: &mut UiState, lvgl_ui: &mut StratumLvglUI) 
             ui.with_layout(
                 Layout::centered_and_justified(Direction::LeftToRight),
                 |ui| {
-                    draw_lvgl_canvas(ui, lvgl_ui.update(ctx), &mut ui_state.canvas_view);
+                    draw_lvgl_canvas(ui, ui_state, lvgl_ui.update(ctx));
                 },
             );
         });

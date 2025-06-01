@@ -61,6 +61,18 @@ pub fn draw(ctx: &egui::Context, ui_state: &mut UiState) {
             }
 
             ui.separator();
+
+            fn format_cursor_pos(pos: Option<(usize, usize)>) -> String {
+                if let Some(pos) = pos {
+                    format!("({}, {})", pos.0, pos.1)
+                } else {
+                    "(__, __)".into()
+                }
+            }
+
+            ui.label(format!("Pixel: {}", format_cursor_pos(ui_state.cursor_pos)));
+
+            ui.separator();
         });
     });
 }
