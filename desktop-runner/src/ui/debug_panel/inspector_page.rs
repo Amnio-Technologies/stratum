@@ -1,7 +1,7 @@
 use std::ffi::CStr;
 
 use egui::{Image, Pos2, Rect, RichText, Ui};
-use egui_ltreeview::{NodeBuilder, TreeView, TreeViewBuilder};
+use egui_ltreeview::{Action, NodeBuilder, TreeView, TreeViewBuilder};
 use stratum_ui_common::{
     lvgl_obj_tree::TreeNode,
     stratum_ui_ffi::{self, lv_obj_t},
@@ -17,96 +17,105 @@ fn draw_lvgl_obj_tree(ui: &mut egui::Ui, ui_state: &mut UiState) {
     if let Some(root) = ui_state.tree_manager.take_root() {
         ui.style_mut().interaction.selectable_labels = false;
 
-        TreeView::new(ui.make_persistent_id("lvgl-object-tree")).show(ui, |builder| {
-            // A helper that recurses for each node:
-            fn add_node(
-                builder: &mut TreeViewBuilder<'_, usize>,
-                node: &TreeNode,
-                ui_state: &mut UiState,
-            ) {
-                let eye_fill = ui_state
-                    .icon_manager
-                    .icon(include_bytes!("../../../assets/icons/eye-fill.svg"))
-                    .square(100);
+        let (resp, actions) = TreeView::new(ui.make_persistent_id("lvgl-object-tree"))
+            .allow_multi_selection(false)
+            .override_indent(Some(12.0))
+            .show(ui, |builder| {
+                // A helper that recurses for each node:
+                fn add_node(
+                    builder: &mut TreeViewBuilder<'_, usize>,
+                    node: &TreeNode,
+                    ui_state: &mut UiState,
+                ) {
+                    let eye_fill = ui_state
+                        .icon_manager
+                        .icon(include_bytes!("../../../assets/icons/eye-fill.svg"))
+                        .square(100);
 
-                let braces = ui_state
-                    .icon_manager
-                    .icon(include_bytes!("../../../assets/icons/braces.svg"))
-                    .square(100);
+                    let braces = ui_state
+                        .icon_manager
+                        .icon(include_bytes!("../../../assets/icons/braces.svg"))
+                        .square(100);
 
-                let draw_label = |ui: &mut Ui| {
-                    unsafe fn c_char_ptr_to_string(ptr: *mut ::std::os::raw::c_char) -> String {
-                        if ptr.is_null() {
-                            return String::new();
+                    let draw_label = |ui: &mut Ui| {
+                        unsafe fn c_char_ptr_to_string(ptr: *mut ::std::os::raw::c_char) -> String {
+                            if ptr.is_null() {
+                                return String::new();
+                            }
+                            CStr::from_ptr(ptr).to_string_lossy().into_owned()
                         }
-                        CStr::from_ptr(ptr).to_string_lossy().into_owned()
-                    }
 
-                    if node.class_name == "lv_label" {
-                        let label_text = unsafe {
-                            let obj_ptr = node.ptr as *const lv_obj_t;
-                            c_char_ptr_to_string(stratum_ui_ffi::lvgl_label_text(obj_ptr))
-                        };
-                        ui.label(RichText::new(format!("{}:", &node.class_name)).monospace());
+                        if node.class_name == "lv_label" {
+                            let label_text = unsafe {
+                                let obj_ptr = node.ptr as *const lv_obj_t;
+                                c_char_ptr_to_string(stratum_ui_ffi::lvgl_label_text(obj_ptr))
+                            };
+                            ui.label(RichText::new(format!("{}:", &node.class_name)).monospace());
 
-                        ui.label(RichText::new(format!("\"{label_text}\"")));
+                            ui.label(RichText::new(format!("\"{label_text}\"")));
+                        } else {
+                            ui.label(RichText::new(&node.class_name).monospace());
+                        }
+
+                        let (_, big_rect) = ui
+                            .spacing()
+                            .icon_rectangles(ui.available_rect_before_wrap());
+
+                        let spacing = ui.spacing().item_spacing.x;
+                        let leftover = ui.available_width() - big_rect.width() - spacing;
+
+                        let place = Rect::from_min_size(
+                            Pos2 {
+                                x: ui.cursor().min.x + leftover,
+                                y: big_rect.min.y,
+                            },
+                            big_rect.size(),
+                        );
+
+                        ui.add_space(spacing + big_rect.width() + spacing);
+
+                        let img = Image::new(&eye_fill)
+                            .tint(ui.visuals().widgets.noninteractive.fg_stroke.color);
+                        img.paint_at(ui, place);
+                    };
+
+                    let draw_icon = |ui: &mut Ui| {
+                        let img = Image::new(&braces)
+                            .tint(ui.visuals().widgets.noninteractive.fg_stroke.color);
+                        img.paint_at(ui, ui.max_rect());
+                    };
+
+                    // use `node.ptr` as an ID (usize impl Hash+Eq)
+                    if node.children.is_empty() {
+                        // leaf
+                        let leaf = NodeBuilder::leaf(node.ptr)
+                            .label_ui(draw_label)
+                            .icon(draw_icon);
+
+                        builder.node(leaf);
                     } else {
-                        ui.label(RichText::new(&node.class_name).monospace());
+                        // directory
+                        let dir = NodeBuilder::dir(node.ptr)
+                            .label_ui(draw_label)
+                            .icon(draw_icon);
+
+                        builder.node(dir);
+                        for child in &node.children {
+                            add_node(builder, child, ui_state);
+                        }
+                        builder.close_dir();
                     }
-
-                    let (_, big_rect) = ui
-                        .spacing()
-                        .icon_rectangles(ui.available_rect_before_wrap());
-
-                    let spacing = ui.spacing().item_spacing.x;
-                    let leftover = ui.available_width() - big_rect.width() - spacing;
-
-                    let place = Rect::from_min_size(
-                        Pos2 {
-                            x: ui.cursor().min.x + leftover,
-                            y: big_rect.min.y,
-                        },
-                        big_rect.size(),
-                    );
-
-                    ui.add_space(spacing + big_rect.width() + spacing);
-
-                    let img = Image::new(&eye_fill)
-                        .tint(ui.visuals().widgets.noninteractive.fg_stroke.color);
-                    img.paint_at(ui, place);
-                };
-
-                let draw_icon = |ui: &mut Ui| {
-                    let img = Image::new(&braces)
-                        .tint(ui.visuals().widgets.noninteractive.fg_stroke.color);
-                    img.paint_at(ui, ui.max_rect());
-                };
-
-                // use `node.ptr` as an ID (usize impl Hash+Eq)
-                if node.children.is_empty() {
-                    // leaf
-                    let leaf = NodeBuilder::leaf(node.ptr)
-                        .label_ui(draw_label)
-                        .icon(draw_icon);
-
-                    builder.node(leaf);
-                } else {
-                    // directory
-                    let dir = NodeBuilder::dir(node.ptr)
-                        .label_ui(draw_label)
-                        .icon(draw_icon);
-
-                    builder.node(dir);
-                    for child in &node.children {
-                        add_node(builder, child, ui_state);
-                    }
-                    builder.close_dir();
                 }
-            }
 
-            // Kick off at the root:
-            add_node(builder, &root, ui_state);
-        });
+                // Kick off at the root:
+                add_node(builder, &root, ui_state);
+            });
+
+        for action in actions {
+            if let Action::SetSelected(v) = action {
+                dbg!(v);
+            }
+        }
     }
 }
 
