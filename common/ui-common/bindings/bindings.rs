@@ -77,3 +77,13 @@ unsafe extern "C" {
     #[doc = " Called by LVGL's flush_cb to push bytes out.  Must be registered\n by the platform code *before* lvgl_setup()."]
     pub fn lvgl_register_spi_send_cb(cb: ui_spi_send_cb_t);
 }
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _lv_obj_t {
+    _unused: [u8; 0],
+}
+#[doc = " Typedefs from various lvgl modules.\n They are defined here to avoid circular dependencies."]
+pub type lv_obj_t = _lv_obj_t;
+unsafe extern "C" {
+    pub fn lvgl_label_text(label: *const lv_obj_t) -> *mut ::std::os::raw::c_char;
+}
