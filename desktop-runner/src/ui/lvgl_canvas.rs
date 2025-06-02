@@ -1,4 +1,5 @@
 use crate::{
+    lvgl_obj_tree::TreeManager,
     state::{CanvasView, UiState},
     stratum_lvgl_ui::StratumLvglUI,
 };
@@ -6,7 +7,6 @@ use egui::{
     Align2, CentralPanel, Color32, Context, Direction, FontId, Frame, Layout, Pos2, Rect, Response,
     Sense, Stroke, TextureHandle, Vec2,
 };
-use stratum_ui_common::lvgl_obj_tree::TreeManager;
 
 pub const ZOOM_MIN: f32 = 0.1;
 pub const ZOOM_MAX: f32 = 200.0;

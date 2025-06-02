@@ -3,6 +3,7 @@
 mod hot_reload_manager;
 mod icon_manager;
 mod lvgl_backend;
+mod lvgl_obj_tree;
 mod state;
 mod stratum_app;
 mod stratum_lvgl_ui;

@@ -1,5 +1,4 @@
 pub mod lvgl_backend;
-pub mod lvgl_obj_tree;
 pub mod ui_logging;
 
 /// FFI surface for C <-> Rust interoperation in the Stratum system.

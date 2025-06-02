@@ -1,5 +1,8 @@
 // state.rs
-use eframe::CreationContext;
+use crate::hot_reload_manager::SharedHotReloadManager;
+use crate::icon_manager::IconManager;
+use crate::lvgl_obj_tree::SharedTreeManager;
+use crate::ui::debug_panel::pages::DebugSidebarPages;
 use egui::Vec2;
 use std::path::PathBuf;
 use std::sync::Arc;
@@ -7,12 +10,7 @@ use std::time::{Duration, Instant};
 use stratum_firmware_common::modules::{
     module_manager::ModuleManager, system_controller::SystemController,
 };
-use stratum_ui_common::lvgl_obj_tree::{SharedTreeManager, TreeManager};
 use stratum_ui_common::ui_logging::UiLogger;
-
-use crate::hot_reload_manager::SharedHotReloadManager;
-use crate::icon_manager::IconManager;
-use crate::ui::debug_panel::pages::DebugSidebarPages;
 
 pub struct CanvasView {
     pub zoom: f32,

@@ -1,6 +1,7 @@
 use crate::{
     hot_reload_manager::HotReloadManager,
     icon_manager::IconManager,
+    lvgl_obj_tree::TreeManager,
     state::{update_fps, UiState},
     stratum_lvgl_ui::StratumLvglUI,
 };
@@ -10,7 +11,7 @@ use std::{
     path::PathBuf,
     sync::{atomic::Ordering, Arc, Mutex},
 };
-use stratum_ui_common::{lvgl_obj_tree::TreeManager, ui_logging::UiLogger};
+use stratum_ui_common::ui_logging::UiLogger;
 
 pub struct StratumApp {
     ui_state: UiState,
