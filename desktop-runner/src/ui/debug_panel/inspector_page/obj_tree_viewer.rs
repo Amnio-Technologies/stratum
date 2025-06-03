@@ -5,6 +5,7 @@ use egui_ltreeview::{Action, NodeBuilder, TreeView, TreeViewBuilder};
 use stratum_ui_common::stratum_ui_ffi::{self, lv_obj_t};
 
 use crate::{
+    icon_manager::IconManager,
     lvgl_obj_tree::{TreeManager, TreeNode},
     state::UiState,
 };
@@ -67,13 +68,33 @@ fn paint_icon_clickable(
     response
 }
 
-struct LabelIcons {
+struct NodeIcons {
     braces: TextureHandle,
     eye_fill: TextureHandle,
     eye_slash: TextureHandle,
 }
 
-fn draw_node_label(ui: &mut Ui, icons: &LabelIcons, node: &TreeNode, shown: &mut bool) {
+impl NodeIcons {
+    fn load(icon_manager: &mut IconManager) -> Self {
+        let braces = icon_manager
+            .icon(include_bytes!("../../../../assets/icons/braces.svg"))
+            .square(100);
+        let eye_fill = icon_manager
+            .icon(include_bytes!("../../../../assets/icons/eye-fill.svg"))
+            .square(100);
+        let eye_slash = icon_manager
+            .icon(include_bytes!("../../../../assets/icons/eye-slash.svg"))
+            .square(100);
+
+        NodeIcons {
+            braces,
+            eye_fill,
+            eye_slash,
+        }
+    }
+}
+
+fn draw_node(ui: &mut Ui, icons: &NodeIcons, node: &TreeNode, shown: &mut bool) {
     let braces_id = ui.make_persistent_id(("braces_icon", node.ptr));
     let _ = paint_icon_clickable(ui, &icons.braces, true, 3.0, braces_id);
 
@@ -96,7 +117,6 @@ fn draw_node_label(ui: &mut Ui, icons: &LabelIcons, node: &TreeNode, shown: &mut
     };
 
     if eye_resp.clicked() {
-        dbg!("clicked");
         *shown = !*shown;
     }
 }
@@ -106,7 +126,7 @@ fn draw_node_label(ui: &mut Ui, icons: &LabelIcons, node: &TreeNode, shown: &mut
 fn add_node(
     builder: &mut TreeViewBuilder<'_, usize>,
     node: &TreeNode,
-    icons: &LabelIcons,
+    icons: &NodeIcons,
     local_hidden: &mut Vec<usize>,
     hidden_before: bool,
 ) {
@@ -114,18 +134,15 @@ fn add_node(
     let mut shown = !hidden_before;
 
     // Build either a leaf or a directory, passing `&mut shown` into the label UI.
-    let label_fn = |ui: &mut Ui| draw_node_label(ui, icons, node, &mut shown);
+    let label_fn = |ui: &mut Ui| draw_node(ui, icons, node, &mut shown);
 
     if node.children.is_empty() {
-        // Leaf node:
         let leaf = NodeBuilder::leaf(node.ptr).label_ui(label_fn);
         builder.node(leaf);
     } else {
-        // Dir node:
         let dir = NodeBuilder::dir(node.ptr).label_ui(label_fn);
         builder.node(dir);
 
-        // Recurse into children
         for child in &node.children {
             // For each child, we need to know if it was hidden _before_ this frame.
             // That is, `hidden_before_child = local_hidden.contains(&child.ptr)`.
@@ -155,7 +172,7 @@ fn add_node(
 pub fn draw(ui: &mut egui::Ui, ui_state: &mut UiState) {
     // 1) Lock once and extract both tree_state and hidden_elements
     let (mut tree_state, mut local_hidden) = {
-        let mut mgr = ui_state.tree_manager.lock().unwrap();
+        let mgr = ui_state.tree_manager.lock().unwrap();
         (mgr.tree_state.clone(), mgr.hidden_elements.clone())
     };
 
@@ -165,29 +182,9 @@ pub fn draw(ui: &mut egui::Ui, ui_state: &mut UiState) {
     if let Some(root) = root {
         ui.style_mut().interaction.selectable_labels = false;
 
-        // 3) Load all three textures exactly once per `draw()`.
-        let braces_tex = ui_state
-            .icon_manager
-            .icon(include_bytes!("../../../../assets/icons/braces.svg"))
-            .square(100);
-        let eye_fill_tex = ui_state
-            .icon_manager
-            .icon(include_bytes!("../../../../assets/icons/eye-fill.svg"))
-            .square(100);
-        let eye_slash_tex = ui_state
-            .icon_manager
-            .icon(include_bytes!("../../../../assets/icons/eye-slash.svg"))
-            .square(100);
+        let icons = NodeIcons::load(&mut ui_state.icon_manager);
 
-        let icons = LabelIcons {
-            braces: braces_tex,
-            eye_fill: eye_fill_tex,
-            eye_slash: eye_slash_tex,
-        };
-
-        // 4) Now build the TreeView *without holding any locks*.
         let tree_id = ui.make_persistent_id("lvgl-object-tree");
-
         let (_resp, actions) = TreeView::new(tree_id)
             .allow_multi_selection(false)
             .override_indent(Some(12.0))
@@ -205,14 +202,13 @@ pub fn draw(ui: &mut egui::Ui, ui_state: &mut UiState) {
                 );
             });
 
-        // 5) After building the entire tree, capture any SetSelected actions if you need them.
         for action in actions {
             if let Action::SetSelected(v) = action {
                 dbg!(v);
             }
         }
 
-        // 6) Now that `local_hidden` reflects this frame’s toggles, write it back under a short lock:
+        // Now that `local_hidden` reflects this frame’s toggles, write it back under a short lock:
         {
             let mut mgr = ui_state.tree_manager.lock().unwrap();
             mgr.tree_state = tree_state;
