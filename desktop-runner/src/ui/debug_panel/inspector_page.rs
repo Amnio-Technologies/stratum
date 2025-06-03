@@ -13,6 +13,51 @@ use crate::{
 
 use super::pages::DebugSidebarPages;
 
+/// Convert a raw C string pointer to a Rust `String`. Returns `""` if null.
+unsafe fn c_char_ptr_to_string(ptr: *mut ::std::os::raw::c_char) -> String {
+    if ptr.is_null() {
+        String::new()
+    } else {
+        CStr::from_ptr(ptr).to_string_lossy().into_owned()
+    }
+}
+
+fn paint_icon(ui: &mut Ui, tex: &egui::TextureHandle, is_left: bool, spacing: f32) {
+    // Ask egui how big it will paint the icon
+    let full_rect = ui.available_rect_before_wrap();
+    let (_, icon_rect) = ui.spacing().icon_rectangles(full_rect);
+    let icon_size = icon_rect.size();
+    let tint = ui.visuals().widgets.noninteractive.fg_stroke.color;
+
+    if is_left {
+        // Place at x = cursor.min.x, y = icon_rect.min.y
+        let place = Rect::from_min_size(
+            Pos2 {
+                x: ui.cursor().min.x,
+                y: icon_rect.min.y,
+            },
+            icon_size,
+        );
+        // Advance the cursor by (icon_width + spacing)
+        ui.add_space(icon_size.x + spacing);
+        // Paint the texture
+        Image::new(tex).tint(tint).paint_at(ui, place);
+    } else {
+        // Compute leftover = (available width) - (icon_width) - spacing
+        let leftover = ui.available_width() - icon_size.x - spacing;
+        let place = Rect::from_min_size(
+            Pos2 {
+                x: ui.cursor().min.x + leftover,
+                y: icon_rect.min.y,
+            },
+            icon_size,
+        );
+        // Advance the cursor by (spacing + icon_width + spacing)
+        ui.add_space(spacing + icon_size.x + spacing);
+        Image::new(tex).tint(tint).paint_at(ui, place);
+    }
+}
+
 fn draw_node_label(ui: &mut Ui, node: &TreeNode, ui_state: &mut UiState) {
     let braces_tex = ui_state
         .icon_manager
@@ -23,72 +68,19 @@ fn draw_node_label(ui: &mut Ui, node: &TreeNode, ui_state: &mut UiState) {
         .icon(include_bytes!("../../../assets/icons/eye-fill.svg"))
         .square(100);
 
-    // --- 2) Draw the “braces” icon at the leftmost cursor position ---
-    {
-        let spacing = 3.0;
+    paint_icon(ui, &braces_tex, true, 3.0);
 
-        let full_rect = ui.available_rect_before_wrap();
-        let (_, braces_rect) = ui.spacing().icon_rectangles(full_rect);
-
-        let place = Rect::from_min_size(
-            Pos2 {
-                x: ui.cursor().min.x,
-                y: braces_rect.min.y,
-            },
-            braces_rect.size(),
-        );
-
-        ui.add_space(braces_rect.width() + spacing);
-
-        let img = Image::new(&braces_tex).tint(ui.visuals().widgets.noninteractive.fg_stroke.color);
-        img.paint_at(ui, place);
-    }
-
-    // --- 3) Now draw the class name (or lv_label text) in monospace ---
-    // If this node is an lv_label, fetch runtime text from LVGL; else just class name.
     if node.class_name == "lv_label" {
-        unsafe fn c_char_ptr_to_string(ptr: *mut ::std::os::raw::c_char) -> String {
-            if ptr.is_null() {
-                return String::new();
-            }
-            CStr::from_ptr(ptr).to_string_lossy().into_owned()
-        }
-
-        let label_text = unsafe {
-            let obj_ptr = node.ptr as *const lv_obj_t;
-            c_char_ptr_to_string(stratum_ui_ffi::lvgl_label_text(obj_ptr))
-        };
+        let raw_ptr = node.ptr as *const lv_obj_t;
+        let label_text = unsafe { c_char_ptr_to_string(stratum_ui_ffi::lvgl_label_text(raw_ptr)) };
         ui.label(RichText::new(format!("{}:", &node.class_name)).monospace());
         ui.label(RichText::new(format!("\"{label_text}\"")));
     } else {
         ui.label(RichText::new(&node.class_name).monospace());
     }
 
-    // --- 4) Finally, place the “eye” icon at the far right of this same row ---
-    {
-        // Again ask egui how big the eye icon would be:
-        let full_rect = ui.available_rect_before_wrap();
-        let (_, eye_rect) = ui.spacing().icon_rectangles(full_rect);
-        let spacing = ui.spacing().item_spacing.x;
-
-        // Compute how much horizontal space remains on this row:
-        let leftover = ui.available_width() - eye_rect.width() - spacing;
-        // `ui.cursor().min.x` is where text just ended, so:
-        let place = Rect::from_min_size(
-            Pos2 {
-                x: ui.cursor().min.x + leftover,
-                y: eye_rect.min.y,
-            },
-            eye_rect.size(),
-        );
-
-        // Add enough space so that the icon will not overlap the text we just painted:
-        ui.add_space(spacing + eye_rect.width() + spacing);
-
-        let img =
-            Image::new(&eye_fill_tex).tint(ui.visuals().widgets.noninteractive.fg_stroke.color);
-        img.paint_at(ui, place);
-    }
+    let eye_spacing = ui.spacing().item_spacing.x;
+    paint_icon(ui, &eye_fill_tex, /* is_left = */ false, eye_spacing);
 }
 
 fn add_node(builder: &mut TreeViewBuilder<'_, usize>, node: &TreeNode, ui_state: &mut UiState) {
@@ -120,7 +112,7 @@ fn draw_lvgl_obj_tree(ui: &mut egui::Ui, ui_state: &mut UiState) {
         let id = ui.make_persistent_id("lvgl-object-tree");
         let state = &mut shared_mgr.lock().unwrap().tree_state;
 
-        let (resp, actions) = TreeView::new(id)
+        let (_resp, actions) = TreeView::new(id)
             .allow_multi_selection(false)
             .override_indent(Some(12.0))
             .show_state(ui, state, |builder| {
