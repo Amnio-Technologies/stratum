@@ -3,7 +3,7 @@ use strum_macros::EnumIter;
 use crate::state::UiState;
 
 use super::{
-    inspector_page::{draw_inspector_debug_ui, PropertyEditorTabs},
+    inspector_page::{draw_inspector_debug_ui, property_editor::PropertyEditorTabs},
     ui_build_page::draw_uibuild_debug_ui,
 };
 
