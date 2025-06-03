@@ -1,6 +1,6 @@
 use std::ffi::CStr;
 
-use egui::{Image, Pos2, Rect, RichText, Ui};
+use egui::{Id, Image, Pos2, Rect, Response, RichText, Sense, Ui};
 use egui_ltreeview::{Action, NodeBuilder, TreeView, TreeViewBuilder};
 use stratum_ui_common::stratum_ui_ffi::{self, lv_obj_t};
 use strum::IntoEnumIterator;
@@ -14,7 +14,7 @@ use crate::{
 use super::pages::DebugSidebarPages;
 
 /// Convert a raw C string pointer to a Rust `String`. Returns `""` if null.
-unsafe fn c_char_ptr_to_string(ptr: *mut ::std::os::raw::c_char) -> String {
+unsafe fn string_from_raw(ptr: *mut ::std::os::raw::c_char) -> String {
     if ptr.is_null() {
         String::new()
     } else {
@@ -22,40 +22,54 @@ unsafe fn c_char_ptr_to_string(ptr: *mut ::std::os::raw::c_char) -> String {
     }
 }
 
-fn paint_icon(ui: &mut Ui, tex: &egui::TextureHandle, is_left: bool, spacing: f32) {
-    // Ask egui how big it will paint the icon
+fn paint_icon_clickable(
+    ui: &mut Ui,
+    tex: &egui::TextureHandle,
+    is_left: bool,
+    spacing: f32,
+    unique_id: Id,
+) -> Response {
+    // 1) Figure out how large the icon will be:
     let full_rect = ui.available_rect_before_wrap();
     let (_, icon_rect) = ui.spacing().icon_rectangles(full_rect);
     let icon_size = icon_rect.size();
     let tint = ui.visuals().widgets.noninteractive.fg_stroke.color;
 
-    if is_left {
-        // Place at x = cursor.min.x, y = icon_rect.min.y
-        let place = Rect::from_min_size(
+    // 2) Compute “place” based on left vs. right:
+    let place = if is_left {
+        Rect::from_min_size(
             Pos2 {
                 x: ui.cursor().min.x,
                 y: icon_rect.min.y,
             },
             icon_size,
-        );
-        // Advance the cursor by (icon_width + spacing)
-        ui.add_space(icon_size.x + spacing);
-        // Paint the texture
-        Image::new(tex).tint(tint).paint_at(ui, place);
+        )
     } else {
-        // Compute leftover = (available width) - (icon_width) - spacing
         let leftover = ui.available_width() - icon_size.x - spacing;
-        let place = Rect::from_min_size(
+        Rect::from_min_size(
             Pos2 {
                 x: ui.cursor().min.x + leftover,
                 y: icon_rect.min.y,
             },
             icon_size,
-        );
-        // Advance the cursor by (spacing + icon_width + spacing)
+        )
+    };
+
+    // 3) Use `interact` (no layout impact) to make it clickable:
+    let response = ui.interact(place, unique_id, Sense::click());
+
+    // 4) Paint the icon at exactly the same rect:
+    Image::new(tex).tint(tint).paint_at(ui, place);
+
+    // 5) Advance the cursor so that subsequent UI elements lay out correctly:
+    if is_left {
+        ui.add_space(icon_size.x + spacing);
+    } else {
+        // match the old “right” version’s spacing so we skip over the icon + padding:
         ui.add_space(spacing + icon_size.x + spacing);
-        Image::new(tex).tint(tint).paint_at(ui, place);
     }
+
+    response
 }
 
 fn draw_node_label(ui: &mut Ui, node: &TreeNode, ui_state: &mut UiState) {
@@ -68,11 +82,12 @@ fn draw_node_label(ui: &mut Ui, node: &TreeNode, ui_state: &mut UiState) {
         .icon(include_bytes!("../../../assets/icons/eye-fill.svg"))
         .square(100);
 
-    paint_icon(ui, &braces_tex, true, 3.0);
+    let braces_id = ui.make_persistent_id(("braces_icon", node.ptr));
+    let resp_braces = paint_icon_clickable(ui, &braces_tex, true, 3.0, braces_id);
 
     if node.class_name == "lv_label" {
         let raw_ptr = node.ptr as *const lv_obj_t;
-        let label_text = unsafe { c_char_ptr_to_string(stratum_ui_ffi::lvgl_label_text(raw_ptr)) };
+        let label_text = unsafe { string_from_raw(stratum_ui_ffi::lvgl_label_text(raw_ptr)) };
         ui.label(RichText::new(format!("{}:", &node.class_name)).monospace());
         ui.label(RichText::new(format!("\"{label_text}\"")));
     } else {
@@ -80,7 +95,9 @@ fn draw_node_label(ui: &mut Ui, node: &TreeNode, ui_state: &mut UiState) {
     }
 
     let eye_spacing = ui.spacing().item_spacing.x;
-    paint_icon(ui, &eye_fill_tex, /* is_left = */ false, eye_spacing);
+    // paint_icon_clickable(ui, &eye_fill_tex, /* is_left = */ false, eye_spacing);
+    let eye_id = ui.make_persistent_id(("eye_icon", node.ptr));
+    let resp_eye = paint_icon_clickable(ui, &eye_fill_tex, false, eye_spacing, eye_id);
 }
 
 fn add_node(builder: &mut TreeViewBuilder<'_, usize>, node: &TreeNode, ui_state: &mut UiState) {
