@@ -1,7 +1,11 @@
-use crate::{lvgl_obj_tree::TreeManager, state::UiState, stratum_lvgl_ui::StratumLvglUI};
+use crate::{
+    lvgl_obj_tree::{TreeManager, TreeNode},
+    state::UiState,
+    stratum_lvgl_ui::StratumLvglUI,
+};
 use egui::{
-    Align2, CentralPanel, Color32, Context, Direction, FontId, Frame, Layout, Pos2, Rect, Response,
-    Sense, Stroke, TextureHandle, Vec2,
+    Align2, CentralPanel, Color32, Context, Direction, Event, FontId, Frame, Layout, PointerButton,
+    Pos2, Rect, Response, Sense, Stroke, TextureHandle, Ui, Vec2,
 };
 
 pub const ZOOM_MIN: f32 = 0.1;
@@ -124,27 +128,122 @@ fn maybe_draw_pixel_grid(ui: &mut egui::Ui, view: &CanvasView, rect: Rect, displ
 fn draw_lvgl_canvas(ui: &mut egui::Ui, ui_state: &mut UiState, tex: Option<&TextureHandle>) {
     let display_size = get_lvgl_display_size();
     let available_rect = ui.available_rect_before_wrap();
-    let view = &mut ui_state.canvas_view;
+    let bg_resp = ui.interact(available_rect, ui.id().with("canvas_bg"), Sense::click());
 
-    handle_zoom(ui, view, display_size, available_rect);
-
-    let rect = compute_canvas_rect(view, display_size, available_rect);
-    let response = ui.allocate_rect(rect, Sense::click_and_drag());
-
-    update_pan(view, &response);
-    draw_canvas(ui, tex, rect, &response);
-    maybe_draw_pixel_grid(ui, view, rect, display_size);
-
-    let zoom = view.zoom;
-    update_user_cursor_pos(ui, ui_state, rect, display_size, zoom);
-
-    if response.clicked() && ui_state.element_select_active {
-        if let Some((lvgl_x, lvgl_y)) = ui_state.cursor_pos {
-            TreeManager::request_obj_at_point(&ui_state.tree_manager, lvgl_x, lvgl_y);
-        }
-
-        ui_state.element_select_active = false;
+    if bg_resp.clicked() {
+        ui_state
+            .tree_manager
+            .lock()
+            .unwrap()
+            .tree_state
+            .set_selected(vec![]);
     }
+
+    //  Zoom / pan / draw the LVGL texture
+    {
+        let view = &mut ui_state.canvas_view;
+        handle_zoom(ui, view, display_size, available_rect);
+
+        let rect = compute_canvas_rect(view, display_size, available_rect);
+        let response = ui.allocate_rect(rect, Sense::click_and_drag());
+
+        update_pan(view, &response);
+        draw_canvas(ui, tex, rect, &response);
+        maybe_draw_pixel_grid(ui, view, rect, display_size);
+    }
+
+    let zoom = ui_state.canvas_view.zoom;
+    let view_rect = compute_canvas_rect(&ui_state.canvas_view, display_size, available_rect);
+    update_user_cursor_pos(ui, ui_state, view_rect, display_size, zoom);
+
+    {
+        let view = &mut ui_state.canvas_view;
+        let rect = compute_canvas_rect(view, display_size, available_rect);
+
+        for event in ui.ctx().input(|i| i.events.clone()) {
+            if let Event::PointerButton {
+                pos,
+                button: PointerButton::Primary,
+                pressed: true,
+                ..
+            } = event
+            {
+                // Clicks inside the canvas when element selection is active select the corresponding lvgl element
+                if rect.contains(pos) && ui_state.element_select_active {
+                    if let Some((lvgl_x, lvgl_y)) = ui_state.cursor_pos {
+                        TreeManager::request_obj_at_point(&ui_state.tree_manager, lvgl_x, lvgl_y);
+                    }
+                    ui_state.element_select_active = false;
+                }
+            }
+        }
+    }
+
+    // 4) Extract the selected_ptr *before* calling update_and_take_root
+    let selected_ptr_opt = {
+        let guard = ui_state.tree_manager.lock().unwrap();
+        guard.tree_state.selected().first().cloned()
+    };
+
+    // 5) Now call update_and_take_root (which locks internally) and draw the highlight
+    if let Some(selected_ptr) = selected_ptr_opt {
+        if let Some(root) = TreeManager::update_and_take_root(&ui_state.tree_manager) {
+            if let Some(selected_node) = find_node_by_ptr(&root, selected_ptr) {
+                let (x, y, w, h) = (
+                    selected_node.x as f32,
+                    selected_node.y as f32,
+                    selected_node.w as f32,
+                    selected_node.h as f32,
+                );
+
+                let bounds = Rect::from_min_max(Pos2 { x, y }, Pos2 { x: x + w, y: y + h });
+                draw_selection_box(ui, &ui_state.canvas_view, view_rect, bounds);
+            }
+        }
+    }
+}
+
+fn draw_selection_box(ui: &mut Ui, view: &CanvasView, canvas_rect: Rect, lvgl_bounds: Rect) {
+    // Unpack LVGL bounds
+    let lx = lvgl_bounds.min.x;
+    let ly = lvgl_bounds.min.y;
+    let lw = lvgl_bounds.width() + 1.0;
+    let lh = lvgl_bounds.height() + 1.0;
+
+    // Convert LVGL‐space to screen‐space:
+    let x_screen = (canvas_rect.min.x + lx * view.zoom).round();
+    let y_screen = (canvas_rect.min.y + ly * view.zoom).round();
+    let w_screen = (lw * view.zoom).round();
+    let h_screen = (lh * view.zoom).round();
+
+    let selection_rect = Rect::from_min_size(
+        Pos2::new(x_screen, y_screen),
+        egui::Vec2::new(w_screen, h_screen),
+    );
+
+    // Compute a stroke that is exactly 1 device pixel wide
+    let pixels_per_point = ui.ctx().pixels_per_point();
+    let stroke = Stroke {
+        width: 1.0 / pixels_per_point,
+        color: Color32::from_rgb(0, 191, 255),
+    };
+
+    // Draw the rectangle outline
+    ui.painter()
+        .rect_stroke(selection_rect, 0.0, stroke, egui::StrokeKind::Outside);
+}
+
+/// Recursively search `node` (and its children) for a `TreeNode` whose `.ptr` equals `target`.
+fn find_node_by_ptr<'a>(node: &'a TreeNode, target: usize) -> Option<&'a TreeNode> {
+    if node.ptr == target {
+        return Some(node);
+    }
+    for child in &node.children {
+        if let Some(found) = find_node_by_ptr(child, target) {
+            return Some(found);
+        }
+    }
+    None
 }
 
 fn update_user_cursor_pos(
