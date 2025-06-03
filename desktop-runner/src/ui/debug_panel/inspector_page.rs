@@ -1,6 +1,6 @@
 use std::ffi::CStr;
 
-use egui::{Image, Pos2, Rect, RichText, TextureHandle, Ui};
+use egui::{Image, Pos2, Rect, RichText, Ui};
 use egui_ltreeview::{Action, NodeBuilder, TreeView, TreeViewBuilder};
 use stratum_ui_common::stratum_ui_ffi::{self, lv_obj_t};
 use strum::IntoEnumIterator;
@@ -13,17 +13,47 @@ use crate::{
 
 use super::pages::DebugSidebarPages;
 
-/// Draw just the “label + eye icon” for a single node
 fn draw_node_label(ui: &mut Ui, node: &TreeNode, ui_state: &mut UiState) {
-    unsafe fn c_char_ptr_to_string(ptr: *mut ::std::os::raw::c_char) -> String {
-        if ptr.is_null() {
-            return String::new();
-        }
-        CStr::from_ptr(ptr).to_string_lossy().into_owned()
+    let braces_tex = ui_state
+        .icon_manager
+        .icon(include_bytes!("../../../assets/icons/braces.svg"))
+        .square(100);
+    let eye_fill_tex = ui_state
+        .icon_manager
+        .icon(include_bytes!("../../../assets/icons/eye-fill.svg"))
+        .square(100);
+
+    // --- 2) Draw the “braces” icon at the leftmost cursor position ---
+    {
+        let spacing = 3.0;
+
+        let full_rect = ui.available_rect_before_wrap();
+        let (_, braces_rect) = ui.spacing().icon_rectangles(full_rect);
+
+        let place = Rect::from_min_size(
+            Pos2 {
+                x: ui.cursor().min.x,
+                y: braces_rect.min.y,
+            },
+            braces_rect.size(),
+        );
+
+        ui.add_space(braces_rect.width() + spacing);
+
+        let img = Image::new(&braces_tex).tint(ui.visuals().widgets.noninteractive.fg_stroke.color);
+        img.paint_at(ui, place);
     }
 
-    // 1) If it’s an lv_label, fetch its text at runtime:
+    // --- 3) Now draw the class name (or lv_label text) in monospace ---
+    // If this node is an lv_label, fetch runtime text from LVGL; else just class name.
     if node.class_name == "lv_label" {
+        unsafe fn c_char_ptr_to_string(ptr: *mut ::std::os::raw::c_char) -> String {
+            if ptr.is_null() {
+                return String::new();
+            }
+            CStr::from_ptr(ptr).to_string_lossy().into_owned()
+        }
+
         let label_text = unsafe {
             let obj_ptr = node.ptr as *const lv_obj_t;
             c_char_ptr_to_string(stratum_ui_ffi::lvgl_label_text(obj_ptr))
@@ -31,66 +61,51 @@ fn draw_node_label(ui: &mut Ui, node: &TreeNode, ui_state: &mut UiState) {
         ui.label(RichText::new(format!("{}:", &node.class_name)).monospace());
         ui.label(RichText::new(format!("\"{label_text}\"")));
     } else {
-        // 2) Otherwise just show the class name in monospace
         ui.label(RichText::new(&node.class_name).monospace());
     }
 
-    // 3) Figure out where to place the “eye” icon on the same row
-    let eye_fill = ui_state
-        .icon_manager
-        .icon(include_bytes!("../../../assets/icons/eye-fill.svg"))
-        .square(100);
+    // --- 4) Finally, place the “eye” icon at the far right of this same row ---
+    {
+        // Again ask egui how big the eye icon would be:
+        let full_rect = ui.available_rect_before_wrap();
+        let (_, eye_rect) = ui.spacing().icon_rectangles(full_rect);
+        let spacing = ui.spacing().item_spacing.x;
 
-    let (_, big_rect) = ui
-        .spacing()
-        .icon_rectangles(ui.available_rect_before_wrap());
-    let spacing = ui.spacing().item_spacing.x;
-    let leftover = ui.available_width() - big_rect.width() - spacing;
+        // Compute how much horizontal space remains on this row:
+        let leftover = ui.available_width() - eye_rect.width() - spacing;
+        // `ui.cursor().min.x` is where text just ended, so:
+        let place = Rect::from_min_size(
+            Pos2 {
+                x: ui.cursor().min.x + leftover,
+                y: eye_rect.min.y,
+            },
+            eye_rect.size(),
+        );
 
-    let place = Rect::from_min_size(
-        Pos2 {
-            x: ui.cursor().min.x + leftover,
-            y: big_rect.min.y,
-        },
-        big_rect.size(),
-    );
+        // Add enough space so that the icon will not overlap the text we just painted:
+        ui.add_space(spacing + eye_rect.width() + spacing);
 
-    // Add enough horizontal space so the icon doesn’t overlap
-    ui.add_space(spacing + big_rect.width() + spacing);
-
-    let img = Image::new(&eye_fill).tint(ui.visuals().widgets.noninteractive.fg_stroke.color);
-    img.paint_at(ui, place);
-}
-
-fn draw_icon(ui: &Ui, braces: &TextureHandle) {
-    let img = Image::new(braces).tint(ui.visuals().widgets.noninteractive.fg_stroke.color);
-    img.paint_at(ui, ui.max_rect());
+        let img =
+            Image::new(&eye_fill_tex).tint(ui.visuals().widgets.noninteractive.fg_stroke.color);
+        img.paint_at(ui, place);
+    }
 }
 
 fn add_node(builder: &mut TreeViewBuilder<'_, usize>, node: &TreeNode, ui_state: &mut UiState) {
-    let braces = ui_state
-        .icon_manager
-        .icon(include_bytes!("../../../assets/icons/braces.svg"))
-        .square(100);
-
     // use `node.ptr` as an ID (usize impl Hash+Eq)
     if node.children.is_empty() {
         // leaf
-        let leaf = NodeBuilder::leaf(node.ptr)
-            .label_ui(|ui| draw_node_label(ui, node, ui_state))
-            .icon(|ui| draw_icon(ui, &braces));
-
+        let leaf = NodeBuilder::leaf(node.ptr).label_ui(|ui| draw_node_label(ui, node, ui_state));
         builder.node(leaf);
     } else {
         // directory
-        let dir = NodeBuilder::dir(node.ptr)
-            .label_ui(|ui| draw_node_label(ui, node, ui_state))
-            .icon(|ui| draw_icon(ui, &braces));
+        let dir = NodeBuilder::dir(node.ptr).label_ui(|ui| draw_node_label(ui, node, ui_state));
 
         builder.node(dir);
         for child in &node.children {
             add_node(builder, child, ui_state);
         }
+
         builder.close_dir();
     }
 }
