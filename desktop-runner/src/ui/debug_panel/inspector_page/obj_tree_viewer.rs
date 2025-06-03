@@ -152,13 +152,11 @@ fn add_node(
     hidden_before: bool,
     ancestor_hidden: bool,
 ) {
-    // Determine if this node is currently "shown" according to `local_hidden`.
     let mut shown = !hidden_before;
 
     let this_node_hidden_now = !shown; // i.e. hidden_before XOR toggled?
     let effective_hidden_for_children = ancestor_hidden || this_node_hidden_now;
 
-    // Build either a leaf or a directory, passing `&mut shown` into the label UI.
     let draw_node_fn = |ui: &mut Ui| draw_node(ui, icons, node, &mut shown, ancestor_hidden);
 
     if node.children.is_empty() {
