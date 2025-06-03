@@ -76,15 +76,16 @@ struct NodeIcons {
 
 impl NodeIcons {
     fn load(icon_manager: &mut IconManager) -> Self {
+        const ICON_PX: u32 = 24;
         let braces = icon_manager
             .icon(include_bytes!("../../../../assets/icons/braces.svg"))
-            .square(100);
+            .square(ICON_PX);
         let eye_fill = icon_manager
             .icon(include_bytes!("../../../../assets/icons/eye-fill.svg"))
-            .square(100);
+            .square(ICON_PX);
         let eye_slash = icon_manager
             .icon(include_bytes!("../../../../assets/icons/eye-slash.svg"))
-            .square(100);
+            .square(ICON_PX);
 
         NodeIcons {
             braces,
