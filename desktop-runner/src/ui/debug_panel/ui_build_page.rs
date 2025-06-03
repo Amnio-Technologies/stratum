@@ -4,11 +4,6 @@ use stratum_firmware_common::modules::dummies::dummy_battery::DummyBatteryModule
 use crate::state::UiState;
 
 pub fn draw_uibuild_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
-    ui.add(Checkbox::new(&mut ui_state.enable_vsync, "Enable VSync"));
-    ui.label("Toggle VSync for smoother rendering");
-
-    ui.separator();
-
     // Pull in new logs from the UiLogger this frame
     let new_logs = ui_state.ui_logger.take_logs();
     ui_state.log_buffer.extend(new_logs);

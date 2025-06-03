@@ -1,8 +1,4 @@
-use crate::{
-    lvgl_obj_tree::TreeManager,
-    state::{CanvasView, UiState},
-    stratum_lvgl_ui::StratumLvglUI,
-};
+use crate::{lvgl_obj_tree::TreeManager, state::UiState, stratum_lvgl_ui::StratumLvglUI};
 use egui::{
     Align2, CentralPanel, Color32, Context, Direction, FontId, Frame, Layout, Pos2, Rect, Response,
     Sense, Stroke, TextureHandle, Vec2,
@@ -10,6 +6,32 @@ use egui::{
 
 pub const ZOOM_MIN: f32 = 0.1;
 pub const ZOOM_MAX: f32 = 200.0;
+
+pub struct CanvasView {
+    pub zoom: f32,
+    pub offset: Vec2,
+    pub pending_zoom: Option<f32>,
+}
+
+impl CanvasView {
+    pub fn reset_zoom(&mut self) {
+        self.zoom = 1.0;
+        self.pending_zoom = None;
+    }
+    pub fn reset_position(&mut self) {
+        self.offset = Default::default();
+    }
+}
+
+impl Default for CanvasView {
+    fn default() -> Self {
+        Self {
+            zoom: 1.0,
+            offset: Default::default(),
+            pending_zoom: None,
+        }
+    }
+}
 
 fn get_lvgl_display_size() -> Vec2 {
     let w = unsafe { stratum_ui_common::stratum_ui_ffi::get_lvgl_display_width() as f32 };

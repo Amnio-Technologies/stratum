@@ -1,5 +1,6 @@
 // main.rs
 
+mod fps_tracker;
 mod hot_reload_manager;
 mod icon_manager;
 mod lvgl_backend;

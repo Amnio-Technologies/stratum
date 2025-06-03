@@ -7,7 +7,7 @@ use egui::DragValue;
 pub fn draw(ctx: &egui::Context, ui_state: &mut UiState) {
     egui::TopBottomPanel::bottom("status_bar").show(ctx, |ui| {
         ui.horizontal(|ui| {
-            ui.label(format!("FPS: {:.2}", ui_state.fps));
+            ui.label(format!("FPS: {:.2}", ui_state.fps_tracker.fps));
             ui.separator();
 
             ui.label("Zoom:");

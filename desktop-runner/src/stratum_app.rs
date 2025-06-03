@@ -1,15 +1,13 @@
 use crate::{
-    hot_reload_manager::HotReloadManager,
-    icon_manager::IconManager,
-    lvgl_obj_tree::TreeManager,
-    state::{update_fps, UiState},
-    stratum_lvgl_ui::StratumLvglUI,
+    hot_reload_manager::HotReloadManager, icon_manager::IconManager, lvgl_obj_tree::TreeManager,
+    state::UiState, stratum_lvgl_ui::StratumLvglUI,
 };
 use eframe::{egui, CreationContext, Frame};
 use egui::epaint::text::{FontInsert, InsertFontFamily};
 use std::{
     path::PathBuf,
     sync::{atomic::Ordering, Arc, Mutex},
+    time::Duration,
 };
 use stratum_ui_common::ui_logging::UiLogger;
 
@@ -107,8 +105,8 @@ impl eframe::App for StratumApp {
 
         crate::ui::draw_ui(ctx, &mut self.ui_state, &mut self.lvgl_ui);
 
-        update_fps(&mut self.ui_state, &self.last_frame_start);
+        self.ui_state.fps_tracker.tick();
         self.last_frame_start = std::time::Instant::now();
-        ctx.request_repaint();
+        ctx.request_repaint_after(Duration::from_millis(16));
     }
 }
