@@ -32,6 +32,7 @@ pub struct UiState {
     pub canvas_view: CanvasView,
     pub icon_manager: IconManager,
     pub cursor_pos: Option<(usize, usize)>,
+    pub element_select_active: bool,
 }
 
 impl UiState {
@@ -55,6 +56,7 @@ impl UiState {
             canvas_view: CanvasView::default(),
             icon_manager,
             cursor_pos: None,
+            element_select_active: false,
         }
     }
 }

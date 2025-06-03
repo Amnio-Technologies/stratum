@@ -3,7 +3,13 @@ use crate::state::UiState;
 
 pub fn draw(ui: &mut egui::Ui, ui_state: &mut UiState) {
     ui.horizontal(|ui| {
-        ui.selectable_label(true, "👆");
+        if ui
+            .selectable_label(ui_state.element_select_active, "👆")
+            .clicked()
+        {
+            ui_state.element_select_active = !ui_state.element_select_active;
+        }
+
         ui.selectable_label(false, "💡");
     });
     ui.separator();

@@ -138,10 +138,12 @@ fn draw_lvgl_canvas(ui: &mut egui::Ui, ui_state: &mut UiState, tex: Option<&Text
     let zoom = view.zoom;
     update_user_cursor_pos(ui, ui_state, rect, display_size, zoom);
 
-    if response.clicked() {
+    if response.clicked() && ui_state.element_select_active {
         if let Some((lvgl_x, lvgl_y)) = ui_state.cursor_pos {
             TreeManager::request_obj_at_point(&ui_state.tree_manager, lvgl_x, lvgl_y);
         }
+
+        ui_state.element_select_active = false;
     }
 }
 
