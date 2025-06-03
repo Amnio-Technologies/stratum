@@ -1,6 +1,6 @@
 use std::ffi::CStr;
 
-use egui::{Id, Image, Pos2, Rect, Response, RichText, Sense, TextureHandle, Ui};
+use egui::{Color32, Id, Image, Pos2, Rect, Response, RichText, Sense, TextureHandle, Ui};
 use egui_ltreeview::{Action, NodeBuilder, TreeView, TreeViewBuilder};
 use stratum_ui_common::stratum_ui_ffi::{self, lv_obj_t};
 
@@ -25,12 +25,12 @@ fn paint_icon_clickable(
     is_left: bool,
     spacing: f32,
     unique_id: Id,
+    color: Color32,
 ) -> Response {
     // 1) Figure out how large the icon will be:
     let full_rect = ui.available_rect_before_wrap();
     let (_, icon_rect) = ui.spacing().icon_rectangles(full_rect);
     let icon_size = icon_rect.size();
-    let tint = ui.visuals().widgets.noninteractive.fg_stroke.color;
 
     // 2) Compute “place” based on left vs. right:
     let place = if is_left {
@@ -56,7 +56,7 @@ fn paint_icon_clickable(
     let response = ui.interact(place, unique_id, Sense::click());
 
     // 4) Actually paint the icon:
-    Image::new(tex).tint(tint).paint_at(ui, place);
+    Image::new(tex).tint(color).paint_at(ui, place);
 
     // 5) Advance the cursor (so next widget lands correctly).
     if is_left {
@@ -95,26 +95,46 @@ impl NodeIcons {
     }
 }
 
-fn draw_node(ui: &mut Ui, icons: &NodeIcons, node: &TreeNode, shown: &mut bool) {
+fn draw_node(
+    ui: &mut Ui,
+    icons: &NodeIcons,
+    node: &TreeNode,
+    shown: &mut bool,
+    ancestor_hidden: bool,
+) {
+    let text_color = if !*shown || ancestor_hidden {
+        ui.visuals().weak_text_color()
+    } else {
+        ui.visuals().text_color() // default
+    };
+
     let braces_id = ui.make_persistent_id(("braces_icon", node.ptr));
-    let _ = paint_icon_clickable(ui, &icons.braces, true, 3.0, braces_id);
+    let _ = paint_icon_clickable(ui, &icons.braces, true, 3.0, braces_id, text_color);
 
     if node.class_name == "lv_label" {
         let raw_ptr = node.ptr as *const lv_obj_t;
         let label_text = unsafe { string_from_raw(stratum_ui_ffi::lvgl_label_text(raw_ptr)) };
-        ui.label(RichText::new(format!("{}:", &node.class_name)).monospace());
-        ui.label(RichText::new(format!("\"{label_text}\"")));
+        ui.label(
+            RichText::new(format!("{}:", &node.class_name))
+                .monospace()
+                .color(text_color),
+        );
+        ui.label(RichText::new(format!("\"{label_text}\"")).color(text_color));
     } else {
-        ui.label(RichText::new(&node.class_name).monospace());
+        ui.label(
+            RichText::new(&node.class_name)
+                .monospace()
+                .color(text_color),
+        );
     }
 
     let eye_spacing = ui.spacing().item_spacing.x;
     let eye_resp = if *shown {
         let eye_id = ui.make_persistent_id(("eye_icon", node.ptr));
-        paint_icon_clickable(ui, &icons.eye_fill, false, eye_spacing, eye_id)
+        paint_icon_clickable(ui, &icons.eye_fill, false, eye_spacing, eye_id, text_color)
     } else {
         let eye_id = ui.make_persistent_id(("eye_slash_icon", node.ptr));
-        paint_icon_clickable(ui, &icons.eye_slash, false, eye_spacing, eye_id)
+        paint_icon_clickable(ui, &icons.eye_slash, false, eye_spacing, eye_id, text_color)
     };
 
     if eye_resp.clicked() {
@@ -130,25 +150,36 @@ fn add_node(
     icons: &NodeIcons,
     local_hidden: &mut Vec<usize>,
     hidden_before: bool,
+    ancestor_hidden: bool,
 ) {
     // Determine if this node is currently "shown" according to `local_hidden`.
     let mut shown = !hidden_before;
 
+    let this_node_hidden_now = !shown; // i.e. hidden_before XOR toggled?
+    let effective_hidden_for_children = ancestor_hidden || this_node_hidden_now;
+
     // Build either a leaf or a directory, passing `&mut shown` into the label UI.
-    let label_fn = |ui: &mut Ui| draw_node(ui, icons, node, &mut shown);
+    let draw_node_fn = |ui: &mut Ui| draw_node(ui, icons, node, &mut shown, ancestor_hidden);
 
     if node.children.is_empty() {
-        let leaf = NodeBuilder::leaf(node.ptr).label_ui(label_fn);
+        let leaf = NodeBuilder::leaf(node.ptr).label_ui(draw_node_fn);
         builder.node(leaf);
     } else {
-        let dir = NodeBuilder::dir(node.ptr).label_ui(label_fn);
+        let dir = NodeBuilder::dir(node.ptr).label_ui(draw_node_fn);
         builder.node(dir);
 
         for child in &node.children {
             // For each child, we need to know if it was hidden _before_ this frame.
             // That is, `hidden_before_child = local_hidden.contains(&child.ptr)`.
             let child_hidden_before = local_hidden.contains(&child.ptr);
-            add_node(builder, child, icons, local_hidden, child_hidden_before);
+            add_node(
+                builder,
+                child,
+                icons,
+                local_hidden,
+                child_hidden_before,
+                effective_hidden_for_children,
+            );
         }
 
         builder.close_dir();
@@ -200,6 +231,7 @@ pub fn draw(ui: &mut egui::Ui, ui_state: &mut UiState) {
                     &icons,
                     &mut local_hidden,
                     root_hidden_before,
+                    false,
                 );
             });
 
