@@ -1,6 +1,6 @@
 use std::ffi::CStr;
 
-use egui::{Id, Image, Pos2, Rect, Response, RichText, Sense, Ui};
+use egui::{Id, Image, Pos2, Rect, Response, RichText, Sense, TextureHandle, Ui};
 use egui_ltreeview::{Action, NodeBuilder, TreeView, TreeViewBuilder};
 use stratum_ui_common::stratum_ui_ffi::{self, lv_obj_t};
 
@@ -68,18 +68,15 @@ fn paint_icon_clickable(
     response
 }
 
-fn draw_node_label(ui: &mut Ui, node: &TreeNode, ui_state: &mut UiState) {
-    let braces_tex = ui_state
-        .icon_manager
-        .icon(include_bytes!("../../../../assets/icons/braces.svg"))
-        .square(100);
-    let eye_fill_tex = ui_state
-        .icon_manager
-        .icon(include_bytes!("../../../../assets/icons/eye-fill.svg"))
-        .square(100);
+struct LabelIcons {
+    braces: TextureHandle,
+    eye_fill: TextureHandle,
+    eye_slash: TextureHandle,
+}
 
+fn draw_node_label(ui: &mut Ui, icons: &LabelIcons, node: &TreeNode, shown: &mut bool) {
     let braces_id = ui.make_persistent_id(("braces_icon", node.ptr));
-    let resp_braces = paint_icon_clickable(ui, &braces_tex, true, 3.0, braces_id);
+    let resp_braces = paint_icon_clickable(ui, &icons.braces, true, 3.0, braces_id);
 
     if node.class_name == "lv_label" {
         let raw_ptr = node.ptr as *const lv_obj_t;
@@ -92,19 +89,51 @@ fn draw_node_label(ui: &mut Ui, node: &TreeNode, ui_state: &mut UiState) {
 
     let eye_spacing = ui.spacing().item_spacing.x;
     // paint_icon_clickable(ui, &eye_fill_tex, /* is_left = */ false, eye_spacing);
-    let eye_id = ui.make_persistent_id(("eye_icon", node.ptr));
-    let resp_eye = paint_icon_clickable(ui, &eye_fill_tex, false, eye_spacing, eye_id);
+    let eye_resp = if *shown {
+        let eye_id = ui.make_persistent_id(("eye_icon", node.ptr));
+        paint_icon_clickable(ui, &icons.eye_fill, false, eye_spacing, eye_id)
+    } else {
+        let eye_id = ui.make_persistent_id(("eye_slash_icon", node.ptr));
+        paint_icon_clickable(ui, &icons.eye_slash, false, eye_spacing, eye_id)
+    };
 }
 
 fn add_node(builder: &mut TreeViewBuilder<'_, usize>, node: &TreeNode, ui_state: &mut UiState) {
-    // use `node.ptr` as an ID (usize impl Hash+Eq)
+    let braces_tex = ui_state
+        .icon_manager
+        .icon(include_bytes!("../../../../assets/icons/braces.svg"))
+        .square(100);
+    let eye_fill_tex = ui_state
+        .icon_manager
+        .icon(include_bytes!("../../../../assets/icons/eye-fill.svg"))
+        .square(100);
+    let eye_slash_tex = ui_state
+        .icon_manager
+        .icon(include_bytes!("../../../../assets/icons/eye-slash.svg"))
+        .square(100);
+
+    let icons = LabelIcons {
+        braces: braces_tex,
+        eye_fill: eye_fill_tex,
+        eye_slash: eye_slash_tex,
+    };
+
+    let shown_before = {
+        let mgr = ui_state.tree_manager.lock().unwrap();
+        mgr.hidden_elements.contains(&node.ptr)
+    };
+
+    let mut shown = shown_before;
+
     if node.children.is_empty() {
         // leaf
-        let leaf = NodeBuilder::leaf(node.ptr).label_ui(|ui| draw_node_label(ui, node, ui_state));
+        let leaf = NodeBuilder::leaf(node.ptr)
+            .label_ui(|ui| draw_node_label(ui, &icons, node, &mut shown));
         builder.node(leaf);
     } else {
         // directory
-        let dir = NodeBuilder::dir(node.ptr).label_ui(|ui| draw_node_label(ui, node, ui_state));
+        let dir =
+            NodeBuilder::dir(node.ptr).label_ui(|ui| draw_node_label(ui, &icons, node, &mut shown));
 
         builder.node(dir);
         for child in &node.children {
@@ -112,6 +141,19 @@ fn add_node(builder: &mut TreeViewBuilder<'_, usize>, node: &TreeNode, ui_state:
         }
 
         builder.close_dir();
+    }
+
+    if shown && !shown_before {
+        let mut mgr = ui_state.tree_manager.lock().unwrap();
+        // Remove this node.ptr from hidden_elements (if present)
+        if let Some(pos) = mgr.hidden_elements.iter().position(|x| *x == node.ptr) {
+            mgr.hidden_elements.remove(pos);
+        }
+    }
+    if !shown && shown_before {
+        let mut mgr = ui_state.tree_manager.lock().unwrap();
+        // Push node.ptr onto hidden_elements
+        mgr.hidden_elements.push(node.ptr);
     }
 }
 

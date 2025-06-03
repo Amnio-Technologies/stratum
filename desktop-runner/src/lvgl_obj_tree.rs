@@ -42,6 +42,7 @@ pub struct TreeNode {
 pub struct TreeManager {
     root: Option<TreeNode>,
     pub tree_state: TreeViewState<usize>,
+    pub hidden_elements: Vec<usize>,
 }
 
 pub type SharedTreeManager = Arc<Mutex<TreeManager>>;
@@ -52,6 +53,7 @@ impl TreeManager {
         let mgr = Arc::new(Mutex::new(TreeManager {
             root: None,
             tree_state: TreeViewState::default(),
+            hidden_elements: vec![],
         }));
         unsafe {
             register_tree_send_callback(Some(tree_send_cb), Arc::as_ptr(&mgr) as *mut c_void);
