@@ -1,3 +1,4 @@
+use egui::Ui;
 use egui_ltreeview::TreeViewState;
 use std::{
     collections::HashMap,
@@ -40,7 +41,7 @@ pub struct TreeNode {
 /// Manages a single‐root tree snapshot and FFI callback setup.
 pub struct TreeManager {
     root: Option<TreeNode>,
-    pub selected_obj_ptr: Option<usize>,
+    pub tree_state: TreeViewState<usize>,
 }
 
 pub type SharedTreeManager = Arc<Mutex<TreeManager>>;
@@ -50,7 +51,7 @@ impl TreeManager {
     pub fn new() -> SharedTreeManager {
         let mgr = Arc::new(Mutex::new(TreeManager {
             root: None,
-            selected_obj_ptr: None,
+            tree_state: TreeViewState::default(),
         }));
         unsafe {
             register_tree_send_callback(Some(tree_send_cb), Arc::as_ptr(&mgr) as *mut c_void);
@@ -77,11 +78,10 @@ impl TreeManager {
 
         unsafe {
             let ptr = stratum_ui_ffi::lvgl_obj_at_point(x as i32, y as i32) as *const c_void;
-            guard.selected_obj_ptr = if ptr.is_null() {
-                None
-            } else {
-                Some(ptr as usize)
-            };
+
+            if !ptr.is_null() {
+                guard.tree_state.set_one_selected(ptr as usize);
+            }
         }
     }
 }
@@ -126,13 +126,11 @@ unsafe extern "C" fn tree_send_cb(
 
     // Convert the flat list into a single‐root TreeNode
     let tree = build_tree(&flat);
-    dbg!("hey yall");
     // Store it
     {
         let mut guard = mgr.lock().unwrap();
         guard.root = tree;
     }
-    dbg!("hey yall but here now");
 
     // Drop the temporary Arc; the original Arc still lives elsewhere
     // mgr is dropped here

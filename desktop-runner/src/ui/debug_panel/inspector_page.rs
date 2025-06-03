@@ -1,7 +1,7 @@
 use std::ffi::CStr;
 
 use egui::{Image, Pos2, Rect, RichText, Ui};
-use egui_ltreeview::{Action, NodeBuilder, TreeView, TreeViewBuilder, TreeViewState};
+use egui_ltreeview::{Action, NodeBuilder, TreeView, TreeViewBuilder};
 use stratum_ui_common::stratum_ui_ffi::{self, lv_obj_t};
 use strum::IntoEnumIterator;
 use strum_macros::EnumIter;
@@ -21,18 +21,12 @@ fn draw_lvgl_obj_tree(ui: &mut egui::Ui, ui_state: &mut UiState) {
         ui.style_mut().interaction.selectable_labels = false;
 
         let id = ui.make_persistent_id("lvgl-object-tree");
-        let mut state = TreeViewState::load(ui, id).unwrap_or_default();
-        if let Some(ptr) = {
-            let mut guard = shared_mgr.lock().unwrap();
-            guard.selected_obj_ptr.take()
-        } {
-            state.set_one_selected(ptr);
-        }
+        let state = &mut shared_mgr.lock().unwrap().tree_state;
 
         let (resp, actions) = TreeView::new(id)
             .allow_multi_selection(false)
             .override_indent(Some(12.0))
-            .show_state(ui, &mut state, |builder| {
+            .show_state(ui, state, |builder| {
                 // A helper that recurses for each node:
                 fn add_node(
                     builder: &mut TreeViewBuilder<'_, usize>,
@@ -122,8 +116,6 @@ fn draw_lvgl_obj_tree(ui: &mut egui::Ui, ui_state: &mut UiState) {
                 // Kick off at the root:
                 add_node(builder, &root, ui_state);
             });
-
-        state.store(ui, id);
 
         for action in actions {
             if let Action::SetSelected(v) = action {
