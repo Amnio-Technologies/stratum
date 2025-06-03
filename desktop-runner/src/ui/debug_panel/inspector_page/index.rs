@@ -1,7 +1,7 @@
 use super::{obj_tree_viewer, property_editor};
 use crate::state::UiState;
 
-pub fn draw_inspector_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
+pub fn draw(ui: &mut egui::Ui, ui_state: &mut UiState) {
     ui.horizontal(|ui| {
         ui.selectable_label(true, "👆");
         ui.selectable_label(false, "💡");
