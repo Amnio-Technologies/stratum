@@ -51,17 +51,16 @@ fn paint_icon_clickable(
         )
     };
 
-    // 3) Use `interact` (no layout impact) to make it clickable:
+    // 3) Make it clickable (no layout change).
     let response = ui.interact(place, unique_id, Sense::click());
 
-    // 4) Paint the icon at exactly the same rect:
+    // 4) Actually paint the icon:
     Image::new(tex).tint(tint).paint_at(ui, place);
 
-    // 5) Advance the cursor so that subsequent UI elements lay out correctly:
+    // 5) Advance the cursor (so next widget lands correctly).
     if is_left {
         ui.add_space(icon_size.x + spacing);
     } else {
-        // match the old “right” version’s spacing so we skip over the icon + padding:
         ui.add_space(spacing + icon_size.x + spacing);
     }
 
@@ -76,7 +75,7 @@ struct LabelIcons {
 
 fn draw_node_label(ui: &mut Ui, icons: &LabelIcons, node: &TreeNode, shown: &mut bool) {
     let braces_id = ui.make_persistent_id(("braces_icon", node.ptr));
-    let resp_braces = paint_icon_clickable(ui, &icons.braces, true, 3.0, braces_id);
+    let _ = paint_icon_clickable(ui, &icons.braces, true, 3.0, braces_id);
 
     if node.class_name == "lv_label" {
         let raw_ptr = node.ptr as *const lv_obj_t;
@@ -88,7 +87,6 @@ fn draw_node_label(ui: &mut Ui, icons: &LabelIcons, node: &TreeNode, shown: &mut
     }
 
     let eye_spacing = ui.spacing().item_spacing.x;
-    // paint_icon_clickable(ui, &eye_fill_tex, /* is_left = */ false, eye_spacing);
     let eye_resp = if *shown {
         let eye_id = ui.make_persistent_id(("eye_icon", node.ptr));
         paint_icon_clickable(ui, &icons.eye_fill, false, eye_spacing, eye_id)
@@ -96,89 +94,129 @@ fn draw_node_label(ui: &mut Ui, icons: &LabelIcons, node: &TreeNode, shown: &mut
         let eye_id = ui.make_persistent_id(("eye_slash_icon", node.ptr));
         paint_icon_clickable(ui, &icons.eye_slash, false, eye_spacing, eye_id)
     };
+
+    if eye_resp.clicked() {
+        dbg!("clicked");
+        *shown = !*shown;
+    }
 }
 
-fn add_node(builder: &mut TreeViewBuilder<'_, usize>, node: &TreeNode, ui_state: &mut UiState) {
-    let braces_tex = ui_state
-        .icon_manager
-        .icon(include_bytes!("../../../../assets/icons/braces.svg"))
-        .square(100);
-    let eye_fill_tex = ui_state
-        .icon_manager
-        .icon(include_bytes!("../../../../assets/icons/eye-fill.svg"))
-        .square(100);
-    let eye_slash_tex = ui_state
-        .icon_manager
-        .icon(include_bytes!("../../../../assets/icons/eye-slash.svg"))
-        .square(100);
+/// Recursively build the TreeView and simultaneously update `local_hidden`
+/// to reflect any toggles the user made in this subtree.
+fn add_node(
+    builder: &mut TreeViewBuilder<'_, usize>,
+    node: &TreeNode,
+    icons: &LabelIcons,
+    local_hidden: &mut Vec<usize>,
+    hidden_before: bool,
+) {
+    // Determine if this node is currently "shown" according to `local_hidden`.
+    let mut shown = !hidden_before;
 
-    let icons = LabelIcons {
-        braces: braces_tex,
-        eye_fill: eye_fill_tex,
-        eye_slash: eye_slash_tex,
-    };
-
-    let shown_before = {
-        let mgr = ui_state.tree_manager.lock().unwrap();
-        mgr.hidden_elements.contains(&node.ptr)
-    };
-
-    let mut shown = shown_before;
+    // Build either a leaf or a directory, passing `&mut shown` into the label UI.
+    let label_fn = |ui: &mut Ui| draw_node_label(ui, icons, node, &mut shown);
 
     if node.children.is_empty() {
-        // leaf
-        let leaf = NodeBuilder::leaf(node.ptr)
-            .label_ui(|ui| draw_node_label(ui, &icons, node, &mut shown));
+        // Leaf node:
+        let leaf = NodeBuilder::leaf(node.ptr).label_ui(label_fn);
         builder.node(leaf);
     } else {
-        // directory
-        let dir =
-            NodeBuilder::dir(node.ptr).label_ui(|ui| draw_node_label(ui, &icons, node, &mut shown));
-
+        // Dir node:
+        let dir = NodeBuilder::dir(node.ptr).label_ui(label_fn);
         builder.node(dir);
+
+        // Recurse into children
         for child in &node.children {
-            add_node(builder, child, ui_state);
+            // For each child, we need to know if it was hidden _before_ this frame.
+            // That is, `hidden_before_child = local_hidden.contains(&child.ptr)`.
+            let child_hidden_before = local_hidden.contains(&child.ptr);
+            add_node(builder, child, icons, local_hidden, child_hidden_before);
         }
 
         builder.close_dir();
     }
 
-    if shown && !shown_before {
-        let mut mgr = ui_state.tree_manager.lock().unwrap();
-        // Remove this node.ptr from hidden_elements (if present)
-        if let Some(pos) = mgr.hidden_elements.iter().position(|x| *x == node.ptr) {
-            mgr.hidden_elements.remove(pos);
+    // After drawing the label (and possibly clicking the eye icon), `shown` tells us
+    // if the node is visible _now_. Compare with `hidden_before` to know if it changed.
+
+    if shown && hidden_before {
+        // Node was unhidden this frame. Remove it from local_hidden if present.
+        if let Some(pos) = local_hidden.iter().position(|x| *x == node.ptr) {
+            local_hidden.remove(pos);
         }
-    }
-    if !shown && shown_before {
-        let mut mgr = ui_state.tree_manager.lock().unwrap();
-        // Push node.ptr onto hidden_elements
-        mgr.hidden_elements.push(node.ptr);
+    } else if !shown && !hidden_before {
+        // Node was hidden this frame. Add it to local_hidden if not already there.
+        if !local_hidden.contains(&node.ptr) {
+            local_hidden.push(node.ptr);
+        }
     }
 }
 
 pub fn draw(ui: &mut egui::Ui, ui_state: &mut UiState) {
-    let shared_mgr = ui_state.tree_manager.clone();
-    let root = TreeManager::update_and_take_root(&shared_mgr);
+    // 1) Lock once and extract both tree_state and hidden_elements
+    let (mut tree_state, mut local_hidden) = {
+        let mut mgr = ui_state.tree_manager.lock().unwrap();
+        (mgr.tree_state.clone(), mgr.hidden_elements.clone())
+    };
+
+    // 2) Ask TreeManager to produce a new root for this frame (also needs a lock).
+    let root = TreeManager::update_and_take_root(&ui_state.tree_manager);
 
     if let Some(root) = root {
         ui.style_mut().interaction.selectable_labels = false;
 
-        let id: Id = ui.make_persistent_id("lvgl-object-tree");
-        let state = &mut shared_mgr.lock().unwrap().tree_state;
+        // 3) Load all three textures exactly once per `draw()`.
+        let braces_tex = ui_state
+            .icon_manager
+            .icon(include_bytes!("../../../../assets/icons/braces.svg"))
+            .square(100);
+        let eye_fill_tex = ui_state
+            .icon_manager
+            .icon(include_bytes!("../../../../assets/icons/eye-fill.svg"))
+            .square(100);
+        let eye_slash_tex = ui_state
+            .icon_manager
+            .icon(include_bytes!("../../../../assets/icons/eye-slash.svg"))
+            .square(100);
 
-        let (_resp, actions) = TreeView::new(id)
+        let icons = LabelIcons {
+            braces: braces_tex,
+            eye_fill: eye_fill_tex,
+            eye_slash: eye_slash_tex,
+        };
+
+        // 4) Now build the TreeView *without holding any locks*.
+        let tree_id = ui.make_persistent_id("lvgl-object-tree");
+
+        let (_resp, actions) = TreeView::new(tree_id)
             .allow_multi_selection(false)
             .override_indent(Some(12.0))
-            .show_state(ui, state, |builder| {
-                // Kick off at the root:
-                add_node(builder, &root, ui_state);
+            .show_state(ui, &mut tree_state, |builder| {
+                // Kick off recursion with root. We pass in:
+                //   - a mutable reference to local_hidden,
+                //   - whether root was hidden_before (local_hidden.contains(&root.ptr)).
+                let root_hidden_before = local_hidden.contains(&root.ptr);
+                add_node(
+                    builder,
+                    &root,
+                    &icons,
+                    &mut local_hidden,
+                    root_hidden_before,
+                );
             });
 
+        // 5) After building the entire tree, capture any SetSelected actions if you need them.
         for action in actions {
             if let Action::SetSelected(v) = action {
                 dbg!(v);
             }
+        }
+
+        // 6) Now that `local_hidden` reflects this frame’s toggles, write it back under a short lock:
+        {
+            let mut mgr = ui_state.tree_manager.lock().unwrap();
+            mgr.tree_state = tree_state;
+            mgr.hidden_elements = local_hidden;
         }
     }
 }
