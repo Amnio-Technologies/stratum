@@ -139,6 +139,9 @@ fn draw_node(
 
     if eye_resp.clicked() {
         *shown = !*shown;
+        unsafe {
+            stratum_ui_ffi::lvgl_obj_set_shown(node.ptr as *mut lv_obj_t, *shown);
+        }
     }
 }
 

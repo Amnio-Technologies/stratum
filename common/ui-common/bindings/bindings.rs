@@ -90,3 +90,6 @@ unsafe extern "C" {
 unsafe extern "C" {
     pub fn lvgl_obj_at_point(x: i32, y: i32) -> *mut lv_obj_t;
 }
+unsafe extern "C" {
+    pub fn lvgl_obj_set_shown(obj: *mut lv_obj_t, hidden: bool);
+}
