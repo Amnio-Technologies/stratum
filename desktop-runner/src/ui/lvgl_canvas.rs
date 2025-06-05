@@ -140,7 +140,7 @@ fn draw_lvgl_canvas(ui: &mut egui::Ui, ui_state: &mut UiState, tex: Option<&Text
     }
 
     //  Zoom / pan / draw the LVGL texture
-    {
+    let view_rect = {
         let view = &mut ui_state.canvas_view;
         handle_zoom(ui, view, display_size, available_rect);
 
@@ -150,10 +150,10 @@ fn draw_lvgl_canvas(ui: &mut egui::Ui, ui_state: &mut UiState, tex: Option<&Text
         update_pan(view, &response);
         draw_canvas(ui, tex, rect, &response);
         maybe_draw_pixel_grid(ui, view, rect, display_size);
-    }
+        rect
+    };
 
     let zoom = ui_state.canvas_view.zoom;
-    let view_rect = compute_canvas_rect(&ui_state.canvas_view, display_size, available_rect);
     update_user_cursor_pos(ui, ui_state, view_rect, display_size, zoom);
 
     {

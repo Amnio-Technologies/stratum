@@ -221,6 +221,7 @@ pub fn draw(ui: &mut egui::Ui, ui_state: &mut UiState) {
         let (_resp, actions) = TreeView::new(tree_id)
             .allow_multi_selection(false)
             .override_indent(Some(12.0))
+            .allow_drag_and_drop(false)
             .show_state(ui, &mut tree_state, |builder| {
                 // Kick off recursion with root. We pass in:
                 //   - a mutable reference to local_hidden,
