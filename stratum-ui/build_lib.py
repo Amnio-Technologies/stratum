@@ -21,49 +21,35 @@ TOOLCHAIN_FILE = ESP_IDF_PATH / "tools" / "cmake" / "toolchain-esp32.cmake"
 EXPORT_SH = Path.home() / "export-esp.sh"
 
 
-def do_build(
-    dynamic: bool, nocache: bool, target: str, release: bool, output_name: str
-) -> bool:
-    """
-    Runs the full build process in-process.
-    Returns True on success, False on failure.
-    """
-    build_type = "Release" if release else "Debug"
-    is_dynamic = dynamic
-    no_cache = nocache
-    final_name = output_name or "stratum-ui"
+def run_command(cmd, cwd=None, shell=False):
+    """Run a subprocess command and return True on success."""
+    return subprocess.run(cmd, cwd=cwd, shell=shell).returncode == 0
 
-    # intermediaries:
-    intermediary = "stratum-ui-intermediary"
-    # extension logic:
+
+def get_lib_extension(is_dynamic):
+    """Return file extension based on dynamic vs. static and platform."""
     if is_dynamic:
         if sys.platform == "win32":
-            ext = "dll"
-        elif sys.platform == "darwin":
-            ext = "dylib"
-        else:
-            ext = "so"
-    else:
-        ext = "a"
+            return "dll"
+        if sys.platform == "darwin":
+            return "dylib"
+        return "so"
+    return "a"
 
-    build_start = time.time()
 
-    # -------- Font generation + prep --------
-    if target == "firmware":
-        if not TOOLCHAIN_FILE.exists() or not EXPORT_SH.exists():
-            print("❌ Missing ESP toolchain/export script.")
-            return False
-
-    for script in [FONT_GEN, SHIM_GEN]:
+def run_tool_scripts(no_cache):
+    """Run the font and shim generators."""
+    for script in (FONT_GEN, SHIM_GEN):
         print(f"📁 Running {script}...")
-        cmd = [sys.executable, script]
-        if no_cache:
-            cmd.append("--no-cache")
-        if subprocess.run(cmd, cwd=PROJECT_ROOT).returncode != 0:
+        cmd = [sys.executable, script] + (["--no-cache"] if no_cache else [])
+        if not run_command(cmd, cwd=PROJECT_ROOT):
             print(f"❌ {script} failed.")
             return False
+    return True
 
-    build_dir = PROJECT_ROOT / "build" / target
+
+def prepare_build_dir(build_dir, no_cache, intermediary, ext):
+    """Clean and create the build directory, and remove stale libs."""
     if no_cache and build_dir.exists():
         print("🧹 Cleaning build dir", build_dir)
         shutil.rmtree(build_dir)
@@ -73,8 +59,23 @@ def do_build(
     if stale.exists():
         stale.unlink()
 
-    # -------- CMake configure --------
-    cmake_cmd = [
+
+def need_cmake_config(build_dir, target, is_dynamic, no_cache):
+    """Decide if we need to rerun CMake configure."""
+    cache = build_dir / "CMakeCache.txt"
+    if no_cache or not cache.exists():
+        return True
+    txt = cache.read_text()
+    toggle = "ON" if is_dynamic else "OFF"
+    return not (
+        f"STRATUM_TARGET:STRING={target}" in txt
+        and f"STRATUM_BUILD_DYNAMIC:BOOL={toggle}" in txt
+    )
+
+
+def configure_cmake(build_dir, build_type, target, is_dynamic, intermediary, no_cache):
+    """Run (or skip) the CMake configuration step."""
+    args = [
         "cmake",
         f"-DCMAKE_BUILD_TYPE={build_type}",
         f"-DSTRATUM_TARGET={target}",
@@ -84,58 +85,47 @@ def do_build(
         "-DCMAKE_CXX_COMPILER_LAUNCHER=ccache",
         str(PROJECT_ROOT),
     ]
-
-    cmake_cache = build_dir / "CMakeCache.txt"
-    need_cfg = no_cache or not cmake_cache.exists()
-    if cmake_cache.exists():
-        txt = cmake_cache.read_text()
-        toggle = "ON" if is_dynamic else "OFF"
-        if (
-            f"STRATUM_TARGET:STRING={target}" not in txt
-            or f"STRATUM_BUILD_DYNAMIC:BOOL={toggle}" not in txt
-        ):
-            need_cfg = True
-
     if target == "desktop":
-        cmake_cmd[1:1] = ["-G", GENERATOR]
-        if need_cfg:
-            print("⚙️  Running CMake config...")
-            subprocess.run(cmake_cmd, cwd=build_dir, check=True)
-        else:
-            print("⚙️  Skipping CMake config")
+        args[1:1] = ["-G", GENERATOR]
     else:
-        cmake_cmd.insert(1, f"-DCMAKE_TOOLCHAIN_FILE={TOOLCHAIN_FILE}")
-        cmake_cmd.insert(2, "-DIDF_TARGET=esp32")
+        args.insert(1, f"-DCMAKE_TOOLCHAIN_FILE={TOOLCHAIN_FILE}")
+        args.insert(2, "-DIDF_TARGET=esp32")
+
+    if need_cmake_config(build_dir, target, is_dynamic, no_cache):
+        phase = "CMake config" + ("" if target == "desktop" else " (firmware)")
+        print(f"⚙️  Running {phase}...")
+        if target == "desktop":
+            return run_command(args, cwd=build_dir)
         full = (
             f'export IDF_PATH="{ESP_IDF_PATH}" && source "{EXPORT_SH}" && '
-            + " ".join(cmake_cmd)
+            + " ".join(args)
         )
-        if need_cfg:
-            print("⚙️  Running CMake config (firmware)...")
-            subprocess.run(["bash", "-c", full], cwd=build_dir, check=True)
-        else:
-            print("⚙️  Skipping CMake config")
+        return run_command(["bash", "-c", full], cwd=build_dir)
+    print("⚙️  Skipping CMake config")
+    return True
 
-    # -------- Build --------
-    print(f"🔧 Building ({target}/{build_type}/{'DYN' if is_dynamic else 'STATIC'})...")
+
+def build_target(build_dir, target, build_type, is_dynamic):
+    """Invoke `cmake --build`."""
     cpu = multiprocessing.cpu_count()
-    build_cmd = ["cmake", "--build", ".", "--", f"-j{cpu}"]
+    print(f"🔧 Building ({target}/{build_type}/{'DYN' if is_dynamic else 'STATIC'})...")
+    cmd = ["cmake", "--build", ".", "--", f"-j{cpu}"]
     if target == "desktop":
-        subprocess.run(build_cmd, cwd=build_dir, check=True)
-    else:
-        full = (
-            f'export IDF_PATH="{ESP_IDF_PATH}" && source "{EXPORT_SH}" && '
-            + " ".join(build_cmd)
-        )
-        subprocess.run(["bash", "-c", full], cwd=build_dir, check=True)
+        return run_command(cmd, cwd=build_dir)
+    full = f'export IDF_PATH="{ESP_IDF_PATH}" && source "{EXPORT_SH}" && ' + " ".join(
+        cmd
+    )
+    return run_command(["bash", "-c", full], cwd=build_dir)
 
-    # -------- Rename intermediary -> final --------
+
+def rename_output(build_dir, intermediary, final_name, ext, is_dynamic):
+    """Rename the intermediary lib to the final name (and clean up)."""
     arb = build_dir / f"lib{intermediary}.{ext}"
-    final = build_dir / f"lib{final_name}.{ext}"
     if not arb.exists():
         print("❌ Expected intermediary not found:", arb)
         return False
 
+    final = build_dir / f"lib{final_name}.{ext}"
     if final.exists():
         final.unlink()
     arb.replace(final)
@@ -144,8 +134,38 @@ def do_build(
         imp = build_dir / f"lib{final_name}.dll.a"
         if imp.exists():
             imp.unlink()
+    return True
 
-    elapsed = time.time() - build_start
-    m, s = divmod(elapsed, 60)
-    print(f"✅ Built {final.name} in {int(m)}m {s:.3f}s")
+
+def do_build(dynamic, nocache, target, release, output_name):
+    """Full build orchestration."""
+    build_type = "Release" if release else "Debug"
+    is_dynamic = dynamic
+    final_name = output_name or "stratum-ui"
+    intermediary = "stratum-ui-intermediary"
+    ext = get_lib_extension(is_dynamic)
+
+    start = time.time()
+
+    if target == "firmware" and (not TOOLCHAIN_FILE.exists() or not EXPORT_SH.exists()):
+        print("❌ Missing ESP toolchain/export script.")
+        return False
+
+    if not run_tool_scripts(nocache):
+        return False
+
+    build_dir = PROJECT_ROOT / "build" / target
+    prepare_build_dir(build_dir, nocache, intermediary, ext)
+
+    if not configure_cmake(
+        build_dir, build_type, target, is_dynamic, intermediary, nocache
+    ):
+        return False
+    if not build_target(build_dir, target, build_type, is_dynamic):
+        return False
+    if not rename_output(build_dir, intermediary, final_name, ext, is_dynamic):
+        return False
+
+    m, s = divmod(time.time() - start, 60)
+    print(f"✅ Built lib{final_name}.{ext} in {int(m)}m {s:.3f}s")
     return True

@@ -83,14 +83,16 @@ endif()
 
 # TODO: maybe guard this under a compiler flag to not always include shims for release builds
 # Force-include our shim header on every TU in this target:
-if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
     target_compile_options(${LIB_NAME} PRIVATE
-        -include lvlens_shims.h
+      -include lvlens_shims.h
     )
-elseif(MSVC)
+  elseif(MSVC)
     target_compile_options(${LIB_NAME} PRIVATE
-    /FI lvlens_shims.h
-)
+      /FI lvlens_shims.h
+    )
+  endif()
 endif()
 
 # Windows: export all symbols automatically for DLLs
