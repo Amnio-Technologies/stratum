@@ -1,4 +1,3 @@
-#include "lvlens_shims.h"
 #include "lvgl.h"
 #include "components/component_output_card.h"
 #include "fonts/jetbrains_mono_nl_regular_12.h"

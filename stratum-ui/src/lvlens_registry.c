@@ -70,9 +70,7 @@ bool lvlens_get_metadata(lv_obj_t *obj, lvlens_meta_t *out_meta)
 }
 
 /**
- * Iterate over every (key→value) pair in g_lvlens_hash and print it.
- * Call this from your application whenever you want to inspect the current
- * contents of the registry.
+ * Iterate over every (key-value) pair in g_lvlens_hash and print it.
  */
 void lvlens_dump_registry(void)
 {

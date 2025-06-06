@@ -81,6 +81,18 @@ else()
     )
 endif()
 
+# TODO: maybe guard this under a compiler flag to not always include shims for release builds
+# Force-include our shim header on every TU in this target:
+if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+    target_compile_options(${LIB_NAME} PRIVATE
+        -include lvlens_shims.h
+    )
+elseif(MSVC)
+    target_compile_options(${LIB_NAME} PRIVATE
+    /FI lvlens_shims.h
+)
+endif()
+
 # Windows: export all symbols automatically for DLLs
 if(WIN32 AND STRATUM_BUILD_DYNAMIC)
     set_target_properties(${LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)

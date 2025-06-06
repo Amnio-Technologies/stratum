@@ -13,6 +13,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", line_bufferin
 # -------- Configuration --------
 PROJECT_ROOT = Path(__file__).parent.resolve()
 FONT_GEN = "tools/generate_fonts.py"
+SHIM_GEN = "tools/generate_shims.py"
 GENERATOR = "Ninja" if shutil.which("ninja") else "MinGW Makefiles"
 
 ESP_IDF_PATH = Path.home() / "esp" / "esp-idf"
@@ -53,7 +54,7 @@ def do_build(
             print("❌ Missing ESP toolchain/export script.")
             return False
 
-    for script in [FONT_GEN]:
+    for script in [FONT_GEN, SHIM_GEN]:
         print(f"📁 Running {script}...")
         cmd = [sys.executable, script]
         if no_cache:
