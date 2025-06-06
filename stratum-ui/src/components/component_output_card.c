@@ -1,5 +1,6 @@
-#include "components/component_output_card.h"
+#include "lvlens_shims.h"
 #include "lvgl.h"
+#include "components/component_output_card.h"
 #include "fonts/jetbrains_mono_nl_regular_12.h"
 #include "fonts/atkinson_regular_20.h"
 #include "fonts/atkinson_regular_16.h"
@@ -57,6 +58,8 @@ lv_obj_t *component_output_card_create(lv_obj_t *parent)
 
     lv_obj_clear_flag(tile, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_set_scrollbar_mode(tile, LV_SCROLLBAR_MODE_OFF);
+
+    lvlens_dump_registry();
 
     return tile;
 }
