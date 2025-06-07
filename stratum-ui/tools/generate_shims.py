@@ -5,9 +5,19 @@ import json
 import hashlib
 from pathlib import Path
 import io
+import argparse
 
 # Ensure UTF-8 stdout
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+
+parser = argparse.ArgumentParser(description="Generate lvlens_shims.h")
+parser.add_argument(
+    "--no-cache",
+    action="store_true",
+    dest="no_cache",
+    help="Ignore cache and always regenerate shims",
+)
+args = parser.parse_args()
 
 # Paths (adjust if your files live elsewhere)
 INCLUDE_FOLDER = Path("include")
@@ -44,7 +54,7 @@ def save_cached_hash(h):
 
 # 0) CACHE CHECK
 current_hash = compute_inputs_hash()
-if load_cached_hash() == current_hash:
+if not args.no_cache and load_cached_hash() == current_hash:
     print("✨ No changes detected; skipping shim generation.", file=sys.stderr)
     sys.exit(0)
 

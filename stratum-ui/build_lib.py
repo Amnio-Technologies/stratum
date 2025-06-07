@@ -38,13 +38,17 @@ def get_lib_extension(is_dynamic):
 
 
 def run_tool_scripts(no_cache):
-    """Run the font and shim generators."""
+    """Run the font and shim generators, printing each script's run time."""
     for script in (FONT_GEN, SHIM_GEN):
         print(f"📁 Running {script}...")
         cmd = [sys.executable, script] + (["--no-cache"] if no_cache else [])
-        if not run_command(cmd, cwd=PROJECT_ROOT):
-            print(f"❌ {script} failed.")
+        start = time.time()
+        success = run_command(cmd, cwd=PROJECT_ROOT)
+        elapsed = time.time() - start
+        if not success:
+            print(f"❌ {script} failed after {elapsed:.2f}s.")
             return False
+        print(f"✔️  {script} completed in {elapsed:.2f}s.")
     return True
 
 
