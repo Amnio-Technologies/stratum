@@ -81,7 +81,6 @@ else()
     )
 endif()
 
-# TODO: maybe guard this under a compiler flag to not always include shims for release builds
 # Force-include our shim header on every TU in this target:
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")

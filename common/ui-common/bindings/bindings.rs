@@ -93,3 +93,51 @@ unsafe extern "C" {
 unsafe extern "C" {
     pub fn lvgl_obj_set_shown(obj: *mut lv_obj_t, hidden: bool);
 }
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct UT_hash_bucket {
+    pub hh_head: *mut UT_hash_handle,
+    pub count: ::std::os::raw::c_uint,
+    pub expand_mult: ::std::os::raw::c_uint,
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct UT_hash_table {
+    pub buckets: *mut UT_hash_bucket,
+    pub num_buckets: ::std::os::raw::c_uint,
+    pub log2_num_buckets: ::std::os::raw::c_uint,
+    pub num_items: ::std::os::raw::c_uint,
+    pub tail: *mut UT_hash_handle,
+    pub hho: isize,
+    pub ideal_chain_maxlen: ::std::os::raw::c_uint,
+    pub nonideal_items: ::std::os::raw::c_uint,
+    pub ineff_expands: ::std::os::raw::c_uint,
+    pub noexpand: ::std::os::raw::c_uint,
+    pub signature: u32,
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct UT_hash_handle {
+    pub tbl: *mut UT_hash_table,
+    pub prev: *mut ::std::os::raw::c_void,
+    pub next: *mut ::std::os::raw::c_void,
+    pub hh_prev: *mut UT_hash_handle,
+    pub hh_next: *mut UT_hash_handle,
+    pub key: *const ::std::os::raw::c_void,
+    pub keylen: ::std::os::raw::c_uint,
+    pub hashv: ::std::os::raw::c_uint,
+}
+#[doc = " A struct to hold creation metadata for each lv_obj_t*.\n We use `obj` as the hash key (i.e., the pointer value)."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct lvlens_meta_t {
+    pub obj: *mut lv_obj_t,
+    pub file: *const ::std::os::raw::c_char,
+    pub line: ::std::os::raw::c_int,
+    pub helper_name: *const ::std::os::raw::c_char,
+    pub hh: UT_hash_handle,
+}
+unsafe extern "C" {
+    #[doc = " Look up metadata for a given object. Returns true if found,\n and fills out the metadata fields in `out_meta`. Otherwise returns false."]
+    pub fn lvlens_get_metadata(obj: *mut lv_obj_t, out_meta: *mut lvlens_meta_t) -> bool;
+}

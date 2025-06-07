@@ -1,8 +1,8 @@
-use std::ffi::CStr;
+use std::{ffi::CStr, mem::MaybeUninit, process::Command};
 
 use egui::{Color32, Id, Image, Pos2, Rect, Response, RichText, Sense, TextureHandle, Ui};
 use egui_ltreeview::{Action, NodeBuilder, TreeView, TreeViewBuilder};
-use stratum_ui_common::stratum_ui_ffi::{self, lv_obj_t};
+use stratum_ui_common::stratum_ui_ffi::{self, lv_obj_t, lvlens_meta_t};
 
 use crate::{
     icon_manager::IconManager,
@@ -11,7 +11,7 @@ use crate::{
 };
 
 /// Convert a raw C string pointer to a Rust `String`. Returns `""` if null.
-unsafe fn string_from_raw(ptr: *mut ::std::os::raw::c_char) -> String {
+unsafe fn string_from_raw(ptr: *const ::std::os::raw::c_char) -> String {
     if ptr.is_null() {
         String::new()
     } else {
@@ -145,6 +145,40 @@ fn draw_node(
     }
 }
 
+fn get_node_definition(ptr: usize) -> Result<(String, i32), ()> {
+    unsafe {
+        let mut meta_uninit = MaybeUninit::<lvlens_meta_t>::uninit();
+        let meta_fetch_successful =
+            stratum_ui_ffi::lvlens_get_metadata(ptr as *mut lv_obj_t, meta_uninit.as_mut_ptr());
+
+        if meta_fetch_successful {
+            let meta = meta_uninit.assume_init();
+            let file = string_from_raw(meta.file);
+
+            return Ok((file, meta.line));
+        }
+    }
+
+    Err(())
+}
+
+fn go_to_node_definition(ptr: usize) -> Result<(), ()> {
+    let (file, line) = get_node_definition(ptr)?;
+
+    let code_cmd = if cfg!(windows) { "code.cmd" } else { "code" };
+
+    if Command::new(code_cmd)
+        .arg("--goto")
+        .arg(format!("{}:{}", file, line))
+        .spawn()
+        .is_ok()
+    {
+        return Ok(());
+    }
+
+    Err(())
+}
+
 /// Recursively build the TreeView and simultaneously update `local_hidden`
 /// to reflect any toggles the user made in this subtree.
 fn add_node(
@@ -161,12 +195,22 @@ fn add_node(
     let effective_hidden_for_children = ancestor_hidden || this_node_hidden_now;
 
     let draw_node_fn = |ui: &mut Ui| draw_node(ui, icons, node, &mut shown, ancestor_hidden);
+    let draw_context_menu_fn = |ui: &mut Ui| {
+        if ui.button("Go to Definition").clicked() {
+            go_to_node_definition(node.ptr);
+            ui.close_menu();
+        }
+    };
 
     if node.children.is_empty() {
-        let leaf = NodeBuilder::leaf(node.ptr).label_ui(draw_node_fn);
+        let leaf = NodeBuilder::leaf(node.ptr)
+            .label_ui(draw_node_fn)
+            .context_menu(draw_context_menu_fn);
         builder.node(leaf);
     } else {
-        let dir = NodeBuilder::dir(node.ptr).label_ui(draw_node_fn);
+        let dir = NodeBuilder::dir(node.ptr)
+            .label_ui(draw_node_fn)
+            .context_menu(draw_context_menu_fn);
         builder.node(dir);
 
         for child in &node.children {

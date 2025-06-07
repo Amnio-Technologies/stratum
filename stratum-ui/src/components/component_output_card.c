@@ -58,7 +58,5 @@ lv_obj_t *component_output_card_create(lv_obj_t *parent)
     lv_obj_clear_flag(tile, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_set_scrollbar_mode(tile, LV_SCROLLBAR_MODE_OFF);
 
-    lvlens_dump_registry();
-
     return tile;
 }

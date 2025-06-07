@@ -8,6 +8,9 @@ pub fn draw(ui: &mut egui::Ui, ui_state: &mut UiState) {
             .clicked()
         {
             ui_state.element_select_active = !ui_state.element_select_active;
+            // TODO: lock the tree with our RenderLock(Arc<Mutex<()>>), capture the current clickable state of all objects in the tree, save it somewhere else,
+            // apply the clickable state to everything, once user makes selection or element_select_active goes back to false, we re-capture the RenderLock,
+            // and re-apply the cached state for the nodes that we changed its clickability
         }
 
         ui.selectable_label(false, "💡");

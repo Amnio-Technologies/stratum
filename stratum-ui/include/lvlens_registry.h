@@ -3,6 +3,7 @@
 #include <lvgl.h>
 #include <stdbool.h>
 #include "uthash.h"
+#include "ui_export_marker.h"
 
 /**
  * A struct to hold creation metadata for each lv_obj_t*.
@@ -31,7 +32,7 @@ void lvlens_register(lv_obj_t *obj,
  * Look up metadata for a given object. Returns true if found,
  * and fills out the metadata fields in `out_meta`. Otherwise returns false.
  */
-bool lvlens_get_metadata(lv_obj_t *obj,
-                         lvlens_meta_t *out_meta);
+UI_EXPORT bool lvlens_get_metadata(lv_obj_t *obj,
+                                   lvlens_meta_t *out_meta);
 
 void lvlens_dump_registry(void);
