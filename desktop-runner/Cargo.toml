@@ -20,7 +20,7 @@ glob = "0.3.2"
 fern = "0.7.1"
 serde = { version = "1.0.219", features = ["derive"] }
 serde_json = "1.0.140"
-egui_ltreeview = "0.4.1"
+egui_ltreeview = "0.2.0"
 strum = "0.27.1"
 strum_macros = "0.27.1"
 usvg = "0.45.1"
