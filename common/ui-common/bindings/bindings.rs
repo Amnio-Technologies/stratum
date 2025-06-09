@@ -141,3 +141,9 @@ unsafe extern "C" {
     #[doc = " Look up metadata for a given object. Returns true if found,\n and fills out the metadata fields in `out_meta`. Otherwise returns false."]
     pub fn lvlens_get_metadata(obj: *mut lv_obj_t, out_meta: *mut lvlens_meta_t) -> bool;
 }
+unsafe extern "C" {
+    pub fn make_all_clickable();
+}
+unsafe extern "C" {
+    pub fn revert_clickability();
+}

@@ -1,12 +1,13 @@
 use crate::{
     lvgl_obj_tree::{TreeManager, TreeNode},
     state::UiState,
-    stratum_lvgl_ui::StratumLvglUI,
+    stratum_lvgl_ui::{StratumLvglUI, RENDER_LOCK},
 };
 use egui::{
     Align2, CentralPanel, Color32, Context, Direction, Event, FontId, Frame, Layout, PointerButton,
     Pos2, Rect, Response, Sense, Stroke, TextureHandle, Ui, Vec2,
 };
+use stratum_ui_common::stratum_ui_ffi;
 
 pub const ZOOM_MIN: f32 = 0.1;
 pub const ZOOM_MAX: f32 = 200.0;
@@ -174,6 +175,10 @@ fn draw_lvgl_canvas(ui: &mut egui::Ui, ui_state: &mut UiState, tex: Option<&Text
                         TreeManager::request_obj_at_point(&ui_state.tree_manager, lvgl_x, lvgl_y);
                     }
                     ui_state.element_select_active = false;
+                    let _guard = RENDER_LOCK.lock().unwrap();
+                    unsafe {
+                        stratum_ui_ffi::revert_clickability();
+                    }
                 }
             }
         }

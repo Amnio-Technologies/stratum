@@ -100,6 +100,7 @@ UI_EXPORT void lvgl_setup(void)
 
     // 👇 Load the actual dashboard screen now
     screen_dashboard_create();
+    // lv_example_get_started_1();
 }
 
 UI_EXPORT void lvgl_teardown(void)

@@ -5,3 +5,4 @@
 #include "ui_core.h"
 #include "lvgl_exports.h"
 #include "lvlens_registry.h"
+#include "lv_click_cache.h"

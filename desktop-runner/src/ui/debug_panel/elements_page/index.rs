@@ -1,5 +1,7 @@
+use stratum_ui_common::stratum_ui_ffi;
+
 use super::{obj_tree_viewer, property_editor};
-use crate::state::UiState;
+use crate::{state::UiState, stratum_lvgl_ui::RENDER_LOCK};
 
 pub fn draw(ui: &mut egui::Ui, ui_state: &mut UiState) {
     ui.horizontal(|ui| {
@@ -8,9 +10,16 @@ pub fn draw(ui: &mut egui::Ui, ui_state: &mut UiState) {
             .clicked()
         {
             ui_state.element_select_active = !ui_state.element_select_active;
-            // TODO: lock the tree with our RenderLock(Arc<Mutex<()>>), capture the current clickable state of all objects in the tree, save it somewhere else,
-            // apply the clickable state to everything, once user makes selection or element_select_active goes back to false, we re-capture the RenderLock,
-            // and re-apply the cached state for the nodes that we changed its clickability
+
+            let _guard = RENDER_LOCK.lock().unwrap();
+
+            unsafe {
+                if ui_state.element_select_active {
+                    stratum_ui_ffi::make_all_clickable();
+                } else {
+                    stratum_ui_ffi::revert_clickability();
+                }
+            }
         }
 
         ui.selectable_label(false, "💡");

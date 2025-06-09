@@ -3,11 +3,13 @@ use egui::{ColorImage, Context, TextureFilter, TextureHandle, TextureOptions};
 use std::{
     pin::Pin,
     sync::mpsc::{channel, Receiver},
-    sync::{Arc, Mutex},
+    sync::{Arc, LazyLock, Mutex},
     thread,
     time::{Duration, Instant},
 };
 use stratum_ui_common::{lvgl_backend::LvglBackend, stratum_ui_ffi};
+
+pub static RENDER_LOCK: LazyLock<Arc<Mutex<()>>> = LazyLock::new(|| Arc::new(Mutex::new(())));
 
 /// Texture sampling options (nearest‐neighbor)
 fn default_tex_opts() -> TextureOptions {
@@ -73,10 +75,13 @@ impl StratumLvglUI {
         let interval_handle = Arc::clone(&render_interval);
         let backend_handle = Arc::clone(&backend);
         let fps_tracker_handle = Arc::clone(&fps_tracker);
+        let render_lock = Arc::clone(&RENDER_LOCK);
 
         thread::spawn(move || {
             let mut last_frame = Instant::now();
             loop {
+                let _render_guard = render_lock.lock().unwrap();
+
                 // 1) LVGL logic tick
                 {
                     let mut be = backend_handle.lock().unwrap();
@@ -92,6 +97,8 @@ impl StratumLvglUI {
                         let be = backend_handle.lock().unwrap();
                         be.with_framebuffer(|fb| fb.to_vec())
                     };
+
+                    drop(_render_guard);
 
                     // Convert & send
                     let (w, h) = unsafe {
