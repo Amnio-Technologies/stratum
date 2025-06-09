@@ -79,28 +79,35 @@ impl StratumLvglUI {
 
         thread::spawn(move || {
             let mut last_frame = Instant::now();
+
             loop {
-                let _render_guard = render_lock.lock().unwrap();
-
-                // 1) LVGL logic tick
-                {
-                    let mut be = backend_handle.lock().unwrap();
-                    be.as_mut().get_mut().update_ui();
-                }
-
-                // 2) Snapshot & send a new frame if interval elapsed
                 let now = Instant::now();
-                let interval = *interval_handle.lock().unwrap();
-                if interval.is_zero() || now.duration_since(last_frame) >= interval {
-                    // Copy RGB565 buffer
-                    let fb: Vec<u16> = {
-                        let be = backend_handle.lock().unwrap();
-                        be.with_framebuffer(|fb| fb.to_vec())
-                    };
 
-                    drop(_render_guard);
+                // This block holds both RENDER_LOCK and the backend mutex
+                // only long enough to tick LVGL and grab the raw framebuffer.
+                let maybe_fb: Option<Vec<u16>> = {
+                    //  Lock render
+                    let _render_guard = render_lock.lock().unwrap();
+                    // Lock backend
+                    let mut be = backend_handle.lock().unwrap();
 
-                    // Convert & send
+                    //  LVGL tick/update
+                    be.as_mut().get_mut().update_ui();
+
+                    // 4. Decide if it's time to snapshot
+                    let interval = *interval_handle.lock().unwrap();
+                    if interval.is_zero() || now.duration_since(last_frame) >= interval {
+                        last_frame = now;
+                        // 5. Copy framebuffer under lock
+                        Some(be.with_framebuffer(|fb| fb.to_vec()))
+                    } else {
+                        None
+                    }
+                };
+
+                // If we grabbed a new frame, convert & send **after** unlocking
+                if let Some(fb) = maybe_fb {
+                    // Convert RGB565 → ColorImage
                     let (w, h) = unsafe {
                         (
                             stratum_ui_ffi::get_lvgl_display_width() as usize,
@@ -109,16 +116,12 @@ impl StratumLvglUI {
                     };
                     let img = rgb565_to_color_image(&fb, w, h);
 
+                    // Track & dispatch
                     fps_tracker_handle.lock().unwrap().tick();
-
-                    // send & wake UI
                     let _ = tx.send(img);
                     ctx_clone.request_repaint();
-
-                    last_frame = now;
                 }
 
-                // 3) Sleep briefly to avoid a tight spin
                 thread::sleep(Duration::from_millis(1));
             }
         });
