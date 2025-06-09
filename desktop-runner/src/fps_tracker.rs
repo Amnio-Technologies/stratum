@@ -3,9 +3,7 @@ use std::time::{Duration, Instant};
 /// Keeps track of frames per second and optionally sleeps
 /// to cap at ~60 Hz.
 pub struct FpsTracker {
-    /// Measured frames per second over the last second.
-    pub fps: f64,
-
+    fps: f64,
     frame_count: u32,
     last_update: Instant,
 }
@@ -19,16 +17,25 @@ impl FpsTracker {
         }
     }
 
-    pub fn tick(&mut self) -> f64 {
+    /// Call once per frame. Returns true if the FPS value was recalculated.
+    pub fn tick(&mut self) -> bool {
         self.frame_count += 1;
-        let since = self.last_update.elapsed();
+        let now = Instant::now();
+        let elapsed = now - self.last_update;
 
-        if since >= Duration::from_secs(1) {
-            self.fps = self.frame_count as f64 / since.as_secs_f64();
+        if elapsed >= Duration::from_secs(1) {
+            self.fps = self.frame_count as f64 / elapsed.as_secs_f64();
             self.frame_count = 0;
-            self.last_update = Instant::now();
+            // Advance by *exactly* the elapsed time to avoid drift:
+            self.last_update += elapsed;
+            true
+        } else {
+            false
         }
+    }
 
+    /// Read the last computed FPS.
+    pub fn fps(&self) -> f64 {
         self.fps
     }
 }

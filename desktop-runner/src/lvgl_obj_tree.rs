@@ -1,4 +1,3 @@
-use egui::Ui;
 use egui_ltreeview::TreeViewState;
 use std::{
     collections::HashMap,
@@ -24,7 +23,6 @@ struct FlatNode {
     debug_id: usize,
 }
 
-/// A real tree node: owns its children.
 #[derive(Debug, Clone)]
 pub struct TreeNode {
     pub ptr: usize,

@@ -1,20 +1,20 @@
 use crate::{
     hot_reload_manager::HotReloadManager, icon_manager::IconManager, lvgl_obj_tree::TreeManager,
     state::UiState, stratum_lvgl_ui::StratumLvglUI,
+    ui::debug_panel::performance_page::LvglFpsLimit,
 };
 use eframe::{egui, CreationContext, Frame};
 use egui::epaint::text::{FontInsert, InsertFontFamily};
 use std::{
     path::PathBuf,
     sync::{atomic::Ordering, Arc, Mutex},
-    time::Duration,
 };
 use stratum_ui_common::ui_logging::UiLogger;
 
 pub struct StratumApp {
     ui_state: UiState,
     lvgl_ui: StratumLvglUI,
-    last_frame_start: std::time::Instant,
+    last_fps: LvglFpsLimit,
 }
 
 impl<'ctx> StratumApp {
@@ -35,15 +35,16 @@ impl<'ctx> StratumApp {
         let ui_logger: Arc<UiLogger> = UiLogger::new(10_000);
         let icon_manager = IconManager::new(cc.egui_ctx.clone(), "./.asset_cache");
         let ui_state = UiState::new(ui_logger, hot_reload_manager, tree_manager, icon_manager);
+        let initial_fps = ui_state.lvgl_fps_limit.clone();
 
-        let lvgl_ui = StratumLvglUI::new();
+        let lvgl_ui = StratumLvglUI::new(&cc.egui_ctx, initial_fps.get_limit());
 
         Self::add_fonts(&cc.egui_ctx);
 
         Self {
             ui_state,
             lvgl_ui,
-            last_frame_start: std::time::Instant::now(),
+            last_fps: initial_fps,
         }
     }
 
@@ -103,10 +104,12 @@ impl eframe::App for StratumApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut Frame) {
         self.hot_reload_check();
 
-        crate::ui::draw_ui(ctx, &mut self.ui_state, &mut self.lvgl_ui);
+        if self.ui_state.lvgl_fps_limit != self.last_fps {
+            self.lvgl_ui
+                .set_fps_limit(self.ui_state.lvgl_fps_limit.get_limit());
+            self.last_fps = self.ui_state.lvgl_fps_limit.clone();
+        }
 
-        self.ui_state.fps_tracker.tick();
-        self.last_frame_start = std::time::Instant::now();
-        ctx.request_repaint_after(Duration::from_millis(16));
+        crate::ui::draw_ui(ctx, &mut self.ui_state, &mut self.lvgl_ui);
     }
 }

@@ -1,90 +1,166 @@
-use std::pin::Pin;
-
-use egui::TextureHandle;
+use crate::{fps_tracker::FpsTracker, lvgl_backend::DesktopLvglBackend};
+use egui::{ColorImage, Context, TextureFilter, TextureHandle, TextureOptions};
+use std::{
+    pin::Pin,
+    sync::mpsc::{channel, Receiver},
+    sync::{Arc, Mutex},
+    thread,
+    time::{Duration, Instant},
+};
 use stratum_ui_common::{lvgl_backend::LvglBackend, stratum_ui_ffi};
 
-use crate::lvgl_backend::DesktopLvglBackend;
+/// Texture sampling options (nearest‐neighbor)
+fn default_tex_opts() -> TextureOptions {
+    TextureOptions {
+        minification: TextureFilter::Nearest,
+        magnification: TextureFilter::Nearest,
+        ..Default::default()
+    }
+}
+
+/// Convert an RGB565 framebuffer into an egui::ColorImage (RGBA8)
+fn rgb565_to_color_image(frame_buffer: &[u16], width: usize, height: usize) -> ColorImage {
+    let mut rgba = Vec::with_capacity(width * height * 4);
+    rgba.resize(width * height * 4, 0);
+
+    for (i, &px) in frame_buffer.iter().enumerate() {
+        let r = ((px >> 11) & 0x1F) << 3;
+        let g = ((px >> 5) & 0x3F) << 2;
+        let b = (px & 0x1F) << 3;
+        let base = i * 4;
+        rgba[base + 0] = r as u8;
+        rgba[base + 1] = g as u8;
+        rgba[base + 2] = b as u8;
+        rgba[base + 3] = 0xFF;
+    }
+
+    ColorImage::from_rgba_unmultiplied([width, height], &rgba)
+}
 
 pub struct StratumLvglUI {
-    backend: Pin<Box<DesktopLvglBackend>>,
-    renderer: LvglRenderer,
+    /// Shared, pinned backend so its framebuffer pointer never moves
+    backend: Arc<Mutex<Pin<Box<DesktopLvglBackend>>>>,
+    /// Incoming frames from the LVGL thread
+    frame_rx: Receiver<ColorImage>,
+    /// The egui texture handle we update
+    texture: Option<TextureHandle>,
+    /// How often we actually produce a frame (None = vsync max)
+    render_interval: Arc<Mutex<Duration>>,
+    fps_tracker: Arc<Mutex<FpsTracker>>,
 }
 
 impl StratumLvglUI {
-    pub fn new() -> Self {
-        let mut backend = Box::pin(DesktopLvglBackend::new());
-        backend.as_mut().get_mut().setup_ui();
+    /// Spawn the LVGL logic + render thread, drive LVGL at high tick rate,
+    /// snapshot only at `fps_limit`, and wake egui via `ctx.request_repaint()`.
+    pub fn new(ctx: &Context, fps_limit: Option<u32>) -> Self {
+        // initial interval (zero = no cap / vsync)
+        let initial = fps_limit
+            .map(|hz| Duration::from_secs_f64(1.0 / hz as f64))
+            .unwrap_or_default();
+        let render_interval = Arc::new(Mutex::new(initial));
+        let fps_tracker = Arc::new(Mutex::new(FpsTracker::new()));
+
+        // Shared, pinned backend
+        let backend = Arc::new(Mutex::new(Box::pin(DesktopLvglBackend::new())));
+        {
+            // initial UI setup
+            let mut be = backend.lock().unwrap();
+            be.as_mut().get_mut().setup_ui();
+        }
+
+        let (tx, rx) = channel();
+        let ctx_clone = ctx.clone();
+        let interval_handle = Arc::clone(&render_interval);
+        let backend_handle = Arc::clone(&backend);
+        let fps_tracker_handle = Arc::clone(&fps_tracker);
+
+        thread::spawn(move || {
+            let mut last_frame = Instant::now();
+            loop {
+                // 1) LVGL logic tick
+                {
+                    let mut be = backend_handle.lock().unwrap();
+                    be.as_mut().get_mut().update_ui();
+                }
+
+                // 2) Snapshot & send a new frame if interval elapsed
+                let now = Instant::now();
+                let interval = *interval_handle.lock().unwrap();
+                if interval.is_zero() || now.duration_since(last_frame) >= interval {
+                    // Copy RGB565 buffer
+                    let fb: Vec<u16> = {
+                        let be = backend_handle.lock().unwrap();
+                        be.with_framebuffer(|fb| fb.to_vec())
+                    };
+
+                    // Convert & send
+                    let (w, h) = unsafe {
+                        (
+                            stratum_ui_ffi::get_lvgl_display_width() as usize,
+                            stratum_ui_ffi::get_lvgl_display_height() as usize,
+                        )
+                    };
+                    let img = rgb565_to_color_image(&fb, w, h);
+
+                    fps_tracker_handle.lock().unwrap().tick();
+
+                    // send & wake UI
+                    let _ = tx.send(img);
+                    ctx_clone.request_repaint();
+
+                    last_frame = now;
+                }
+
+                // 3) Sleep briefly to avoid a tight spin
+                thread::sleep(Duration::from_millis(1));
+            }
+        });
 
         Self {
             backend,
-            renderer: LvglRenderer::new(),
+            frame_rx: rx,
+            texture: None,
+            render_interval,
+            fps_tracker,
         }
     }
 
-    pub fn reload_ui(&mut self) {
-        self.backend.as_mut().get_mut().setup_ui();
+    /// Hot-reload the LVGL UI definition at runtime.
+    pub fn reload_ui(&self) {
+        let mut be = self.backend.lock().unwrap();
+        be.as_mut().get_mut().setup_ui();
     }
 
-    pub fn update(&mut self, ctx: &egui::Context) -> Option<&TextureHandle> {
-        self.backend.as_mut().get_mut().update_ui();
-
-        self.backend
-            .with_framebuffer(|fb| self.renderer.render_lvgl_framebuffer(fb, ctx));
-
-        self.renderer.get_texture()
-    }
-}
-
-struct LvglRenderer {
-    texture: Option<TextureHandle>,
-}
-
-impl LvglRenderer {
-    fn new() -> Self {
-        LvglRenderer { texture: None }
+    /// Change the user‐selected FPS cap at runtime.
+    /// `None` means unlimited (vsync).
+    pub fn set_fps_limit(&self, fps_limit: Option<u32>) {
+        let new_interval = fps_limit
+            .map(|hz| Duration::from_secs_f64(1.0 / hz as f64))
+            .unwrap_or_default();
+        *self.render_interval.lock().unwrap() = new_interval;
     }
 
-    /// Converts LVGL's RGB565 framebuffer to RGBA and uploads to GPU
-    fn render_lvgl_framebuffer(&mut self, frame_buffer: &[u16], egui_ctx: &egui::Context) {
-        // 1) Convert to RGBA_u8
-        let (width, height) = unsafe {
-            (
-                stratum_ui_ffi::get_lvgl_display_width() as usize,
-                stratum_ui_ffi::get_lvgl_display_height() as usize,
-            )
-        };
-        let mut rgba_data = Vec::with_capacity(width * height * 4);
-        rgba_data.resize(width * height * 4, 0);
-        for (i, &pixel) in frame_buffer.iter().enumerate() {
-            let r = ((pixel >> 11) & 0x1F) << 3;
-            let g = ((pixel >> 5) & 0x3F) << 2;
-            let b = (pixel & 0x1F) << 3;
-            rgba_data[i * 4] = r as u8;
-            rgba_data[i * 4 + 1] = g as u8;
-            rgba_data[i * 4 + 2] = b as u8;
-            rgba_data[i * 4 + 3] = 255 as u8;
+    pub fn current_fps(&self) -> f64 {
+        self.fps_tracker.lock().unwrap().fps()
+    }
+
+    /// Call from `eframe::App::update()`. Returns the latest texture to draw.
+    pub fn update(&mut self, ctx: &Context) -> Option<&TextureHandle> {
+        // Drain any pending frames; keep only the latest
+        let mut latest = None;
+        while let Ok(img) = self.frame_rx.try_recv() {
+            latest = Some(img);
         }
-        let img = egui::ColorImage::from_rgba_unmultiplied([width, height], &rgba_data);
 
-        let tex_opts = egui::TextureOptions {
-            minification: egui::TextureFilter::Nearest,
-            magnification: egui::TextureFilter::Nearest,
-            ..Default::default()
-        };
-
-        // 2) If we already have a texture handle, just call .set() to update it
-        if let Some(tex) = &mut self.texture {
-            tex.set(img, tex_opts);
-        } else {
-            // First time only: allocate it
-            self.texture = Some(egui_ctx.load_texture(
-                "lvgl_fb", // the same id, persistent
-                img, tex_opts,
-            ));
+        if let Some(img) = latest {
+            let opts = default_tex_opts();
+            if let Some(tex) = &mut self.texture {
+                tex.set(img, opts);
+            } else {
+                self.texture = Some(ctx.load_texture("lvgl_fb", img, opts));
+            }
         }
-    }
 
-    fn get_texture(&self) -> Option<&TextureHandle> {
         self.texture.as_ref()
     }
 }

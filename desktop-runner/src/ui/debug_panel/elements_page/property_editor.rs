@@ -41,7 +41,7 @@ impl Default for PropertyEditorTabs {
 }
 
 pub fn draw(ui: &mut egui::Ui, ui_state: &mut UiState) {
-    if let DebugSidebarPages::Inspector(selected_tab) = ui_state.selected_debug_page {
+    if let DebugSidebarPages::Elements(selected_tab) = ui_state.selected_debug_page {
         // 1) Collect all the tab variants
         let tabs: Vec<_> = PropertyEditorTabs::iter().collect();
         let count = tabs.len() as f32;
@@ -60,7 +60,7 @@ pub fn draw(ui: &mut egui::Ui, ui_state: &mut UiState) {
                 // height = 0.0 → use default interact height
                 let resp = ui.add_sized([tab_width, 0.0], lbl);
                 if resp.clicked() {
-                    ui_state.selected_debug_page = DebugSidebarPages::Inspector(tab);
+                    ui_state.selected_debug_page = DebugSidebarPages::Elements(tab);
                 }
             }
         });

@@ -1,4 +1,4 @@
-use crate::fps_tracker::FpsTracker;
+use crate::ui::debug_panel::performance_page::LvglFpsLimit;
 // state.rs
 use crate::hot_reload_manager::SharedHotReloadManager;
 use crate::icon_manager::IconManager;
@@ -16,7 +16,6 @@ use stratum_ui_common::ui_logging::UiLogger;
 pub struct UiState {
     pub module_manager: ModuleManager,
     pub system_controller: Arc<SystemController>,
-    pub fps_tracker: FpsTracker,
     /// Logger for UI messages (forwarded from C).
     pub ui_logger: Arc<UiLogger>,
 
@@ -33,6 +32,7 @@ pub struct UiState {
     pub icon_manager: IconManager,
     pub cursor_pos: Option<(usize, usize)>,
     pub element_select_active: bool,
+    pub lvgl_fps_limit: LvglFpsLimit,
 }
 
 impl UiState {
@@ -46,7 +46,6 @@ impl UiState {
         UiState {
             module_manager: ModuleManager::new(),
             system_controller: SystemController::new(),
-            fps_tracker: FpsTracker::new(),
             ui_logger,
             hot_reload_manager,
             tree_manager,
@@ -57,6 +56,7 @@ impl UiState {
             icon_manager,
             cursor_pos: None,
             element_select_active: false,
+            lvgl_fps_limit: LvglFpsLimit::Preset(30),
         }
     }
 }

@@ -54,7 +54,7 @@ impl LvglBackend for DesktopLvglBackend {
         let dt = now.duration_since(self.last_update);
         self.last_update = now;
 
-        let elapsed_ms = dt.as_millis().min(32) as u32; // Cap to ~30fps for stability
+        let elapsed_ms = dt.as_millis() as u32; // Cap to ~30fps for stability
         unsafe {
             stratum_ui_ffi::lvgl_update(elapsed_ms);
         }

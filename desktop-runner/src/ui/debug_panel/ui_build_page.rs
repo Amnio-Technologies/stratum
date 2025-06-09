@@ -1,9 +1,9 @@
-use egui::{Checkbox, Id, ScrollArea};
+use egui::{Id, ScrollArea};
 use stratum_firmware_common::modules::dummies::dummy_battery::DummyBatteryModule;
 
 use crate::state::UiState;
 
-pub fn draw_uibuild_debug_ui(ui: &mut egui::Ui, ui_state: &mut UiState) {
+pub fn draw(ui: &mut egui::Ui, ui_state: &mut UiState) {
     // Pull in new logs from the UiLogger this frame
     let new_logs = ui_state.ui_logger.take_logs();
     ui_state.log_buffer.extend(new_logs);

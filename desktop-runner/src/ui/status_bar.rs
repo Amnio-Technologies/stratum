@@ -1,13 +1,14 @@
 use crate::{
     state::UiState,
+    stratum_lvgl_ui::StratumLvglUI,
     ui::lvgl_canvas::{ZOOM_MAX, ZOOM_MIN},
 };
 use egui::DragValue;
 
-pub fn draw(ctx: &egui::Context, ui_state: &mut UiState) {
+pub fn draw(ctx: &egui::Context, ui_state: &mut UiState, lvgl_ui: &StratumLvglUI) {
     egui::TopBottomPanel::bottom("status_bar").show(ctx, |ui| {
         ui.horizontal(|ui| {
-            ui.label(format!("FPS: {:.2}", ui_state.fps_tracker.fps));
+            ui.label(format!("FPS: {:.2}", lvgl_ui.current_fps()));
             ui.separator();
 
             ui.label("Zoom:");

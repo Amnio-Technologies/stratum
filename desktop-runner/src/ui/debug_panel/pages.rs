@@ -3,28 +3,31 @@ use strum_macros::EnumIter;
 use crate::state::UiState;
 
 use super::{
-    inspector_page::{self, property_editor::PropertyEditorTabs},
-    ui_build_page::draw_uibuild_debug_ui,
+    elements_page::{self, property_editor::PropertyEditorTabs},
+    performance_page, ui_build_page,
 };
 
 #[derive(Debug, Clone, PartialEq, EnumIter)]
 pub enum DebugSidebarPages {
     UiBuild,
-    Inspector(PropertyEditorTabs),
+    Elements(PropertyEditorTabs),
+    Performance,
 }
 
 impl DebugSidebarPages {
     pub fn as_str(&self) -> &'static str {
         match self {
-            DebugSidebarPages::UiBuild => "UI Build",
-            DebugSidebarPages::Inspector(_) => "Inspector",
+            Self::UiBuild => "UI Build",
+            Self::Elements(_) => "Elements",
+            Self::Performance => "Performance",
         }
     }
 
     pub fn draw_debug_page(&self, ui: &mut egui::Ui, ui_state: &mut UiState) {
         match self {
-            DebugSidebarPages::UiBuild => draw_uibuild_debug_ui(ui, ui_state),
-            DebugSidebarPages::Inspector(_) => inspector_page::draw(ui, ui_state),
+            Self::UiBuild => ui_build_page::draw(ui, ui_state),
+            Self::Elements(_) => elements_page::draw(ui, ui_state),
+            Self::Performance => performance_page::draw(ui, ui_state),
         }
     }
 }
