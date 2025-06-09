@@ -28,7 +28,7 @@ FONTS = [
     ("Lexend-Light.ttf", "lexend_light", [20]),
 ]
 
-TTF_DIR = Path("ttf")
+TTF_DIR = Path("fonts")
 C_OUT_DIR = Path("src/fonts")
 H_OUT_DIR = Path("include/fonts")
 C_OUT_DIR.mkdir(parents=True, exist_ok=True)
