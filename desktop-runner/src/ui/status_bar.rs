@@ -1,7 +1,7 @@
 use crate::{
     state::UiState,
     stratum_lvgl_ui::StratumLvglUI,
-    ui::lvgl_canvas::{ZOOM_MAX, ZOOM_MIN},
+    ui::lvgl_canvas::view::{ZOOM_MAX, ZOOM_MIN},
 };
 use egui::DragValue;
 

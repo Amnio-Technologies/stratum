@@ -1,6 +1,6 @@
 use strum_macros::EnumIter;
 
-use crate::state::UiState;
+use crate::{state::UiState, ui::debug_panel::logs_page};
 
 use super::{
     elements_page::{self, property_editor::PropertyEditorTabs},
@@ -11,6 +11,7 @@ use super::{
 pub enum DebugSidebarPages {
     UiBuild,
     Elements(PropertyEditorTabs),
+    Logs,
     Performance,
 }
 
@@ -19,6 +20,7 @@ impl DebugSidebarPages {
         match self {
             Self::UiBuild => "UI Build",
             Self::Elements(_) => "Elements",
+            Self::Logs => "Logs",
             Self::Performance => "Performance",
         }
     }
@@ -27,6 +29,7 @@ impl DebugSidebarPages {
         match self {
             Self::UiBuild => ui_build_page::draw(ui, ui_state),
             Self::Elements(_) => elements_page::draw(ui, ui_state),
+            Self::Logs => logs_page::draw(ui, ui_state),
             Self::Performance => performance_page::draw(ui, ui_state),
         }
     }

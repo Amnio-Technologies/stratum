@@ -1,21 +1,17 @@
 #include "lv_conf.h"
 #include "stratum_ui.h"
-#include "extern_log.h"
 #include "lvgl.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
-#include "fonts/jetbrains_mono_nl_regular_12.h"
 #include "screens/screen_dashboard.h"
+#include "screens/test_example.h"
 
 // LVGL framebuffer (RGB565 format)
 static uint16_t *lvgl_framebuffer = NULL;
 static size_t lvgl_buffer_bytes = 0;
 
 static lv_display_t *global_display = NULL;
-
-static lv_obj_t *elapsed_label = NULL;
-static uint32_t elapsed_seconds = 0;
 
 static ui_spi_send_cb_t _spi_cb = NULL;
 
@@ -28,9 +24,12 @@ void my_flush_cb(lv_display_t *disp,
     const int32_t h = area->y2 - area->y1 + 1;
     const size_t bytes = (size_t)w * h * sizeof(uint16_t);
 
+    lvlens_invoke_flush_area_cb(area);
+
     // 1) Copy into our registered framebuffer (if any)
     if (lvgl_framebuffer)
     {
+        ui_logf(LOG_INFO, "(%d, %d) %d %d", area->x1, area->y1, w, h);
         // src starts at the first pixel of the region
         uint16_t *src = (uint16_t *)px_map;
         for (int32_t row = 0; row < h; row++)
@@ -55,41 +54,6 @@ void my_flush_cb(lv_display_t *disp,
     lv_display_flush_ready(disp);
 }
 
-void update_elapsed_time(lv_timer_t *timer)
-{
-    elapsed_seconds++;
-
-    ui_logf(LOG_INFO, "Updating Elapsed Time: %u sec", elapsed_seconds);
-
-    if (elapsed_label)
-    {
-        char buffer[32];
-        snprintf(buffer, sizeof(buffer), "Elapsed: %u sec", elapsed_seconds);
-        lv_label_set_text(elapsed_label, buffer);
-    }
-}
-
-void lv_example_get_started_1(void)
-{
-    lv_obj_t *screen = lv_screen_active();
-    if (!screen)
-        return;
-
-    lv_obj_set_style_bg_color(screen, lv_color_hex(0xff3a57), LV_PART_MAIN);
-
-    // Create the label for elapsed time
-    elapsed_label = lv_label_create(screen);
-    lv_label_set_text(elapsed_label, "Elapsed: 0 sec");
-
-    // Apply JetBrains Mono font style
-    lv_obj_set_style_text_font(elapsed_label, &jetbrains_mono_nl_regular_12, LV_PART_MAIN);
-    lv_obj_set_style_text_color(elapsed_label, lv_color_hex(0xffffff), LV_PART_MAIN);
-    lv_obj_align(elapsed_label, LV_ALIGN_CENTER, 0, 0);
-
-    // Create a timer to update elapsed time every 1 second (1000ms)
-    lv_timer_create(update_elapsed_time, 1000, NULL);
-}
-
 UI_EXPORT void lvgl_setup(void)
 {
     lv_init();
@@ -99,10 +63,11 @@ UI_EXPORT void lvgl_setup(void)
     lv_display_set_buffers(global_display, buf, NULL, sizeof(buf), LV_DISPLAY_RENDER_MODE_PARTIAL);
 
     // 👇 Load the actual dashboard screen now
-    screen_dashboard_create();
-    // lv_example_get_started_1();
+    // screen_dashboard_create();
+    lv_example_get_started_1();
 }
 
+// TODO FIXME this is probably not necessary
 UI_EXPORT void lvgl_teardown(void)
 {
     // Wipe current screen and all children
@@ -115,9 +80,7 @@ UI_EXPORT void lvgl_teardown(void)
         lv_timer_del(t);
     }
 
-    elapsed_label = NULL;
     global_display = NULL;
-    elapsed_seconds = 0;
 
     // Don't touch lvgl_framebuffer here unless you're managing it
 }

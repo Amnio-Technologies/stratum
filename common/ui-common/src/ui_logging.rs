@@ -47,6 +47,11 @@ impl UiLogger {
         let mut guard = self.logs.lock().unwrap();
         std::mem::take(&mut *guard)
     }
+
+    pub fn all_logs(&self) -> Vec<String> {
+        let guard = self.logs.lock().unwrap();
+        guard.clone() // just clone, don’t clear
+    }
 }
 
 unsafe extern "C" fn ui_log_callback(

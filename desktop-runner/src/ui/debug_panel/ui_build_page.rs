@@ -4,35 +4,6 @@ use stratum_firmware_common::modules::dummies::dummy_battery::DummyBatteryModule
 use crate::state::UiState;
 
 pub fn draw(ui: &mut egui::Ui, ui_state: &mut UiState) {
-    // Pull in new logs from the UiLogger this frame
-    let new_logs = ui_state.ui_logger.take_logs();
-    ui_state.log_buffer.extend(new_logs);
-
-    ui.horizontal(|ui| {
-        ui.label("📝 Debug Logs:");
-        let has_logs = !ui_state.log_buffer.is_empty();
-        if ui
-            .add_enabled(has_logs, egui::Button::new("🗑 Clear Logs"))
-            .clicked()
-        {
-            ui_state.log_buffer.clear();
-        }
-    });
-
-    let scroll_id = Id::new("debug_log_scroll");
-
-    ScrollArea::vertical()
-        .id_salt(scroll_id)
-        .stick_to_bottom(true)
-        .max_height(200.0)
-        .show(ui, |ui| {
-            for line in &ui_state.log_buffer {
-                ui.monospace(line);
-            }
-        });
-
-    ui.separator();
-
     ui.heading("🔌 Connected Modules");
     let connected_modules = ui_state.module_manager.list_modules();
     if connected_modules.is_empty() {
@@ -139,5 +110,7 @@ pub fn draw(ui: &mut egui::Ui, ui_state: &mut UiState) {
                     ui.label(egui::RichText::new(clean).monospace());
                 }
             });
+        // TODO FIXME add piping of stdout into a log output somewhere here
+        // Options: show entirely in egui UI, show entirely in console stdout, show in both
     });
 }

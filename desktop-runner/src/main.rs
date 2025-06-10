@@ -1,5 +1,6 @@
 // main.rs
 
+mod flush_area_collector;
 mod fps_tracker;
 mod hot_reload_manager;
 mod icon_manager;

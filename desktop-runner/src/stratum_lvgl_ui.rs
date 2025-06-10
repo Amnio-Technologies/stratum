@@ -1,4 +1,7 @@
-use crate::{fps_tracker::FpsTracker, lvgl_backend::DesktopLvglBackend};
+use crate::{
+    flush_area_collector::FlushAreaCollector, fps_tracker::FpsTracker,
+    lvgl_backend::DesktopLvglBackend,
+};
 use egui::{ColorImage, Context, TextureFilter, TextureHandle, TextureOptions};
 use std::{
     pin::Pin,
@@ -49,12 +52,13 @@ pub struct StratumLvglUI {
     /// How often we actually produce a frame (None = vsync max)
     render_interval: Arc<Mutex<Duration>>,
     fps_tracker: Arc<Mutex<FpsTracker>>,
+    pub flush_collector: Arc<FlushAreaCollector>,
 }
 
 impl StratumLvglUI {
     /// Spawn the LVGL logic + render thread, drive LVGL at high tick rate,
     /// snapshot only at `fps_limit`, and wake egui via `ctx.request_repaint()`.
-    pub fn new(ctx: &Context, fps_limit: Option<u32>) -> Self {
+    pub fn new(ctx: &Context, fps_limit: Option<u32>, repaint_flash_enabled: bool) -> Self {
         // initial interval (zero = no cap / vsync)
         let initial = fps_limit
             .map(|hz| Duration::from_secs_f64(1.0 / hz as f64))
@@ -64,11 +68,14 @@ impl StratumLvglUI {
 
         // Shared, pinned backend
         let backend = Arc::new(Mutex::new(Box::pin(DesktopLvglBackend::new())));
-        {
+
+        let flush_collector = FlushAreaCollector::new(repaint_flash_enabled);
+
+        flush_collector.scope(|| {
             // initial UI setup
             let mut be = backend.lock().unwrap();
             be.as_mut().get_mut().setup_ui();
-        }
+        });
 
         let (tx, rx) = channel();
         let ctx_clone = ctx.clone();
@@ -76,6 +83,7 @@ impl StratumLvglUI {
         let backend_handle = Arc::clone(&backend);
         let fps_tracker_handle = Arc::clone(&fps_tracker);
         let render_lock = Arc::clone(&RENDER_LOCK);
+        let flush_collector_handle = flush_collector.clone();
 
         thread::spawn(move || {
             let mut last_frame = Instant::now();
@@ -92,7 +100,13 @@ impl StratumLvglUI {
                     let mut be = backend_handle.lock().unwrap();
 
                     //  LVGL tick/update
-                    be.as_mut().get_mut().update_ui();
+                    flush_collector_handle.scope(|| {
+                        be.as_mut().get_mut().update_ui();
+                    });
+
+                    if !flush_collector_handle.active_events().is_empty() {
+                        ctx_clone.request_repaint();
+                    }
 
                     // 4. Decide if it's time to snapshot
                     let interval = *interval_handle.lock().unwrap();
@@ -132,11 +146,13 @@ impl StratumLvglUI {
             texture: None,
             render_interval,
             fps_tracker,
+            flush_collector,
         }
     }
 
     /// Hot-reload the LVGL UI definition at runtime.
     pub fn reload_ui(&self) {
+        self.flush_collector.clone().bind();
         let mut be = self.backend.lock().unwrap();
         be.as_mut().get_mut().setup_ui();
     }
@@ -155,7 +171,7 @@ impl StratumLvglUI {
     }
 
     /// Call from `eframe::App::update()`. Returns the latest texture to draw.
-    pub fn update(&mut self, ctx: &Context) -> Option<&TextureHandle> {
+    pub fn update(&mut self, ctx: &Context) -> Option<TextureHandle> {
         // Drain any pending frames; keep only the latest
         let mut latest = None;
         while let Ok(img) = self.frame_rx.try_recv() {
@@ -171,6 +187,6 @@ impl StratumLvglUI {
             }
         }
 
-        self.texture.as_ref()
+        self.texture.clone()
     }
 }

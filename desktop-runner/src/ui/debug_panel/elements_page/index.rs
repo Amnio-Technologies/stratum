@@ -7,6 +7,7 @@ pub fn draw(ui: &mut egui::Ui, ui_state: &mut UiState) {
     ui.horizontal(|ui| {
         if ui
             .selectable_label(ui_state.element_select_active, "👆")
+            .on_hover_text("Toggle element selection mode")
             .clicked()
         {
             ui_state.element_select_active = !ui_state.element_select_active;
@@ -22,7 +23,13 @@ pub fn draw(ui: &mut egui::Ui, ui_state: &mut UiState) {
             }
         }
 
-        ui.selectable_label(false, "💡");
+        if ui
+            .selectable_label(ui_state.repaint_flash_active, "💡")
+            .on_hover_text("Flash on repaint")
+            .clicked()
+        {
+            ui_state.repaint_flash_active = !ui_state.repaint_flash_active;
+        }
     });
     ui.separator();
     obj_tree_viewer::draw(ui, ui_state);

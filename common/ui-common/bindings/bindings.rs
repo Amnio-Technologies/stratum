@@ -84,6 +84,15 @@ pub struct _lv_obj_t {
 }
 #[doc = " Typedefs from various lvgl modules.\n They are defined here to avoid circular dependencies."]
 pub type lv_obj_t = _lv_obj_t;
+#[doc = " Represents an area of the screen."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct lv_area_t {
+    pub x1: i32,
+    pub y1: i32,
+    pub x2: i32,
+    pub y2: i32,
+}
 unsafe extern "C" {
     pub fn lvgl_label_text(label: *const lv_obj_t) -> *mut ::std::os::raw::c_char;
 }
@@ -146,4 +155,13 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn revert_clickability();
+}
+pub type flush_area_cb = ::std::option::Option<
+    unsafe extern "C" fn(ud: *mut ::std::os::raw::c_void, area: *const lv_area_t),
+>;
+unsafe extern "C" {
+    pub fn register_flush_area_cb(cb: flush_area_cb, ud: *mut ::std::os::raw::c_void);
+}
+unsafe extern "C" {
+    pub fn clear_flush_area_cb();
 }

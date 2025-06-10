@@ -37,7 +37,10 @@ impl<'ctx> StratumApp {
         let ui_state = UiState::new(ui_logger, hot_reload_manager, tree_manager, icon_manager);
         let initial_fps = ui_state.lvgl_fps_limit.clone();
 
-        let lvgl_ui = StratumLvglUI::new(&cc.egui_ctx, initial_fps.get_limit());
+        let repaint_flash_enabled = ui_state.repaint_flash_active;
+
+        let lvgl_ui =
+            StratumLvglUI::new(&cc.egui_ctx, initial_fps.get_limit(), repaint_flash_enabled);
 
         Self::add_fonts(&cc.egui_ctx);
 
@@ -108,6 +111,12 @@ impl eframe::App for StratumApp {
             self.lvgl_ui
                 .set_fps_limit(self.ui_state.lvgl_fps_limit.get_limit());
             self.last_fps = self.ui_state.lvgl_fps_limit.clone();
+        }
+
+        if self.ui_state.repaint_flash_active != self.lvgl_ui.flush_collector.is_enabled() {
+            self.lvgl_ui
+                .flush_collector
+                .set_enabled(self.ui_state.repaint_flash_active);
         }
 
         crate::ui::draw_ui(ctx, &mut self.ui_state, &mut self.lvgl_ui);

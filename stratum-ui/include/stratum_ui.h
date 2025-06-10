@@ -6,3 +6,4 @@
 #include "lvgl_exports.h"
 #include "lvlens_registry.h"
 #include "lv_click_cache.h"
+#include "lvlens_flush_area.h"
